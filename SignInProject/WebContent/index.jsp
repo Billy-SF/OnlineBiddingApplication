@@ -8,7 +8,7 @@
 <body>
     <form action="loginServlet" method="post">
         <fieldset style="width: 300px">
-            <legend> Login to  Appl </legend>
+            <legend> Login to  Appicatl </legend>
             <table>
                 <tr>
                     <td>User ID</td>
