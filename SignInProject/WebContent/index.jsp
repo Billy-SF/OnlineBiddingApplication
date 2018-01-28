@@ -3,26 +3,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
 <title>Login Application</title>
 </head>
 <body>
-    <form action="loginServlet" method="post">
-        <fieldset style="width: 300px">
-            <legend> Login to App </legend>
-            <table>
-                <tr>
-                    <td>User ID</td>
-                    <td><input type="text" name="username" required="required" /></td>
-                </tr>
-                <tr>
-                    <td>Password!!</td>
-                    <td><input type="password" name="userpass" required="required" /></td>
-                </tr>
-                <tr>
-                    <td><input type="submit" value="Login" /></td>
-                </tr>
-            </table>
-        </fieldset>
-    </form>
+<form action="loginServlet" class="login-form" method="post">
+	<div class ="form-group row">
+		<div class="col-3">
+         	<input type="text" name="username" class="form-control form-control-sm" required="required" placeholder="username" />
+         	<input type="password" name="userpass"  class="form-control form-control-sm" required="required" placeholder ="password"/>
+         </div>
+	</div>
+	 <button type="login" class="btn btn-primary" id="loginbtn" name="login">Login</button>
+     <p class="message">Not registered? <a href="#">Register Now!</a>
+</form>
 </body>
 </html>
