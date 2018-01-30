@@ -6,9 +6,10 @@
 <title>Login Application</title>
 </head>
 <body>
+      <p> testing...</p>
     <form action="loginServlet" method="post">
         <fieldset style="width: 300px">
-            <legend> Login to Application </legend>
+            <legend> Login to App </legend>
             <table>
                 <tr>
                     <td>User ID</td>
