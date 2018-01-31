@@ -9,7 +9,7 @@
       <p> testing...</p>
     <form action="loginServlet" method="post">
         <fieldset style="width: 300px">
-            <legend> Login to App </legend>
+            <legend> Login to Application Testing </legend>
             <table>
                 <tr>
                     <td>User ID</td>
