@@ -25,6 +25,12 @@
 			<input type="text" class="form-control input-sm" id="firstName" placeholder="Enter first name" name="firstName">
 		    <label for="lastName">Last Name:</label>
 			<input type="text" class="form-control input-sm" id="lastName"  placeholder="Enter last name" name="lastName">
+			<label for="username">User Name:"</label>
+			<input type="text" class="form-control input-sm" id="userName" placeholder="Enter username" name="userName">
+			<label for="password">Enter password:</label>
+			<input type="password" class="form-control input-sm" id="password" placeholder="Enter a password" name="password">
+			<label for="emailAddress">Email Address:</label>
+			<input type="text" class="form-control input-sm" id="emailAddress" placeholder="Enter your email address" name="emailAddress">
 		</div>	
 			<button type="submit" class="btn btn-primary id="submitbtn" name="submitbtn">Submit</button>
 
