@@ -20,7 +20,7 @@
 	<div class ="form-group row">
 		<div class="col-3">
          	<input type="text" name="username" class="form-control form-control-sm" required="required" placeholder="username" />
-         	<input type="password" name="userpass"  class="form-control form-control-sm" required="required" placeholder ="password"/>
+         	<input type="password" name="password"  class="form-control form-control-sm" required="required" placeholder ="password"/>
          </div>
 	</div>
 	 <button type="login" class="btn btn-primary" id="loginbtn" name="login">Login</button>
