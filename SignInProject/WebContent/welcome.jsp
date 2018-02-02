@@ -11,5 +11,7 @@
         Hello,
         <%=session.getAttribute("name")%> 
         Change coming from Billy's branch</h4>
+        <h1>NEW CHANGE</h1>
+       <jsp:include page="registrationForm.jsp"/>
 </body>
 </html>
