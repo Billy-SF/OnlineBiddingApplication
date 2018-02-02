@@ -6,9 +6,14 @@
 <title>Login Application</title>
 </head>
 <body>
+      <p> testing...</p>
     <form action="loginServlet" method="post">
         <fieldset style="width: 300px">
+<<<<<<< HEAD
             <legend> Login to  Application </legend>
+=======
+            <legend> Login to Application Testing </legend>
+>>>>>>> branch 'Farah's-branch' of https://github.com/Biller89/OnlineBiddingApplication.git
             <table>
                 <tr>
                     <td>User ID</td>
@@ -24,5 +29,6 @@
             </table>
         </fieldset>
     </form>
+    <p style="color:#FF0000">Dylan's message</p>
 </body>
 </html>
