@@ -1,1 +1,116 @@
 
+CREATE database ottawauction;
+
+use ottawauction;
+
+CREATE TABLE `addresses` (
+  `id` int(10) NOT NULL,
+  `city` int(20) NOT NULL,
+  `postal_code` varchar(6) NOT NULL,
+  `address` text NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+ALTER TABLE `addresses`
+  MODIFY `id` int(10) PRIMARY KEY nOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+CREATE TABLE `users` (
+  `id` int(10) NOT NULL,
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(25) NOT NULL
+##  `email` varchar(50) NOT NULL,
+##  `phone` varchar(20) NOT NULL,
+##  `addresses_fk` int(10) NOT NULL,
+##  `verification_code` varchar(6) NOT NULL,
+##  `verified_state` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+##  `date_created` datetime NOT NULL,
+##  `date_modified` datetime DEFAULT NULL,
+##  `state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `users`
+  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+##ALTER TABLE `users`
+##  ADD CONSTRAINT `addresses_fk` FOREIGN KEY (`addresses_fk`) REFERENCES `addresses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE `admins` (
+  `id` int(10) NOT NULL,
+  `username` varchar(20) NOT NULL,
+  `password` varchar(25) NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `admins`
+  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+
+CREATE TABLE `auctions` (
+  `id` int(10) NOT NULL,
+  `bid_start_time` datetime NOT NULL,
+  `bid_end_time` datetime NOT NULL,
+  `bid_price_start` decimal(15,2) NOT NULL,
+  `bid_price_max` decimal(15,2) NOT NULL,
+  `description` text NOT NULL,
+  `items_fk` int(10) NOT NULL, `user_id` int(10) NOT NULL, `date_created` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL,
+  `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `auctions`
+  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+CREATE TABLE `bids` (
+  `id` int(10) NOT NULL,
+  `bid_price` DECIMAL(15,2) NOT NULL,
+ `auctions_fk` int(10) NOT NULL,`users_fk` int(10) NOT NULL, `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `bids`
+  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+ALTER TABLE `bids`
+  ADD CONSTRAINT `auctions_fk` FOREIGN KEY (`auctions_fk`) REFERENCES `auctions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+ALTER TABLE `bids`
+  ADD CONSTRAINT `users_fk` FOREIGN KEY (`users_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+CREATE TABLE `items` (
+  `id` int(10) NOT NULL,
+  `itemname` varchar(30) NOT NULL,
+  `description` text NOT NULL,
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL,
+  `image` varchar(20)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+##ALTER TABLE `items`
+##  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+
+##ALTER TABLE `auctions`
+##  ADD CONSTRAINT `items_fk` FOREIGN KEY (`items_fk`) REFERENCES `items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+##ALTER TABLE `auctions`
+  ##ADD CONSTRAINT `users_fk` FOREIGN KEY (`users_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+##DROP database if exists ottawauction;
+
+INSERT INTO `ottawauction`.`users` (`firstname`,`lastname`,`username`, `password`) VALUES ('Anita','Rezakhani','Admin', 'passw0rd');
+select * from `ottawauction`.`users`;
