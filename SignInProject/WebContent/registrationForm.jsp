@@ -19,7 +19,7 @@
 
 <title>Registration Form</title></head>
 <body>
-	<form> 
+	<form action="registerServlet" method="POST"> 
 		<div class="form-group">
 		    <label for="firstName">First Name:</label>
 			<input type="text" class="form-control input-sm" id="firstName" placeholder="Enter first name" name="firstName">

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.SQLTimeoutException;
 
 import com.oa.helpers.User;
+import com.oa.utilities.Encryption;
 
 
 public class UserDao {
@@ -18,16 +19,20 @@ public class UserDao {
 		//password = Encryption.decrypt(password);
 		
 		try{
-			pst = conn.prepareStatement("select * from users where username=? and password=?");
+			pst = conn.prepareStatement("select * from users where username=? and password=? OR email=? and password=?");
 			pst.setString(1, username);
 			pst.setString(2, password);
+			pst.setString(3, username);
+			pst.setString(4, password);
 			rs = pst.executeQuery();
 			if(rs.next()){
 				user= new User();
 				// ? Do we need it ? user.setUserId(rs.getString("userId"));
-				// ? user.setUsername(rs.getString("username"));
-				user.setFirstname(rs.getString("firstname"));
-				user.setLastname(rs.getString("lastname"));
+				user.setUsername(rs.getString("userName"));
+				user.setFirstname(rs.getString("firstName"));
+				user.setLastname(rs.getString("lastName"));
+				user.setPassword(rs.getString("password"));
+				user.setEmail(rs.getString("emailAddress"));
 			}
 		}catch (Exception e) {
             e.printStackTrace();
@@ -58,10 +63,10 @@ public class UserDao {
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		User user = null;
-		//password = Encryption.decrypt(password); //NOT REQUIRED
+		password = Encryption.decrypt(password); //NOT REQUIRED
 		
 		try{
-			pst = conn.prepareStatement("SELECT userId FROM users WHERE username=? OR email=?");
+			pst = conn.prepareStatement("SELECT id FROM users WHERE username=? OR email=?");
 			pst.setString(1, username);
 			pst.setString(2, email);
 			rs = pst.executeQuery();
@@ -82,14 +87,14 @@ public class UserDao {
 	                    e.printStackTrace();
 	                }
 	            }
-				
-				pst = conn.prepareStatement("INSERT into users (firstname, lastname, username, password, email ) VALUES (?, ?, ?, ?, ?)");
+				pst = conn.prepareStatement("INSERT into users (firstname, lastname, username, password, email) VALUES (?, ?, ?, ?, ?)");
 				pst.setString(1, firstname);
 				pst.setString(2, lastname);
 				pst.setString(3, username);
 				pst.setString(4, password);
 				pst.setString(5, email);
 				pst.executeUpdate();
+				
 				if (pst != null) { 
 	                try {
 	                    pst.close();
@@ -99,15 +104,17 @@ public class UserDao {
 	                }
 	            }
 				// for what purpose do we need userName
-				pst = conn.prepareStatement("SELECT userId FROM usertable WHERE username=?");
+				pst = conn.prepareStatement("SELECT id FROM users WHERE username=?");
 				pst.setString(1, username);
 				rs = pst.executeQuery();
 				rs.next();
 				user = new User();
-				user.setUserId(rs.getString("userId"));
+				//user.setUserId(rs.getString("id"));
 				user.setUsername(username);
 				user.setFirstname(firstname);
 				user.setLastname(lastname);
+				user.setPassword(password);
+				user.setEmail(email);
 			}
 		}catch (Exception e) {
             System.out.println(e);

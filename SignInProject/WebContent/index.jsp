@@ -24,5 +24,5 @@
          </div>
 	</div>
 	 <button type="login" class="btn btn-primary" id="loginbtn" name="login">Login</button>
-     <p class="message">Not registered? <a href="#">Register Now!</a>
+     <p class="message">Not registered? <a href="registrationForm.jsp">Register Now!</a>
 </form>
