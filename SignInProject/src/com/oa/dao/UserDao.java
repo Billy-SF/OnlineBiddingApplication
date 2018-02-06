@@ -32,7 +32,7 @@ public class UserDao {
 				user.setFirstname(rs.getString("firstName"));
 				user.setLastname(rs.getString("lastName"));
 				user.setPassword(rs.getString("password"));
-				user.setEmail(rs.getString("emailAddress"));
+				user.setEmail(rs.getString("email"));
 			}
 		}catch (Exception e) {
             e.printStackTrace();
