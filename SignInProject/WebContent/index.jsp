@@ -1,5 +1,6 @@
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <jsp:include page="<%= \"topMenu.jsp\" %>" />
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -14,8 +15,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
 <!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> 
-
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body> 
 <form action="loginServlet" class="login-form" method="post">
 	<div class ="form-group row">
 		<div class="col-3">
@@ -26,3 +28,5 @@
 	 <button type="login" class="btn btn-primary" id="loginbtn" name="login">Login</button>
      <p class="message">Not registered? <a href="registrationForm.jsp">Register Now!</a>
 </form>
+</body>
+</html>

@@ -2,23 +2,9 @@ package com.oa.helpers;
 
 public class Address {
 	
-	private String province;
-	private String city;
 	private String street;
 	private String streetNo;
 	
-	public String getProvince() {
-		return province;
-	}
-	public void setProvince(String province) {
-		this.province = province;
-	}
-	public String getCity() {
-		return city;
-	}
-	public void setCity(String city) {
-		this.city = city;
-	}
 	public String getStreet() {
 		return street;
 	}
