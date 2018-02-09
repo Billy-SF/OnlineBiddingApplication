@@ -35,9 +35,10 @@ public class LoginServlet extends HttpServlet{
         if(user != null){
         	HttpSession session = request.getSession(false);
             if (session!=null){
-            	 session.setAttribute("username", "test");
+            	 session.setAttribute("username", user.getUsername());
             	 session.setAttribute("password", user.getPassword());
             	 session.setAttribute("firstname", user.getFirstname());
+            	 session.setAttribute("email", user.getEmail());
             	 session.setAttribute("lastname", user.getLastname());
             }
 //            response.sendRedirect("welcome.jsp");  what is the difference?

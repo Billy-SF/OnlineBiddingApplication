@@ -140,7 +140,7 @@ public class UserDao {
 		return user;
 	}
 	
-	public static User getUser(String userID)
+	public static User getUser(String username , String password)
 	{
 		Connection conn = Dao.getConnection();
 		PreparedStatement pst = null;
@@ -148,15 +148,15 @@ public class UserDao {
 		User user = new User();
 		// not sure if userId is needed
 		try {
-        	pst = conn.prepareStatement("SELECT * FROM users WHERE userId='" + userID + "'");
+        	pst = conn.prepareStatement("SELECT * FROM users WHERE username='" + username + "' and password='" + password + "'");
         	rs = pst.executeQuery();
         	
         	//Stores the results
         	while(rs.next())
         	{
-        		user.setUserId(rs.getString("userId"));
+        		user.setUserId(rs.getString("id"));
         		user.setUsername(rs.getString("username"));
-        		user.setPassword(null);
+        		user.setPassword(rs.getString("password"));
         		user.setFirstname(rs.getString("firstname"));
         		user.setLastname(rs.getString("lastname"));
         		user.setEmail(rs.getString("email"));
@@ -195,7 +195,7 @@ public class UserDao {
 		try {
         	pst = conn.prepareStatement("UPDATE users SET firstname='" + firstname + "', lastname='" + lastname
         								+ "', username='" + username + "', email='" + email + "', password='" + password + 
-        								"' WHERE userId='" + userId + "';"); // userId?
+        								"' WHERE id='" + userId + "';");
 			
      	
         	pst.executeUpdate();
