@@ -17,7 +17,7 @@ public class Dao {
         String dbName = "ottawauction";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
-        String password = "xxxx";
+        String password = "!Abc1234";
         try {
             Class.forName(driver).newInstance();
             dao.con = DriverManager.getConnection(url + dbName, userName, password);
