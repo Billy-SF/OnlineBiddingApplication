@@ -1,16 +1,37 @@
+<<<<<<< HEAD
  <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <jsp:include page="<%= \"topMenu.jsp\" %>" />
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> branch 'Chi's-branch' of https://github.com/Biller89/OnlineBiddingApplication
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Select Language</title>
+</head>
+<body>
+<table>
+<tr>
+<td colspan=4 bgcolor="black">
+<br/>
+<center><font face="arial" size=+2 color="white">
+    <b><i>Select</i> your prefered language to Login Page.</b></font>
+    </center>
+<br/>
  
- <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</td>
+</tr>
+ <tr><td>
+ 
+ <c:url value="login.jsp" var="englishURL">
+   <c:param name="locale" value="en_US"/>
+ </c:url>
+ 
+ <a href="${englishURL}"> English </a>
+</td>
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+<<<<<<< HEAD
 <!-- Popper JS -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
@@ -30,3 +51,16 @@
 </form>
 </body>
 </html>
+=======
+<td>
+  <c:url value="login.jsp" var="chineseURL">
+     <c:param name="locale" value="zh_CN"/>
+  </c:url>
+ 
+  <a href="${chineseURL}"> Chinese </a>
+</td>
+</tr>
+</table>
+</body>
+</html>
+>>>>>>> branch 'Chi's-branch' of https://github.com/Biller89/OnlineBiddingApplication
