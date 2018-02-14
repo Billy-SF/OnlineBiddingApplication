@@ -8,5 +8,12 @@
 </head>
 <body>
 Please verify your email and enter the code to confirm your account!
+<form action="verifyEmailServlet" method="POST"> 
+		<div class="form-group">
+		    <label for="verificationCode">Verification code:</label>
+			<input type="text" class="form-control input-sm" id="code" placeholder="Enter verification code" name="code">
+		</div>
+			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
+</form>
 </body>
 </html>

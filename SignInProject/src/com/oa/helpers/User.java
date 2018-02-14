@@ -8,6 +8,8 @@ public class User {
 	private String firstname;
 	private String lastname;
 	private String email;
+	private String verificationCode;
+	private int verificationState;
 	private Address address;
 	
 	
@@ -46,6 +48,18 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getVerificationCode() {
+		return verificationCode;
+	}
+	public void setVerificationCode(String verificationCode) {
+		this.verificationCode = verificationCode;
+	}
+	public int getVerificationState() {
+		return verificationState;
+	}
+	public void setVerificationState(int verificationState) {
+		this.verificationState = verificationState;
 	}
 	public Address getAddress() {
 		return address;

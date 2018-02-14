@@ -20,6 +20,10 @@
     <servlet-name>auction</servlet-name>
     <servlet-class>com.oa.servlets.AuctionServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>verifyEmail</servlet-name>
+  	<servlet-class>com.oa.servlets.VerifyEmailServlet</servlet-class>
+  </servlet>
   
   
   
@@ -42,6 +46,10 @@
   <servlet-mapping>
     <servlet-name>auction</servlet-name>
     <url-pattern>/auctionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>verifyEmail</servlet-name>
+  	<url-pattern>/verifyEmailServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
