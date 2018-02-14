@@ -21,11 +21,11 @@ CREATE TABLE `users` (
   `lastname` varchar(20),
   `username` varchar(20),
   `password` varchar(25),
-  `email` varchar(50)
+  `email` varchar(50),
+  `verification_code` varchar(6) NOT NULL,
+  `verified_state` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
 ##  `phone` varchar(20) NOT NULL,
 ##  `addresses_fk` int(10) NOT NULL,
-##  `verification_code` varchar(6) NOT NULL,
-##  `verified_state` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
 ##  `date_created` datetime NOT NULL,
 ##  `date_modified` datetime DEFAULT NULL,
 ##  `state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
@@ -111,5 +111,5 @@ CREATE TABLE `items` (
 
 ##DROP database if exists ottawauction;
 
-INSERT INTO `ottawauction`.`users` (`firstname`,`lastname`,`username`, `password`, `email`) VALUES ('Anita','Rezakhani','Admin', 'passw0rd', 'test1@gmail.com');
+INSERT INTO `ottawauction`.`users` (`firstname`,`lastname`,`username`, `password`, `email`, `verification_code`,`verified_state` ) VALUES ('Anita','Rezakhani','Admin', 'passw0rd', 'test1@gmail.com', '123', '1');
 select * from `ottawauction`.`users`;
