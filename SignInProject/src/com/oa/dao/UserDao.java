@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import com.oa.helpers.User;
 import com.oa.utilities.Encryption;
+import com.oa.utilities.Mailer;
 
 
 public class UserDao {
@@ -98,7 +99,8 @@ public class UserDao {
 				pst.setString(6, String.valueOf(verificationCode));
 				pst.setString(7, "0");
 				pst.executeUpdate();
-				
+				Mailer mailer = new Mailer(email,String.valueOf(verificationCode));
+				mailer.send();
 				if (pst != null) { 
 	                try {
 	                    pst.close();

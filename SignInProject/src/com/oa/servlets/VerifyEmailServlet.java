@@ -28,6 +28,7 @@ public class VerifyEmailServlet extends HttpServlet {
 		String username = (String) request.getSession().getAttribute("username");
 		System.out.println("username: " + username);
 		String password = (String) request.getSession().getAttribute("password");
+		
 		String verificationCode = request.getParameter("code");
 		result = UserDao.verifyVerificationCode(username,password,verificationCode);
 		
