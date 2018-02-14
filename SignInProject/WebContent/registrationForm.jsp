@@ -8,7 +8,57 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+  <script>
+  function validateForm(){
+	  var firstName = document.forms["registrationForm"]["firstName"].value;
+	  var lastName = document.forms["registrationForm"]["lastName"].value;
+	  var userName = document.forms["registrationForm"]["userName"].value;
+	  var password = document.forms["registrationForm"]["password"].value;
+	  var email = document.forms["registrationForm"]["email"].value;
+	  var errorAmount = 0;
+	  
+				if (firstName.length < 2) 
+				{
+					document.getElementById("firstNameValidation").innerHTML = "Please enter a valid first name";
+					errorAmount++;
+				} else {
+					document.getElementById("firstNameValidation").innerHTML = "";
+					errorAmount++;
+				}
+				if (lastName.length < 2) {
+					document.getElementById("lastNameValidation").innerHTML = "Please enter a valid last name";
+					errorAmount++;
+				} else {
+					document.getElementById("lastNameValidation").innerHTML = "";
+				}
+				if (userName.length < 2) {
+					document.getElementById("userNameValidation").innerHTML = "Please enter a user name with alteast two characters";
+					errorAmount++;
+				} else {
+					document.getElementById("userNameValidation").innerHTML = "";
+				}
+				if (password.length < 4) {
+					document.getElementById("passwordValidation").innerHTML = "Please enter a password with atleast 4 characters";
+					errorAmount++;
+				} else {
+					document.getElementById("passwordValidation").innerHTML = "";
+				}
+				if (email.length < 3 || !email.includes("@")
+						|| !email.includes(".") || email.length < 3
+						&& !email.includes("@")) {
+					document.getElementById("emailValidation").innerHTML = "Please enter a valid email address with atleast 3 characters including the @ sybmol";
+					errorAmount++;
+				} else {
+					document.getElementById("emailValidation").innerHTML = "";
+				}
+				if (errorAmount > 0){
+					return false;
+				}
+				else{
+					return true;
+				}
+			}
+</script>
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
@@ -104,27 +154,32 @@
 <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> Registration Form</b> </div>
   <div class ="panel-body"> 
-	<form action="registerServlet" method="POST"> 
+	<form name="registrationForm" action="registerServlet" onsubmit="return validateForm()" method="POST"> 
 		<div class="form-group">
+		    <p class="pull-left" style="color:red" id="firstNameValidation"></p>
 		    <label class ="pull-left" for="firstName">First Name:</label>
-			<input type="text" class="form-control input-sm" id="firstName" placeholder="Enter first name or email address" name="firstName">
+			<input type="text" class="form-control input-sm" id="firstName" placeholder="Enter first name or email address" name="firstName" required>
 		</div>
 		<div class="form-group">
+		 <p class="pull-left" style="color:red" id="lastNameValidation"></p>
 		    <label class ="pull-left" for="lastName">Last Name:</label>
-			<input type="text" class="form-control input-sm" id="lastName"  placeholder="Enter last name" name="lastName">
+			<input type="text" class="form-control input-sm" id="lastName"  placeholder="Enter last name" name="lastName" required>
 	    </div>
-	    <div class="form-group">		
+	    <div class="form-group">
+	     <p class="pull-left" style="color:red" id="userNameValidation"></p>		
 			<label class ="pull-left" for="username">User Name:</label>
-			<input type="text" class="form-control input-sm" id="userName" placeholder="Enter username" name="userName">
+			<input type="text" class="form-control input-sm" id="userName" placeholder="Enter username" name="userName" required>
 		</div>
 			
-		<div class="form-group">	
+		<div class="form-group">
+		 <p class="pull-left" style="color:red" id="passwordValidation"></p>	
 			<label class ="pull-left" for="password">Enter password:</label>
-			<input type="password" class="form-control input-sm" id="password" placeholder="Enter a password" name="password">
+			<input type="password" class="form-control input-sm" id="password" placeholder="Enter a password" name="password" required>
 		</div>
-		<div class="form-group">	
+		<div class="form-group">
+		 <p class="pull-left" style="color:red" id="emailValidation"></p>	
 			<label class ="pull-left" for="emailAddress">Email Address:</label>
-			<input type="text" class="form-control input-sm" id="emailAddress" placeholder="Enter your email address" name="email">    
+			<input type="text" class="form-control input-sm" id="emailAddress" placeholder="Enter your email address" name="email" required>    
 		</div>	
 			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
 	</form>

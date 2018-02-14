@@ -19,7 +19,6 @@ public class VerifyEmailServlet extends HttpServlet {
 		
 		
 		HttpSession session = request.getSession(false);
-		
 		int verificationAttempts = 0;
 		String attempts="";
 		System.out.println("InVerifyServlet");
@@ -52,7 +51,7 @@ public class VerifyEmailServlet extends HttpServlet {
 				System.out.print(verificationAttempts);
 				verificationAttempts++;
 				session.setAttribute("verificationAttempt", String.valueOf(verificationAttempts));
-				out.print("<p style=\"color:red\">Invalid Input! Please enter a valid verification code!</p>"); 
+				//out.print("<p style=\"color:red\">Invalid Input! Please enter a valid verification code!</p>"); 
 				RequestDispatcher rd=request.getRequestDispatcher("verifyEmail.jsp");  
 		        rd.include(request,response);
 			}
