@@ -97,6 +97,13 @@ CREATE TABLE `items` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
+CREATE TABLE `api_key` (
+  `id` int(10) auto_increment,
+  `code` varchar(100),
+  primary key (id)
+);
+
+
 ##ALTER TABLE `items`
 ##  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
