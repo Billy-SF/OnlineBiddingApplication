@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <%-- <jsp:include page="<%= \"topMenu.jsp\" %>" /> --%>
 <html lang="en">
@@ -342,11 +343,8 @@ window.onclick = function(event) {
     }
 }
 </script>
-      
-
-    
 </fmt:bundle>
-
-
 </body>
 </html>
+
+
