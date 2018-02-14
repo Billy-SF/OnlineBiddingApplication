@@ -27,12 +27,13 @@ public class RegisterServlet extends HttpServlet{
 		User user;
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		String username = request.getParameter("userName");
+		String username = request.getParameter("username");
 		String password = Encryption.encrypt(request.getParameter("password")); 
 		String email = request.getParameter("email");
 		user = UserDao.register(username, password, firstName, lastName, email);
 		
-		if(user != null){
+		if(user != null)
+		{
 			HttpSession session = request.getSession(false);
 			if (session!=null){
 				session.setAttribute("firstName", user.getFirstname());
@@ -40,7 +41,9 @@ public class RegisterServlet extends HttpServlet{
 				session.setAttribute("username", user.getUsername());
 				session.setAttribute("password", user.getPassword());
 				session.setAttribute("email", user.getEmail());
+				session.setAttribute("verificationAttempt", "0");
 				//session.setAttribute("user_id", user.getUserId());
+				
 			}
 			response.sendRedirect("verifyEmail.jsp"); 
 		} else {
