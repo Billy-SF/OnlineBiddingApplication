@@ -34,8 +34,8 @@ public class VerifyEmailServlet extends HttpServlet {
 		
 		if(result == true) 
 		{
-			out.println("Verification code verified!");
-			System.out.println("True");
+			RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
+	        rd.include(request,response);
 		} 
 		else 
 		{	

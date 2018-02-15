@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet{
             }
 //            response.sendRedirect("welcome.jsp");  what is the difference?
             
-            RequestDispatcher rd=request.getRequestDispatcher("welcome.jsp");  
+            RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
             rd.forward(request,response);  
                  
         } else {
