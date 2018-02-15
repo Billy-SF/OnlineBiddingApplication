@@ -194,7 +194,7 @@
       <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#"><font color="white"><b>© OttawAuction</b></font></a></li>
+      <li><a href="edit.jsp"><font color="white"><b>© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
       <li><a href="#"><font color="white"><b>Feedback</b></font></a></li>

@@ -1,19 +1,6 @@
-
 <!DOCTYPE html>
 <%-- <jsp:include page="<%= \"topMenu.jsp\" %>" /> --%>
 <html lang="en">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="loc" value="en_US"/>
-<c:if test="${!(empty param.locale)}">
-  <c:set var="loc" value="${param.locale}"/>
-</c:if>
-<fmt:setLocale value="${loc}" />
-<fmt:bundle basename="MessagesBundle">
-
 
 <title>OttawaAuction</title>
 
@@ -201,19 +188,12 @@ span.psw {
       <li><a href="#"><font color="white"><b>Home</b></font></a></li>
       <li><a href="#"><font color="white"><b>Contact Us</b></font></a></li>
       <li><a href="#"><font color="white"><b>Help</b></font></a></li>
-
-    <li>
-    <c:url value="index.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
- 	<a href="${englishURL}"> English </a> </li>
- 	
- 	  <li>
- 	<c:url value="index.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}"> Chinese </a></li>
-        </ul>
+    </ul>
+<!--     toggle button for  -->
      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-user" style="color:white"></span><font color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
+           <span class="glyphicon glyphicon-user" style="color:white"></span><font color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
             <!-- <span class="caret"></span> -->
           </a>
           <ul class="dropdown-menu">
@@ -235,7 +215,7 @@ span.psw {
   
   <div  id="myCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
+     <ol class="carousel-indicators">
       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
       <li data-target="#myCarousel" data-slide-to="1"></li>
       <li data-target="#myCarousel" data-slide-to="2"></li>
@@ -277,6 +257,7 @@ span.psw {
       <span class="sr-only">Next</span>
     </a>
   </div>
+  
 </div>
 
 <div class="col-sm-2 sidenav">
@@ -294,24 +275,29 @@ span.psw {
     </div>
 
     <div class="container">
-      <label  for="username"><b><fmt:message key="username"/></b></label><br />
-      <input type="text" placeholder="<fmt:message key="enterUsername"/>" name="username" required>
+    
+  
+      <label  for="username"><b>Username</b></label><br />
+      <input  type="text" placeholder="Enter Username" name="username" required>
+      
+     
 
-     <br /> <label  for="password"><b><fmt:message key="password"/></b></label><br />
-      <input type="password" placeholder="<fmt:message key="enterPassword"/>" name="password" required>
-        
-      <button type="submit"><fmt:message key="login"/></button>
+
+      <br /><label  for="password"><b>Password</b></label><br />
+      <input  type="password" placeholder="Enter Password" name="password" required>
+       
+      <button type="submit">Login</button>
        <br/>
       <label>
       
-        <input type="checkbox" checked="checked" name="remember"> <fmt:message key="rememberMe"/>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
     </div>
 
     <div class="container" style="background-color:#ccffcc">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"><fmt:message key="cancel"/></button>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
       
-      <span class="message"><fmt:message key="notRegistered"/><a href="registrationForm.jsp"><fmt:message key="registerNow"/></a></span>
+      <span class="message">Not registered? <a href="registrationForm.jsp">Register Now!</a></span>
     </div>
   </form>
 </div>
@@ -324,7 +310,7 @@ span.psw {
       <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#"><font color="white"><b>Â© OttawAuction</b></font></a></li>
+      <li><a href="#"><font color="white"><b>© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
       <li><a href="#"><font color="white"><b>Feedback</b></font></a></li>
@@ -343,8 +329,11 @@ window.onclick = function(event) {
     }
 }
 </script>
-</fmt:bundle>
+      
+
+    
+
+
+
 </body>
 </html>
-
-
