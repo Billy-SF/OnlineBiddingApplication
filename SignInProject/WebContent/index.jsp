@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <%-- <jsp:include page="<%= \"topMenu.jsp\" %>" /> --%>
 <html lang="en">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="loc" value="en_US"/>
+<c:if test="${!(empty param.locale)}">
+  <c:set var="loc" value="${param.locale}"/>
+</c:if>
+<fmt:setLocale value="${loc}" />
+<fmt:bundle basename="MessagesBundle">
 
 <title>OttawaAuction</title>
 
@@ -176,7 +187,7 @@ span.psw {
     </div>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
+        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
         <div class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <i class="glyphicon glyphicon-search"></i>
@@ -185,10 +196,19 @@ span.psw {
       </div>
     </form>
     <ul class="nav navbar-nav">
-      <li><a href="#"><font color="white"><b>Home</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Contact Us</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Help</b></font></a></li>
-    </ul>
+      <li><a href="#"><font color="white"><b><fmt:message key="home"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
+    
+    
+    <li>
+    <c:url value="index.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+ 	<a href="${englishURL}"> English </a> </li>
+ 	
+ 	  <li>
+ 	<c:url value="index.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
+ 	 </ul>
 <!--     toggle button for  -->
      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -197,8 +217,8 @@ span.psw {
             <!-- <span class="caret"></span> -->
           </a>
           <ul class="dropdown-menu">
-            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
-            <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
+            <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="logout"/></a></li>
       </ul>      
     </div>
 </nav>
@@ -261,11 +281,11 @@ span.psw {
 </div>
 
 <div class="col-sm-2 sidenav">
-  <h2><font color=white>Welcome to Ottawa Auction</font></h2>
+  <h2><font color=white><fmt:message key="WelcomeMessage"/></font></h2>
 
-  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+  <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><fmt:message key="login"/></button>
 <!-- <center><p class="message">Not registered? <a href="registrationForm.jsp">Register Now!</a></center> -->
-<p class="message"><font size="4" color="white"><b>Not Registered?</b></font> <a href="registrationForm.jsp"><b>Register Now!</b></a>
+<p class="message"><font size="4" color="white"><b><fmt:message key="notRegistered"/></b></font>  <c:url value="registrationForm.jsp" var="fuck"><c:param name="locale" value="${loc}"/></c:url><a href="${fuck}"> <fmt:message key="registerNow"/> </a></b></a>
 <div id="id01" class="modal">
   
   <form class="modal-content animate" action="loginServlet" method="post">
@@ -275,29 +295,23 @@ span.psw {
     </div>
 
     <div class="container">
-    
-  
-      <label  for="username"><b>Username</b></label><br />
-      <input  type="text" placeholder="Enter Username" name="username" required>
-      
-     
+      <label  for="username"><b><fmt:message key="username"/></b></label><br />
+      <input type="text" placeholder="<fmt:message key="enterUsername"/>" name="username" required>
 
-
-      <br /><label  for="password"><b>Password</b></label><br />
-      <input  type="password" placeholder="Enter Password" name="password" required>
-       
-      <button type="submit">Login</button>
+     <br /> <label  for="password"><b><fmt:message key="password"/></b></label><br />
+      <input type="password" placeholder="<fmt:message key="enterPassword"/>" name="password" required>
+        
+      <button type="submit"><fmt:message key="login"/></button>
        <br/>
       <label>
       
-        <input type="checkbox" checked="checked" name="remember"> Remember me
+        <input type="checkbox" checked="checked" name="remember"> <fmt:message key="rememberMe"/>
       </label>
     </div>
 
     <div class="container" style="background-color:#ccffcc">
-      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-      
-      <span class="message">Not registered? <a href="registrationForm.jsp">Register Now!</a></span>
+      <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn"><fmt:message key="cancel"/></button>      
+      <span class="message"><fmt:message key="notRegistered"/><a href="registrationForm.jsp"><fmt:message key="registerNow"/></a></span>
     </div>
   </form>
 </div>
@@ -310,11 +324,11 @@ span.psw {
       <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#"><font color="white"><b>© OttawAuction</b></font></a></li>
+      <li><a href="#"><font color="white"><b>Â© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
-      <li><a href="#"><font color="white"><b>Feedback</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Privacy Policy</b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="feedback"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
    </ul>
 </footer>
 
@@ -332,7 +346,7 @@ window.onclick = function(event) {
       
 
     
-
+</fmt:bundle>
 
 
 </body>

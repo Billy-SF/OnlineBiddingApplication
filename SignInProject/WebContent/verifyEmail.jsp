@@ -61,7 +61,7 @@
     </div>
 </nav>
 
- <jsp:include page="<%= \"leftMenu.jsp\" %>" />
+<jsp:include page="<%= \"leftMenu.jsp\" %>" /> 
  
  <div class="col-sm-8 text-left"> 
 		<p>Please verify your email and enter the code to confirm your account!</p>
@@ -69,7 +69,7 @@
 				<div class="form-group">
 					<p class="pull-left" style="color:red"id="codeValidation"></p>
 				    <label for="verificationCode">Verification code:</label>
-					<input type="text" class="form-control input-sm" id="code" placeholder="Enter verification code" name="code">
+					<input type="text" class="form-control input-md" id="code" placeholder="Enter verification code" name="code">
 				</div>
 				<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
 		</form>
@@ -77,6 +77,6 @@
 
 </body>
 <footer>
-<jsp:include page="<%= \"footer.jsp\" %>" />
+ <jsp:include page="<%= \"footer.jsp\" %>" />
 </footer>
 </html>

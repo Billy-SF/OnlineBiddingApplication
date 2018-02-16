@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 
 <html lang="en">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="loc" value="en_US"/>
+<c:if test="${!(empty param.locale)}">
+  <c:set var="loc" value="${param.locale}"/>
+</c:if>
+<fmt:setLocale value="${param.locale}" />
+<fmt:bundle basename="MessagesBundle">
+
+
 <head>
 <title>Registration Form</title>
   <meta charset="utf-8">
@@ -109,7 +122,7 @@
     </div>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
+        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
         <div class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <i class="glyphicon glyphicon-search"></i>
@@ -118,19 +131,19 @@
       </div>
     </form>
     <ul class="nav navbar-nav">
-      <li><a href="index.jsp"><font color="white"><b>Home</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Contact Us</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Help</b></font></a></li>
+      <li><a href="index.jsp"><font color="white"><b><fmt:message key="home"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
     </ul>
     
    <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> Logout</b></font>
+            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
             <!-- <span class="caret"></span> -->
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
       </ul>      
     </div>
 </nav> 
@@ -151,36 +164,36 @@
 <div class="col-sm-3">
 <div> &nbsp;</div>
 <div class= "panel panel-danger">
- <div class= "panel-heading" >  <b> Registration Form</b> </div>
+ <div class= "panel-heading" >  <b> <fmt:message key="registrationForm"/></b> </div>
   <div class ="panel-body"> 
 	<form name="registrationForm" action="registerServlet" onsubmit="return validateForm()" method="POST"> 
 		<div class="form-group">
 		    <p class="pull-left" style="color:red" id="firstNameValidation"></p>
-		    <label class ="pull-left" for="firstName">First Name:</label>
-			<input type="text" class="form-control input-sm" id="firstName" placeholder="Enter first name or email address" name="firstName" required>
+		    <label class ="pull-left" for="firstName"><fmt:message key="firstName"/></label>
+			<input type="text" class="form-control input-sm" id="firstName" placeholder="<fmt:message key="enterFirstName"/>" name="firstName" required>
 		</div>
 		<div class="form-group">
 		 <p class="pull-left" style="color:red" id="lastNameValidation"></p>
-		    <label class ="pull-left" for="lastName">Last Name:</label>
-			<input type="text" class="form-control input-sm" id="lastName"  placeholder="Enter last name" name="lastName" required>
+		    <label class ="pull-left" for="lastName"><fmt:message key="lastName"/></label>
+			<input type="text" class="form-control input-sm" id="lastName"  placeholder="<fmt:message key="enterLastName"/>" name="lastName" required>
 	    </div>
 	    <div class="form-group">
 	     <p class="pull-left" style="color:red" id="userNameValidation"></p>		
-			<label class ="pull-left" for="username">User Name:</label>
-			<input type="text" class="form-control input-sm" id="userName" placeholder="Enter username" name="userName" required>
+			<label class ="pull-left" for="username"><fmt:message key="username"/></label>
+			<input type="text" class="form-control input-sm" id="userName" placeholder="<fmt:message key="enterUsername"/>" name="userName" required>
 		</div>
 			
 		<div class="form-group">
 		 <p class="pull-left" style="color:red" id="passwordValidation"></p>	
-			<label class ="pull-left" for="password">Enter password:</label>
-			<input type="password" class="form-control input-sm" id="password" placeholder="Enter a password" name="password" required>
+			<label class ="pull-left" for="password"><fmt:message key="password"/></label>
+			<input type="password" class="form-control input-sm" id="password" placeholder="<fmt:message key="enterPassword"/>" name="password" required>
 		</div>
 		<div class="form-group">
 		 <p class="pull-left" style="color:red" id="emailValidation"></p>	
-			<label class ="pull-left" for="emailAddress">Email Address:</label>
-			<input type="text" class="form-control input-sm" id="emailAddress" placeholder="Enter your email address" name="email" required>    
+			<label class ="pull-left" for="emailAddress"><fmt:message key="email"/></label>
+			<input type="text" class="form-control input-sm" id="emailAddress" placeholder="<fmt:message key="enterEmail"/>" name="email" required>    
 		</div>	
-			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
+			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><fmt:message key="submit"/></button>
 	</form>
 	
 	</div>
@@ -194,14 +207,14 @@
       <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="edit.jsp"><font color="white"><b>© OttawAuction</b></font></a></li>
+      <li><a href="edit.jsp"><font color="white"><b>Â© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
-      <li><a href="#"><font color="white"><b>Feedback</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Privacy Policy</b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="feedback"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
    </ul>
 </footer>
-	
-	
+
 </body>
+</fmt:bundle>
 </html>
