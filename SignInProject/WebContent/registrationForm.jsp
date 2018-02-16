@@ -116,7 +116,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="input-group">
@@ -129,9 +129,18 @@
       </div>
     </form>
     <ul class="nav navbar-nav">
-      <li><a href="index.jsp"><font color="white"><b><fmt:message key="home"/></b></font></a></li>
+      <li> <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a href="${index}"> <fmt:message key="home"/> </a></li>
       <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
+      
+       <li>
+    <c:url value="registrationForm.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+ 	<a href="${englishURL}"> English </a> </li>
+ 	
+ 	  <li>
+ 	<c:url value="registrationForm.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
+ 	 
     </ul>
     
    <ul class="nav navbar-nav navbar-right">

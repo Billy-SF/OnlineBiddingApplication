@@ -183,7 +183,7 @@ span.psw {
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="input-group">
@@ -285,7 +285,7 @@ span.psw {
 
   <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><fmt:message key="login"/></button>
 <!-- <center><p class="message">Not registered? <a href="registrationForm.jsp">Register Now!</a></center> -->
-<p class="message"><font size="4" color="white"><b><fmt:message key="notRegistered"/></b></font>  <c:url value="registrationForm.jsp" var="fuck"><c:param name="locale" value="${loc}"/></c:url><a href="${fuck}"> <fmt:message key="registerNow"/> </a></b></a>
+<p class="message"><font size="4" color="white"><b><fmt:message key="notRegistered"/></b></font>  <c:url value="registrationForm.jsp" var="register"><c:param name="locale" value="${loc}"/></c:url><a href="${register}"> <fmt:message key="registerNow"/> </a>
 <div id="id01" class="modal">
   
   <form class="modal-content animate" action="loginServlet" method="post">

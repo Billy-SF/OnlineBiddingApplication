@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 
 <html lang="en">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:set var="loc" value="en_US"/>
+<c:if test="${!(empty param.locale)}">
+  <c:set var="loc" value="${param.locale}"/>
+</c:if>
+<fmt:setLocale value="${param.locale}" />
+<fmt:bundle basename="MessagesBundle">
+
+
 <head>
 <title>Confirmation Page</title>
   <meta charset="utf-8">
@@ -31,7 +44,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>wAuction</font></b></a>
     </div>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="input-group">
@@ -44,19 +57,27 @@
       </div>
     </form>
     <ul class="nav navbar-nav">
-      <li><a href="index.jsp"><font color="white"><b>Home</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Contact Us</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Help</b></font></a></li>
+    <li> <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a href="${index}"> <fmt:message key="home"/> </a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
+      
+       <li>
+    <c:url value="verifyEmail.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+ 	<a href="${englishURL}"> English </a> </li>
+ 	
+ 	  <li>
+ 	<c:url value="verifyEmail.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
     </ul>
     
    <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> Logout</b></font>
+            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
             <!-- <span class="caret"></span> -->
           </a>
           <ul class="dropdown-menu">
-            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
+            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
       </ul>      
     </div>
 </nav> 
@@ -76,15 +97,15 @@
 <div class="col-sm-3" style="width:35%; margin-left:30%; margin-top:10%">
 <div> &nbsp;</div>
 <div class= "panel panel-danger" >
- <div class= "panel-heading">  <b> Registration Form</b> </div>
+ <div class= "panel-heading">  <b> <fmt:message key="registrationForm"/></b> </div>
   <div class ="panel-body"> 
 	<form name="verifyForm" action="verifyEmailServlet" onsubmit="return validateForm()" method="POST"> 
 		<div class="form-group">
 			<p class="pull-left" style="color:red"id="codeValidation"></p>
-		    <label for="verificationCode">Verification code:</label>
-			<input type="text" class="form-control input-md" id="code" placeholder="Enter verification code" name="code">
+		    <label for="verificationCode"><fmt:message key="verficationCode"/></label>
+			<input type="text" class="form-control input-md" id="code" placeholder="<fmt:message key="EnterverficationCode"/>" name="code">
 		</div>
-			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
+			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><fmt:message key="submit"/></button>
 </form>
 	</div>
 </div>	
@@ -94,18 +115,19 @@
 
 <footer class="container-fluid text-center">
   <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#"><font color="white"><b>© OttawAuction</b></font></a></li>
+      <li><a href="#"><font color="white"><b>Â© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
-      <li><a href="#"><font color="white"><b>Feedback</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Privacy Policy</b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="feedback"/></b></font></a></li>
+      <li><a href="#"><font color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
    </ul>
 </footer>
 	
 </body>
+</fmt:bundle>
 </html>
 
 
