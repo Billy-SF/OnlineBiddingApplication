@@ -96,7 +96,6 @@ public class Mailer {
 					result.append(line);
 				}
 				rd.close();
-				System.out.println(result.toString());
 			} catch (java.net.MalformedURLException e) {
 			} catch (java.io.IOException e) {
 			}
