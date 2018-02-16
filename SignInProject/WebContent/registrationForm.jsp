@@ -23,36 +23,35 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script>
   function validateForm(){
+	  var error = null;
 	  var firstName = document.forms["registrationForm"]["firstName"].value;
 	  var lastName = document.forms["registrationForm"]["lastName"].value;
 	  var userName = document.forms["registrationForm"]["userName"].value;
 	  var password = document.forms["registrationForm"]["password"].value;
 	  var email = document.forms["registrationForm"]["email"].value;
-	  var errorAmount = 0;
 	  
 				if (firstName.length < 2) 
 				{
 					document.getElementById("firstNameValidation").innerHTML = "Please enter a valid first name";
-					errorAmount++;
+					error ="Error";
 				} else {
 					document.getElementById("firstNameValidation").innerHTML = "";
-					errorAmount++;
 				}
 				if (lastName.length < 2) {
 					document.getElementById("lastNameValidation").innerHTML = "Please enter a valid last name";
-					errorAmount++;
+					error ="Error";
 				} else {
 					document.getElementById("lastNameValidation").innerHTML = "";
 				}
 				if (userName.length < 2) {
 					document.getElementById("userNameValidation").innerHTML = "Please enter a user name with alteast two characters";
-					errorAmount++;
+					error ="Error";
 				} else {
 					document.getElementById("userNameValidation").innerHTML = "";
 				}
 				if (password.length < 4) {
 					document.getElementById("passwordValidation").innerHTML = "Please enter a password with atleast 4 characters";
-					errorAmount++;
+					error ="Error";
 				} else {
 					document.getElementById("passwordValidation").innerHTML = "";
 				}
@@ -60,16 +59,15 @@
 						|| !email.includes(".") || email.length < 3
 						&& !email.includes("@")) {
 					document.getElementById("emailValidation").innerHTML = "Please enter a valid email address with atleast 3 characters including the @ sybmol";
-					errorAmount++;
+					error ="Error";
 				} else {
 					document.getElementById("emailValidation").innerHTML = "";
 				}
-				if (errorAmount > 0){
+				
+				if(error != null){
 					return false;
 				}
-				else{
-					return true;
-				}
+				return true;
 			}
 </script>
 <style>
@@ -189,6 +187,9 @@
 			<input type="password" class="form-control input-sm" id="password" placeholder="<fmt:message key="enterPassword"/>" name="password" required>
 		</div>
 		<div class="form-group">
+		<c:if test="${message ne null}">
+		  	<h3>${message}</h3>
+		</c:if>
 		 <p class="pull-left" style="color:red" id="emailValidation"></p>	
 			<label class ="pull-left" for="emailAddress"><fmt:message key="email"/></label>
 			<input type="text" class="form-control input-sm" id="emailAddress" placeholder="<fmt:message key="enterEmail"/>" name="email" required>    

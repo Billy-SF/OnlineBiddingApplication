@@ -25,6 +25,7 @@ public class RegisterServlet extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		User user;
+		String message = null;
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
 		String username = request.getParameter("userName");
@@ -42,14 +43,17 @@ public class RegisterServlet extends HttpServlet{
 				session.setAttribute("password", user.getPassword());
 				session.setAttribute("email", user.getEmail());
 				session.setAttribute("verificationAttempt", "0");
+				session.setAttribute("message", null);
 				//session.setAttribute("user_id", user.getUserId());
 				
 			}
+			
 			response.sendRedirect("verifyEmail.jsp"); 
 		} else {
-			out.print("<p style=\"color:red\">Email already exists</p>"); 
-			RequestDispatcher rd=request.getRequestDispatcher("registrationForm.jsp");  
-			rd.include(request,response);
+			
+			message = "Email already exists</p>";
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("registrationForm.jsp").forward(request, response);
 		}
 	}
 } //End Registerservlet class
