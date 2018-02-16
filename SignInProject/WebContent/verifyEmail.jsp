@@ -72,18 +72,17 @@
       <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
     </div>
 
-<div class="col-sm-3"></div>
 
-<div class="col-sm-3">
+<div class="col-sm-3" style="width:35%; margin-left:30%; margin-top:10%">
 <div> &nbsp;</div>
-<div class= "panel panel-danger">
- <div class= "panel-heading" >  <b> Registration Form</b> </div>
+<div class= "panel panel-danger" >
+ <div class= "panel-heading">  <b> Registration Form</b> </div>
   <div class ="panel-body"> 
 	<form name="verifyForm" action="verifyEmailServlet" onsubmit="return validateForm()" method="POST"> 
 		<div class="form-group">
 			<p class="pull-left" style="color:red"id="codeValidation"></p>
 		    <label for="verificationCode">Verification code:</label>
-			<input type="text" class="form-control input-lg" id="code" placeholder="Enter verification code" name="code">
+			<input type="text" class="form-control input-md" id="code" placeholder="Enter verification code" name="code">
 		</div>
 			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
 </form>
