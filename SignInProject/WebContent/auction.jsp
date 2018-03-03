@@ -1,5 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<script>
+function myFunction() {
+    document.getElementById("image").accept = "image/*";
+}
+</script>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -47,7 +52,7 @@
 		
 		<div class="form-group">	
 			<label class ="pull-left" for="image">Image:</label>
-			<input type="file"  class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image">    
+			<input type="file"  class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image" accept="image/*">    
 		</div>	
 
 			<button type="submit" class="btn btn-primary" id="submitAuctionbtn" name="submitAuctionbtn">Submit Auction</button>
