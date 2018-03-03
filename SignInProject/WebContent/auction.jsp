@@ -47,7 +47,7 @@
 		
 		<div class="form-group">	
 			<label class ="pull-left" for="image">Image:</label>
-			<input type="text" class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image">    
+			<input type="file"  class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image">    
 		</div>	
 
 			<button type="submit" class="btn btn-primary" id="submitAuctionbtn" name="submitAuctionbtn">Submit Auction</button>
