@@ -32,12 +32,12 @@
 	    
 	    <div class="form-group">		
 			<label class ="pull-left" for="bidStart">Bidding Starts at :</label>
-			<input type="text" class="form-control input-sm" id="bidStart" placeholder="Pick a date" name="bidStart">
+			<input type="text" class="form-control input-sm" id="bidStart" placeholder="Please Pick a date" name="bidStart">
 		</div>
 			
 		<div class="form-group">	
 			<label class ="pull-left" for="bidEnd">Bidding Ends at:</label>
-			<input type="text" class="form-control input-sm" id="bidEnd" placeholder="Pick a date"  name="bidEnd">
+			<input type="text" class="form-control input-sm" id="bidEnd" placeholder="Please Pick a date"  name="bidEnd">
 		</div>
 		
 		<div class="form-group">	
