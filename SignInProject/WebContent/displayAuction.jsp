@@ -33,7 +33,7 @@
 		{
 %>
 			<tr>
-				<td><%=rs.getString("itemname") %></td>
+				<td><a href="<%=rs.getString("id")%>.jsp"><%=rs.getString("itemname") %></a></td>
 			</tr>
 			<tr>
 				<td><%=rs.getString("description") %></td>
