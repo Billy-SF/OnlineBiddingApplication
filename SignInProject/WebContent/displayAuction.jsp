@@ -7,6 +7,17 @@
 <%@ page import="com.oa.helpers.User" %>
 <%@ page import="java.sql.PreparedStatement" %>
 <%@ page import="java.sql.SQLException" %>
+<% 
+	Connection conn = Dao.getConnection();
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+	User user = new User();
+	// not sure if userId is needed
+	try {
+		pst = conn.prepareStatement("SELECT * FROM items");
+		rs = pst.executeQuery();
+%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -17,30 +28,27 @@
 	<h3>Auctions</h3>
 	<table>
 
-
-<% 
-	Connection conn = Dao.getConnection();
-	PreparedStatement pst = null;
-	ResultSet rs = null;
-	User user = new User();
-	// not sure if userId is needed
-	try {
-		pst = conn.prepareStatement("SELECT * FROM items");
-		rs = pst.executeQuery();
-		
+<%		
 		//Stores the results
 		while(rs.next())
 		{
 %>
 			<tr>
-				<td><a href="<%=rs.getString("id")%>.jsp"><%=rs.getString("itemname") %></a></td>
+				<td><a href="<%=rs.getString("id")%>.jsp"> <%=rs.getString("itemname") %></a></td>
 			</tr>
 			<tr>
 				<td><%=rs.getString("description") %></td>
-				<td><%=rs.getString("image") %></td>
+				<td><img src="c:\\uploadImageOttawAction\\<%=rs.getString("image") %>" alt="Auction Image"></td>
 			</tr>
 <%
 		}
+%>
+
+	</table>
+
+</body>
+</html>
+<%
 		
 	} catch (Exception e) {
 	    e.printStackTrace();
@@ -65,8 +73,3 @@
 	}		
 
 %>
-
-	</table>
-
-</body>
-</html>

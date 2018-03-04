@@ -23,7 +23,7 @@ function myFunction() {
 <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> Create Auction</b> </div>
   <div class ="panel-body"> 
-	<form action="auctionServlet" method="POST"> 
+	<form action="auctionServlet" method="POST" enctype="multipart/form-data"> 
 		<div class="form-group">
 		    
 		    <label class ="pull-left" for="itemName">Item Name:</label>
@@ -37,17 +37,17 @@ function myFunction() {
 	    
 	    <div class="form-group">		
 			<label class ="pull-left" for="bidStart">Bidding Starts at :</label>
-			<input type="text" class="form-control input-sm" id="bidStart" placeholder="Please Pick a date" name="bidStart">
+			<input type="text" class="form-control input-sm" id="bidStart" placeholder="Please Pick a date:YYYY-MM-DD HH:MM:SS" name="bidStart">
 		</div>
 			
 		<div class="form-group">	
 			<label class ="pull-left" for="bidEnd">Bidding Ends at:</label>
-			<input type="text" class="form-control input-sm" id="bidEnd" placeholder="Please Pick a date"  name="bidEnd">
+			<input type="text" class="form-control input-sm" id="bidEnd" placeholder="Please Pick a date:YYYY-MM-DD HH:MM:SS"  name="bidEnd">
 		</div>
 		
 		<div class="form-group">	
 			<label class ="pull-left" for="initialPrice">Initial Price</label>
-			<input type="text" class="form-control input-sm" id="initialPrice" placeholder="Please Enter Initial Price" name="initialPrice">    
+			<input type="text" class="form-control input-sm" id="initialPrice" placeholder="Please Enter Initial Price" name="initialPrice" >    
 		</div>	
 		
 		<div class="form-group">	
