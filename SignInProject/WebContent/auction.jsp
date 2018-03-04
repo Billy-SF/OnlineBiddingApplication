@@ -27,7 +27,7 @@ function myFunction() {
 		<div class="form-group">
 		    
 		    <label class ="pull-left" for="itemName">Item Name:</label>
-			<input type="text" class="form-control input-sm" id="itemName" placeholder="Please Enter item name" name="itemName">
+			<input type="text" class="form-control input-sm" id="itemName"  placeholder="Please Enter item name" name="itemName">
 		</div>
 		
 		<div class="form-group">
