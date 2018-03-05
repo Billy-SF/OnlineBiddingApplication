@@ -5,7 +5,7 @@ function myFunction() {
 }
 </script>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -37,12 +37,12 @@ function myFunction() {
 	    
 	    <div class="form-group">		
 			<label class ="pull-left" for="bidStart">Bidding Starts at :</label>
-			<input type="text" class="form-control input-sm" id="bidStart" placeholder="Please Pick a date:YYYY-MM-DD HH:MM:SS" name="bidStart">
+			<input type="datetime-local" class="form-control input-sm" id="bidStart"  name="bidStart">
 		</div>
 			
 		<div class="form-group">	
 			<label class ="pull-left" for="bidEnd">Bidding Ends at:</label>
-			<input type="text" class="form-control input-sm" id="bidEnd" placeholder="Please Pick a date:YYYY-MM-DD HH:MM:SS"  name="bidEnd">
+			<input type="datetime-local" class="form-control input-sm" id="bidEnd" name="bidEnd">
 		</div>
 		
 		<div class="form-group">	
