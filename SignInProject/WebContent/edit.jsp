@@ -112,27 +112,27 @@
 		<div class="form-group">
 		    
 		    <label class ="pull-left" for="firstName">First Name:</label>
-			<input type="text" class="form-control input-sm" id="firstName" placeholder="Enter first name or email address" value="<%=session.getAttribute("firstname")%>"name="firstName">
+			<input type="text" class="form-control input-sm" id="firstName"  value="<%=session.getAttribute("firstname")%>"name="firstName">
 		</div>
 		
 		<div class="form-group">
 		    <label class ="pull-left" for="lastName">Last Name:</label>
-			<input type="text" class="form-control input-sm" id="lastName"  placeholder="Enter last name" value="<%=session.getAttribute("lastname")%>" name="lastName">
+			<input type="text" class="form-control input-sm" id="lastName"  value="<%=session.getAttribute("lastname")%>" name="lastName">
 	    </div>
 	    
 	    <div class="form-group">		
 			<label class ="pull-left" for="username">User Name:</label>
-			<input type="text" class="form-control input-sm" id="userName" placeholder="Enter username" value="<%=session.getAttribute("username")%>" name="userName">
+			<input type="text" class="form-control input-sm" id="userName"  value="<%=session.getAttribute("username")%>" name="userName">
 		</div>
 			
 		<div class="form-group">	
 			<label class ="pull-left" for="password">Enter password:</label>
-			<input type="password" class="form-control input-sm" id="password" placeholder="Enter a password" value="<%=session.getAttribute("password")%>" name="password">
+			<input type="password" class="form-control input-sm" id="password"  value="<%=session.getAttribute("password")%>" name="password">
 		</div>
 		
 		<div class="form-group">	
 			<label class ="pull-left" for="emailAddress">Email Address:</label>
-			<input type="text" class="form-control input-sm" id="emailAddress" placeholder="Enter your email address" value="<%=session.getAttribute("email")%>" name="emailAddress">    
+			<input type="text" class="form-control input-sm" id="emailAddress"  value="<%=session.getAttribute("email")%>" name="emailAddress">    
 		</div>	
 		
 			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
