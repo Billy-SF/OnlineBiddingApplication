@@ -56,12 +56,14 @@ CREATE TABLE `auctions` (
   `id` int(10) NOT NULL,
   `bid_start_time` datetime NOT NULL,
   `bid_end_time` datetime NOT NULL,
-  `bid_price_start` decimal(15,2) NOT NULL,
-  `bid_price_max` decimal(15,2) NOT NULL,
-  `description` text NOT NULL,
-  `items_fk` int(10) NOT NULL, `user_id` int(10) NOT NULL, `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
+  `bid_price_start` decimal(15,2) NOT NULL
+##  `bid_price_max` decimal(15,2) NOT NULL,
+##  `description` text NOT NULL,
+##  `items_fk` int(10) NOT NULL,
+##  `user_id` int(10) NOT NULL 
+##  `date_created` datetime NOT NULL
+##  `date_modified` datetime DEFAULT NULL,
+##  `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `auctions`
@@ -91,11 +93,13 @@ CREATE TABLE `items` (
   `id` int(10) NOT NULL,
   `itemname` varchar(30) NOT NULL,
   `description` text NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  `image` varchar(20)
+##  `date_created` datetime NOT NULL,
+##  `date_modified` datetime DEFAULT NULL,
+  `image` varchar(30)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `items`
+  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 CREATE TABLE `api_key` (
   `id` int(10) auto_increment,
@@ -107,16 +111,23 @@ CREATE TABLE `api_key` (
 ##ALTER TABLE `items`
 ##  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
+##ALTER TABLE `auctions`
+ ## ADD CONSTRAINT `items_fk` FOREIGN KEY (`items_fk`) REFERENCES `items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
 
 ##ALTER TABLE `auctions`
-##  ADD CONSTRAINT `items_fk` FOREIGN KEY (`items_fk`) REFERENCES `items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-
-
-##ALTER TABLE `auctions`
-  ##ADD CONSTRAINT `users_fk` FOREIGN KEY (`users_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ ## ADD CONSTRAINT `users_fk` FOREIGN KEY (`users_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ##DROP database if exists ottawauction;
 
 INSERT INTO `ottawauction`.`users` (`firstname`,`lastname`,`username`, `password`, `email`, `verification_code`,`verified_state` ) VALUES ('Anita','Rezakhani','Admin', 'passw0rd', 'test1@gmail.com', '123', '1');
+insert into ottawauction.api_key (code) values ('C:\\AlgonquinCollege\\Level5_1\\WebEnterPrizeApplication\\proposal\\api_key.txt');
+##delete from ottawauction.users where firstname = 'ani';
 select * from `ottawauction`.`users`;
+##drop table auctions;
+INSERT into items (itemname, description) VALUES (21, 21);
+select * from ottawauction.auctions;
+select * from ottawauction.items;
+delete from ottawauction.items;
+SET SQL_SAFE_UPDATES = 0;
