@@ -178,31 +178,6 @@ to {
 	height: 110%;
 }
 
-.sidenavDiv {
-	height: 95%;
-	width: 95%;
-	position: relative;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	background-color: #D8D7D7;
-	overflow-x: hidden;
-	padding-top: 20px;
-	border-radius: 10px;
-}
-
-.sidenavDiv a {
-	padding: 6px 8px 6px 16px;
-	text-decoration: none;
-	font-size: 25px;
-	color: #818181;
-	display: block;
-}
-
-.sidenavDiv a:hover {
-	color: #f1f1f1;
-}
-
 .main {
 	margin-left: 160px; /* Same as the width of the sidenav */
 	font-size: 28px; /* Increased text to enable scrolling */
@@ -288,7 +263,7 @@ div.desc {
 							<c:param name="locale" value="zh_CN" />
 						</c:url> <a href="${chineseURL}"><fmt:message key="chinese" /></a></li>
 				</ul>
-				<form class="navbar-form navbar-left" action="">
+				<form class="navbar-form navbar-left" action="searchServlet">
 					<div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="<fmt:message key="search"/>" name="search">
@@ -326,47 +301,28 @@ div.desc {
 
 			<div class="row content">
 				<div class="col-sm-2 sidenav">
-					<div class="sidenavDiv">
-						<h3
-							class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Category</h3>
-						<a href="#services">Services</a> <a href="#contact">Coins and
-							Bullion</a> <a href="#clients">Computers</a> <a href="#contact">Electronics</a>
-						<a href="#clients">Fashion</a> <a href="#contact">Jewelry</a> <a
-							href="#contact">Watches</a>
-					</div>
 				</div>
 
 				<div class="col-sm-8 text-left">
 
 					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
-						<li class="breadcrumb-item"><a href="search.jsp">Search</a></li>
-						
+						<li class="breadcrumb-item"><a href="#">Home</a></li>
+						<li class="breadcrumb-item"><a href="#">Bid</a></li>
+						<li class="breadcrumb-item"><a href="#">Product Name</a></li>
 					</ol>
 					<br>
 
 
-					<h3
-						class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Search
-						for: ${keyword}</h3>
+					<h3 class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">
+						${productDescription} </h3>
 					1-# of items of ${bidItemNumber} Items
-
-					<div class="btn-group">
-						<label for="sort">Sort By:</label>
-						<button type="button" name="sort"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Default</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">Default</button>
-							<button class="dropdown-item" type="button">Lowest Price</button>
-							<button class="dropdown-item" type="button">Highest
-								Price</button>
-							<button class="dropdown-item" type="button">Most Bids</button>
-							<button class="dropdown-item" type="button">Least Bids</button>
-							<button class="dropdown-item" type="button">Newest</button>
-							<button class="dropdown-item" type="button">Oldest</button>
-						</div>
+					<div class="bd-example bd-example-images">
+					<img src="${imagename}" class="rounded float-left" alt="...">
+					<form action ="bidServlet">
+					<input ></
+					
+					
+					</form>
 					</div>
 					<div class="btn-group">
 						<label for="view"> View:</label>
@@ -375,9 +331,9 @@ div.desc {
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							5</button>
 						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">9</button>
-							<button class="dropdown-item" type="button">18</button>
-							<button class="dropdown-item" type="button">40</button>
+							<button class="dropdown-item" type="button">5</button>
+							<button class="dropdown-item" type="button">10</button>
+							<button class="dropdown-item" type="button">20</button>
 							<button class="dropdown-item" type="button">All</button>
 						</div>
 					</div>
@@ -402,13 +358,66 @@ div.desc {
 						</thead>
 						<tbody>
 							<tr>
-							<c:forEach items="${productItems}" var="productItem">
-							<td><div class="gallery"><a target="_blank" href="${productItem.image}"> <img
-											src="${productItem.image}" alt="Fjords" width="300" height="200"></img>
-										</a></div><div class="desc">${productItem.descrption}</div>
-									</td>
-							<td>
-							</c:forEach>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
+								<td>@
+									<div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
+							</tr>
+							<tr>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
+								<td><div class="gallery">
+										<a target="_blank" href="fjords.jpg"> <img
+											src="fjords.jpg" alt="Fjords" width="300" height="200">
+										</a>
+										<div class="desc">Product Description Bid Time Bid Price</div>
+									</div></td>
 							</tr>
 						</tbody>
 					</table>
