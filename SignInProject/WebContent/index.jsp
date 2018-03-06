@@ -1,8 +1,9 @@
+<%@ page pageEncoding="UTF-8" %>
+
+<%@ page contentType="text/html; charset=UTF-8" %>
 <!DOCTYPE html>
 <%-- <jsp:include page="<%= \"topMenu.jsp\" %>" /> --%>
 <html lang="en">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -15,7 +16,7 @@
 
 <title>OttawaAuction</title>
 
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -185,16 +186,7 @@ span.psw {
     <div class="navbar-header">
       <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
-    <form class="navbar-form navbar-left" action="/action_page.php">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
+ 
     <ul class="nav navbar-nav">
       <li><a href="#"><font color="white"><b><fmt:message key="home"/></b></font></a></li>
       <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
@@ -209,6 +201,16 @@ span.psw {
  	<c:url value="index.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
  	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
  	 </ul>
+ 	  <form class="navbar-form navbar-left" action="searchServlet">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="glyphicon glyphicon-search"></i>
+          </button>
+        </div>
+      </div>
+    </form>
 <!--     toggle button for  -->
      <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -221,7 +223,10 @@ span.psw {
             <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="logout"/></a></li>
       </ul>      
     </div>
+      
 </nav>
+
+
 
 <div class="container-fluid text-center">    
   <div class="row content">
