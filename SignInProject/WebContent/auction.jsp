@@ -37,7 +37,7 @@ function myFunction() {
 	    
 	    <div class="form-group">		
 			<label class ="pull-left" for="bidStart">Bidding Starts at :</label>
-			<input type="datetime-local" class="form-control input-sm" id="bidStart"  name="bidStart">
+			<input type="datetime-local" class="form-control input-sm" id="bidStart" name="bidStart">
 		</div>
 			
 		<div class="form-group">	
@@ -52,7 +52,7 @@ function myFunction() {
 		
 		<div class="form-group">	
 			<label class ="pull-left" for="image">Image:</label>
-			<input type="file"  class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image" accept="image/*">    
+			<input type="file" class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image" accept="image/*">    
 		</div>	
 
 			<button type="submit" class="btn btn-primary" id="submitAuctionbtn" name="submitAuctionbtn">Submit Auction</button>

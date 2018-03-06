@@ -32,13 +32,17 @@
 		//Stores the results
 		while(rs.next())
 		{
+			System.out.println(rs.getString("itemname"));
+			System.out.println(rs.getString("description"));
+			System.out.println(rs.getString("image"));
 %>
 			<tr>
-				<td><a href="<%=rs.getString("id")%>.jsp"> <%=rs.getString("itemname") %></a></td>
+				<td><a href="<%=rs.getString("id")%>.jsp"> <%=rs.getString("itemname")%></a></td>
 			</tr>
 			<tr>
 				<td><%=rs.getString("description") %></td>
-				<td><img src="c:\\uploadImageOttawAction\\<%=rs.getString("image") %>" alt="Auction Image"></td>
+				<td><img <%--src="C:/uploadImageOttawAction/img1903941635699828845.jpg"  %><%--src="file:\\\\c:\uploadImageOttawAction\img1903941635699828845.jpg" src="c:\\uploadImageOttawAction\\<%=rs.getString("image")%>"--%> 
+				src='chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/<%=rs.getString("image")%>'alt="Auction Image"></td>
 			</tr>
 <%
 		}
