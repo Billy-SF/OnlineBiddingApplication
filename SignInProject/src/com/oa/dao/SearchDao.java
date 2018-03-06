@@ -29,7 +29,7 @@ public class SearchDao {
 		ResultSet rs = null;
 		ArrayList<ProductItem> productItems= null;
 		
-		
+		//Todo: need to check auction table first
 		try{
 			pst = conn.prepareStatement("select * from items WHERE itemname or itemname CONTAINS ?");
 			pst.setString(1, keyword);
