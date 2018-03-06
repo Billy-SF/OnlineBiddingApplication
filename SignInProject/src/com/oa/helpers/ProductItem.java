@@ -13,7 +13,7 @@ public class ProductItem {
 		return name;
 	}
 	public void setItemName(String itemName) {
-		this.name = name;
+		this.name = name; 
 	}
 	public String getDesciption() {
 		return desciption;
