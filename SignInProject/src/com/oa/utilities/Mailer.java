@@ -82,7 +82,7 @@ public class Mailer {
 				result.append(apiKey);
 				result.append("&from=verify@aro.science");
 				result.append("&subject=Verify+With+Ottawauction");
-				result.append("&bodyText=Your+verification+code+is:+");
+				result.append("&bodyHTML=Your+verification+code+is:+");
 				result.append(code);
 				result.append("&to=");
 				result.append(recipient);
