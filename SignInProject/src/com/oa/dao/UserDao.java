@@ -241,6 +241,7 @@ public class UserDao {
 			if(rs.next()) 
 			{
 				System.out.print("UserID:" + userId);
+				//IF the verification code verifies, change their account statues to verified
 				if(rs.getString(1).equals(verificationCode)) {
 					System.out.print("Verified");
 					pst2 = conn.prepareStatement("UPDATE users SET verified_state=1 WHERE id='" + userId + "';");
@@ -307,6 +308,7 @@ public class UserDao {
          }
      }
 	}
+	
 	
 	
 }//End of UserDao
