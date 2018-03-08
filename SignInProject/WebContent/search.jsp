@@ -24,6 +24,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+    <link rel="stylesheet"
+		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">		
+	<script
+		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		
 
 	<style>
 body {
@@ -194,7 +200,7 @@ to {
 .sidenavDiv a {
 	padding: 6px 8px 6px 16px;
 	text-decoration: none;
-	font-size: 25px;
+	font-size: 15px;
 	color: #818181;
 	display: block;
 }
@@ -284,7 +290,7 @@ div.desc {
 
 					<li><c:url value="index.jsp" var="chineseURL">
 							<c:param name="locale" value="zh_CN" />
-						</c:url> <a href="${chineseURL}"><fmt:message key="chinese" /></a></li>
+						</c:url> <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
 				</ul>
 				<form class="navbar-form navbar-left" action="">
 					<div class="input-group">
@@ -375,103 +381,44 @@ div.desc {
 
 <hr>
    ${productTotal} items for ${keyword} 
-
-
-
 <hr>
-	<table class="table">
-					
-						<thead>
-							<tr>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<c:forEach items="${productItems}" var="productItem">
-									<td><div class="gallery">
-											<a target="_blank" href="${productItem.image}"> <img
+
+<table id="productitems"  class="stripe">
+                    <thead>
+                        <tr style="display:none; visibility:hide">
+                        	<th>image</th>
+                            <th>itemName</th>
+                            <th>description</th>
+                            <th>highestPrice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach items="${productItems}" var="productItem">
+                    <tr>
+                    <td><div class="gallery">
+											<a target="_blank" href="/bidServlet?productItemId=${productItem.productId}"> <img
 												src="${productItem.image}" alt="Fjords" width="300"
 												height="200"></img>
 											</a>
-										</div>
-										<div class="desc">${productItem.description}</div>
-									   <div class="desc">${productItem.highestPrice}</div></td>
-									<td>
-								</c:forEach>
-							</tr>
-						</tbody>
-					</table>
-
-
-
-
-<%-- 
-
-					<div class="btn-group">
-						<label for="view"> View:</label>
-						<button type="button" name="view"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							5</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">9</button>
-							<button class="dropdown-item" type="button">18</button>
-							<button class="dropdown-item" type="button">40</button>
-							<button class="dropdown-item" type="button">All</button>
-						</div>
-					</div>
-					
-
-					<div class="btn-group">
-						<label for="view"> Page</label>
-						<button type="button" name="view"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							1</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">1</button>
-						</div>
-					</div>
-
-	              
-					<table class="table">
-					
-						<thead>
-							<tr>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<c:forEach items="${productItems}" var="productItem">
-									<td><div class="gallery">
-											<a target="_blank" href="${productItem.image}"> <img
-												src="${productItem.image}" alt="Fjords" width="300"
-												height="200"></img>
-											</a>
-										</div>
-										<div class="desc">${productItem.description}</div></td>
-									<td>
-								</c:forEach>
-							</tr>
-						</tbody>
-					</table>
-
-
-					<div class="btn-group">
-						<label for="view"> Page</label>
-						<button type="button" name="view"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							1</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">1</button>
-						</div>
-					</div>
-					
-			 --%>		
-					
+										</div></td>
+                             <td>${productItem.itemName}</td>
+                         <td>${productItem.description}</td>
+                         <td>${productItem.highestPrice}</td>
+                    </tr>
+                </c:forEach>
+                    </tbody>
+                </table>    
+    
+<script>
+$(document).ready(function() {
+	  
+    $('#productitems').DataTable({
+    	"searching": false,
+    	"lengthMenu": [[1, 2, 50, -1], [1, 2, 50, "All"]]
+    });
+} );
+</script>
+<hr>				
 				</div>
 
 			</div>
