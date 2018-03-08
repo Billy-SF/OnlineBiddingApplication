@@ -105,7 +105,7 @@ CREATE TABLE `items` (
   `description` text NOT NULL,
 ## `date_created` datetime NOT NULL,
 ## `date_modified` datetime DEFAULT NULL,
-  `image` varchar(20),
+  `image` varchar(30),
   `item_categories_fk` int(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -119,7 +119,8 @@ CREATE TABLE `currenthighestBidder` (
   `id` int(10) NOT NULL,
   `user_id_fk` int(10) NOT NULL,
   `item_id_fk` int(10) NOT NULL,
-  `highest_bid_price` DECIMAL(15,2) NOT NULL
+  `highest_bid_price` DECIMAL(15,2) NOT NULL,
+  `bidding_time` datetime NOT NULL
  
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -175,3 +176,6 @@ CREATE TABLE `api_key` (
 ##insert into ottawauction.api_key (code) values ('C:\\GIT\\api_key.txt');
 
 #select max(`bid_price`) from bids where `users_fk` = 1 order by `bid_price` desc; 
+#select highest_bid_price from currenthighestBidder where item_id_fk = 2;
+#INSERT INTO `ottawauction`.`currenthighestbidder` (`user_id_fk`,`item_id_fk`,`highest_bid_price`) VALUES ('1','1','14.26');
+#select * from ottawauction.users;
