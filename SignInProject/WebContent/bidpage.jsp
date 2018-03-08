@@ -27,6 +27,9 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet"
+		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 	<style>
 body {
@@ -353,22 +356,20 @@ div.desc {
 					</ol>
 					<br>
 					<div class="container">
-						<h3>xxxxxxxx</h3>
+						<h3>${productItem.itemName}</h3>
 						<div class="image">
-							<img src="kissing.jpg" alt="Girl in a jacket" height="200px"
+							<img src="${productItem.image}" alt="${productItem.itemName}" height="200px"
 								width="200px">
 						</div>
 
 						<div class="bidInfo">
-							<p>Date Created:</p>
+							<p>Date Created: <b>${productItem.dateCreated}</b></p>
 							<p>Time left: <span id="tttt"></span></p>
-							<p>Current Bid:</p>
+							<p>Current Bid price: <b>${productItem.highestPrice} </b></p>
 							<form action="BidServlet" method="post">
 								<input type="number" name="bidPrice" placeholder="bid here">
 								<input type="submit" value="Bid">
 							</form>
-							<p>Max bid:</p>
-
 						</div>
 <%
 String SimpleVariable="2017-09-22 12:12:12";
@@ -440,36 +441,42 @@ $(document).ready(
 </script>						
 
 					</div>
-					<p>slajfkl;sdajkl;fjaskldjfkl;jsakl;jfkl;sajlkfjkslaj;d</p>
+					<h3>Product Description</h3>
+					<p><b>${productItem.description}</b></p>
 					<div class="container">
 						<h3>Bid History</h3>
 						<table class="table table-condensed">
 							<thead>
 								<tr>
-									<th>bid price</th>
-									<th>user</th>
-									<th>date</th>
+									<th>Bid price</th>
+									<th>Bid User</th>
+									<th>Bid Date</th>
 								</tr>
 							</thead>
 							<tbody>
+						<c:forEach items="${bid}" var="productItem">
 								<tr>
-									<td>John</td>
-									<td>Doe</td>
-									<td>john@example.com</td>
+									<td><b>${bid.itemName}</b></td>
+									<td><b>${bid.description}</b></td>
+									<td><b>$${bid.highestPrice}</b></td>
 								</tr>
-								<tr>
-									<td>Mary</td>
-									<td>Moe</td>
-									<td>mary@example.com</td>
-								</tr>
-								<tr>
-									<td>July</td>
-									<td>Dooley</td>
-									<td>july@example.com</td>
-								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
 
+					<script>
+						$(document).ready(
+								function() {
+									$('#productitems').DataTable(
+											{
+												"searching" : false,
+												"lengthMenu" : [
+														[ 5, 10, 20, -1 ],
+														[ 5, 10, 20, "All" ] ],
+												
+											});
+								});
+					</script>
 
 					</div>
 
@@ -500,6 +507,8 @@ $(document).ready(
 										key="privacyPolicy" /></b></font></a></li>
 				</ul>
 			</footer>
+			
+			
 
 			<script>
 				// Get the modal
