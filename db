@@ -1,5 +1,7 @@
 CREATE database ottawauction;
 
+use ottawauction;
+
 CREATE TABLE `addresses` (
   `id` int(10) NOT NULL,
   `city` int(20) NOT NULL,
@@ -56,10 +58,12 @@ CREATE TABLE `auctions` (
   `bid_end_time` datetime NOT NULL,
   `bid_price_start` decimal(15,2) NOT NULL,
   `bid_price_max` decimal(15,2),
-  `description` text NOT NULL,
-  `items_fk` int(10) NOT NULL, `user_id` int(10) NOT NULL, `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
-  `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
+  `description` text,
+  `items_fk` int(10) NOT NULL,
+  `user_id` int(10) NOT NULL,
+  `date_created` datetime
+##  `date_modified` datetime DEFAULT NULL,
+##  `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `auctions`
@@ -99,22 +103,37 @@ CREATE TABLE `items` (
   `id` int(10) NOT NULL,
   `itemname` varchar(30) NOT NULL,
   `description` text NOT NULL,
-  `date_created` datetime NOT NULL,
-  `date_modified` datetime DEFAULT NULL,
+## `date_created` datetime NOT NULL,
+## `date_modified` datetime DEFAULT NULL,
   `image` varchar(20),
-  `item_categories_fk` int(10) NOT NULL
+  `item_categories_fk` int(10)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `items`
   MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
-
-  
 ALTER TABLE `items`
   ADD CONSTRAINT `item_categories_fk` FOREIGN KEY (`item_categories_fk`) REFERENCES `item_categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+CREATE TABLE `currenthighestBidder` (
+  `id` int(10) NOT NULL,
+  `user_id_fk` int(10) NOT NULL,
+  `item_id_fk` int(10) NOT NULL,
+  `highest_bid_price` DECIMAL(15,2) NOT NULL
+ 
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+ALTER TABLE `currenthighestBidder`
+  MODIFY `id` int(10) PRIMARY KEY NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  
+ALTER TABLE `currenthighestBidder`
+  ADD CONSTRAINT `user_id_fk` FOREIGN KEY (`user_id_fk`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;  
+  
+ALTER TABLE `currenthighestBidder`
+  ADD CONSTRAINT `item_id_fk` FOREIGN KEY (`item_id_fk`) REFERENCES `items` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  
 
+  
 CREATE TABLE `api_key` (
   `id` int(10) auto_increment,
   `code` varchar(100),
@@ -136,24 +155,23 @@ CREATE TABLE `api_key` (
 
 ##DROP database if exists ottawauction;
 
-## INSERT INTO `ottawauction`.`users` (`firstname`,`lastname`,`username`, `password`, `email`, `verification_code`,`verified_state` ) VALUES ('Anita','Rezakhani','Admin', 'passw0rd', 'test1@gmail.com', '123', '1');
+#INSERT INTO `ottawauction`.`users` (`firstname`,`lastname`,`username`, `password`, `email`, `verification_code`,`verified_state` ) VALUES ('Anita','Rezakhani','Admin', 'passw0rd', 'test1@gmail.com', '123', '1');
 
 
-## INSERT INTO ottawauction.item_categories(category) VALUES('bikes');
-## INSERT INTO ottawauction.item_categories(category) VALUES('coins');
+#INSERT INTO ottawauction.item_categories(category) VALUES('bikes');
+#INSERT INTO ottawauction.item_categories(category) VALUES('coins');
 
-## INSERT INTO ottawauction.items(itemname, description,date_created, date_modified, image,item_categories_fk) VALUES ('bike','black bike','1999-09-22 12:12:12','1999-09-22 12:12:12','test.jpg','1');
-## INSERT INTO ottawauction.items (itemname,description,date_created, date_modified, image,item_categories_fk) VALUES ('coin','white coin','1999-09-22 12:12:12','1999-09-22 12:12:12','test2.jpg','2');
+#INSERT INTO ottawauction.items(itemname, description, image,item_categories_fk) VALUES ('bike','black bike','test.jpg','1');
+#INSERT INTO ottawauction.items (itemname,description, image,item_categories_fk) VALUES ('coin','white coin','test2.jpg','2');
 
-## INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created, date_modified,bid_state) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','99.4','150.0', 'Coin auction','2', '1','2018-03-06 12:12:12','2018-03-06 12:12:12', '1');
-## INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created, date_modified,bid_state) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','102.4','999.0', 'Bike auction','1', '1','2018-03-01 12:12:12','2018-03-04 12:12:12', '1');
-
-
-## INSERT INTO `ottawauction`.`bids` (`bid_price`,`auctions_fk`, `users_fk`, `date_created`) VALUES ('12.22','1','1','2018-01-22 12:12:12');
-## INSERT INTO `ottawauction`.`bids` (`bid_price`,`auctions_fk`, `users_fk`, `date_created`) VALUES ('13.24','1','1','1999-01-22 12:14:12');
-## INSERT INTO `ottawauction`.`bids` (`bid_price`,`auctions_fk`, `users_fk`, `date_created`) VALUES ('14.26','1','1','1999-01-22 12:15:12');
-
-## insert into ottawauction.api_key (code) values ('C:\\GIT\\api_key.txt');
+#INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','99.4','150.0', 'Coin auction','2','1','2018-03-04 12:12:12');
+#INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','102.4','999.0', 'Bike auction','1','1','2018-03-04 12:12:12');
 
 
+#INSERT INTO `ottawauction`.`bids` (`bid_price`,`auctions_fk`, `users_fk`, `date_created`) VALUES ('12.22','1','1','2018-01-22 12:12:12');
+#INSERT INTO `ottawauction`.`bids` (`bid_price`,`auctions_fk`, `users_fk`, `date_created`) VALUES ('13.24','1','1','1999-01-22 12:14:12');
+#INSERT INTO `ottawauction`.`bids` (`bid_price`,`auctions_fk`, `users_fk`, `date_created`) VALUES ('14.26','1','1','1999-01-22 12:15:12');
 
+##insert into ottawauction.api_key (code) values ('C:\\GIT\\api_key.txt');
+
+#select max(`bid_price`) from bids where `users_fk` = 1 order by `bid_price` desc; 
