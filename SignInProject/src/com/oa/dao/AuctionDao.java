@@ -1,19 +1,21 @@
 package com.oa.dao;
 
-import java.io.InputStream;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 
 public class AuctionDao {
 	
 	@SuppressWarnings("resource")
-	public static void createAction( String itemName, String description, String imageFileName, String bidStart, String bidEnd, String initialPrice) 
+	public static void createAction( String itemName, String description, String imageFileName, String bidStart, String bidEnd, BigDecimal initialPrice, String username, String password) 
 		{
 			Connection conn = Dao.getConnection();
 			PreparedStatement pst = null;
+			ResultSet rs = null;
+			Integer  items_fk = null;
+			Integer user_id = null;
 	
 			conn = Dao.getConnection();
 			try{
@@ -25,11 +27,28 @@ public class AuctionDao {
 				pst.setString(2, description);
 				pst.setNString(3, imageFileName);
 				pst.executeUpdate();
-		
-				pst = conn.prepareStatement("INSERT into auctions (bid_start_time, bid_end_time, bid_price_start) VALUES (?, ?, ?)");
+				
+				pst = conn.prepareStatement("select id from items");
+				rs = pst.executeQuery();
+				if(rs.next()){
+					items_fk = rs.getInt("id");
+				}
+
+				pst = conn.prepareStatement("SELECT id FROM users WHERE username='" + username + "' and password='" + password + "'");
+				rs = pst.executeQuery();
+				if(rs.next()){
+					user_id = rs.getInt("id");
+				}
+				
+				java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+				
+				pst = conn.prepareStatement("INSERT into auctions (bid_start_time, bid_end_time, bid_price_start, items_fk, user_id, date_created) VALUES (?, ?, ?, ?, ?, ?)");
 				pst.setString(1, bidStart);
 				pst.setString(2, bidEnd);
-				pst.setString(3, initialPrice);
+				pst.setBigDecimal(3, initialPrice);
+				pst.setInt(4, items_fk);
+				pst.setInt(5, user_id);
+				pst.setTimestamp(6, date); 
 				pst.executeUpdate();
 	
 		} catch (Exception e) {
@@ -46,6 +65,13 @@ public class AuctionDao {
 					e.printStackTrace();
 				}
 			}
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
 		}// end finally
 	}// end method
 }// end class
