@@ -361,7 +361,7 @@ div.desc {
 
 						<div class="bidInfo">
 							<p>Date Created:</p>
-							<p>Time left:</p>
+							<p>Time left: <span id="tttt"></span></p>
 							<p>Current Bid:</p>
 							<form action="BidServlet" method="post">
 								<input type="number" name="bidPrice" placeholder="bid here">
@@ -370,6 +370,74 @@ div.desc {
 							<p>Max bid:</p>
 
 						</div>
+<%
+String SimpleVariable="2017-09-22 12:12:12";
+String auctionid="2";
+%>						
+<script>
+function mysqlTimeStampToDate(timestamp) {
+    //function parses mysql datetime string and returns javascript Date object
+    //input has to be in this format: 2007-06-05 15:26:02
+    var regex=/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9]) (?:([0-2][0-9]):([0-5][0-9]):([0-5][0-9]))?$/;
+    var parts=timestamp.replace(regex,"$1 $2 $3 $4 $5 $6").split(' ');
+    return new Date(parts[0],parts[1]-1,parts[2],parts[3],parts[4],parts[5]);
+  };
+  
+$(document).ready(
+		function() {
+			//var date_future = new Date(new Date().getFullYear() +1, 0, 1);
+			var timestamp = "<%=SimpleVariable%>";
+
+			var date_past = mysqlTimeStampToDate(timestamp);
+			var myVar = setInterval(myTimer, 1000);
+			function myTimer() {
+			    //var d = new Date();
+			    //$("#tttt").text(d.toLocaleTimeString());
+
+				var date_now = new Date();
+				
+				// get total seconds between the times
+				var delta = Math.abs(date_now - date_past) / 1000;
+	
+				// calculate (and subtract) whole days
+				var days = Math.floor(delta / 86400);
+				delta -= days * 86400;
+	
+				// calculate (and subtract) whole hours
+				var hours = Math.floor(delta / 3600) % 24;
+				delta -= hours * 3600;
+	
+				// calculate (and subtract) whole minutes
+				var minutes = Math.floor(delta / 60) % 60;
+				delta -= minutes * 60;
+	
+				// what's left is seconds
+				var seconds = delta % 60;  // in theory the modulus is not required
+			    
+			    $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + seconds + ' seconds' + "\n" +
+			    		(date_now.getTime() - date_past.getTime())
+			    );
+				
+				if(date_now.getTime() - date_past.getTime() < 0) {
+					 $.ajax({
+			                url: "auctionStopServlet",
+			                type:"POST",
+			                data: {"auctionid" : "<%=auctionid%>"},
+			                success: function( data, textStatus, jQxhr ){
+			                    //$('#response pre').html( data );
+			                },
+			                error: function( jqXhr, textStatus, errorThrown ){
+			                    //console.log( errorThrown );
+			                }
+			            });
+
+				}
+			}
+
+		
+		});
+
+</script>						
 
 					</div>
 					<p>slajfkl;sdajkl;fjaskldjfkl;jsakl;jfkl;sajlkfjkslaj;d</p>

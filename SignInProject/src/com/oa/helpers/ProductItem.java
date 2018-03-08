@@ -1,5 +1,7 @@
 package com.oa.helpers;
 
+import java.util.ArrayList;
+
 public class ProductItem {
 	
 	private String itemName;
@@ -9,14 +11,18 @@ public class ProductItem {
 	private String dateCreated;
 	private String image;
 	private String highestPrice;
-	
+	private String lowestPrice;
+	private Bid currentbid;
+	private Auction auction;
+	private ArrayList<Bid> bids;
+
 	public ProductItem() {
 		
 		
 		
 	}
 	
-	public String getName() {
+	public String getItemName() {
 		return itemName;
 	}
 	public void setItemName(String itemName) {
@@ -65,11 +71,34 @@ public class ProductItem {
 	}
 	
 	public String getLowestPrice() {
-		return highestPrice;
+		return lowestPrice;
 	}
 	
-	public void setLowestPrice(String highestPrice) {
-		this.highestPrice = highestPrice;
+	public void setLowestPrice(String lowestPrice) {
+		this.lowestPrice = lowestPrice;
 	}
 	
+	public Bid getCurrentbid() {
+		return currentbid;
+	}
+
+	public void setCurrentbid(Bid currentbid) {
+		this.currentbid = currentbid;
+	}
+	
+	public Auction getAuction() {
+		return auction;
+	}
+		
+	public void setAuction(Auction auction) {
+		this.auction = auction;
+	}
+	public ArrayList<Bid> getBids() {
+		return bids;
+	}
+	
+	public void setBids(ArrayList<Bid> bids) {
+		this.bids = bids;
+	}
+		
 }

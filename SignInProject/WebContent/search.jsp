@@ -24,12 +24,11 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		
-    <link rel="stylesheet"
-		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">		
-	<script
-		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-		
+
+	<link rel="stylesheet"
+		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+
 
 	<style>
 body {
@@ -264,7 +263,7 @@ div.desc {
 </style>
 	</head>
 	<body>
-		
+
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -353,72 +352,86 @@ div.desc {
 					<h3
 						class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Search
 						for: ${keyword}</h3>
-				
-<form class="form-inline" action="sortServlet" method="get">
-  <input type="hidden" name="search" value="${keyword}" />
-  <div class="form-group">
-    <label for="email">Sort by:</label>
-<select 
-								name="sortby">
-								<option value="name" >Name</option>
-								<option value="lowestprice" >Lowest Price</option>
-								
-								<option value="highestprice"   
-								<c:if test="${sortMethod == 'highestprice'}">selected</c:if>>
-								Highest Price</option>
-								
-								<option value="mostbids">Most Bids</option>
-								<option value="leastbids">Least Bids</option>
-								<option value="newestauction">Newest auction</option>
-							    <option value="oldestauction">Oldest auction</option>
-</select>
-  </div>
-    <div class="form-group">
-  <button type="submit" class="btn btn-default btn-sm">Go</button>
-  </div>
-</form>
+
+					<form class="form-inline" action="sortServlet" method="get">
+						<input type="hidden" name="search" value="${keyword}" />
+						<div class="form-group">
+							<label for="email">Sort by:</label> <select name="sortby">
+								<option value="name"
+									<c:if test="${sortMethod == 'name'}">selected</c:if>>Name</option>
+								<option value="lowestprice"
+									<c:if test="${sortMethod == 'lowestprice'}">selected</c:if>>Lowest
+									Price</option>
+
+								<option value="highestprice"
+									<c:if test="${sortMethod == 'highestprice'}">selected</c:if>>
+									Highest Price</option>
+
+								<option value="mostbids"
+									<c:if test="${sortMethod == 'mostbids'}">selected</c:if>>Most
+									Bids</option>
+								<option value="leastbids"
+									<c:if test="${sortMethod == 'leastbids'}">selected</c:if>>Least
+									Bids</option>
+								<option value="newestauction"
+									<c:if test="${sortMethod == 'newestauction'}">selected</c:if>>Newest
+									auction</option>
+								<option value="oldestauction"
+									<c:if test="${sortMethod == 'oldestauction'}">selected</c:if>>Oldest
+									auction</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<button type="submit" class="btn btn-default btn-sm">Go</button>
+						</div>
+					</form>
 
 
-<hr>
-   ${productTotal} items for ${keyword} 
-<hr>
+					<hr>
+					${productTotal} items for ${keyword}
+					<hr>
 
-<table id="productitems"  class="stripe">
-                    <thead>
-                        <tr>
-                        	<th></th>
-                            <th>Item</th>
-                            <th>Detail</th>
-                            <th>Current Bid</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <c:forEach items="${productItems}" var="productItem">
-                    <tr>
-                    <td><div class="gallery">
-											<a target="_blank" href="/bidServlet?productItemId=${productItem.productId}"> <img
-												src="${productItem.image}" alt="Fjords" width="300"
+					<table id="productitems" class="stripe">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Item</th>
+								<th>Detail</th>
+								<th>Current Bid</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${productItems}" var="productItem">
+								<tr>
+									<td><div class="gallery">
+											<a target="_blank"
+												href="bidServlet?productItemId=${productItem.productId}">
+												<img src="${productItem.image}" alt="Fjords" width="300"
 												height="200"></img>
 											</a>
-										</div></td> 
-                             <td><b>${productItem.itemName}</b></td>
-                         <td><b>${productItem.description}</b></td>
-                         <td><b>$${productItem.highestPrice}</b></td>
-                    </tr>
-                </c:forEach>
-                    </tbody>
-                </table>    
-    
-<script>
-$(document).ready(function() {
-    $('#productitems').DataTable({
-    	"searching": false,
-    	"lengthMenu": [[5, 10, 30, -1], [5, 10, 30, "All"]],
-    	 "ordering": false
-    });
-} );
-</script>
-<hr>				
+										</div></td>
+									<td><b>${productItem.itemName}</b></td>
+									<td><b>${productItem.description}</b></td>
+									<td><b>$${productItem.highestPrice}</b></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+
+					<script>
+						$(document).ready(
+								function() {
+									$('#productitems').DataTable(
+											{
+												"searching" : false,
+												"lengthMenu" : [
+														[ 5, 10, 30, -1 ],
+														[ 5, 10, 30, "All" ] ],
+												"ordering" : false
+											});
+								});
+					</script>
+					<hr>
 				</div>
 
 			</div>
