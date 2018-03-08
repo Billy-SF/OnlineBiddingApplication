@@ -2,24 +2,31 @@ package com.oa.helpers;
 
 public class ProductItem {
 	
-	private String name;
-	private String desciption;
+	private String itemName;
+	private String description;
 	private String productId;
 	private String dateModified;
 	private String dateCreated;
 	private String image;
+	private String highestPrice;
+	
+	public ProductItem() {
+		
+		
+		
+	}
 	
 	public String getName() {
-		return name;
+		return itemName;
 	}
 	public void setItemName(String itemName) {
-		this.name = name; 
+		this.itemName = itemName; 
 	}
-	public String getDesciption() {
-		return desciption;
+	public String getDescription() {
+		return description;
 	}
-	public void setDesciption(String desciption) {
-		this.desciption = desciption;
+	public void setDesciption(String description) {
+		this.description = description;
 	}
 	
 	public String getProductId() {
@@ -49,4 +56,20 @@ public class ProductItem {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public String getHighestPrice() {
+		return highestPrice;
+	}
+	public void setHighestPrice(String highestPrice) {
+		this.highestPrice = highestPrice;
+	}
+	
+	public String getLowestPrice() {
+		return highestPrice;
+	}
+	
+	public void setLowestPrice(String highestPrice) {
+		this.highestPrice = highestPrice;
+	}
+	
 }

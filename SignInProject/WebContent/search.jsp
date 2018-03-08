@@ -24,6 +24,12 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+    <link rel="stylesheet"
+		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">		
+	<script
+		src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		
 
 	<style>
 body {
@@ -194,7 +200,7 @@ to {
 .sidenavDiv a {
 	padding: 6px 8px 6px 16px;
 	text-decoration: none;
-	font-size: 25px;
+	font-size: 15px;
 	color: #818181;
 	display: block;
 }
@@ -258,9 +264,7 @@ div.desc {
 </style>
 	</head>
 	<body>
-<!--  <c:forEach var = "i" begin = "1" end = "5">
-         Item <c:out value = "${i}"/><p>
-      </c:forEach>--> 
+		
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -286,7 +290,7 @@ div.desc {
 
 					<li><c:url value="index.jsp" var="chineseURL">
 							<c:param name="locale" value="zh_CN" />
-						</c:url> <a href="${chineseURL}"><fmt:message key="chinese" /></a></li>
+						</c:url> <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
 				</ul>
 				<form class="navbar-form navbar-left" action="">
 					<div class="input-group">
@@ -341,7 +345,7 @@ div.desc {
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
 						<li class="breadcrumb-item"><a href="search.jsp">Search</a></li>
-						
+
 					</ol>
 					<br>
 
@@ -349,81 +353,72 @@ div.desc {
 					<h3
 						class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Search
 						for: ${keyword}</h3>
-					1-# of items of ${bidItemNumber} Items
-
-					<div class="btn-group">
-						<label for="sort">Sort By:</label>
-						<button type="button" name="sort"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Default</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">Default</button>
-							<button class="dropdown-item" type="button">Lowest Price</button>
-							<button class="dropdown-item" type="button">Highest
-								Price</button>
-							<button class="dropdown-item" type="button">Most Bids</button>
-							<button class="dropdown-item" type="button">Least Bids</button>
-							<button class="dropdown-item" type="button">Newest</button>
-							<button class="dropdown-item" type="button">Oldest</button>
-						</div>
-					</div>
-					<div class="btn-group">
-						<label for="view"> View:</label>
-						<button type="button" name="view"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							5</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">9</button>
-							<button class="dropdown-item" type="button">18</button>
-							<button class="dropdown-item" type="button">40</button>
-							<button class="dropdown-item" type="button">All</button>
-						</div>
-					</div>
-
-					<div class="btn-group">
-						<label for="view"> Page</label>
-						<button type="button" name="view"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							1</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">1</button>
-						</div>
-					</div>
+				
+<form class="form-inline" action="sortServlet" method="get">
+  <input type="hidden" name="search" value="${keyword}" />
+  <div class="form-group">
+    <label for="email">Sort by:</label>
+<select 
+								name="sortby">
+								<option value="name" >Name</option>
+								<option value="lowestprice" >Lowest Price</option>
+								
+								<option value="highestprice"   
+								<c:if test="${sortMethod == 'highestprice'}">selected</c:if>>
+								Highest Price</option>
+								
+								<option value="mostbids">Most Bids</option>
+								<option value="leastbids">Least Bids</option>
+								<option value="newestauction">Newest auction</option>
+							    <option value="oldestauction">Oldest auction</option>
+</select>
+  </div>
+    <div class="form-group">
+  <button type="submit" class="btn btn-default btn-sm">Go</button>
+  </div>
+</form>
 
 
-					<table class="table">
-						<thead>
-							<tr>
-								<th></th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-							<c:forEach items="${productItems}" var="productItem">
-							<td><div class="gallery"><a target="_blank" href="${productItem.image}"> <img
-											src="${productItem.image}" alt="Fjords" width="300" height="200"></img>
-										</a></div><div class="desc">${productItem.descrption}</div>
-									</td>
-							<td>
-							</c:forEach>
-							</tr>
-						</tbody>
-					</table>
+<hr>
+   ${productTotal} items for ${keyword} 
+<hr>
 
-
-					<div class="btn-group">
-						<label for="view"> Page</label>
-						<button type="button" name="view"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							1</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">1</button>
-						</div>
-					</div>
+<table id="productitems"  class="stripe">
+                    <thead>
+                        <tr style="display:none; visibility:hide">
+                        	<th>image</th>
+                            <th>itemName</th>
+                            <th>description</th>
+                            <th>highestPrice</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <c:forEach items="${productItems}" var="productItem">
+                    <tr>
+                    <td><div class="gallery">
+											<a target="_blank" href="/bidServlet?productItemId=${productItem.productId}"> <img
+												src="${productItem.image}" alt="Fjords" width="300"
+												height="200"></img>
+											</a>
+										</div></td>
+                             <td>${productItem.itemName}</td>
+                         <td>${productItem.description}</td>
+                         <td>${productItem.highestPrice}</td>
+                    </tr>
+                </c:forEach>
+                    </tbody>
+                </table>    
+    
+<script>
+$(document).ready(function() {
+	  
+    $('#productitems').DataTable({
+    	"searching": false,
+    	"lengthMenu": [[1, 2, 50, -1], [1, 2, 50, "All"]]
+    });
+} );
+</script>
+<hr>				
 				</div>
 
 			</div>
