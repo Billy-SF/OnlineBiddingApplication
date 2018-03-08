@@ -32,12 +32,12 @@
 		//Stores the results
 		while(rs.next())
 		{
-			System.out.println(rs.getString("itemname"));
+/* 			System.out.println(rs.getString("itemname"));
 			System.out.println(rs.getString("description"));
 			System.out.println(rs.getString("image"));
-%>
+ */%>
 			<tr>
-				<td><a href="<%=rs.getString("id")%>.jsp"> <%=rs.getString("itemname")%></a></td>
+				<td><a href="bidpage.jsp"> <%=rs.getString("itemname")%></a></td><!-- <%=rs.getString("id")%> -->
 			</tr>
 			<tr>
 				<td><%=rs.getString("description") %></td>

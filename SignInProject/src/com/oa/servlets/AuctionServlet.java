@@ -79,7 +79,7 @@ public class AuctionServlet extends HttpServlet{
 		
 		// if date is not valid, stay on page
 		if (end.compareTo(start)<0) {
-			System.out.println("invalid start and end");
+			//System.out.println("invalid start and end");
 			RequestDispatcher rd=request.getRequestDispatcher("auction.jsp");  
 			rd.include(request,response);  
 		}
@@ -93,7 +93,7 @@ public class AuctionServlet extends HttpServlet{
 
 			// the user has to be logged in order to create an auction
 			if(username == null || password == null) {
-				RequestDispatcher rd=request.getRequestDispatcher("login.jsp");  
+				RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
 				rd.include(request,response);  
 			}
 
