@@ -16,7 +16,7 @@
 
 <head>
 <title>Confirmation Page</title>
-  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -44,7 +44,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>wAuction</font></b></a>
+      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b></a>
     </div>
     <form class="navbar-form navbar-left" action="/action_page.php">
       <div class="input-group">
@@ -67,7 +67,7 @@
  	
  	  <li>
  	<c:url value="verifyEmail.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
+ 	 <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
     </ul>
     
    <ul class="nav navbar-nav navbar-right">
@@ -78,7 +78,9 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
-      </ul>      
+      </ul> 
+      </li>
+      </ul>     
     </div>
 </nav> 
 
@@ -105,7 +107,7 @@
 		    <label for="verificationCode"><fmt:message key="verficationCode"/></label>
 			<input type="text" class="form-control input-md" id="code" placeholder="<fmt:message key="EnterverficationCode"/>" name="code">
 		</div>
-			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><fmt:message key="submit"/></button>
+			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><c:param name="locale" value="${loc}"/><fmt:message key="submit"/></button>
 </form>
 	</div>
 </div>	
