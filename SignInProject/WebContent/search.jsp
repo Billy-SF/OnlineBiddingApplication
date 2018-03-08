@@ -258,9 +258,7 @@ div.desc {
 </style>
 	</head>
 	<body>
-<!--  <c:forEach var = "i" begin = "1" end = "5">
-         Item <c:out value = "${i}"/><p>
-      </c:forEach>--> 
+		
 		<nav class="navbar navbar-inverse">
 			<div class="container-fluid">
 				<div class="navbar-header">
@@ -341,7 +339,7 @@ div.desc {
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
 						<li class="breadcrumb-item"><a href="search.jsp">Search</a></li>
-						
+
 					</ol>
 					<br>
 
@@ -349,25 +347,67 @@ div.desc {
 					<h3
 						class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Search
 						for: ${keyword}</h3>
-					1-# of items of ${bidItemNumber} Items
+				
+<form class="form-inline" action="sortServlet" method="get">
+  <input type="hidden" name="search" value="${keyword}" />
+  <div class="form-group">
+    <label for="email">Sort by:</label>
+<select 
+								name="sortby">
+								<option value="name" >Name</option>
+								<option value="lowestprice" >Lowest Price</option>
+								
+								<option value="highestprice"   
+								<c:if test="${sortMethod == 'highestprice'}">selected</c:if>>
+								Highest Price</option>
+								
+								<option value="mostbids">Most Bids</option>
+								<option value="leastbids">Least Bids</option>
+								<option value="newestauction">Newest auction</option>
+							    <option value="oldestauction">Oldest auction</option>
+</select>
+  </div>
+    <div class="form-group">
+  <button type="submit" class="btn btn-default btn-sm">Go</button>
+  </div>
+</form>
 
-					<div class="btn-group">
-						<label for="sort">Sort By:</label>
-						<button type="button" name="sort"
-							class="btn btn-sm btn-secondary dropdown-toggle"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Default</button>
-						<div class="dropdown-menu dropdown-menu-right">
-							<button class="dropdown-item" type="button">Default</button>
-							<button class="dropdown-item" type="button">Lowest Price</button>
-							<button class="dropdown-item" type="button">Highest
-								Price</button>
-							<button class="dropdown-item" type="button">Most Bids</button>
-							<button class="dropdown-item" type="button">Least Bids</button>
-							<button class="dropdown-item" type="button">Newest</button>
-							<button class="dropdown-item" type="button">Oldest</button>
-						</div>
-					</div>
+
+<hr>
+   ${productTotal} items for ${keyword} 
+
+
+
+<hr>
+	<table class="table">
+					
+						<thead>
+							<tr>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<c:forEach items="${productItems}" var="productItem">
+									<td><div class="gallery">
+											<a target="_blank" href="${productItem.image}"> <img
+												src="${productItem.image}" alt="Fjords" width="300"
+												height="200"></img>
+											</a>
+										</div>
+										<div class="desc">${productItem.description}</div>
+									   <div class="desc">${productItem.highestPrice}</div></td>
+									<td>
+								</c:forEach>
+							</tr>
+						</tbody>
+					</table>
+
+
+
+
+<%-- 
+
 					<div class="btn-group">
 						<label for="view"> View:</label>
 						<button type="button" name="view"
@@ -381,6 +421,7 @@ div.desc {
 							<button class="dropdown-item" type="button">All</button>
 						</div>
 					</div>
+					
 
 					<div class="btn-group">
 						<label for="view"> Page</label>
@@ -393,8 +434,9 @@ div.desc {
 						</div>
 					</div>
 
-
+	              
 					<table class="table">
+					
 						<thead>
 							<tr>
 								<th></th>
@@ -402,13 +444,16 @@ div.desc {
 						</thead>
 						<tbody>
 							<tr>
-							<c:forEach items="${productItems}" var="productItem">
-							<td><div class="gallery"><a target="_blank" href="${productItem.image}"> <img
-											src="${productItem.image}" alt="Fjords" width="300" height="200"></img>
-										</a></div><div class="desc">${productItem.descrption}</div>
-									</td>
-							<td>
-							</c:forEach>
+								<c:forEach items="${productItems}" var="productItem">
+									<td><div class="gallery">
+											<a target="_blank" href="${productItem.image}"> <img
+												src="${productItem.image}" alt="Fjords" width="300"
+												height="200"></img>
+											</a>
+										</div>
+										<div class="desc">${productItem.description}</div></td>
+									<td>
+								</c:forEach>
 							</tr>
 						</tbody>
 					</table>
@@ -424,6 +469,9 @@ div.desc {
 							<button class="dropdown-item" type="button">1</button>
 						</div>
 					</div>
+					
+			 --%>		
+					
 				</div>
 
 			</div>
