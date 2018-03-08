@@ -189,9 +189,10 @@ span.psw {
  
     <ul class="nav navbar-nav">
       <li><a href="#"><font color="white"><b><fmt:message key="home"/></b></font></a></li>
-      <li><a href="auction.jsp"><font color="white"><b>
-      	<%=session.getAttribute("username") != null ? "Auction" : ""%></b></font></a>
-      </li>
+     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font color='white'><b>Auction</li>"%>
+      
+      	
+  
       <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
     
@@ -202,7 +203,7 @@ span.psw {
  	
  	  <li>
  	<c:url value="index.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
+ 	 <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
  	 </ul>
  	  <form class="navbar-form navbar-left" action="searchServlet">
       <div class="input-group">
@@ -224,7 +225,9 @@ span.psw {
           <ul class="dropdown-menu">
             <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
             <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="logout"/></a></li>
-      </ul>      
+      </ul>  
+      </li>
+      </ul>    
     </div>
       
 </nav>
