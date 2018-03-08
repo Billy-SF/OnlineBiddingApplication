@@ -385,11 +385,11 @@ div.desc {
 
 <table id="productitems"  class="stripe">
                     <thead>
-                        <tr style="display:none; visibility:hide">
-                        	<th>image</th>
-                            <th>itemName</th>
-                            <th>description</th>
-                            <th>highestPrice</th>
+                        <tr>
+                        	<th></th>
+                            <th>Item</th>
+                            <th>Detail</th>
+                            <th>Current Bid</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -401,9 +401,9 @@ div.desc {
 												height="200"></img>
 											</a>
 										</div></td> 
-                             <td>${productItem.itemName}</td>
-                         <td>${productItem.description}</td>
-                         <td>${productItem.highestPrice}</td>
+                             <td><b>${productItem.itemName}</b></td>
+                         <td><b>${productItem.description}</b></td>
+                         <td><b>$${productItem.highestPrice}</b></td>
                     </tr>
                 </c:forEach>
                     </tbody>
@@ -411,10 +411,10 @@ div.desc {
     
 <script>
 $(document).ready(function() {
-	  
     $('#productitems').DataTable({
     	"searching": false,
-    	"lengthMenu": [[1, 2, 50, -1], [1, 2, 50, "All"]]
+    	"lengthMenu": [[5, 10, 30, -1], [5, 10, 30, "All"]],
+    	 "ordering": false
     });
 } );
 </script>
