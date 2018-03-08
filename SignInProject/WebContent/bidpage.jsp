@@ -363,6 +363,7 @@ div.desc {
 						</div>
 
 						<div class="bidInfo">
+							<p><a href="matchSellerServlet">Seller Page</a></p>
 							<p>Date Created: <b>${productItem.dateCreated}</b></p>
 							<p>Time left: <span id="tttt"></span></p>
 							<p>Current Bid price: <b>${productItem.highestPrice} </b></p>

@@ -74,4 +74,47 @@ public class AuctionDao {
             }
 		}// end finally
 	}// end method
+
+	public static String MatchUserFromAuctionId(int auctionId) {
+
+		Connection conn = Dao.getConnection();
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		Integer  items_fk = null;
+		Integer user_id = null;
+		String seller = "default";
+
+		conn = Dao.getConnection();
+		try{
+			pst = conn.prepareStatement("select username from users where id in (select user_id from auctions where id = " + auctionId + ");");
+			rs = pst.executeQuery();
+
+			if(rs.next()){
+				seller = "" + rs.getString("username");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				Dao.closeConnection();
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return seller;
+	}
+
 }// end class
