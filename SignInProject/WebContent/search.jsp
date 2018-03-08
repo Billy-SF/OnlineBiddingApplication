@@ -292,7 +292,7 @@ div.desc {
 							<c:param name="locale" value="zh_CN" />
 						</c:url> <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
 				</ul>
-				<form class="navbar-form navbar-left" action="">
+				<form class="navbar-form navbar-left" action="searchServlet">
 					<div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="<fmt:message key="search"/>" name="search">
@@ -400,7 +400,7 @@ div.desc {
 												src="${productItem.image}" alt="Fjords" width="300"
 												height="200"></img>
 											</a>
-										</div></td>
+										</div></td> 
                              <td>${productItem.itemName}</td>
                          <td>${productItem.description}</td>
                          <td>${productItem.highestPrice}</td>
