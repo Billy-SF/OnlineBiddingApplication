@@ -2,6 +2,7 @@ package com.oa.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.oa.dao.SearchDao;
+import com.oa.helpers.ProductItem;
 
 /**
  * @author Zhel * 
@@ -26,8 +28,13 @@ public class SearchServlet extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
+		//strip tag keyword
 		String searchKeyword = request.getParameter("search");
-		request.setAttribute("productItems", SearchDao.searchKeyword(searchKeyword));
+        ArrayList<ProductItem> productItem  = SearchDao.searchKeyword(searchKeyword);
+		request.setAttribute("productItems", productItem);
+		request.setAttribute("keyword", searchKeyword);
+		Integer productCount = Integer.valueOf(productItem.size());
+		request.setAttribute("productTotal", productCount);
 		RequestDispatcher dp = request.getRequestDispatcher("search.jsp");
 		dp.forward(request, response);
 		
