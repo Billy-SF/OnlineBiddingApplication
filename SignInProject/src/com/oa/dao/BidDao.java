@@ -272,9 +272,6 @@ public class BidDao {
 				else {
 					//		
 				}
-		
-				
-	
 				bids.add(bid);	
 		}
 			
