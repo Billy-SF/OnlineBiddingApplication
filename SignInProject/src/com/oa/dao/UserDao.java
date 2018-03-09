@@ -227,6 +227,7 @@ public class UserDao {
             
         }	
 	}//End of editProfile
+
 	@SuppressWarnings("resource")
 	public static Boolean verifyVerificationCode(String userId, String username, String password, String verificationCode) {
 		password = Encryption.decrypt(password); //NOT REQUIRED
@@ -275,6 +276,7 @@ public class UserDao {
      }
 		return false;
 }
+	
 	public static void deleteUser(String username, String password) {
 		password = Encryption.decrypt(password); //NOT REQUIRED
 		User user = getUser(username, password);

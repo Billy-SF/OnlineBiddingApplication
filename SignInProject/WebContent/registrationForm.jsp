@@ -16,7 +16,7 @@
 
 <head>
 <title>Registration Form</title>
-  <meta charset="utf-8">
+   <meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -139,7 +139,7 @@
  	
  	  <li>
  	<c:url value="registrationForm.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
+ 	 <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
  	 
     </ul>
     

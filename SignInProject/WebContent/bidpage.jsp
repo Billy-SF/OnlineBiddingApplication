@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
-
+  
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <%-- <jsp:include page="<%= \"topMenu.jsp\" %>" /> --%>
@@ -27,6 +27,9 @@
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script
 		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet"
+		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
 	<style>
 body {
@@ -353,28 +356,134 @@ div.desc {
 					</ol>
 					<br>
 					<div class="container">
-						<h3>xxxxxxxx</h3>
+						<h3>${productitem.getItemName()}</h3>
 						<div class="image">
 							<img src="kissing.jpg" alt="Girl in a jacket" height="200px"
 								width="200px">
 						</div>
 
 						<div class="bidInfo">
-							<p>Date Created:</p>
-							<p>Time left:</p>
-							<p>Current Bid:</p>
+						    	<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}">
+						    			<input type="hidden" name="itemId" value="${productitem.getProductId()}">
+							<p>Date Created:<b>${productitem.getAuction().getDateCreated() }</b></p>
+							<p>Time left: <span id="tttt"></span></p>
+							<p>Current Bid Price:<b>${productitem.getHighestPrice()}</b></p>
 							<form action="BidServlet" method="post">
-								<input type="number" name="bidPrice" placeholder="bid here">
+								<input type="text" name="bidPrice" placeholder="bid here">
 								<input type="submit" value="Bid">
 							</form>
-							<p>Max bid:</p>
 
 						</div>
+<%
+String SimpleVariable="2017-09-22 12:12:12";
+String auctionid="2";
+%>						
+<script>
+function mysqlTimeStampToDate(timestamp) {
+    //function parses mysql datetime string and returns javascript Date object
+    //input has to be in this format: 2007-06-05 15:26:02
+    var regex=/^([0-9]{2,4})-([0-1][0-9])-([0-3][0-9]) (?:([0-2][0-9]):([0-5][0-9]):([0-5][0-9]))?$/;
+    var parts=timestamp.replace(regex,"$1 $2 $3 $4 $5 $6").split(' ');
+    return new Date(parts[0],parts[1]-1,parts[2],parts[3],parts[4],parts[5]);
+  };
+  
+$(document).ready(
+		function() {
+			//var date_future = new Date(new Date().getFullYear() +1, 0, 1);
+			var timestamp = "<%=SimpleVariable%>";
+
+			var date_past = mysqlTimeStampToDate(timestamp);
+			var myVar = setInterval(myTimer, 1000);
+			function myTimer() {
+			    //var d = new Date();
+			    //$("#tttt").text(d.toLocaleTimeString());
+
+				var date_now = new Date();
+				
+				// get total seconds between the times
+				var delta = Math.abs(date_now - date_past) / 1000;
+	
+				// calculate (and subtract) whole days
+				var days = Math.floor(delta / 86400);
+				delta -= days * 86400;
+	
+				// calculate (and subtract) whole hours
+				var hours = Math.floor(delta / 3600) % 24;
+				delta -= hours * 3600;
+	
+				// calculate (and subtract) whole minutes
+				var minutes = Math.floor(delta / 60) % 60;
+				delta -= minutes * 60;
+	
+				// what's left is seconds
+				var seconds = delta % 60;  // in theory the modulus is not required
+			    
+			    $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + seconds + ' seconds' + "\n" +
+			    		(date_now.getTime() - date_past.getTime())
+			    );
+				
+				if(date_now.getTime() - date_past.getTime() < 0) {
+					 $.ajax({
+			                url: "auctionStopServlet",
+			                type:"POST",
+			                data: {"auctionid" : "<%=auctionid%>"},
+			                success: function( data, textStatus, jQxhr ){
+			                    //$('#response pre').html( data );
+			                },
+			                error: function( jqXhr, textStatus, errorThrown ){
+			                    //console.log( errorThrown );
+			                }
+			            });
+
+				}
+			}
+
+		
+		});
+
+</script>						
 
 					</div>
 					<p>slajfkl;sdajkl;fjaskldjfkl;jsakl;jfkl;sajlkfjkslaj;d</p>
+
 					<div class="container">
 						<h3>Bid History</h3>
+						<p>${productitem.getBids().size()} bid(s) found.</p>
+						
+					<table id="bidhistory" class="stripe">
+						<thead>
+							<tr>
+								<th>bid price</th>
+								<th>user</th>
+								<th>date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${productitem.getBids()}" var="bid">
+								<tr>
+									<td>${bid.getBidprice()}</td>
+									<td><b>${bid.getUser().getFirstname()}</b></td>
+									<td><b>${bid.getDateCreated()}</b></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+						
+					<script>
+						$(document).ready(
+								function() {
+									$('#bidhistory').DataTable(
+											{
+												"searching" : false,
+												"lengthMenu" : [
+														[ 5, 10, 30, -1 ],
+														[ 5, 10, 30, "All" ] ],
+												"ordering" : false
+											});
+								});
+					</script>
+						
+						
 						<table class="table table-condensed">
 							<thead>
 								<tr>

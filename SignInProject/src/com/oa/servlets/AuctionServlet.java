@@ -3,6 +3,7 @@ package com.oa.servlets;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.file.StandardCopyOption;
 import java.util.Calendar;
 import java.util.Date;
@@ -26,74 +27,47 @@ public class AuctionServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("resource")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)  
 			throws ServletException, IOException {
 
 		InputStream inputStream = null;
 
-		/*		response.setContentType("text/html");  
-		PrintWriter out = response.getWriter();  
-		 */
 		String itemName= request.getParameter("itemName");
 		String description = request.getParameter("description");
 		String bidStart = request.getParameter("bidStart");
 		String bidEnd = request.getParameter("bidEnd");
 		String initialPrice = request.getParameter("initialPrice");
 		Part filePart = request.getPart("image");
-
-		/*String bidStartFormated = bidStart.replace("T", " ");
-		String bidEndFormatted = bidEnd.replace("T", " ");
-
-		DateFormat dfSatrt = new SimpleDateFormat(bidStartFormated);
-		DateFormat dfEnd = new SimpleDateFormat(bidEndFormatted);
-
-		try {
-			Date dStart = dfSatrt.parse(bidStartFormated);
-			Date dEnd = dfEnd.parse(bidEndFormatted);
-			if (dEnd.compareTo(dStart)<0) {
-				System.out.println("invalid start and end");
-				RequestDispatcher rd=request.getRequestDispatcher("auction.jsp");  
-				rd.include(request,response);  
-			}
-		} catch (ParseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}*/
-
+		
 		// date validation
 		String [] validSatrtBidArray = bidStart.split("T");
 		String [] startBidDate = validSatrtBidArray[0].split("-");
 		String [] startBidTime = validSatrtBidArray[1].split(":");
 		Calendar calS = Calendar.getInstance();
-		calS.set(Integer.valueOf(startBidDate[0]), Integer.valueOf(startBidDate[1]), Integer.valueOf(startBidDate[2]), Integer.valueOf(startBidTime[0]), Integer.valueOf(startBidTime[1]));
+		calS.set(Integer.valueOf(startBidDate[0]), Integer.valueOf(startBidDate[1]) - 1, Integer.valueOf(startBidDate[2]), Integer.valueOf(startBidTime[0]), Integer.valueOf(startBidTime[1]));
 		Date start = calS.getTime();
 
 		String [] validEndBidArray = bidEnd.split("T");
 		String [] endBidDate = validEndBidArray[0].split("-");
 		String [] endBidTime = validEndBidArray[1].split(":");
 		Calendar calE = Calendar.getInstance();
-		calE.set(Integer.valueOf(endBidDate[0]), Integer.valueOf(endBidDate[1]), Integer.valueOf(endBidDate[2]), Integer.valueOf(endBidTime[0]), Integer.valueOf(endBidTime[1]));
+		calE.set(Integer.valueOf(endBidDate[0]), Integer.valueOf(endBidDate[1]) - 1, Integer.valueOf(endBidDate[2]), Integer.valueOf(endBidTime[0]), Integer.valueOf(endBidTime[1]));
 		Date end = calE.getTime();
 		
 		
 		// if date is not valid, stay on page
-		if (end.compareTo(start)<0) {
-			System.out.println("invalid start and end");
+		if (end.compareTo(start) < 0 || end.compareTo(new Date()) < 0 || start.compareTo(new Date()) < 0) {
+			//System.out.println("invalid start and end");
 			RequestDispatcher rd=request.getRequestDispatcher("auction.jsp");  
 			rd.include(request,response);  
 		}
 		else {
-
-			//Depricated
-			//Date startDate= new Date(Integer.valueOf(startBidDate[0]), Integer.valueOf(startBidDate[1]), Integer.valueOf(startBidDate[2]), Integer.valueOf(startSidTime[0]), Integer.valueOf(startSidTime[1]));
-
 			String username = (String)request.getSession(false).getAttribute("username"); 
 			String password = (String)request.getSession(false).getAttribute("password");
 
 			// the user has to be logged in order to create an auction
 			if(username == null || password == null) {
-				RequestDispatcher rd=request.getRequestDispatcher("login.jsp");  
+				RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
 				rd.include(request,response);  
 			}
 
@@ -124,8 +98,16 @@ public class AuctionServlet extends HttpServlet{
 					String imageFileName = file.getName();
 
 					java.nio.file.Files.copy(inputStream, file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+					
+					BigDecimal initialPriceBd = new BigDecimal(initialPrice);
+					
+					String bidStartFormat = bidStart.replaceAll("T", " ").concat(":00");
+					String bidEndFormat = bidEnd.replaceAll("T", " ").concat(":00");
+					
+					/*Date bidStartDate = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS").parse(bidstartFormat);
+					Date bidEndDate = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS").parse(bidEndFormat);*/
 
-					AuctionDao.createAction(itemName, description, imageFileName, bidStart, bidEnd, initialPrice);
+					AuctionDao.createAction(itemName, description, imageFileName, bidStartFormat, bidEndFormat, initialPriceBd, username, password);
 
 				}catch (Exception e) {
 					e.printStackTrace();

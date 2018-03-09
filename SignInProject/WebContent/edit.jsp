@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <style>
 /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -74,6 +76,16 @@
       <li><a href="index.jsp"><font color="white"><b>Home</b></font></a></li>
       <li><a href="#"><font color="white"><b>Contact Us</b></font></a></li>
       <li><a href="#"><font color="white"><b>Help</b></font></a></li>
+      
+      
+					<li><c:url value="index.jsp" var="englishURL">
+							<c:param name="locale" value="en_US" />
+						</c:url> <a href="${englishURL}"> English </a></li>
+
+					<li><c:url value="index.jsp" var="chineseURL">
+							<c:param name="locale" value="zh_CN" />
+						</c:url> <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
+						
     </ul>
     
    <ul class="nav navbar-nav navbar-right">
@@ -86,7 +98,9 @@
             
             <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
             <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>      
+      </ul>   
+      </li>
+      </ul>   
     </div>
 </nav> 
 
