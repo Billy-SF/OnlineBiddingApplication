@@ -39,7 +39,7 @@ public class BidDao {
 		this.password = user.getPassword();
 		//this.userId = user.getUserId();
 	}
-	public Boolean updateUserBid(String auctionfk, String userId, String bidPrice, String itemId) {
+	public Boolean updateUserBid(String auctionId, String userId, String bidPrice, String itemId) {
 
 		//Validate user bid Price to only contain set of numbers and a decimal if applicable
 		String pattern = "([0-9]*[.])?[0-9]+";
@@ -60,7 +60,7 @@ public class BidDao {
 
 				//Check the current price with the price the user wants to bid
 				pst = conn.prepareStatement("select highest_bid_price from currenthighestBidder where item_id_fk = ?");
-				pst.setString(1, "1");
+				pst.setString(1, itemId);
 				rs = pst.executeQuery();
 				if(rs.next())
 				{
@@ -69,7 +69,7 @@ public class BidDao {
 					{
 						//Compare the time the user wants to bid at with the bidding time for the current item in the database
 						pst = conn.prepareStatement("select bidding_time from currenthighestbidder where item_id_fk = ?");
-						pst.setString(1, "1");
+						pst.setString(1, itemId);
 						rs = pst.executeQuery();
 						System.out.print("Result from query" + rs.toString());
 
@@ -83,8 +83,8 @@ public class BidDao {
 							//Insert into bids the current bid
 							pst = conn.prepareStatement("INSERT INTO bids (bid_price,auctions_fk,users_fk,date_created) VALUES (?,?,?,?)");
 							pst.setString(1, bidPrice);
-							pst.setString(2, "1");
-							pst.setString(3, "2");
+							pst.setString(2, auctionId);
+							pst.setString(3, userId);
 							pst.setTimestamp(4, date);
 							pst.executeUpdate();
 							
@@ -92,7 +92,7 @@ public class BidDao {
 
 							//If a user already holds the highest bid in the table just update the data to reflect the new highest bidder
 							pst = conn.prepareStatement("select item_id_fk from currenthighestbidder where item_id_fk = ?");
-							pst.setString(1, "1");
+							pst.setString(1, itemId);
 							rs = pst.executeQuery();
 							
 
@@ -105,7 +105,7 @@ public class BidDao {
 							if(rs.getInt(1) == Integer.valueOf("1"))
 							{
 								pst = conn.prepareStatement("Update currenthighestbidder set user_id_fk = ?, highest_bid_price = ?, bidding_time = ?");
-								pst.setString(1, "2");
+								pst.setString(1, userId);
 								pst.setString(2, bidPrice);
 								pst.setTimestamp(3, date);
 								pst.executeUpdate();
@@ -113,8 +113,8 @@ public class BidDao {
 							else {
 								// Otherwise add the bidder bid to the current highest bidder table
 								pst = conn.prepareStatement("INSERT INTO currenthighestbidder (user_id_fk,item_id_fk,highest_bid_price, bidding_time) VALUES (?,?,?,?)");
-								pst.setString(1, "2");
-								pst.setString(2, "1");
+								pst.setString(1, userId);
+								pst.setString(2, itemId);
 								pst.setString(3, bidPrice);
 								pst.setTimestamp(4, date);
 								pst.executeUpdate();
@@ -130,14 +130,14 @@ public class BidDao {
 					//Insert into bids the current bid
 					pst = conn.prepareStatement("INSERT INTO bids (bid_price,auctions_fk,users_fk,date_created) VALUES (?,?,?,?)");
 					pst.setString(1, bidPrice);
-					pst.setString(2, "1");
-					pst.setString(3, "2");
+					pst.setString(2, auctionId);
+					pst.setString(3, userId);
 					pst.setTimestamp(4, date);
 					pst.executeUpdate();
 					
 					pst = conn.prepareStatement("INSERT INTO currenthighestbidder (user_id_fk,item_id_fk,highest_bid_price, bidding_time) VALUES (?,?,?,?)");
-					pst.setString(1, "2");
-					pst.setString(2, "1");
+					pst.setString(1, userId);
+					pst.setString(2, itemId);
 					pst.setString(3, bidPrice);
 					pst.setTimestamp(4, date);
 					pst.executeUpdate();
