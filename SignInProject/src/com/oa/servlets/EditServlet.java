@@ -18,7 +18,7 @@ public class EditServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {			
 		response.setContentType("text/html");
-		
+		response.setCharacterEncoding("UTF-8");
 		String currentUsername = (String) request.getSession().getAttribute("username");
 		String currentPassword = (String) request.getSession().getAttribute("password");
 		//String password = Encryption.encrypt(request.getParameter("password"));  //stores encrypted password

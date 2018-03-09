@@ -57,6 +57,7 @@ public class AuctionDao {
 		finally {
 			if (conn != null) {
 				Dao.closeConnection();
+				
 			}
 			if (pst != null) {
 				try {

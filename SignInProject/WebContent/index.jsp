@@ -189,10 +189,8 @@ span.psw {
  
     <ul class="nav navbar-nav">
       <li><a href="#"><font color="white"><b><fmt:message key="home"/></b></font></a></li>
-     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font color='white'><b>Auction</li>"%>
-      
-      	
-  
+     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font color='white'><b>Auction</b></font></a></li>"%>
+       <li><a href="displayAuction.jsp"><font color="white"><b>Bids</b></font></a></li>
       <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
     

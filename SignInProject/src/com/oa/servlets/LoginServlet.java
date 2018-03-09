@@ -23,6 +23,8 @@ public class LoginServlet extends HttpServlet{
             throws ServletException, IOException {  
 
         response.setContentType("text/html");  
+        response.setCharacterEncoding("UTF-8");
+        
         PrintWriter out = response.getWriter();  
         
         String username= request.getParameter("username");

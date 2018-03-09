@@ -35,14 +35,14 @@ public class Auction {
 		return this.bidstarttime;
 	}
 	public void setBidstarttime(String bidstarttime) {
-		this.bidstarttime = bidstarttime;
+		this.bidstarttime = bidstarttime.replaceAll("\\.\\d+", "");
 	}
 	
 	public String getBidendtime() {
 		return this.bidendtime;
 	}
 		public void setBidendtime(String bidendtime) {
-		this.bidendtime = bidendtime;
+		this.bidendtime = bidendtime.replaceAll("\\.\\d+", "");
 	}
 
 	public String getBidpricestart() {
@@ -102,13 +102,13 @@ public class Auction {
 		return this.dateCreated;
 	}
 	public void setDateCreated(String dateCreated) {
-		this.dateCreated = dateCreated;
+		this.dateCreated = dateCreated.replaceAll("\\.\\d+", "");
 	}
 	public String getDatemodified() {
 		return this.datemodified;
 	}
 	public void setDatemodified(String datemodified) {
-		this.datemodified = datemodified;
+		this.datemodified = datemodified.replaceAll("\\.\\d+", "");
 	}
 	
 	
@@ -118,9 +118,4 @@ public class Auction {
 	public void setBidstate(String bidstate) {
 		this.bidstate = bidstate;
 	}
-
-	
-	
-	
-	
 }

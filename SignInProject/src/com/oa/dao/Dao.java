@@ -20,7 +20,9 @@ public class Dao {
         String password = "root";
         try {
             Class.forName(driver).newInstance();
-            dao.con = DriverManager.getConnection(url + dbName, userName, password);
+            dao.con = DriverManager.getConnection(url + dbName + 
+            	"?verifyServerCertificate=false&useSSL=false"
+            		, userName, password);
             dao.isConnected = Boolean.TRUE;
         } catch (Exception e) {
             e.printStackTrace();

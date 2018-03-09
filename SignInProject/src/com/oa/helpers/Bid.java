@@ -65,7 +65,7 @@ public class Bid {
 		return this.dateCreated;
 	}
 	public void setDateCreated(String dateCreated) {
-		this.dateCreated = dateCreated;
+		this.dateCreated = dateCreated.replaceAll("\\.\\d+", "");
 	}
 	
 	

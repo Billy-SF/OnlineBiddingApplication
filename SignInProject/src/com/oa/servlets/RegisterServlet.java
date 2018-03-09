@@ -24,6 +24,7 @@ public class RegisterServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
 		User user;
 		String message = null;
 		String firstName = request.getParameter("firstName");
@@ -55,5 +56,6 @@ public class RegisterServlet extends HttpServlet{
 			request.setAttribute("message", message);
 			request.getRequestDispatcher("registrationForm.jsp").forward(request, response);
 		}
+		out.close();
 	}
 } //End Registerservlet class

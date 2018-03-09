@@ -352,7 +352,12 @@ div.desc {
 					<h3
 						class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Search
 						for: ${keyword}</h3>
+						
+						<c:if test = "${productTotal <=0}">
+<p>Sorry no items are found for ${keyword}</p>
 
+</c:if>
+<c:if test = "${productTotal > 0}">
 					<form class="form-inline" action="sortServlet" method="get">
 						<input type="hidden" name="search" value="${keyword}" />
 						<div class="form-group">
@@ -387,8 +392,11 @@ div.desc {
 					</form>
 
 
+
+
+
 					<hr>
-					${productTotal} items for ${keyword}
+					<p>${productTotal} items for ${keyword}</p>
 					<hr>
 
 					<table id="productitems" class="stripe">
@@ -398,14 +406,16 @@ div.desc {
 								<th>Item</th>
 								<th>Detail</th>
 								<th>Current Bid</th>
+							    <th>Date created</th>
+								
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${productItems}" var="productItem">
 								<tr>
 									<td><div class="gallery">
-											<a target="_blank"
-												href="bidServlet?productItemId=${productItem.productId}">
+											<a 
+												href="bidPageDisplayServlet?productitemid=${productItem.productId}">
 												<img src="${productItem.image}" alt="Fjords" width="300"
 												height="200"></img>
 											</a>
@@ -413,6 +423,7 @@ div.desc {
 									<td><b>${productItem.itemName}</b></td>
 									<td><b>${productItem.description}</b></td>
 									<td><b>$${productItem.highestPrice}</b></td>
+									<td><b>${productItem.dateCreated}</b></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -432,6 +443,7 @@ div.desc {
 								});
 					</script>
 					<hr>
+					</c:if>
 				</div>
 
 			</div>

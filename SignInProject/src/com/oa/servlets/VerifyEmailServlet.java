@@ -25,6 +25,7 @@ public class VerifyEmailServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Boolean result;
 		response.setContentType("text/html");
+		response.setCharacterEncoding("UTF-8");
 		String username = (String) request.getSession().getAttribute("username");
 		System.out.println("username: " + username);
 		String password = (String) request.getSession().getAttribute("password");
@@ -57,6 +58,7 @@ public class VerifyEmailServlet extends HttpServlet {
 		        rd.include(request,response);
 			}
 		}
-	}
+		out.close();
+	}	
 }
 

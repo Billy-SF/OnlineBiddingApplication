@@ -1,5 +1,5 @@
 <%@ page pageEncoding="UTF-8"%>
-
+  
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <%-- <jsp:include page="<%= \"topMenu.jsp\" %>" /> --%>
@@ -242,9 +242,9 @@ footer {
 }
 
 image {
-	width: 400px;
+	width: 350px;
 	float: left;
-	height: 200px;
+	height: 300px;
 	padding: 0px 20px 0px;
 }
 
@@ -305,9 +305,9 @@ div.desc {
 
 					<li><c:url value="index.jsp" var="chineseURL">
 							<c:param name="locale" value="zh_CN" />
-						</c:url> <a href="${chineseURL}"><fmt:message key="chinese" /></a></li>
+						</c:url> <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
 				</ul>
-				<form class="navbar-form navbar-left" action="">
+				<form class="navbar-form navbar-left" action="searchServlet">
 					<div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="<fmt:message key="search"/>" name="search">
@@ -356,26 +356,31 @@ div.desc {
 					</ol>
 					<br>
 					<div class="container">
-						<h3>${productItem.itemName}</h3>
+						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-							<img src="${productItem.image}" alt="${productItem.itemName}" height="200px"
-								width="200px">
+							<img src="${ productitem.getImage()}" ${productitem.getItemName()}>
 						</div>
 
 						<div class="bidInfo">
 							<p><a href="matchSellerServlet">Seller Page</a></p>
-							<p>Date Created: <b>${productItem.dateCreated}</b></p>
+							<p>Date Created: <b>${productitem.getAuction().getDateCreated() }</b></p>
 							<p>Time left: <span id="tttt"></span></p>
-							<p>Current Bid price: <b>${productItem.highestPrice} </b></p>
-							<form action="BidServlet" method="post">
-								<input type="number" name="bidPrice" placeholder="bid here">
-								<input type="submit" value="Bid">
+							<p>Current Bid Price: <b>${productitem.getHighestPrice()}</b></p>
+							<form class="form-inline" action="bidServlet" method="post">
+								<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}">
+						        <input type="hidden" name="productItemId" value="${productitem.getProductId()}">
+									<div class="form-group">
+									<input type="text"  pattern="[0-9]+(\.[0-9]{0,2})?%?"
+									id="bidprice" name="bidPrice" placeholder="bid here">
+								</div>
+								<div class="form-group">
+									<input type="submit" id="bidsubmit" value="Bid">
+								</div>
+					
 							</form>
+
 						</div>
-<%
-String SimpleVariable="2017-09-22 12:12:12";
-String auctionid="2";
-%>						
+						
 <script>
 function mysqlTimeStampToDate(timestamp) {
     //function parses mysql datetime string and returns javascript Date object
@@ -388,9 +393,11 @@ function mysqlTimeStampToDate(timestamp) {
 $(document).ready(
 		function() {
 			//var date_future = new Date(new Date().getFullYear() +1, 0, 1);
-			var timestamp = "<%=SimpleVariable%>";
-
-			var date_past = mysqlTimeStampToDate(timestamp);
+			var timestamp = "${productitem.getAuction().getBidendtime()}";
+//alert(timestamp);		
+			var date_future = mysqlTimeStampToDate(timestamp);
+			//alert(date_past);
+			//alert(new Date());
 			var myVar = setInterval(myTimer, 1000);
 			function myTimer() {
 			    //var d = new Date();
@@ -399,7 +406,7 @@ $(document).ready(
 				var date_now = new Date();
 				
 				// get total seconds between the times
-				var delta = Math.abs(date_now - date_past) / 1000;
+				var delta = Math.abs(date_future - date_now) / 1000;
 	
 				// calculate (and subtract) whole days
 				var days = Math.floor(delta / 86400);
@@ -416,15 +423,22 @@ $(document).ready(
 				// what's left is seconds
 				var seconds = delta % 60;  // in theory the modulus is not required
 			    
-			    $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + seconds + ' seconds' + "\n" +
-			    		(date_now.getTime() - date_past.getTime())
-			    );
+			   // $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + seconds + ' seconds' + "\n" +
+			    		//(date_now.getTime() - date_past.getTime())
+			   // );
+			    $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + parseInt(seconds) + ' seconds');
 				
-				if(date_now.getTime() - date_past.getTime() < 0) {
+				if(date_future.getTime() - date_now.getTime() < 0) {
+					// auction end date expired
+					$("#bidprice").attr("disabled", "disabled");
+					$("#bidsubmit").attr('disabled', "disabled");
+					$("#tttt").text("0");
+
+					 clearInterval(myVar);
 					 $.ajax({
 			                url: "auctionStopServlet",
 			                type:"POST",
-			                data: {"auctionid" : "<%=auctionid%>"},
+			                data: {"auctionid" : "${productitem.getAuction().getId()}"},
 			                success: function( data, textStatus, jQxhr ){
 			                    //$('#response pre').html( data );
 			                },
@@ -438,46 +452,49 @@ $(document).ready(
 
 		
 		});
-
-</script>						
+</script>
 
 					</div>
-					<h3>Product Description</h3>
-					<p><b>${productItem.description}</b></p>
+					<h3>Item Description</h3>
+					<p>${productitem.getDescription()}</p>
+
 					<div class="container">
 						<h3>Bid History</h3>
-						<table class="table table-condensed">
-							<thead>
+						<p>${productitem.getBids().size()} bid(s) found.</p>
+						
+					<table id="bidhistory" class="stripe">
+						<thead>
+							<tr>
+								<th>bid price</th>
+								<th>user</th>
+								<th>date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${productitem.getBids()}" var="bid">
 								<tr>
-									<th>Bid price</th>
-									<th>Bid User</th>
-									<th>Bid Date</th>
-								</tr>
-							</thead>
-							<tbody>
-						<c:forEach items="${bid}" var="productItem">
-								<tr>
-									<td><b>${bid.itemName}</b></td>
-									<td><b>${bid.description}</b></td>
-									<td><b>$${bid.highestPrice}</b></td>
+									<td>${bid.getBidprice()}</td>
+									<td><b>${bid.getUser().getFirstname()}</b></td>
+									<td><b>${bid.getDateCreated()}</b></td>
 								</tr>
 							</c:forEach>
-							</tbody>
-						</table>
-
+						</tbody>
+					</table>
+						
 					<script>
 						$(document).ready(
 								function() {
-									$('#productitems').DataTable(
+									$('#bidhistory').DataTable(
 											{
 												"searching" : false,
 												"lengthMenu" : [
-														[ 5, 10, 20, -1 ],
-														[ 5, 10, 20, "All" ] ],
-												
+														[ 5, 10, 30, -1 ],
+														[ 5, 10, 30, "All" ] ],
+												"ordering" : false
 											});
 								});
 					</script>
+
 
 					</div>
 
@@ -508,8 +525,6 @@ $(document).ready(
 										key="privacyPolicy" /></b></font></a></li>
 				</ul>
 			</footer>
-			
-			
 
 			<script>
 				// Get the modal

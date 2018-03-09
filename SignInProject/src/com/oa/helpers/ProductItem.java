@@ -46,14 +46,14 @@ public class ProductItem {
 		return dateModified;
 	}
 	public void setDateModified(String dateModified) {
-		this.dateModified = dateModified;
+		this.dateModified = dateModified.replaceAll("\\.\\d+", "");;
 	}
 	
 	public String getDateCreated() {
 		return dateCreated;
 	}
 	public void setDateCreated(String dateCreated) {
-		this.dateCreated = dateCreated;
+		this.dateCreated = dateCreated.replaceAll("\\.\\d+", "");;
 	}
 	
 	public String getImage() {

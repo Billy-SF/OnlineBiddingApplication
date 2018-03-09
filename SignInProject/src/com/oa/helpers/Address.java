@@ -51,7 +51,7 @@ public class Address {
 	}
 
 	public void setDatecreated(String datecreated) {
-		this.datecreated = datecreated;
+		this.datecreated = datecreated.replaceAll("\\.\\d+", "");
 	}
 
 	public String getDatemodified() {
@@ -59,7 +59,7 @@ public class Address {
 	}
 
 	public void setDatemodified(String datemodified) {
-		this.datemodified = datemodified;
+		this.datemodified = datemodified.replaceAll("\\.\\d+", "");
 	}
 
 	public String getStreet() {
