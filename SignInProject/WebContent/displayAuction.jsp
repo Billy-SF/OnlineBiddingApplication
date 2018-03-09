@@ -34,7 +34,6 @@
 <fmt:bundle basename="MessagesBundle">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<<<<<<< Upstream, based on origin/Testing-branch
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -43,10 +42,7 @@
 <body> 
 	<h3>Auctions</h3>
 	<table>
-=======
->>>>>>> 738c531 lots of work
 
-<<<<<<< Upstream, based on origin/Testing-branch
 <%		
 		//Stores the results
 		while(rs.next())
@@ -66,9 +62,7 @@
 <%
 		}
 %>
-=======
 <title>OttawaAuction</title>
->>>>>>> 738c531 lots of work
 
 <meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1">
