@@ -37,7 +37,6 @@ public class SearchServlet extends HttpServlet{
 		request.setAttribute("productTotal", productCount);
 		RequestDispatcher dp = request.getRequestDispatcher("search.jsp");
 		dp.forward(request, response);
-		
 		out.close();
 	}
 } //End searchServlet class

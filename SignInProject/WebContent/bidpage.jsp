@@ -363,12 +363,12 @@ div.desc {
 						</div>
 
 						<div class="bidInfo">
-						    	<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}">
-						    			<input type="hidden" name="itemId" value="${productitem.getProductId()}">
 							<p>Date Created:<b>${productitem.getAuction().getDateCreated() }</b></p>
 							<p>Time left: <span id="tttt"></span></p>
 							<p>Current Bid Price:<b>${productitem.getHighestPrice()}</b></p>
-							<form action="BidServlet" method="post">
+							<form action="bidServlet" method="post">
+								<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}">
+						    	<input type="hidden" name="productItemId" value="${productitem.getProductId()}">
 								<input type="text" name="bidPrice" placeholder="bid here">
 								<input type="submit" value="Bid">
 							</form>
@@ -418,8 +418,8 @@ $(document).ready(
 				// what's left is seconds
 				var seconds = delta % 60;  // in theory the modulus is not required
 			    
-			    $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + seconds + ' seconds' + "\n" +
-			    		(date_now.getTime() - date_past.getTime())
+			    $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + parseFloat(seconds).toFixed(0) + ' seconds' + "\n" 
+			    		
 			    );
 				
 				if(date_now.getTime() - date_past.getTime() < 0) {
@@ -444,7 +444,8 @@ $(document).ready(
 </script>						
 
 					</div>
-					<p>slajfkl;sdajkl;fjaskldjfkl;jsakl;jfkl;sajlkfjkslaj;d</p>
+					<h3>Item Description</h3>
+					<p>${productitem.getDescription()}</p>
 
 					<div class="container">
 						<h3>Bid History</h3>
@@ -482,34 +483,6 @@ $(document).ready(
 											});
 								});
 					</script>
-						
-						
-						<table class="table table-condensed">
-							<thead>
-								<tr>
-									<th>bid price</th>
-									<th>user</th>
-									<th>date</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>John</td>
-									<td>Doe</td>
-									<td>john@example.com</td>
-								</tr>
-								<tr>
-									<td>Mary</td>
-									<td>Moe</td>
-									<td>mary@example.com</td>
-								</tr>
-								<tr>
-									<td>July</td>
-									<td>Dooley</td>
-									<td>july@example.com</td>
-								</tr>
-							</tbody>
-						</table>
 
 
 					</div>

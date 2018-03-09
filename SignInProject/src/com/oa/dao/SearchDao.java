@@ -33,7 +33,6 @@ public class SearchDao {
 		Connection conn = Dao.getConnection();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		ResultSet rs2 = null;
 		ArrayList<ProductItem> productItems= null;
 		
 		//Todo: need to check auction table first
@@ -57,7 +56,6 @@ public class SearchDao {
 			 int i = 0;
 			 productItems = new ArrayList<ProductItem>();
 			while(rs.next() && i<size){
-				System.out.println("i = " + i );
 				
 				ProductItem productItem = new ProductItem();
 			
@@ -107,7 +105,6 @@ public class SearchDao {
 				i++;
 		}
 			
-			System.out.println("Arraylist is size" + productItems.size() );
 			
 		}catch (Exception e) {
             e.printStackTrace();
@@ -130,13 +127,6 @@ public class SearchDao {
                 }
             }
             
-            if (rs2 != null) {
-                try {
-                    rs2.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
         }	
 		
 
@@ -156,7 +146,6 @@ public class SearchDao {
 				 currentbid = bids.get(0);
 				 productitem.setCurrentbid(currentbid);
 			 }
-	         //System.out.println(productitem.getProductId()); 		
 	      }
 		
 		return productItems;
@@ -166,7 +155,6 @@ public class SearchDao {
 		ArrayList<ProductItem> productItems= null;
 		
 		productItems = searchKeyword(keyword);
-		System.out.println("Size of Arraylist bids is " + productItems.size() );
 		switch(sortMethod){
 		case "name":
 			return productItems;
@@ -208,7 +196,6 @@ public class SearchDao {
 		    // This is where the sorting happens.
 		        public int compare(ProductItem o1, ProductItem o2)
 		        {
-		        	System.out.println(o1.getAuction().getDateCreated() + "::" + o2.getAuction().getDateCreated());
 		        	if(o1.getAuction().getDateCreated().compareTo(o2.getAuction().getDateCreated()) ==1) {
 		        		return 1;
 		        	}
@@ -445,14 +432,15 @@ public class SearchDao {
 	            
 	        }	
 
-			
+			System.out.print("aaaaaaaaaaaaaaa. \n");			
 			 productitem.setHighestPrice(getHighestPriceByProductItemID(productitem.getProductId()));
 			 productitem.setLowestPrice(getLowestPriceByProductItemID(productitem.getProductId()));
 
 			 Auction auction = new Auction();
 			 auction = getAuctionByProductItemID(productitem.getProductId());
+
 			 productitem.setAuction(auction);
-			 
+ 
 			 Bid currentbid = new Bid();
 			 ArrayList<Bid> bids;
 			 bids = getBidsByProductID(productitem.getProductId());
@@ -476,11 +464,11 @@ public class SearchDao {
 			ResultSet rs = null;
 			Auction auction= new Auction();
 			auction.setDateCreated("0000-00-0000 00:00:00");
-			
+		
 			//Todo: need to check auction table first
 			try{
-				pst = conn.prepareStatement("select * from auctions WHERE id=?");
-				pst.setString(1, productitemid);
+				pst = conn.prepareStatement("select * from auctions WHERE items_fk=" + productitemid);
+				//pst.setString(1, productitemid);
 				
 				rs = pst.executeQuery();
 				int size =0;
@@ -510,7 +498,7 @@ public class SearchDao {
 					auction.setDateCreated(rs.getString("date_created"));
 					auction.setDatemodified(rs.getString("date_modified"));
 					auction.setBidstate(rs.getString("bid_state"));
-		
+						
 			}
 				
 				
@@ -536,7 +524,6 @@ public class SearchDao {
 	            }
 
 	        }	
-			
 			return auction;
 		}
 	  
@@ -549,7 +536,7 @@ public class SearchDao {
 			//Todo: need to check auction table first
 			try{
 				pst = conn.prepareStatement("select b.* from bids b, auctions a, items i where "
-						+ " b.auctions_fk = a.id and a.items_fk = i.id and i.id=?");
+						+ " b.auctions_fk = a.id and a.items_fk = i.id and i.id=? order by b.date_created");
 				pst.setString(1, productitemid);
 				
 				rs = pst.executeQuery();
@@ -574,7 +561,12 @@ public class SearchDao {
 					bid.setAuctionid(rs.getString("auctions_fk"));
 					bid.setUserid(rs.getString("users_fk"));
 					bid.setDateCreated(rs.getString("date_created"));
+System.out.print("hhhhhhhhhh=" + bid.getUserid()  + "\n");
 
+					// get user by user_id
+					User user = new User();
+					user = getUserByUserID(bid.getUserid());
+					bid.setUser(user);
 					/*
 					// get auction by auction_id
 					pst = conn.prepareStatement("select * from auctions where id=?");
@@ -639,12 +631,13 @@ public class SearchDao {
 						//		
 					}
 			*/
+				
+					
 					
 		
 					bids.add(bid);	
 			}
 				
-				//System.out.println("Size of Arraylist bids is " + bids.size() );
 				
 			}catch (Exception e) {
 	            e.printStackTrace();
@@ -672,7 +665,75 @@ public class SearchDao {
 			
 			return bids;
 		}
+
 		
+		/////////////
+		public static User getUserByUserID(String userid){
+			Connection conn = Dao.getConnection();
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+			User user= new User();
+			//auction.setDateCreated("0000-00-0000 00:00:00");
+			System.out.print("nnnnnnnnnn=" + userid  + "\n");		
+			//Todo: need to check auction table first
+			try{
+				pst = conn.prepareStatement("select * from users WHERE id=" + userid);
+				//pst.setString(1, productitemid);
+				
+				rs = pst.executeQuery();
+				int size =0;
+				if (rs != null) 
+				{
+				  rs.beforeFirst();
+				  rs.last();
+				  size = rs.getRow();
+				}
+				
+		
+				rs.beforeFirst();
+				 int i = 0;
+				 //auction = new Auction();
+				while(rs.next() && i<size){
+					// id,bid_start_time,bid_end_time,bid_price_start,bid_price_max,description
+					//,items_fk,user_id,dateCreated,date_modified,bid_state
+					
+					user.setUserId(rs.getString("id"));
+					user.setFirstname(rs.getString("firstname"));
+					user.setLastname(rs.getString("lastname"));
+					user.setUsername(rs.getString("username"));
+					user.setPassword(rs.getString("password"));
+					user.setEmail(rs.getString("email"));
+					user.setVerificationCode(rs.getString("verification_code"));
+					user.setVerificationState(Integer.parseInt(rs.getString("verified_state")));
+						
+			}
+				
+				
+			}catch (Exception e) {
+	            e.printStackTrace();
+	        } finally {
+	        	if (conn != null) {
+	        		Dao.closeConnection();
+	        	}
+	            if (pst != null) {
+	                try {
+	                    pst.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	            if (rs != null) {
+	                try {
+	                    rs.close();
+	                } catch (SQLException e) {
+	                    e.printStackTrace();
+	                }
+	            }
+
+	        }	
+			return user;
+		}
+	  		
 
 		// to remove
 		public static Auction getAuction(String productitemid){
@@ -713,7 +774,7 @@ public class SearchDao {
 					auction.setDatemodified(rs.getString("date_modified"));
 					auction.setBidstate(rs.getString("bid_state"));
 					
-
+					
 					// get user by user_id
 					pst = conn.prepareStatement("select * from users where id=?");
 					pst.setString(1, auction.getUserid());
@@ -759,7 +820,6 @@ public class SearchDao {
 					
 			}
 				
-				//System.out.println("Size of Arraylist bids is " + bids.size() );
 				
 			}catch (Exception e) {
 	            e.printStackTrace();
