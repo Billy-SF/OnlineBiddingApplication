@@ -365,7 +365,7 @@ div.desc {
 							<p><a href="matchSellerServlet">Seller Page</a></p>
 							<p>Date Created: <b>${productitem.getAuction().getDateCreated() }</b></p>
 							<p>Time left: <span id="tttt"></span></p>
-							<p>Current Bid Price: <b>${productitem.getHighestPrice()}</b></p>
+							<p>Current Bid Price: <b>$${productitem.getHighestPrice()}</b></p>
 							<form class="form-inline" action="bidServlet" method="post">
 								<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}">
 						        <input type="hidden" name="productItemId" value="${productitem.getProductId()}">
@@ -473,7 +473,7 @@ $(document).ready(
 						<tbody>
 							<c:forEach items="${productitem.getBids()}" var="bid">
 								<tr>
-									<td>${bid.getBidprice()}</td>
+									<td>$${bid.getBidprice()}</td>
 									<td><b>${bid.getUser().getFirstname()}</b></td>
 									<td><b>${bid.getDateCreated()}</b></td>
 								</tr>
