@@ -356,14 +356,8 @@ div.desc {
 					</ol>
 					<br>
 					<div class="container">
-						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-							<img src="${ productitem.getImage()}" ${productitem.getItemName()}>
 						</div>
-
-						<div class="bidInfo">
-							<p><a href="matchSellerServlet">Seller Page</a></p>
-							<p>Date Created: <b>${productitem.getAuction().getDateCreated() }</b></p>
 							<p>Time left: <span id="tttt"></span></p>
 							<p>Current Bid Price: <b>$${productitem.getHighestPrice()}</b></p>
 							<form class="form-inline" action="bidServlet" method="post">
@@ -376,7 +370,6 @@ div.desc {
 								<div class="form-group">
 									<input type="submit" id="bidsubmit" value="Bid">
 								</div>
-					
 							</form>
 
 						</div>
@@ -423,6 +416,7 @@ $(document).ready(
 				// what's left is seconds
 				var seconds = delta % 60;  // in theory the modulus is not required
 			    
+
 			   // $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + seconds + ' seconds' + "\n" +
 			    		//(date_now.getTime() - date_past.getTime())
 			   // );
@@ -473,7 +467,9 @@ $(document).ready(
 						<tbody>
 							<c:forEach items="${productitem.getBids()}" var="bid">
 								<tr>
+
 									<td>$${bid.getBidprice()}</td>
+
 									<td><b>${bid.getUser().getFirstname()}</b></td>
 									<td><b>${bid.getDateCreated()}</b></td>
 								</tr>
