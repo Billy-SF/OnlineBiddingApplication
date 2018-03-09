@@ -67,7 +67,7 @@
  	
  	  <li>
  	<c:url value="verifyEmail.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
+ 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
     </ul>
     
    <ul class="nav navbar-nav navbar-right">
@@ -78,9 +78,7 @@
           </a>
           <ul class="dropdown-menu">
             <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
-      </ul> 
-      </li>
-      </ul>     
+      </ul>      
     </div>
 </nav> 
 
@@ -95,8 +93,8 @@
       <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
     </div>
 
-
-<div class="col-sm-3" style="width:35%; margin-left:30%; margin-top:10%">
+<div class="col-sm-3"></div>
+<div class="col-sm-3">
 <div> &nbsp;</div>
 <div class= "panel panel-danger" >
  <div class= "panel-heading">  <b> <fmt:message key="registrationForm"/></b> </div>
@@ -107,7 +105,7 @@
 		    <label for="verificationCode"><fmt:message key="verficationCode"/></label>
 			<input type="text" class="form-control input-md" id="code" placeholder="<fmt:message key="EnterverficationCode"/>" name="code">
 		</div>
-			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><c:param name="locale" value="${loc}"/><fmt:message key="submit"/></button>
+			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><fmt:message key="submit"/></button>
 </form>
 	</div>
 </div>	
