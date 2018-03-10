@@ -74,7 +74,7 @@ public class AuctionServlet extends HttpServlet{
 			// if the user doesn't exist in dB, redirect it to register
 			User user = UserDao.login(username, password);
 			if(user == null) {
-				RequestDispatcher rd=request.getRequestDispatcher("register.jsp");  
+				RequestDispatcher rd=request.getRequestDispatcher("registerForm.jsp");  
 				rd.include(request,response);  
 			}
 			else {
