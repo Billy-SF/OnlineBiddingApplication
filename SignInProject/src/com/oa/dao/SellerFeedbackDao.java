@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class SellerFeedbackDao {
 	
-	public static void updateRating( String seller, String description, String rating) {
+	public static void updateRating(String seller, String description, String rating) {
 			Connection conn = Dao.getConnection();
 			PreparedStatement pst = null;
 			ResultSet rs = null;
@@ -55,4 +55,55 @@ public class SellerFeedbackDao {
 			}
 		}
 	}
+
+	public static String getAverageRatingMessage(String seller) {
+			Connection conn = Dao.getConnection();
+			PreparedStatement pst = null;
+			ResultSet rs = null;
+
+			int numRatings = 0;
+			float currentRating = 0;
+			String message = "Unable to retrieve user rating.";
+
+			conn = Dao.getConnection();
+			try{
+
+				pst = conn.prepareStatement("select * from ratings where user_id_fk in (select id from users where username = \'" + seller + "\');");
+				rs = pst.executeQuery();
+				while(rs.next()) {
+					numRatings++;
+					currentRating += rs.getInt("rating");
+				}
+				if(numRatings == 0) {
+					message = seller + " has no ratings yet.";
+				} else {
+					currentRating = currentRating/(float)numRatings;
+					message = seller + "\'s average rating is " + String.format("%.2f", currentRating) + " (" + numRatings + " ratings)";
+				}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally {
+			if (conn != null) {
+				Dao.closeConnection();
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return message;
+	}
+
 }

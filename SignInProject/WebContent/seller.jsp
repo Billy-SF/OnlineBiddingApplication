@@ -90,6 +90,8 @@
 
 <h2>${param.seller}'s seller page</h2>
 
+<p>${currentRating}</p>
+
 <a href="sellerFeedback.jsp?seller=${param.seller}">Rate This Seller</a>
 
 

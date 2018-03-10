@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.oa.dao.AuctionDao;
+import com.oa.dao.SellerFeedbackDao;
 
 public class MatchSellerServlet extends HttpServlet{
 
@@ -20,7 +21,9 @@ public class MatchSellerServlet extends HttpServlet{
 		response.setContentType("text/html");
 		String seller = AuctionDao.MatchUserFromAuctionId(Integer.parseInt((String)request.getSession(false).getAttribute("auctionId")));
 		request.getSession(false).setAttribute("seller", seller);
-		response.sendRedirect("seller.jsp?seller=" + seller); 
+		request.getSession(false).setAttribute("currentRating", SellerFeedbackDao.getAverageRatingMessage(seller));
+		RequestDispatcher rp = request.getRequestDispatcher("seller.jsp?seller=" + seller);
+		rp.forward(request, response);
 
 	}
 }
