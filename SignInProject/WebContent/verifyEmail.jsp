@@ -39,7 +39,7 @@
 </head>
 
 
-<body>
+<body style="background-color:#ccff99">
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
