@@ -522,7 +522,7 @@ $(document).ready(
 					<li><a href="#"><font color="white"><b><fmt:message
 										key="feedback" /></b></font></a></li>
 					<li><a href="#"><font color="white"><b><fmt:message
-										key="privacyPolicy" /></b></font></a></li>
+										key="privacyPolicy" /></b></font></a></li> 
 				</ul>
 			</footer>
 
