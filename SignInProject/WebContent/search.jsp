@@ -9,7 +9,7 @@
 
 <c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
-	<c:set var="loc" value="${param.locale}" />
+	<c:set var="loc" value="${param.locale}" /> 
 </c:if>
 <fmt:setLocale value="${loc}" />
 <fmt:bundle basename="MessagesBundle">

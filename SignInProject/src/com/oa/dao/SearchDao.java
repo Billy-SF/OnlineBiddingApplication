@@ -24,7 +24,7 @@ import com.oa.utilities.Mailer;
  * @author Julie
  *
  */
-public class SearchDao {
+public class SearchDao { 
 	/**
 	 * @param keyword
 	 * @return productItem

@@ -18,7 +18,7 @@ import com.oa.helpers.ProductItem;
  *
  */
 public class SearchServlet extends HttpServlet{
-
+ 
 	/**
 	 * 
 	 */
