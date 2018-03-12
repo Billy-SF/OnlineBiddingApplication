@@ -49,14 +49,14 @@ System.out.print("d1=" + d1);
 			  String d2 = auction.getBidendtime();   
 			  Date date2 =sdf.parse(d2);      
 			  if(today_date.after(date2)) {
-				  auction.setBidstate("0");
+				//  auction.setBidstate("0");
 				  //0: end
 				  //1: start
 				  //2: not sarted
 				  // then write to database
 			  }
 			  else if(date1.after(today_date)) {
-				  auction.setBidstate("2");
+				//  auction.setBidstate("2");
 					 //0: end
 				  //1: start
 					 //2: not sarted
@@ -64,7 +64,7 @@ System.out.print("d1=" + d1);
 
 			  }
 			  else {
-				  auction.setBidstate("1");
+				 // auction.setBidstate("1");
 				  //0: end
 				  //1: start
 				  //2: not sarted

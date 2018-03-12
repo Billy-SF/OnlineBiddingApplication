@@ -40,7 +40,7 @@ public class BidDao {
 		//this.userId = user.getUserId();
 	}
 	public Boolean updateUserBid(String auctionId, String userId, String bidPrice, String itemId) {
-
+System.out.println("LISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
 		//Validate user bid Price to only contain set of numbers and a decimal if applicable
 		String pattern = "([0-9]*[.])?[0-9]+";
 		//If the bid price is valid
@@ -59,7 +59,7 @@ public class BidDao {
 			try {
 
 				//Make sure the bid is bigger than the initial price
-				pst = conn.prepareStatement("select bid_price_start from auctions where item_id_fk = ?");
+				pst = conn.prepareStatement("select bid_price_start from auctions where items_fk = ?");
 				pst.setString(1, itemId);
 				rs = pst.executeQuery();
 				if(rs.next())
@@ -216,8 +216,8 @@ public class BidDao {
 					auction.setItemsfk(rs.getString("items_fk"));
 					auction.setUserid(rs.getString("user_id"));
 					auction.setDateCreated(rs.getString("dateCreated"));
-					auction.setDatemodified(rs.getString("date_modified"));
-					auction.setBidstate(rs.getString("bid_state"));
+					//auction.setDatemodified(rs.getString("date_modified"));
+					//auction.setBidstate(rs.getString("bid_state"));
 
 					bid.setAuction(auction);
 				}

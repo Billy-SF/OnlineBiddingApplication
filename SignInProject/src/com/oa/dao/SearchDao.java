@@ -502,8 +502,8 @@ public class SearchDao {
 					auction.setItemsfk(rs.getString("items_fk"));
 					auction.setUserid(rs.getString("user_id"));
 					auction.setDateCreated(rs.getString("date_created"));
-					auction.setDatemodified(rs.getString("date_modified"));
-					auction.setBidstate(rs.getString("bid_state"));
+					//auction.setDatemodified(rs.getString("date_modified"));
+					//auction.setBidstate(rs.getString("bid_state"));
 						
 			}
 				
@@ -588,7 +588,7 @@ public class SearchDao {
 						auction.setItemsfk(rs.getString("items_fk"));
 						auction.setUserid(rs.getString("user_id"));
 						auction.setDateCreated(rs.getString("dateCreated"));
-						auction.setDatemodified(rs.getString("date_modified"));
+						//auction.setDatemodified(rs.getString("date_modified"));
 						auction.setBidstate(rs.getString("bid_state"));
 
 						bid.setAuction(auction);
