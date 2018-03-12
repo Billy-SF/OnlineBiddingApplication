@@ -9,7 +9,7 @@
 
 <c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
-	<c:set var="loc" value="${param.locale}" /> 
+	<c:set var="loc" value="${param.locale}" />
 </c:if>
 <fmt:setLocale value="${loc}" />
 <fmt:bundle basename="MessagesBundle">
@@ -348,10 +348,16 @@ div.desc {
 					</ol>
 					<br>
 
-
+					<c:if test = "${!keyword.isEmpty()}">
 					<h3
 						class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Search
 						for: ${keyword}</h3>
+					</c:if>
+					<c:if test = "${keyword.isEmpty()}">
+					<h3
+						class="a-size-medium a-spacing-base a-spacing-top-small a-color-tertiary a-text-normal">Search
+						for: all items</h3>
+					</c:if>
 						
 						<c:if test = "${productTotal <=0}">
 <p>Sorry no items are found for ${keyword}</p>

@@ -24,7 +24,7 @@ import com.oa.utilities.Mailer;
  * @author Julie
  *
  */
-public class SearchDao { 
+public class SearchDao {
 	/**
 	 * @param keyword
 	 * @return productItem
@@ -38,11 +38,16 @@ public class SearchDao {
 		
 		//Todo: need to check auction table first
 		try{
-			pst = conn.prepareStatement("select * from items WHERE "
-					+ "itemname REGEXP '[[:<:]]" + keyword + "[[:>:]]' "
-					+ "OR description REGEXP '[[:<:]]" + keyword + "[[:>:]]' ORDER BY items.itemname ASC");
+			pst = conn.prepareStatement("select * from items ORDER BY items.itemname ASC");
+
+			if(keyword != null && !keyword.isEmpty()) {
+				pst = conn.prepareStatement("select * from items WHERE "
+						+ "itemname REGEXP '[[:<:]]" + keyword + "[[:>:]]' "
+						+ "OR description REGEXP '[[:<:]]" + keyword + "[[:>:]]' ORDER BY items.itemname ASC");
+				
+			}
 			//pst.setString(1, keyword);
-			
+	
 			rs = pst.executeQuery();
 			int size =0;
 			if (rs != null) 
