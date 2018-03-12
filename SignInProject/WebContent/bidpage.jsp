@@ -432,7 +432,7 @@ $(document).ready(
 					// auction end date expired
 					$("#bidprice").attr("disabled", "disabled");
 					$("#bidsubmit").attr('disabled', "disabled");
-					$("#tttt").text("0");
+					$("#tttt").text("0 seconds left, Bidding ended!");
 
 					 clearInterval(myVar);
 					 $.ajax({

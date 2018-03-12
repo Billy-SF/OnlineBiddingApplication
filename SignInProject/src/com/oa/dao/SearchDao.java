@@ -503,7 +503,7 @@ public class SearchDao {
 					auction.setUserid(rs.getString("user_id"));
 					auction.setDateCreated(rs.getString("date_created"));
 					//auction.setDatemodified(rs.getString("date_modified"));
-					//auction.setBidstate(rs.getString("bid_state"));
+					auction.setBidstate(rs.getString("bid_state"));
 						
 			}
 				
