@@ -28,8 +28,12 @@ public class SearchServlet extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
-		//strip tag keyword
 		String searchKeyword = request.getParameter("search");
+		//strip html tag
+		searchKeyword = searchKeyword.replaceAll("\\<.*?\\>", "");
+		// trim
+		searchKeyword = searchKeyword.trim();
+		// sql injection: in DAO: the PreparedStatements
         ArrayList<ProductItem> productItem  = SearchDao.searchKeyword(searchKeyword);
 		request.setAttribute("productItems", productItem);
 		request.setAttribute("keyword", searchKeyword);
