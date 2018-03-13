@@ -61,9 +61,9 @@ CREATE TABLE `auctions` (
   `description` text,
   `items_fk` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
-  `date_created` datetime
-##  `date_modified` datetime DEFAULT NULL,
-##  `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
+  `date_created` datetime,
+   `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1',
+##  `date_modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `auctions`
@@ -176,8 +176,8 @@ alter table ratings add constraint ratings_user_id_fk foreign key (user_id_fk) r
 #INSERT INTO ottawauction.items(itemname, description, image,item_categories_fk) VALUES ('bike','black bike','test.jpg','1');
 #INSERT INTO ottawauction.items (itemname,description, image,item_categories_fk) VALUES ('coin','white coin','test2.jpg','2');
 
-#INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','99.4','150.0', 'Coin auction','2','1','2018-03-04 12:12:12');
-#INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','102.4','999.0', 'Bike auction','1','1','2018-03-04 12:12:12');
+#INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created, bid_state) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','99.4','150.0', 'Coin auction','2','1','2018-03-04 12:12:12','1');
+#INSERT INTO ottawauction.auctions (bid_start_time,bid_end_time, bid_price_start, bid_price_max,description,items_fk, user_id, date_created, bid_state) VALUES ('2018-03-04 12:12:12','2018-03-09 12:12:12','102.4','999.0', 'Bike auction','1','1','2018-03-04 12:12:12','1');
 
 
 #INSERT INTO `ottawauction`.`bids` (`bid_price`,`auctions_fk`, `users_fk`, `date_created`) VALUES ('12.22','1','1','2018-01-22 12:12:12');
