@@ -14,16 +14,67 @@
 <fmt:bundle basename="MessagesBundle">
 
 <head>
-
-
 <title>Edit</title></head>
-<meta charset="utf-8">
+<meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="customStyle.css"> 
   
+
+  <script>
+  function validateForm(){
+	  var error = null;
+	  var firstName = document.forms["editForm"]["firstname"].value;
+	  var lastName = document.forms["editForm"]["lastname"].value;
+	  var userName = document.forms["editForm"]["username"].value;
+	  var password = document.forms["editForm"]["password"].value;
+	  var email = document.forms["editForm"]["email"].value;
+	  
+				if (firstName.length < 2) 
+				{
+					document.getElementById("firstNameValidation").innerHTML = "Please enter a valid first name";
+					error ="Error";
+				} else {
+					document.getElementById("firstNameValidation").innerHTML = "";
+				}
+				if (lastName.length < 2) {
+					document.getElementById("lastNameValidation").innerHTML = "Please enter a valid last name";
+					error ="Error";
+				} else {
+					document.getElementById("lastNameValidation").innerHTML = "";
+				}
+				if (userName.length < 2) {
+					document.getElementById("userNameValidation").innerHTML = "Please enter a user name with alteast two characters";
+					error ="Error";
+				} else {
+					document.getElementById("userNameValidation").innerHTML = "";
+				}
+				if (password.length < 4) {
+					document.getElementById("passwordValidation").innerHTML = "Please enter a password with atleast 4 characters";
+					error ="Error";
+				} else {
+					document.getElementById("passwordValidation").innerHTML = "";
+				}
+				if (email.length < 3 || !email.includes("@")
+						|| !email.includes(".") || email.length < 3
+						&& !email.includes("@")) {
+					document.getElementById("emailValidation").innerHTML = "Please enter a valid email address with atleast 3 characters including the @ sybmol";
+					error ="Error";
+				} else {
+					document.getElementById("emailValidation").innerHTML = "";
+				}
+				
+				if(error != null){
+					return false;
+				}
+				return true;
+			}
+</script>
+
+
+
 
 </head>
 
@@ -95,31 +146,35 @@
 <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> Edit</b> </div>
   <div class ="panel-body"> 
-	<form action="editServlet" method="POST"> 
+	<form name="editForm" action="editServlet" method="POST" onsubmit="return validateForm();"> 
 		<div class="form-group">
-		    
-		    <label class ="pull-left" for="firstName"><fmt:message key="firstName"/></label>
-			<input type="text" class="form-control input-sm" id="firstName"  value="<%=session.getAttribute("firstname")%>"name="firstName">
+		    <label class ="pull-left" for="firstname">First Name:</label>
+			<input type="text" class="form-control input-sm" id="firstname"  value="<%=session.getAttribute("firstname")%>"name="firstname" required>
+			<p class="pull-left" style="color:red" id="firstNameValidation"></p>
 		</div>
 		
 		<div class="form-group">
-		   <label class ="pull-left" for="lastName"><fmt:message key="lastName"/></label>
-			<input type="text" class="form-control input-sm" id="lastName"  value="<%=session.getAttribute("lastname")%>" name="lastName">
+		    <label class ="pull-left" for="lastname">Last Name:</label>
+			<input type="text" class="form-control input-sm" id="lastname"  value="<%=session.getAttribute("lastname")%>" name="lastname" required>
+			<p class="pull-left" style="color:red" id="lastNameValidation"></p>
 	    </div>
 	    
 	    <div class="form-group">		
-			<label class ="pull-left" for="username"><fmt:message key="username"/></label>
-			<input type="text" class="form-control input-sm" id="userName"  value="<%=session.getAttribute("username")%>" name="userName">
+			<label class ="pull-left" for="username">User Name:</label>
+			<input type="text" class="form-control input-sm" id="username"  value="<%=session.getAttribute("username")%>" name="username" required>
+			<p class="pull-left" style="color:red" id="userNameValidation"></p>
 		</div>
 			
 		<div class="form-group">	
-			<label class ="pull-left" for="password"><fmt:message key="password"/></label>
-			<input type="password" class="form-control input-sm" id="password"  value="<%=session.getAttribute("password")%>" name="password">
+			<label class ="pull-left" for="password">Enter password:</label>
+			<input type="password" class="form-control input-sm" id="password"  value="<%=session.getAttribute("password")%>" name="password" required>
+			<p class="pull-left" style="color:red" id="passwordValidation"></p>
 		</div>
 		
 		<div class="form-group">	
-			<label class ="pull-left" for="emailAddress"><fmt:message key="email"/></label>
-			<input type="text" class="form-control input-sm" id="emailAddress"  value="<%=session.getAttribute("email")%>" name="emailAddress">    
+			<label class ="pull-left" for="email">Email Address:</label>
+			<input type="text" class="form-control input-sm" id="email"  value="<%=session.getAttribute("email")%>" name="email" required> 
+			<p class="pull-left" style="color:red" id="emailValidation"></p>   
 		</div>	
 		
 			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
