@@ -34,17 +34,10 @@ public class BidServlet extends HttpServlet{
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
+		
 		//strip tag keyword
-		String productitemid = request.getParameter("productItemId");
-		System.out.print("ProductItemid=" + productitemid);
-		ProductItem productitem = SearchDao.getProductItemByID(productitemid);
-		Auction auction = SearchDao.getAuctionByProductItemID(productitemid);
-		
-		
-		//ArrayList<Bid> bids = productitem.getBids();
-		
-		request.setAttribute("productitem", productitem);
-		request.setAttribute("auction", auction);
+		String userId = (String) request.getSession().getAttribute("userId");
+		String auctionId = (String) request.getSession().getAttribute("auctionId");
 		String username = (String) request.getSession().getAttribute("username");
 		System.out.println("username: " + username);
 		String password = (String) request.getSession().getAttribute("password");
@@ -57,14 +50,17 @@ public class BidServlet extends HttpServlet{
 		{
 			session.setAttribute("errorMessageBidDao", null);
 		}
-		String errorMessage = newbid.updateUserBid(auction.getId(),user.getUserId(), bidPrice, auction.getItemsfk());
-		System.out.println( "item id: " + auction.getItemsfk());
-		System.out.println( "auction id:" + auction.getId());
-		System.out.println( "user id:" + auction.getUserid());
-		request.setAttribute("productitem", productitem);
-		request.setAttribute("auction", auction);
+		String itemId = newbid.getUserId(auctionId);
+		String errorMessage = newbid.updateUserBid(auctionId, userId, bidPrice, itemId);
+		//System.out.println( "item id: " + itemId);
+		System.out.println( "auction id: " + auctionId);
+		System.out.println("userId: " + userId);
+		System.out.println("item id: " + itemId);
+		//System.out.println( "user id:" + auction.getUserid());
+		//request.setAttribute("productitem", productitem);
+		//request.setAttribute("auction", auction);
 		request.setAttribute("errorMessageBidDao", errorMessage);
-		RequestDispatcher dp = request.getRequestDispatcher("bidpage.jsp");
+		RequestDispatcher dp = request.getRequestDispatcher("bidPage.jsp");
 		dp.forward(request, response);
 		
 		out.close();

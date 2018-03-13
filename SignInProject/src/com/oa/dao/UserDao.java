@@ -22,6 +22,7 @@ public class UserDao {
 		
 		try{
 			pst = conn.prepareStatement("select * from users where username=? and password=? OR email=? and password=?");
+			//select id from users where username="bstf89";
 			pst.setString(1, username);
 			pst.setString(2, password);
 			pst.setString(3, username);
@@ -30,6 +31,7 @@ public class UserDao {
 			if(rs.next()){
 				user= new User();
 				// ? Do we need it ? user.setUserId(rs.getString("userId"));
+				user.setUserId(rs.getString("id"));
 				user.setUsername(rs.getString("userName"));
 				user.setFirstname(rs.getString("firstName"));
 				user.setLastname(rs.getString("lastName"));

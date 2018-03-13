@@ -73,8 +73,9 @@ public class BidDao {
 						//If no bids was made for the item, just insert it straight into the db, otherwise continue validating
 						if(rs.next())
 						{
+							System.out.print("1# Query contains a result");
 							//if the bid the user entered is bigger then the current highest bid 
-							if(bidPrice2.compareTo(rs.getBigDecimal(2)) >  0)
+							if(bidPrice2.compareTo(rs.getBigDecimal(1)) >  0)
 							{
 								pst = conn.prepareStatement("select bidding_time from currenthighestbidder where item_id_fk = ?");
 								pst.setString(1, itemId);
@@ -85,7 +86,7 @@ public class BidDao {
 									return "Query#3 failed";
 								}
 								//If the bidding time the user bid at is later then the last one in the table
-								if(date.compareTo(rs.getDate(3)) > 0) 
+								if(date.compareTo(rs.getDate(1)) > 0) 
 								{
 									//Insert into bids the current bid
 									pst = conn.prepareStatement("INSERT INTO bids (bid_price,auctions_fk,users_fk,date_created) VALUES (?,?,?,?)");
@@ -160,7 +161,7 @@ public class BidDao {
 				}
 			}		
 		}
-		return "";
+		return "Invalid Input please enter a valid price!";
 	}
 	// to remove
 	public static ArrayList<Bid> getBids(String productitemid){
@@ -298,10 +299,31 @@ public class BidDao {
 				}
 			}
 		}	
-
 		return bids;
 	}
-
+public String getUserId(String auctionId) 
+{
+	Connection conn = Dao.getConnection();
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+	
+	try {
+		pst = conn.prepareStatement("select items_fk from auctions where id = ?");
+		pst.setString(1, auctionId);
+		rs = pst.executeQuery();
+		if(rs.next())
+		{
+			return rs.getString(1);
+		}
+		else
+		{
+			return "Failed getting item_id";
+		}
+	} catch (SQLException e) {
+		System.out.print("Exception");
+	}
+	return "Failure in getUserID Method";
+}
 
 
 }//End of BidDao

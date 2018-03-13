@@ -77,6 +77,7 @@ System.out.print("d1=" + d1);
 			}
 		
 		
+		request.setAttribute("itemId", productitemid);
 		request.setAttribute("productitem", productitem);
 		request.setAttribute("auction", auction);
          
