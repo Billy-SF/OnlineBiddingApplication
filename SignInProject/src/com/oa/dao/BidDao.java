@@ -39,8 +39,8 @@ public class BidDao {
 		this.password = user.getPassword();
 		//this.userId = user.getUserId();
 	}
-	public Boolean updateUserBid(String auctionId, String userId, String bidPrice, String itemId) {
-System.out.println("LISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
+
+	public String updateUserBid(String auctionId, String userId, String bidPrice, String itemId) {
 		//Validate user bid Price to only contain set of numbers and a decimal if applicable
 		String pattern = "([0-9]*[.])?[0-9]+";
 		//If the bid price is valid
@@ -82,7 +82,7 @@ System.out.println("LISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
 
 								if(rs.next() == false) {
 									System.out.println("Query to get time failed");
-									return false;
+									return "Query#3 failed";
 								}
 								//If the bidding time the user bid at is later then the last one in the table
 								if(date.compareTo(rs.getDate(3)) > 0) 
@@ -101,13 +101,13 @@ System.out.println("LISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
 									pst.setString(2, bidPrice);
 									pst.setTimestamp(3, date);
 									pst.executeUpdate();
-									return true;
+									return null;
 								}
 							}
 							else 
 							{
 								System.out.print("the price the bidder gave to the item is smaller then the one currently in the db");
-								return false;
+								return "Bidding price too small";
 							}
 						}
 						else
@@ -126,16 +126,15 @@ System.out.println("LISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
 							pst.setString(3, bidPrice);
 							pst.setTimestamp(4, date);
 							pst.executeUpdate();
-							return true;
+							return null;
 						}
-						return false;
 					}
 					//Price user entered for is smaller than initial bid price
 					System.out.print("the price the bidder gave to the item is smaller then the one currently in the db");
-					return false;
+					return "Your bid is smaller than the initial price";
 				}
 				//Item either not existent or db problem
-				return false;
+				return "Query#1 failed";
 				//Price is lower than the current one in the database
 			}
 			catch(Exception e)
@@ -161,9 +160,8 @@ System.out.println("LISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS");
 				}
 			}		
 		}
-		return false;
+		return "";
 	}
-
 	// to remove
 	public static ArrayList<Bid> getBids(String productitemid){
 		Connection conn = Dao.getConnection();

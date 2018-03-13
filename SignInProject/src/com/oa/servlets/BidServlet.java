@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oa.dao.BidDao;
 import com.oa.dao.SearchDao;
@@ -51,13 +52,18 @@ public class BidServlet extends HttpServlet{
 		BidDao newbid = new BidDao(username,password);
 		String bidPrice = request.getParameter("bidPrice");
 		System.out.println("bidPrice: " + bidPrice);
-		newbid.updateUserBid(auction.getId(),user.getUserId(), bidPrice, auction.getItemsfk());
+		HttpSession session = request.getSession(false);
+		if (session!= null)
+		{
+			session.setAttribute("errorMessageBidDao", null);
+		}
+		String errorMessage = newbid.updateUserBid(auction.getId(),user.getUserId(), bidPrice, auction.getItemsfk());
 		System.out.println( "item id: " + auction.getItemsfk());
 		System.out.println( "auction id:" + auction.getId());
 		System.out.println( "user id:" + auction.getUserid());
 		request.setAttribute("productitem", productitem);
 		request.setAttribute("auction", auction);
-
+		request.setAttribute("errorMessageBidDao", errorMessage);
 		RequestDispatcher dp = request.getRequestDispatcher("bidpage.jsp");
 		dp.forward(request, response);
 		

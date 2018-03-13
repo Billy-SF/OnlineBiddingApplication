@@ -366,6 +366,9 @@ div.desc {
 							<p>Date Created: <b>${productitem.getAuction().getDateCreated() }</b></p>
 							<p>Time left: <span id="tttt"></span></p>
 							<p>Current Bid Price: <b>$${productitem.getHighestPrice()}</b></p>
+							<c:if test="${errorMessageBidDao ne null}">
+		  						<h3>${errorMessageBidDao}</h3>
+							</c:if>
 							<form class="form-inline" action="bidServlet" method="post">
 								<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}">
 						        <input type="hidden" name="productItemId" value="${productitem.getProductId()}">
