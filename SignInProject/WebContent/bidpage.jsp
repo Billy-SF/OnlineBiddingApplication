@@ -358,7 +358,8 @@ div.desc {
 					<div class="container">
 						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-							<img src="${ productitem.getImage()}" ${productitem.getItemName()}>
+						<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productItem.image}"
+														alt="${productItem.itemName}"></img>
 						</div>
 
 						<div class="bidInfo">

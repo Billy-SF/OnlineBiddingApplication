@@ -424,8 +424,9 @@ div.desc {
 										<c:if test="${not empty productItem.getAuction().getId()}">	<a 
 												href="bidPageDisplayServlet?productitemid=${productItem.productId}">
 										</c:if>
-														<img src="${productItem.image}" alt="Fjords" width="300"
-												height="200"></img>
+														<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productItem.image}"
+														alt="${productItem.itemName}" width="300" height="200"></img>
+									
 									<c:if test="${not empty productItem.getAuction().getId()}">	</a> </c:if>
 											
 										
@@ -449,7 +450,8 @@ div.desc {
 							
 									<td><b>${productItem.description}</b></td>
 									<td><b>$${productItem.highestPrice}</b></td>
-									<td><b>${productItem.dateCreated}</b></td>
+									<td><b>${productItem.getAuction().getDateCreated()}</b></td>
+									
 								</tr>
 							</c:forEach>
 						</tbody>
