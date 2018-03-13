@@ -356,10 +356,12 @@ div.desc {
 					</ol>
 					<br>
 					<div class="container">
+					<p>Image url: ${productitem.getItemName()}</p>
 						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
 						<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productItem.image}"
-														alt="${productItem.itemName}"></img>
+														alt="${productItem.itemName}" width="300" height="200"></img>
+					
 						</div>
 
 						<div class="bidInfo">
@@ -370,21 +372,34 @@ div.desc {
 							<c:if test="${errorMessageBidDao ne null}">
 		  						<h3>${errorMessageBidDao}</h3>
 							</c:if>
+							
 							<form class="form-inline" action="bidServlet" method="post">
-								<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}">
-						        <input type="hidden" name="productItemId" value="${productitem.getProductId()}">
+								<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}"/>
+						        <input type="hidden" name="productItemId" value="${productitem.getProductId()}"/>
 									<div class="form-group">
-									<input type="text"  pattern="[0-9]+(\.[0-9]{0,2})?%?"
+									<input type="text" 
+									<c:if test="${null == sessionScope.username}">
+									   disabled
+									</c:if>
+									 pattern="[0-9]+(\.[0-9]{0,2})?%?"
 									id="bidprice" name="bidPrice" placeholder="bid here">
 								</div>
 								<div class="form-group">
-									<input type="submit" id="bidsubmit" value="Bid">
+									<input
+									<c:if test="${null == sessionScope.username}">
+									   disabled
+									</c:if>
+									   type="submit" id="bidsubmit" value="Bid"/>
 								</div>
+					
+							<c:if test="${null == sessionScope.username}">
+									 Please sign in to bid
+							</c:if>
 					
 							</form>
 
 						</div>
-						
+					
 <script>
 function mysqlTimeStampToDate(timestamp) {
     //function parses mysql datetime string and returns javascript Date object
