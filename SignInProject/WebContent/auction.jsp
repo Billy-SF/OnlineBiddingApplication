@@ -156,8 +156,8 @@ function validateAuctionForm(){
     </form>
  
     <ul class="nav navbar-nav">
-      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
-     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font color='white'><b>Auction</b></font></a></li>"%>
+      <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
+     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size ='4' color='white'><b>Auction</b></font></a></li>"%>
        <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
@@ -175,12 +175,12 @@ function validateAuctionForm(){
     
    <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
+          <a class="dropdown-toggle" data-toggle="dropdown" href="Logout.jsp">
+          <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
             <!-- <span class="caret"></span> -->
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
+            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
       </ul>      
     </div>
 </nav> 

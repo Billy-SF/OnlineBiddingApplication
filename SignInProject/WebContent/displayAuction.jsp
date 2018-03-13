@@ -114,9 +114,9 @@
     </div>
 
 
-<div class="col-sm-3"></div>
+<div class="col-sm-1"></div>
 
-<div class="col-sm-3">
+<div class="col-sm-8">
 <div> &nbsp;</div>
 <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> Auctions</b> </div>
@@ -130,13 +130,14 @@
 		{
 %>
 			<tr>
-				<td><a href="bidpage.jsp"onclick='<%request.getSession(false).setAttribute("auctionId", rs.getString("id"));%>'> <%=rs.getString("itemname")%></a></td><!-- <%=rs.getString("id")%> -->
+				<td style="width:10%"><a href="bidpage.jsp"onclick='<%request.getSession(false).setAttribute("auctionId", rs.getString("id"));%>'> <%=rs.getString("itemname")%></a></td><!-- <%=rs.getString("id")%> -->
 			</tr>
 			<tr>
-				<td><%=rs.getString("description") %></td>
-				<td><img  <%-- src="c:\\uploadImageOttawAction\\<%=rs.getString("image")%>" --%> 
+				<td style="width:10%"><%=rs.getString("description") %></td>
+				<td style="width:90%"><img  <%-- src="c:\\uploadImageOttawAction\\<%=rs.getString("image")%>" --%> height="200"  width="200"
 				 src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/<%=rs.getString("image")%>' alt="Auction Image"></td>
 			</tr>
+			<tr><td>&nbsp;</td></tr>
 <%
 		}
 %>
