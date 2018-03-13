@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 
 <html lang="en">
+<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  
+  <c:set var="loc" value="en_US"/>
+<c:if test="${!(empty param.locale)}">
+  <c:set var="loc" value="${param.locale}"/>
+</c:if>
+<fmt:setLocale value="${param.locale}" />
+<fmt:bundle basename="MessagesBundle">
+
 <head>
 
 
@@ -10,61 +22,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+  <link rel="stylesheet" href="customStyle.css"> 
+  
 
-<style>
-/* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      background-color: #cc0000;
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #990033;
-      height: 110%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #cc0000;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  .text-left{
-  background-color: #ff6600;
-  }
-
-}
-</style>
 </head>
 
 
 <body>
-
+<div id="grad1">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
-    <form class="navbar-form navbar-left" action="/action_page.php">
+    
+    <form class="navbar-form navbar-left" action="searchServlet">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
+        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
         <div class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <i class="glyphicon glyphicon-search"></i>
@@ -72,37 +46,36 @@
         </div>
       </div>
     </form>
+ 
     <ul class="nav navbar-nav">
-      <li><a href="index.jsp"><font color="white"><b>Home</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Contact Us</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Help</b></font></a></li>
-      
-      
-					<li><c:url value="index.jsp" var="englishURL">
-							<c:param name="locale" value="en_US" />
-						</c:url> <a href="${englishURL}"> English </a></li>
-
-					<li><c:url value="index.jsp" var="chineseURL">
-							<c:param name="locale" value="zh_CN" />
-						</c:url> <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
-						
-    </ul>
+      <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
+     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size=4 color='white'><b>Auction</b></font></a></li>"%>
+       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
+      <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
+    
+    
+    <li>
+    <c:url value="edit.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+ 	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
+ 	
+ 	  <li>
+ 	<c:url value="edit.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
+ 	 </ul>
     
    <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> Logout</b></font>
+            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
             <!-- <span class="caret"></span> -->
           </a>
           <ul class="dropdown-menu">
-            
-            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> Edit</a></li>
-            <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>   
-      </li>
-      </ul>   
+            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
+      </ul>      
     </div>
 </nav> 
+
 
 
 
@@ -125,27 +98,27 @@
 	<form action="editServlet" method="POST"> 
 		<div class="form-group">
 		    
-		    <label class ="pull-left" for="firstName">First Name:</label>
+		    <label class ="pull-left" for="firstName"><fmt:message key="firstName"/></label>
 			<input type="text" class="form-control input-sm" id="firstName"  value="<%=session.getAttribute("firstname")%>"name="firstName">
 		</div>
 		
 		<div class="form-group">
-		    <label class ="pull-left" for="lastName">Last Name:</label>
+		   <label class ="pull-left" for="lastName"><fmt:message key="lastName"/></label>
 			<input type="text" class="form-control input-sm" id="lastName"  value="<%=session.getAttribute("lastname")%>" name="lastName">
 	    </div>
 	    
 	    <div class="form-group">		
-			<label class ="pull-left" for="username">User Name:</label>
+			<label class ="pull-left" for="username"><fmt:message key="username"/></label>
 			<input type="text" class="form-control input-sm" id="userName"  value="<%=session.getAttribute("username")%>" name="userName">
 		</div>
 			
 		<div class="form-group">	
-			<label class ="pull-left" for="password">Enter password:</label>
+			<label class ="pull-left" for="password"><fmt:message key="password"/></label>
 			<input type="password" class="form-control input-sm" id="password"  value="<%=session.getAttribute("password")%>" name="password">
 		</div>
 		
 		<div class="form-group">	
-			<label class ="pull-left" for="emailAddress">Email Address:</label>
+			<label class ="pull-left" for="emailAddress"><fmt:message key="email"/></label>
 			<input type="text" class="form-control input-sm" id="emailAddress"  value="<%=session.getAttribute("email")%>" name="emailAddress">    
 		</div>	
 		
@@ -161,17 +134,19 @@
 
 <footer class="container-fluid text-center">
   <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#"><font color="white"><b>© OttawAuction</b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b>Â© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
-      <li><a href="#"><font color="white"><b>Feedback</b></font></a></li>
-      <li><a href="#"><font color="white"><b>Privacy Policy</b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="feedback"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
    </ul>
 </footer>
+
 	
-	
+</div>	
 </body>
+</fmt:bundle>
 </html>

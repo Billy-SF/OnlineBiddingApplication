@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="customStyle.css">
   <script>
   function validateForm(){
 	  var error = null;
@@ -70,55 +71,19 @@
 				return true;
 			}
 </script>
-<style>
-/* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      background-color: #cc0000;
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #990033;
-      height: 110%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #cc0000;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  .text-left{
-  background-color: #ff6600;
-  }
 
-}
-</style>
 </head>
 
 
 <body>
+<div id="grad1">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
-    <form class="navbar-form navbar-left" action="/action_page.php">
+    
+    <form class="navbar-form navbar-left" action="searchServlet">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
         <div class="input-group-btn">
@@ -128,18 +93,22 @@
         </div>
       </div>
     </form>
+ 
     <ul class="nav navbar-nav">
-      <li> <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a href="${index}"> <fmt:message key="home"/> </a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
-      
-       <li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
+     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font color='white'><b>Auction</b></font></a></li>"%>
+       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
+      <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
+    
+    
+    <li>
     <c:url value="registrationForm.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
- 	<a href="${englishURL}"> English </a> </li>
+ 	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
  	
  	  <li>
  	<c:url value="registrationForm.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
+ 	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 
     </ul>
     
@@ -168,14 +137,15 @@
 
 <div class="col-sm-3"></div>
 
-<div class="col-sm-3">
+
+<div  class="col-sm-3">
 <div> &nbsp;</div>
 <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> <fmt:message key="registrationForm"/></b> </div>
   <div class ="panel-body"> 
 	<form name="registrationForm" action="registerServlet" onsubmit="return validateForm()" method="POST"> 
 		<div class="form-group">
-		    <p class="pull-left" style="color:red" id="firstNameValidation"></p>
+		  <p class="pull-left" style="color:red" id="firstNameValidation"></p>
 		    <label class ="pull-left" for="firstName"><fmt:message key="firstName"/></label>
 			<input type="text" class="form-control input-sm" id="firstName" placeholder="<fmt:message key="enterFirstName"/>" name="firstName" required>
 		</div>
@@ -211,20 +181,21 @@
  </div>	
   </div>
 </div>
+</div>
 
 <footer class="container-fluid text-center">
   <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="edit.jsp"><font color="white"><b>© OttawAuction</b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b>© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
-      <li><a href="#"><font color="white"><b><fmt:message key="feedback"/></b></font></a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="feedback"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
    </ul>
 </footer>
-
+</div>
 </body>
 </fmt:bundle>
 </html>
