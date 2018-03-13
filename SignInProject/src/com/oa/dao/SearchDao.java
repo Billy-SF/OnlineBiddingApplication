@@ -68,8 +68,8 @@ public class SearchDao {
 				productItem.setProductId(rs.getString("id"));
 				productItem.setItemName(rs.getString("itemname"));
 				productItem.setDesciption(rs.getString("description"));
-				productItem.setDateCreated(rs.getString("date_created"));
-				productItem.setDateModified(rs.getString("date_modified"));
+				//productItem.setDateCreated(rs.getString("date_created"));
+				//productItem.setDateModified(rs.getString("date_modified"));
 				productItem.setImage(rs.getString("image"));
 				
 				//productItem.setHighestPrice(getHestPriceByProductItemID(productItem.getProductId()));
@@ -409,8 +409,8 @@ public class SearchDao {
 					productitem.setProductId(rs.getString("id"));
 					productitem.setItemName(rs.getString("itemname"));
 					productitem.setDesciption(rs.getString("description"));
-					productitem.setDateCreated(rs.getString("date_created"));
-					productitem.setDateModified(rs.getString("date_modified"));
+					//productitem.setDateCreated(rs.getString("date_created"));
+					//productitem.setDateModified(rs.getString("date_modified"));
 					productitem.setImage(rs.getString("image"));
 			}
 				

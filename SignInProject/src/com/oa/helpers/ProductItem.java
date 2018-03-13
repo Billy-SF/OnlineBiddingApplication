@@ -7,8 +7,8 @@ public class ProductItem {
 	private String itemName;
 	private String description;
 	private String productId;
-	private String dateModified;
-	private String dateCreated;
+	//private String dateModified;
+	//private String dateCreated;
 	private String image;
 	private String highestPrice;
 	private String lowestPrice;
@@ -42,19 +42,19 @@ public class ProductItem {
 		this.productId = productId;
 	}
 	
-	public String getDateModified() {
-		return dateModified;
-	}
-	public void setDateModified(String dateModified) {
-		this.dateModified = dateModified.replaceAll("\\.\\d+", "");;
-	}
+	//public String getDateModified() {
+		//return dateModified;
+	//}
+	//public void setDateModified(String dateModified) {
+		//this.dateModified = dateModified.replaceAll("\\.\\d+", "");;
+	//}
 	
-	public String getDateCreated() {
-		return dateCreated;
-	}
-	public void setDateCreated(String dateCreated) {
-		this.dateCreated = dateCreated.replaceAll("\\.\\d+", "");;
-	}
+	//public String getDateCreated() {
+		//return dateCreated;
+	//}
+	//public void setDateCreated(String dateCreated) {
+		//this.dateCreated = dateCreated.replaceAll("\\.\\d+", "");;
+	//}
 	
 	public String getImage() {
 		return image;
