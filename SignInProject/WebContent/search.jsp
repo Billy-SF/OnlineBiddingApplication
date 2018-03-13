@@ -410,6 +410,7 @@ div.desc {
 							<tr>
 								<th></th>
 								<th>Item</th>
+								<th>Status</th>
 								<th>Detail</th>
 								<th>Current Bid</th>
 							    <th>Date created</th>
@@ -420,13 +421,32 @@ div.desc {
 							<c:forEach items="${productItems}" var="productItem">
 								<tr>
 									<td><div class="gallery">
-											<a 
+										<c:if test="${not empty productItem.getAuction().getId()}">	<a 
 												href="bidPageDisplayServlet?productitemid=${productItem.productId}">
-												<img src="${productItem.image}" alt="Fjords" width="300"
+										</c:if>
+														<img src="${productItem.image}" alt="Fjords" width="300"
 												height="200"></img>
-											</a>
+									<c:if test="${not empty productItem.getAuction().getId()}">	</a> </c:if>
+											
+										
 										</div></td>
+												
 									<td><b>${productItem.itemName}</b></td>
+									<c:if test="${not empty productItem.getAuction().getId()}">	
+									<c:if test="${productItem.getAuction().getBidstate() =='0'}">	
+									<td><b>Bidding Ended</b></td>
+									</c:if>
+									<c:if test="${productItem.getAuction().getBidstate() =='1'}">
+									<td><b>Bidding</b></td>
+									</c:if>
+									<c:if test="${productItem.getAuction().getBidstate() =='2'}">
+									<td><b>Bidding Not Started</b></td>
+									</c:if>
+									</c:if>
+									<c:if test="${empty productItem.getAuction().getId()}">	
+									<td><b>No Bidding</b></td>
+									</c:if>
+							
 									<td><b>${productItem.description}</b></td>
 									<td><b>$${productItem.highestPrice}</b></td>
 									<td><b>${productItem.dateCreated}</b></td>

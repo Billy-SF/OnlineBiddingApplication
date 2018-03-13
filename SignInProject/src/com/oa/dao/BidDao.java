@@ -39,8 +39,8 @@ public class BidDao {
 		this.password = user.getPassword();
 		//this.userId = user.getUserId();
 	}
-	public String updateUserBid(String auctionId, String userId, String bidPrice, String itemId) {
 
+	public String updateUserBid(String auctionId, String userId, String bidPrice, String itemId) {
 		//Validate user bid Price to only contain set of numbers and a decimal if applicable
 		String pattern = "([0-9]*[.])?[0-9]+";
 		//If the bid price is valid
@@ -214,7 +214,7 @@ public class BidDao {
 					auction.setItemsfk(rs.getString("items_fk"));
 					auction.setUserid(rs.getString("user_id"));
 					auction.setDateCreated(rs.getString("dateCreated"));
-					auction.setDatemodified(rs.getString("date_modified"));
+					//auction.setDatemodified(rs.getString("date_modified"));
 					auction.setBidstate(rs.getString("bid_state"));
 
 					bid.setAuction(auction);

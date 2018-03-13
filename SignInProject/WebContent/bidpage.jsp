@@ -435,7 +435,7 @@ $(document).ready(
 					// auction end date expired
 					$("#bidprice").attr("disabled", "disabled");
 					$("#bidsubmit").attr('disabled', "disabled");
-					$("#tttt").text("0");
+					$("#tttt").text("0 seconds left, Bidding ended!");
 
 					 clearInterval(myVar);
 					 $.ajax({
@@ -525,7 +525,7 @@ $(document).ready(
 					<li><a href="#"><font color="white"><b><fmt:message
 										key="feedback" /></b></font></a></li>
 					<li><a href="#"><font color="white"><b><fmt:message
-										key="privacyPolicy" /></b></font></a></li>
+										key="privacyPolicy" /></b></font></a></li> 
 				</ul>
 			</footer>
 
