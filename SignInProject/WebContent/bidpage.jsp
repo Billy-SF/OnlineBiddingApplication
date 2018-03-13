@@ -6,10 +6,6 @@
 <html lang="en">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
-
 <c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
 	<c:set var="loc" value="${param.locale}" />
