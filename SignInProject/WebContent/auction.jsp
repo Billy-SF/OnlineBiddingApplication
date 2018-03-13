@@ -1,5 +1,6 @@
-<!DOCTYPE html>
+<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> --%>
 
+<!DOCTYPE html>
 <html lang="en">
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8" %>
@@ -15,26 +16,64 @@
 
 
 <head>
-<title>Registration Form</title>
-   <meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
+ <meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="customStyle.css">
+   <link rel="stylesheet" href="customStyle.css">
   <script type="text/javascript">
-  
- 
 
 $( document ).ready(function() { 
 	//alert("Helllo!");
-	jQuery("#itemNameValidationMessage").hide();
-	jQuery("#descriptionValidationMessage").hide();
-	jQuery("#bidStartValidationMessage").hide();
-	jQuery("#bidEndValidationMessage").hide();
-	jQuery("#datesValidationMessage").hide();
-	jQuery("#initialPriceValidationMessage").hide();
+	$("#itemNameValidationMessage").hide();
+	$("#descriptionValidationMessage").hide();
+	$("#bidStartValidationMessage").hide();
+	$("#bidEndValidationMessage").hide();
+	$("#datesValidationMessage").hide();
+	$("#initialPriceValidationMessage").hide();
+	$("#imageValidationMessage").hide();
+	
+	// make sure the uploaded file is an image
+ 	$("#image").change(function() {
+		var mimeType = this.files[0]['type'];
+		if(mimeType.split('/')[0] != 'image'){
+			$("#imageValidationMessage").slideDown();
+	    }
+	});
+
+	$("#image").click(function() {
+		$("#imageValidationMessage").slideUp();
+	});
+	
+	
+	
+/* 	$("body").click(function(e){
+	    var name = $(e.target)[0].nodeName;
+	    alert(name);
+	    var nameid = $(e.target)[0].id;
+	    alert(nameid);
+	    var classname = $(name+"#"+nameid).attr('class');
+	    var full = name+"#"+nameid;
+	    console.log(nameid);
+
+	    function b(x){
+	        alert(x);
+	    };
+
+	    b(full);
+	}); */
+	
+	
 });
+
+function hideErrorMessage(element){
+	//alert("hoho");
+	//alert(element);
+	//alert("hi"+$(element).nodeNme+"hi");	
+	documet.getElementById(element).style.background = "yellow";
+	
+}
 
 function validateAuctionForm(){
 	var error = true;
@@ -44,19 +83,16 @@ function validateAuctionForm(){
 	var bidEnd = document.forms["auction"]["bidEnd"].value;
 	var initialPrice = document.forms["auction"]["initialPrice"].value;
 	  
-	//alert("In submit" + bidStart + "Hi");
-
 	if (itemName.length == 0) 
 	{
 		$("#itemNameValidationMessage").slideDown();
-		//alert("ItemNnaem"+ itemName.length);
 		error = false;
 	}
 	if (description.length == 0) {
 		$("#descriptionValidationMessage").slideDown();
 		error = false;
 	}
-	if (bidStart.length == 0) {
+	if (bidStart.length == 0 ) {
 		$("#bidStartValidationMessage").slideDown();
 		error = false;
 	}
@@ -64,49 +100,51 @@ function validateAuctionForm(){
 		$("#bidEndValidationMessage").slideDown();
 		error = false;
 	}
-	if (initialPrice.length == 0) {
+  	if (initialPrice.length == 0 || isNaN(initialPrice)) {
 		$("#initialPriceValidationMessage").slideDown();
 		error = false;
 	}
-/* 	if () {
-		$("#datesValidationMessage").slideDown();
-		error = true;
-	}		
- */
 	return error;
 }
 
-function hideErrorMessage(elementId){
-	//alert (elementId);
-	//var id = "#" + elementId; 
-	//alert("Here" + elementId);
+/* function hideErrorMessage(elementId){
 	
-	document.getElementById(elementId).next("div").style.background = "yellow";
+	//document.getElementById(elementId).style.background = "yellow";
+	
+	//document.getElementById(elementId).next().css( "background-color", "red" );
+	//$( "#itemName" ).next().slideUp();
+	
+	//alert(elementId.next());
+	
+        $(elementId).css("background-color", "#cccccc");
+
+	
+	
+	document.getElementById(elementId).next().style.background = "yellow";
 	
 	return function() { // the function to return
-				alert("showing "+ elementId);
+				/* alert("showing "+ elementId);
 				document.getElementById(elementId).slideUp();
-				$(elementId).slideUp(); // use the variable from the parameter
-			};
+				$(elementId).slideUp(); // use the variable from the parameter */
+			//};
 	
 	//$(paramId).slideUp();
 	
-}
+//} */
 
 </script>
   
 <title>Create Auction</title>
 </head>
-<body style="background-color:#ccff99">
-
-
-
+<body>
+	<div id="grad1">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
-    <form class="navbar-form navbar-left" action="/action_page.php">
+    
+    <form class="navbar-form navbar-left" action="searchServlet">
       <div class="input-group">
         <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
         <div class="input-group-btn">
@@ -116,18 +154,22 @@ function hideErrorMessage(elementId){
         </div>
       </div>
     </form>
+ 
     <ul class="nav navbar-nav">
-      <li> <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a href="${index}"> <fmt:message key="home"/> </a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
-      
-       <li>
-    <c:url value="registrationForm.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
- 	<a href="${englishURL}"> English </a> </li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
+     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font color='white'><b>Auction</b></font></a></li>"%>
+       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
+      <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
+    
+    
+    <li>
+    <c:url value="auction.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+ 	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
  	
  	  <li>
- 	<c:url value="registrationForm.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}">&#x4E2D;&#x6587;</a></li>
+ 	<c:url value="auction.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 
     </ul>
     
@@ -144,6 +186,8 @@ function hideErrorMessage(elementId){
 </nav> 
 
 
+
+
 <div class="container-fluid text-center">    
   <div class="row content">
     <div class="col-sm-2 sidenav">
@@ -151,12 +195,14 @@ function hideErrorMessage(elementId){
       <p><a href="#"><img src="chicago.png" height=100% width=100%></a></p>
       <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
     </div>
-
-
-
-<div class="col-sm-3"></div>
-
-<div class="col-sm-3">
+	
+	
+	
+	
+	
+	<div class="col-sm-3"></div>
+	
+<div  class="col-sm-3">
 <div> &nbsp;</div>
 <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> <fmt:message key="auctionForm"/></b> </div>
@@ -164,64 +210,64 @@ function hideErrorMessage(elementId){
 	<form action="auctionServlet" method="POST" enctype="multipart/form-data" name="auction" onsubmit="return validateAuctionForm()"> 
 		<div class="form-group">
 		    <label class ="pull-left" for="itemName">Item Name:</label>
-			<input type="text" class="form-control input-sm" id="itemName"  placeholder="Please Enter item name" name="itemName" onfocus="hideErrorMessage(this.id)">
+			<input type="text" class="form-control input-sm" id="itemName"  placeholder="Please Enter item name" name="itemName" onfocus="hideErrorMessage(this.id);" required>
 			<div id="itemNameValidationMessage" Style="color: red">Item Name is required</div>
 		</div>
 		
 		<div class="form-group">
 		    <label class ="pull-left" for="description">Description:</label>
-			<input type="text" class="form-control input-sm" id="description"  placeholder="Please Enter Description"  name="description">
+			<input type="text" class="form-control input-sm" id="description"  placeholder="Please Enter Description"  name="description" required>
 			<div id="descriptionValidationMessage" Style="color: red">Description is required</div>
 	    </div>
 	    
 	    <div class="form-group">		
 			<label class ="pull-left" for="bidStart">Bidding Starts at :</label>
-			<input type="datetime-local" class="form-control input-sm" id="bidStart" name="bidStart">
+			<input type="datetime-local" class="form-control input-sm" id="bidStart" name="bidStart" required>
 			<div id="bidStartValidationMessage" Style="color: red">Bidding Start Date and Time are required</div>
 		</div>
 			
 		<div class="form-group">	
 			<label class ="pull-left" for="bidEnd">Bidding Ends at:</label>
-			<input type="datetime-local" class="form-control input-sm" id="bidEnd" name="bidEnd">
+			<input type="datetime-local" class="form-control input-sm" id="bidEnd" name="bidEnd" required>
 			<div id="bidEndValidationMessage" Style="color: red">Bidding End Date and Time are required</div>
 			<div id="datesValidationMessage" Style="color: red">Bidding Start Time should be before End Time</div>
 		</div>
 		
 		<div class="form-group">	
 			<label class ="pull-left" for="initialPrice">Initial Price</label>
-			<input type="text" class="form-control input-sm" id="initialPrice" placeholder="Please Enter Initial Price" name="initialPrice" >
-			<div id="initialPriceValidationMessage" Style="color: red">Initial Price is required</div>    
+			<input type="text" class="form-control input-sm" id="initialPrice" placeholder="Please Enter Initial Price" name="initialPrice" required>
+			<div id="initialPriceValidationMessage" Style="color: red">Initial Price is required and has to be number</div>    
 		</div>	
 		
 		<div class="form-group">	
 			<label class ="pull-left" for="image">Image:</label>
-			<input type="file" class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image" accept="image/*">    
+			<input type="file" class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image" accept="image/*">
+			<div id="imageValidationMessage" Style="color: red">The file needs to be an image</div>    
 		</div>	
 
 			<button type="submit" class="btn btn-primary" id="submitAuctionbtn" name="submitAuctionbtn">Submit Auction</button>
 
 	</form>
-	
 	</div>
 </div>	
  </div>	
- </div>
+  </div>
 </div>
- 
- <footer class="container-fluid text-center">
+</div> 
+<footer class="container-fluid text-center">
   <div class="navbar-header">
-      <a class="navbar-brand" href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+      <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="edit.jsp"><font color="white"><b>© OttawAuction</b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b>© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
-      <li><a href="#"><font color="white"><b><fmt:message key="feedback"/></b></font></a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="feedback"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
    </ul>
-</footer>
-
+</footer>	
+	
+	
 </body>
 </fmt:bundle>
 </html>
-

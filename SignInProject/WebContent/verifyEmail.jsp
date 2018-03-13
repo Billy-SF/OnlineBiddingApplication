@@ -38,17 +38,17 @@
 
 </head>
 
-
-<body style="background-color:#ccff99">
-
+<body>
+<div id="grad1">
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b></a>
+      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
-    <form class="navbar-form navbar-left" action="/action_page.php">
+    
+    <form class="navbar-form navbar-left" action="searchServlet">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search" name="search">
+        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
         <div class="input-group-btn">
           <button class="btn btn-default" type="submit">
             <i class="glyphicon glyphicon-search"></i>
@@ -56,19 +56,23 @@
         </div>
       </div>
     </form>
+ 
     <ul class="nav navbar-nav">
-    <li> <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a href="${index}"> <fmt:message key="home"/> </a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
-      <li><a href="#"><font color="white"><b><fmt:message key="help"/></b></font></a></li>
-      
-       <li>
+      <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
+     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size=4 color='white'><b>Auction</b></font></a></li>"%>
+       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
+      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
+      <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
+    
+    
+    <li>
     <c:url value="verifyEmail.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
- 	<a href="${englishURL}"> English </a> </li>
+ 	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
  	
  	  <li>
  	<c:url value="verifyEmail.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}"><fmt:message key="chinese"/></a></li>
-    </ul>
+ 	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
+ 	 </ul>
     
    <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -125,7 +129,7 @@
       <li><a href="#"><font color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
    </ul>
 </footer>
-	
+</div>	
 </body>
 </fmt:bundle>
 </html>
