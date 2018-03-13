@@ -63,7 +63,7 @@ public class ProductItem {
 		this.image = image;
 	}
 	
-	public String getHighestPrice() {
+	public String getHighestPrice() { 
 		return highestPrice;
 	}
 	public void setHighestPrice(String highestPrice) {

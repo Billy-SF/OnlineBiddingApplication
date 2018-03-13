@@ -411,7 +411,7 @@ public class SearchDao {
 					productitem.setDesciption(rs.getString("description"));
 					//productitem.setDateCreated(rs.getString("date_created"));
 					//productitem.setDateModified(rs.getString("date_modified"));
-					productitem.setImage(rs.getString("image"));
+					productitem.setImage(rs.getString("image")); 
 			}
 				
 				
