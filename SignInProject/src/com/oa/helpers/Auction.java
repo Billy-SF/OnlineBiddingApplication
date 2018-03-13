@@ -15,11 +15,12 @@ public class Auction {
 		private User user;
 
 	private String dateCreated;
-	private String datemodified;
+	//private String datemodified;
 	private String bidstate;
 
 
 	public Auction() {
+		
 		
 		
 	}
@@ -104,15 +105,15 @@ public class Auction {
 	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated.replaceAll("\\.\\d+", "");
 	}
-	public String getDatemodified() {
-		return this.datemodified;
-	}
-	public void setDatemodified(String datemodified) {
-		this.datemodified = datemodified.replaceAll("\\.\\d+", "");
-	}
+	//public String getDatemodified() {
+		//return this.datemodified;
+	//}
+	//public void setDatemodified(String datemodified) {
+		//this.datemodified = datemodified.replaceAll("\\.\\d+", "");
+	//}
 	
 	
-	public String getDidstate() {
+	public String getBidstate() { 
 		return this.bidstate;
 	}
 	public void setBidstate(String bidstate) {
