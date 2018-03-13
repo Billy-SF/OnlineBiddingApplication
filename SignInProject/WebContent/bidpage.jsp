@@ -6,10 +6,6 @@
 <html lang="en">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
-
-
 <c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
 	<c:set var="loc" value="${param.locale}" />
@@ -106,11 +102,13 @@
 					</ol>
 					<br>
 					<div class="container">
-					<p>Image url: ${productitem.image}</p>
+					<p>Image url: ${productitem.getItemName()}</p>
 						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-			<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productitem.image}" alt="${productitem.itemName}" ></img>					
-					</div>
+						<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productItem.image}"
+														alt="${productItem.itemName}" width="300" height="200"></img>
+					
+						</div>
 
 						<div class="bidInfo">
 							<p><a href="matchSellerServlet">Seller Page</a></p>
