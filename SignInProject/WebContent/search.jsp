@@ -33,7 +33,7 @@
 	</head>
 	<body>
 
-	<body style="background-color:#f4f0f0">
+		<body style="background-color:#f4f0f0">
 		<!--  <c:forEach var = "i" begin = "1" end = "5">
          Item <c:out value = "${i}"/><p>
       </c:forEach>-->
@@ -45,16 +45,16 @@
     
     <form class="navbar-form navbar-left" action="searchServlet">
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
- 
-    <ul class="nav navbar-nav">
+						<input type="text" class="form-control"
+							placeholder="<fmt:message key="search"/>" name="search">
+						<div class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+	<ul class="nav navbar-nav">
       <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
      <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size=4 color='white'><b>Auction</b></font></a></li>"%>
        <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
@@ -81,18 +81,17 @@
             <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
       </ul>      
     </div>
-</nav> 
+</nav>
 
 
+		<div class="container-fluid text-center">
 
-		<div class="container-fluid text-center">    
-  <div class="row content">
+			<div class="row content">
     <div class="col-sm-2 sidenav">
       <p><a href="#"><img src="Real_Time_Bidding.png" height=100% width=100%></a></p>
       <p><a href="#"><img src="chicago.png" height=100% width=100%></a></p>
       <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
     </div>
-
 
 				<div class="col-sm-8 text-left">
 
@@ -236,7 +235,10 @@
 
 
 		<footer class="container-fluid text-center">
-  <div class="navbar-header">
+
+
+
+ <div class="navbar-header">
       <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
     </div>
     <ul class="nav navbar-nav">
@@ -248,7 +250,17 @@
    </ul>
 </footer>
 
-		
+		<script>
+			// Get the modal
+			var modal = document.getElementById('id01');
+
+			// When the user clicks anywhere outside of the modal, close it
+			window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+				}
+			}
+		</script>
 </fmt:bundle>
 
 

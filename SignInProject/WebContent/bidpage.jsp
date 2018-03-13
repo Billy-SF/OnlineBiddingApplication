@@ -33,7 +33,7 @@
 		<!--  <c:forEach var = "i" begin = "1" end = "5">
          Item <c:out value = "${i}"/><p>
       </c:forEach>-->
-	<nav class="navbar navbar-inverse">
+		<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
       <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
@@ -80,35 +80,24 @@
 </nav> 
 
 
+		<div class="container-fluid text-center">
 
-
-
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="#"><img src="Real_Time_Bidding.png" height=100% width=100%></a></p>
+			<div class="row content">
+				<div class="col-sm-2 sidenav">
+     <p><a href="#"><img src="Real_Time_Bidding.png" height=100% width=100%></a></p>
       <p><a href="#"><img src="chicago.png" height=100% width=100%></a></p>
       <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
     </div>
 
-
 				<div class="col-sm-8 text-left">
 
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">bid</a></li>
-						<li class="breadcrumb-item">${productName}</li>
-
-					</ol>
 					<br>
 					<div class="container">
-					<p>Image url: ${productitem.getItemName()}</p>
+				
 						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-						<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productItem.image}"
-														alt="${productItem.itemName}" width="300" height="200"></img>
-					
-						</div>
+			<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productitem.image}" alt="${productitem.itemName}" ></img>					
+					</div>
 
 						<div class="bidInfo">
 							<p><a href="matchSellerServlet">Seller Page</a></p>
@@ -271,20 +260,35 @@ $(document).ready(
 
          </div>
 
-		<footer class="container-fluid text-center">
-  <div class="navbar-header">
-      <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
-    </div>
-    <ul class="nav navbar-nav">
+			<footer class="container-fluid text-center">
+
+
+
+
+				<div class="navbar-header">
+					<a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
+				</div>
+			   <ul class="nav navbar-nav">
       <li><a href="#"><font size ="4" color="white"><b>© OttawAuction</b></font></a></li>
    </ul>
      <ul class="nav navbar-nav"> 
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="feedback"/></b></font></a></li>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
-   </ul>
-</footer>
+			
+				</ul>
+			</footer>
 
+			<script>
+				// Get the modal
+				var modal = document.getElementById('id01');
 
+				// When the user clicks anywhere outside of the modal, close it
+				window.onclick = function(event) {
+					if (event.target == modal) {
+						modal.style.display = "none";
+					}
+				}
+			</script>
 </fmt:bundle>
 
 
