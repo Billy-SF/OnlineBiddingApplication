@@ -356,13 +356,11 @@ div.desc {
 					</ol>
 					<br>
 					<div class="container">
-					<p>Image url: ${productitem.getItemName()}</p>
+					<p>Image url: ${productitem.image}</p>
 						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-						<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productItem.image}"
-														alt="${productItem.itemName}" width="300" height="200"></img>
-					
-						</div>
+			<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productitem.image}" alt="${productitem.itemName}" ></img>					
+					</div>
 
 						<div class="bidInfo">
 							<p><a href="matchSellerServlet">Seller Page</a></p>

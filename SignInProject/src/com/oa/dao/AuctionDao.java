@@ -42,13 +42,14 @@ public class AuctionDao {
 				
 				java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 				
-				pst = conn.prepareStatement("INSERT into auctions (bid_start_time, bid_end_time, bid_price_start, items_fk, user_id, date_created) VALUES (?, ?, ?, ?, ?, ?)");
+				pst = conn.prepareStatement("INSERT into auctions (bid_start_time, bid_end_time, bid_price_start, items_fk, user_id, date_created, bid_state) VALUES (?, ?, ?, ?, ?, ?, ?)");
 				pst.setString(1, bidStart);
 				pst.setString(2, bidEnd);
 				pst.setBigDecimal(3, initialPrice);
 				pst.setInt(4, items_fk);
 				pst.setInt(5, user_id);
-				pst.setTimestamp(6, date); 
+				pst.setTimestamp(6, date);
+				pst.setBoolean(7, true);
 				pst.executeUpdate();
 	
 		} catch (Exception e) {
@@ -81,8 +82,6 @@ public class AuctionDao {
 		Connection conn = Dao.getConnection();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
-		Integer  items_fk = null;
-		Integer user_id = null;
 		String seller = "default";
 
 		conn = Dao.getConnection();
