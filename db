@@ -62,7 +62,7 @@ CREATE TABLE `auctions` (
   `items_fk` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `date_created` datetime,
-   `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1',
+   `bid_state` tinyint(2) UNSIGNED NOT NULL DEFAULT '1'
 ##  `date_modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
