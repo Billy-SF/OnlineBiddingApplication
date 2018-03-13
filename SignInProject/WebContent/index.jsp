@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="customStyle.css">
 
 </head>
-<body style="background-color:#ccff99">
+<body style="background-color:#59b300">
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
@@ -104,22 +104,22 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
 
-      <div style= "height:480px" class="item active">
+      <div style= "height:640px" class="item active">
         <img src="Real_Time_Bidding.png" style="width:100%;">
       
       </div>
 
-      <div style= "height:480px"  class="item">
+      <div style= "height:640px"  class="item">
         <img src="chicago.png" style="width:100%;">
         
       </div>
     
-      <div style= "height:480px" class="item">
+      <div style= "height:640px" class="item">
         <img src="tabs.png" style="width:100%;">
         
       </div>
       
-      <div style= "height:480px" class="item">
+      <div style= "height:640px" class="item">
         <img src="random.png" style="width:100%;">
         
       </div>
