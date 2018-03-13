@@ -33,7 +33,7 @@
 <link rel="stylesheet" href="customStyle.css"> 
 
 	</head>
-	<body style="background-color:#ccff99">
+	<body style="background-color:#f4f0f0">
 		<!--  <c:forEach var = "i" begin = "1" end = "5">
          Item <c:out value = "${i}"/><p>
       </c:forEach>-->
