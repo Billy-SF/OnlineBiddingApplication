@@ -30,7 +30,7 @@ $( document ).ready(function() {
 	$("#descriptionValidationMessage").hide();
 	$("#bidStartValidationMessage").hide();
 	$("#bidEndValidationMessage").hide();
-	$("#datesValidationMessage").hide();
+	//$("#datesValidationMessage").hide();
 	$("#initialPriceValidationMessage").hide();
 	$("#imageValidationMessage").hide();
 	
@@ -230,7 +230,9 @@ function validateAuctionForm(){
 			<label class ="pull-left" for="bidEnd">Bidding Ends at:</label>
 			<input type="datetime-local" class="form-control input-sm" id="bidEnd" name="bidEnd" required>
 			<div id="bidEndValidationMessage" Style="color: red">Bidding End Date and Time are required</div>
-			<div id="datesValidationMessage" Style="color: red">Bidding Start Time should be before End Time</div>
+			<c:if test = "${dateFormat == 'wrong'}">
+				<div id="datesValidationMessage" Style="color: red">Bidding Start Time should be before End Time and Bidding start time has to be before now</div>
+			</c:if>
 		</div>
 		
 		<div class="form-group">	

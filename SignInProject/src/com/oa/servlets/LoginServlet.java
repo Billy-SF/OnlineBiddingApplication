@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet{
         if(user != null){
         	HttpSession session = request.getSession(false);
             if (session!=null){
+            	 session.setAttribute("userId", user.getUserId());
             	 session.setAttribute("username", user.getUsername());
             	 session.setAttribute("password", user.getPassword());
             	 session.setAttribute("firstname", user.getFirstname());
