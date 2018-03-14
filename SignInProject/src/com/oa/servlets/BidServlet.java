@@ -60,7 +60,7 @@ public class BidServlet extends HttpServlet{
 		//System.out.println( "user id:" + auction.getUserid());
 		//request.setAttribute("productitem", productitem);
 		//request.setAttribute("auction", auction);
-		request.setAttribute("errorMessageBidDao", errorMessage);
+		request.getSession().setAttribute("errorMessageBidDao", errorMessage);
 		RequestDispatcher rp = request.getRequestDispatcher("bidPage.jsp");
 		rp.forward(request, response);
 		//response.sendRedirect("displayAuction.jsp");
