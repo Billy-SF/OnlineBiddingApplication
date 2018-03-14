@@ -67,7 +67,7 @@ public class BidDao {
 					//If The user entered bid price is bigger than the initial bidding price for the item continue
 					if(bidPrice2.compareTo(rs.getBigDecimal(1)) >  0)
 					{
-						pst = conn.prepareStatement("select highest_bid_price from currenthighestbidder where item_id_fk = ?");
+						pst = conn.prepareStatement("select highest_bid_price from currenthighestBidder where item_id_fk = ?");
 						pst.setString(1, itemId);
 						rs = pst.executeQuery();
 						//If no bids was made for the item, just insert it straight into the db, otherwise continue validating
@@ -77,7 +77,7 @@ public class BidDao {
 							//if the bid the user entered is bigger then the current highest bid 
 							if(bidPrice2.compareTo(rs.getBigDecimal(1)) >  0)
 							{
-								pst = conn.prepareStatement("select bidding_time from currenthighestbidder where item_id_fk = ?");
+								pst = conn.prepareStatement("select bidding_time from currenthighestBidder where item_id_fk = ?");
 								pst.setString(1, itemId);
 								rs = pst.executeQuery();
 
@@ -97,7 +97,7 @@ public class BidDao {
 									pst.executeUpdate();
 
 									//Update current highest bidder holder for item 
-									pst = conn.prepareStatement("Update currenthighestbidder set user_id_fk = ?, highest_bid_price = ?, bidding_time = ?");
+									pst = conn.prepareStatement("Update currenthighestBidder set user_id_fk = ?, highest_bid_price = ?, bidding_time = ?");
 									pst.setString(1, userId);
 									pst.setString(2, bidPrice);
 									pst.setTimestamp(3, date);
@@ -121,7 +121,7 @@ public class BidDao {
 							pst.setTimestamp(4, date);
 							pst.executeUpdate();
 
-							pst = conn.prepareStatement("INSERT INTO currenthighestbidder (user_id_fk,item_id_fk,highest_bid_price, bidding_time) VALUES (?,?,?,?)");
+							pst = conn.prepareStatement("INSERT INTO currenthighestBidder (user_id_fk,item_id_fk,highest_bid_price, bidding_time) VALUES (?,?,?,?)");
 							pst.setString(1, userId);
 							pst.setString(2, itemId);
 							pst.setString(3, bidPrice);
