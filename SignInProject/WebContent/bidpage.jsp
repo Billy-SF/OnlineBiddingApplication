@@ -58,12 +58,17 @@
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
     
     
-    <li>
-    <c:url value="bidpage.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+   <li>
+    <c:url value="searchServlet" var="englishURL">
+    <c:param name="search" value="${keyword}"/>
+    <c:param name="locale" value="en_US"/></c:url>
  	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
  	
  	  <li>
- 	<c:url value="bidpage.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	<c:url value="searchServlet" var="chineseURL">
+ 	<c:param name="search" value="${keyword}"/>
+ 	<c:param name="locale" value="zh_CN"/>
+ 	</c:url>
  	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 </ul>
     

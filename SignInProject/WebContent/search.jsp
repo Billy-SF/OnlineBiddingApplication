@@ -43,7 +43,8 @@
       <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
     </div>
     
-    <form class="navbar-form navbar-left" action="searchServlet">
+    <form class="navbar-form navbar-left" action="searchServlet" method="get">
+    <input type="hidden" name="locale" value="${locale}">
       <div class="input-group">
 						<input type="text" class="form-control"
 							placeholder="<fmt:message key="search"/>" name="search">
@@ -63,11 +64,16 @@
     
     
     <li>
-    <c:url value="search.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+    <c:url value="searchServlet" var="englishURL">
+    <c:param name="search" value="${keyword}"/>
+    <c:param name="locale" value="en_US"/></c:url>
  	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
  	
  	  <li>
- 	<c:url value="search.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	<c:url value="searchServlet" var="chineseURL">
+ 	<c:param name="search" value="${keyword}"/>
+ 	<c:param name="locale" value="zh_CN"/>
+ 	</c:url>
  	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 </ul>
     
@@ -94,12 +100,6 @@
     </div>
 
 				<div class="col-sm-8 text-left">
-
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
-						<li class="breadcrumb-item"><a href="search.jsp">Search</a></li>
-
-					</ol>
 					<br>
 
 					<c:if test = "${!keyword.isEmpty()}">

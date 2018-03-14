@@ -686,7 +686,7 @@ public class SearchDao {
 			ResultSet rs = null;
 			User user= new User();
 			//auction.setDateCreated("0000-00-0000 00:00:00");
-			System.out.print("nnnnnnnnnn=" + userid  + "\n");		
+			//System.out.print("nnnnnnnnnn=" + userid  + "\n");		
 			//Todo: need to check auction table first
 			try{
 				pst = conn.prepareStatement("select * from users WHERE id=" + userid);
