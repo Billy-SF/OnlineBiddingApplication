@@ -35,6 +35,11 @@ public class BidServlet extends HttpServlet{
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
 		
+		String productitemid = request.getParameter("productitemid");
+		ProductItem productitem = SearchDao.getProductItemByID(productitemid);
+			
+		Auction auction = productitem.getAuction();
+		
 		//strip tag keyword
 		String userId = (String) request.getSession().getAttribute("userId");
 		String auctionId = (String) request.getSession().getAttribute("auctionId");
@@ -60,10 +65,17 @@ public class BidServlet extends HttpServlet{
 		//System.out.println( "user id:" + auction.getUserid());
 		//request.setAttribute("productitem", productitem);
 		//request.setAttribute("auction", auction);
+		
+		
+		request.setAttribute("itemId", productitemid);
+		request.setAttribute("productitem", productitem);
+		request.setAttribute("auction", auction);
 		request.setAttribute("errorMessageBidDao", errorMessage);
-		RequestDispatcher rp = request.getRequestDispatcher("bidpage.jsp");
-		rp.forward(request, response);
-		//response.sendRedirect("displayAuction.jsp");
+
+		
+		//RequestDispatcher rp = request.getRequestDispatcher("bidpage.jsp");
+		//rp.forward(request, response);
+		response.sendRedirect("bidPageDisplayServlet?productitemid=" + itemId);
 		out.close();
 	}	
 	
