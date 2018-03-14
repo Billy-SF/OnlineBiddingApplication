@@ -97,10 +97,11 @@ public class BidDao {
 									pst.executeUpdate();
 
 									//Update current highest bidder holder for item 
-									pst = conn.prepareStatement("Update currenthighestBidder set user_id_fk = ?, highest_bid_price = ?, bidding_time = ?");
+									pst = conn.prepareStatement("Update currenthighestBidder set user_id_fk = ?, highest_bid_price = ?, bidding_time = ? where item_id_fk =?");
 									pst.setString(1, userId);
 									pst.setString(2, bidPrice);
 									pst.setTimestamp(3, date);
+									pst.setString(4, itemId);
 									pst.executeUpdate();
 									return null;
 								}
