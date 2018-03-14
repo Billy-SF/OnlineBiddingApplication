@@ -45,7 +45,7 @@ public class RegisterServlet extends HttpServlet{
 				session.setAttribute("email", user.getEmail());
 				session.setAttribute("verificationAttempt", "0");
 				session.setAttribute("message", null);
-				//session.setAttribute("user_id", user.getUserId());
+				session.setAttribute("userId", user.getUserId());
 				
 			}
 			
