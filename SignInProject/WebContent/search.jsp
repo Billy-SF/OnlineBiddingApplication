@@ -175,9 +175,12 @@
 							<c:forEach items="${productItems}" var="productItem">
 								<tr>
 									<td><div class="gallery">
-										<c:if test="${not empty productItem.getAuction().getId()}">	<a 
+										<c:if test="${not empty productItem.getAuction().getId()}">	
+										<c:set var = "auctionId" scope = "session" value = "${productItem.getAuction().getId()}"/>
+										<a 
 												href="bidPageDisplayServlet?productitemid=${productItem.productId}">
 										</c:if>
+										
 														<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productItem.image}"
 														alt="${productItem.itemName}" width="300" height="200"></img>
 									
