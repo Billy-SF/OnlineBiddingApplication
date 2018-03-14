@@ -28,7 +28,7 @@ public class AuctionDao {
 				pst.setNString(3, imageFileName);
 				pst.executeUpdate();
 				
-				pst = conn.prepareStatement("select id from items");
+				pst = conn.prepareStatement("select id from items where itemname = '" + itemName + "'");
 				rs = pst.executeQuery();
 				if(rs.next()){
 					items_fk = rs.getInt("id");
