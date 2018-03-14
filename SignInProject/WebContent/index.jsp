@@ -45,7 +45,9 @@
  
     <ul class="nav navbar-nav">
       <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
-     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font color='white'><b>Auction</b></font></a></li>"%>
+      <c:if test="${null != sessionScope.username}">
+      <li><a href='auction.jsp'><font color='white'><b><fmt:message key="auction"/></b></font></a></li>
+      </c:if>
        <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
@@ -70,10 +72,14 @@
            <span class="glyphicon glyphicon-user" style="color:white"></span><font color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
             <!-- <span class="caret"></span> -->
           </a>
-          <ul class="dropdown-menu">
-            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
-            <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="logout"/></a></li>
-      </ul>  
+      
+            <c:if test="${null != sessionScope.username}">
+             <ul class="dropdown-menu">
+               <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
+               <li><a href="Logout.jsp"><span class="glyphicon glyphicon-log-out"></span> <fmt:message key="logout"/></a></li>
+            </ul> 
+            </c:if>
+       
       </li>
       </ul>    
     </div>
@@ -141,11 +147,18 @@
 
 <div class="col-sm-2 sidenav">
   <font size= "6" color=white><b><fmt:message key="WelcomeMessage"/></b></font>
-
+<c:if test="${null == sessionScope.username}">
   <p><button onclick="document.getElementById('id01').style.display='block'" style="width:auto;"><b><font size ="6" ><fmt:message key="login"/></font></b></button></p>
 <!-- <center><p class="message">Not registered? <a href="registrationForm.jsp"><b><font size ="6" >Register Now!</a></center> -->
 <p class="message"><font size="6" color="white"><b><fmt:message key="notRegistered"/></b></font>  <c:url value="registrationForm.jsp" var="register"><c:param name="locale" value="${loc}"/></c:url>
 <p><a href="${register}"><b><font size ="6" > <fmt:message key="registerNow"/> </font></b></a></p>
+
+</c:if>
+
+<c:if test="${null != sessionScope.username}">
+<p><font size="4" color="white"><b>${sessionScope.username}</b></font></p>
+</c:if>
+
 <div id="id01" class="modal">
   
   <form class="modal-content animate" action="loginServlet" method="post">
