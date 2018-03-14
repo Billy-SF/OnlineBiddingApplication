@@ -130,7 +130,8 @@
 		{
 %>
 			<tr>
-				<td style="width:10%"><a href="bidpage.jsp"onclick='<%request.getSession(false).setAttribute("auctionId", rs.getString("id"));%>'> <%=rs.getString("itemname")%></a></td><!-- <%=rs.getString("id")%> -->
+				<td style="width:10%">	
+				<a href="bidPageDisplayServlet?productitemid=<%=rs.getString("id")%>" onclick='<%request.getSession(false).setAttribute("auctionId", rs.getString("id"));%>'> <%=rs.getString("itemname")%></a></td><!-- <%=rs.getString("id")%> -->
 			</tr>
 			<tr>
 				<td style="width:10%"><%=rs.getString("description") %></td>
