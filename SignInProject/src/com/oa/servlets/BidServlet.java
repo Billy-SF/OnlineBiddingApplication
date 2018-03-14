@@ -70,12 +70,12 @@ public class BidServlet extends HttpServlet{
 		request.setAttribute("itemId", productitemid);
 		request.setAttribute("productitem", productitem);
 		request.setAttribute("auction", auction);
-		request.setAttribute("errorMessageBidDao", errorMessage);
+		//request.setAttribute("errorMessageBidDao", errorMessage);
 
 		
 		//RequestDispatcher rp = request.getRequestDispatcher("bidpage.jsp");
 		//rp.forward(request, response);
-		response.sendRedirect("bidPageDisplayServlet?productitemid=" + itemId);
+		response.sendRedirect("bidPageDisplayServlet?productitemid=" + itemId+ "&errorMessagebd=" + errorMessage);
 		out.close();
 	}	
 	
