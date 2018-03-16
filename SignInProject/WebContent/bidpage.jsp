@@ -114,7 +114,11 @@
 							</c:if>
 							
 							<form class="form-inline" action="bidServlet" method="post">
-								<input type="hidden" name="auctionId" value="${productitem.getAuction().getId()}"/>
+							<c:if test="${sessionScope.auctionId != null}}">
+							<c:remove var="auctionId"/>
+							 </c:if>
+							      <c:set var = "auctionId" scope = "session" value = "${productitem.getAuction().getId()}"/>
+						
 						        <input type="hidden" name="productItemId" value="${productitem.getProductId()}"/>
 									<div class="form-group">
 									<input type="text" 
