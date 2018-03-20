@@ -40,11 +40,13 @@ public class LoginServlet extends HttpServlet{
             	 session.setAttribute("userId", user.getUserId());
             	 session.setAttribute("username", user.getUsername());
             	 session.setAttribute("password", user.getPassword());
+            	 session.setAttribute("userId", user.getUserId());
             	 session.setAttribute("firstname", user.getFirstname());
             	 session.setAttribute("email", user.getEmail());
             	 session.setAttribute("lastname", user.getLastname());
             }
 //            response.sendRedirect("welcome.jsp");  what is the difference?
+            
             
             RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  
             rd.forward(request,response);  
