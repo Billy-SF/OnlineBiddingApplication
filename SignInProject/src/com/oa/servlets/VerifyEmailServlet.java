@@ -31,9 +31,8 @@ public class VerifyEmailServlet extends HttpServlet {
 		String password = (String) request.getSession().getAttribute("password");
 		
 		String verificationCode = request.getParameter("code");
-		User user = UserDao.getUser(username, password);
-		result = UserDao.verifyVerificationCode(user.getUserId(),username,password,verificationCode);
-		System.out.println(result);
+		result = UserDao.verifyVerificationCode(username,password,verificationCode);
+		
 		if(result == true) 
 		{
 			RequestDispatcher rd=request.getRequestDispatcher("index.jsp");  

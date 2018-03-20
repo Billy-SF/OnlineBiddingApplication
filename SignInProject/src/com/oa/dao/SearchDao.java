@@ -567,9 +567,11 @@ public class SearchDao {
 					bid.setAuctionid(rs.getString("auctions_fk"));
 					bid.setUserid(rs.getString("users_fk"));
 					bid.setDateCreated(rs.getString("date_created"));
-System.out.print("hhhhhhhhhh=" + bid.getUserid()  + "\n");
 
 					// get user by user_id
+					//User user = new User();
+					//user = getUserByUserID(bid.getUserid());
+					//bid.setUser(user);
 					/*
 					// get auction by auction_id
 					pst = conn.prepareStatement("select * from auctions where id=?");

@@ -208,6 +208,8 @@ public class UserDao {
         	pst = conn.prepareStatement("UPDATE users SET firstname='" + firstname + "', lastname='" + lastname
         								+ "', username='" + username + "', email='" + email + "', password='" + password + 
         								"' WHERE id='" + userId + "';");
+			
+     	
         	pst.executeUpdate();
         	
         }catch (SQLTimeoutException SQLte){
@@ -230,27 +232,19 @@ public class UserDao {
             
         }	
 	}//End of editProfile
-
-	@SuppressWarnings("resource")
-	public static Boolean verifyVerificationCode(String userId, String username, String password, String verificationCode) {
+	
+	public static Boolean verifyVerificationCode(String username, String password, String verificationCode) {
 		password = Encryption.decrypt(password); //NOT REQUIRED
 		User user = getUser(username, password);
 		Connection conn = Dao.getConnection();
 		PreparedStatement pst = null;
-		PreparedStatement pst2 = null;
 		ResultSet rs = null;
 		try {
 			pst = conn.prepareStatement("SELECT verification_code from `users` WHERE username='" + username + "';");
 			rs = pst.executeQuery();
 			if(rs.next()) 
 			{
-				System.out.print("UserID:" + userId);
-				//IF the verification code verifies, change their account statues to verified
 				if(rs.getString(1).equals(verificationCode)) {
-					System.out.print("Verified");
-					pst2 = conn.prepareStatement("UPDATE users SET verified_state=1 WHERE id='" + userId + "';");
-					pst2.executeUpdate();
-					pst2.close();
 					return true;
 				}
 			}
@@ -313,7 +307,6 @@ public class UserDao {
          }
      }
 	}
-	
 	
 	
 }//End of UserDao
