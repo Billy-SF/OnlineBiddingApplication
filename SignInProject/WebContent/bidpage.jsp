@@ -242,7 +242,7 @@ $(document).ready(
 							<c:forEach items="${productitem.getBids()}" var="bid">
 								<tr>
 									<td>$${bid.getBidprice()}</td>
-									<td><b>${bid.getUser().getFirstname()}</b></td>
+									<td><b>${bid.getUser().getUsername()}</b></td>
 									<td><b>${bid.getDateCreated()}</b></td>
 								</tr>
 							</c:forEach>
