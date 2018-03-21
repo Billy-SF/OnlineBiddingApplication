@@ -108,7 +108,12 @@
 							<p><a href="matchSellerServlet">Seller Page</a></p>
 							<p>Date Created: <b>${productitem.getAuction().getDateCreated() }</b></p>
 							<p>Time left: <span id="tttt"></span></p>
+							<c:if test="${productitem.getHighestPrice() == '0.00'}">
+							<p>Initial Bid Price: <b>$${productitem.getAuction().getBidpricestart()}</b></p>
+							</c:if>
+							<c:if test="${productitem.getHighestPrice() != '0.00'}">
 							<p>Current Bid Price: <b>$${productitem.getHighestPrice()}</b></p>
+							</c:if>
 							<c:if test="${errorMessageBidDao ne null}">
 		  						<h3>${errorMessageBidDao}</h3>
 							</c:if>
