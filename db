@@ -23,7 +23,8 @@ CREATE TABLE `users` (
   `password` varchar(25),
   `email` varchar(50),
   `verification_code` varchar(6) NOT NULL,
-  `verified_state` tinyint(1) UNSIGNED NOT NULL DEFAULT '0'
+  `verified_state` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
+  `role` tinyint(1) UNSIGNED DEFAULT '0'
 ##  `phone` varchar(20) NOT NULL,
 ##  `addresses_fk` int(10) NOT NULL,
 ##  `date_created` datetime NOT NULL,
