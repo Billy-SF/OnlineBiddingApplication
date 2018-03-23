@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 
 import com.oa.dao.UserDao;
 import com.oa.helpers.User;
-import com.oa.utilities.Encryption;
 
 
 public class LoginServlet extends HttpServlet{
@@ -43,6 +42,7 @@ public class LoginServlet extends HttpServlet{
             	 session.setAttribute("firstname", user.getFirstname());
             	 session.setAttribute("email", user.getEmail());
             	 session.setAttribute("lastname", user.getLastname());
+            	 session.setAttribute("role", user.getRole());
             }
 //            response.sendRedirect("welcome.jsp");  what is the difference?
             

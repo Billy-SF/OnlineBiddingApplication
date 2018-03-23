@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLTimeoutException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 import com.oa.helpers.User;
@@ -19,7 +21,7 @@ public class UserDao {
 		ResultSet rs = null;
 		User user = null;
 		//password = Encryption.decrypt(password);
-		
+
 		try{
 			pst = conn.prepareStatement("select * from users where username=? and password=? OR email=? and password=?");
 			//select id from users where username="bstf89";
@@ -37,39 +39,40 @@ public class UserDao {
 				user.setLastname(rs.getString("lastName"));
 				user.setPassword(rs.getString("password"));
 				user.setEmail(rs.getString("email"));
+				user.setRole("1".equals(rs.getString("role")) ? Boolean.TRUE : Boolean.FALSE);
 			}
 		}catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-        	if (conn != null) {
-        		Dao.closeConnection();
-        	}
-            if (pst != null) {
-                try {
-                    pst.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }	
-		
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				Dao.closeConnection();
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}	
+
 		return user;
 	}
-	
+
 	public static User register(String username, String password, String firstname, String lastname, String email){
 		Connection conn = Dao.getConnection();
 		PreparedStatement pst = null;
 		ResultSet rs = null;
 		User user = null;
 		password = Encryption.decrypt(password); //NOT REQUIRED
-		
+
 		try{
 			pst = conn.prepareStatement("SELECT id FROM users WHERE username=? OR email=?");
 			pst.setString(1, username);
@@ -77,23 +80,23 @@ public class UserDao {
 			rs = pst.executeQuery();
 			if(!rs.next()){
 				if (rs != null) {
-	                try {
-	                    rs.close();
-	                    rs = null;
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-	            }
+					try {
+						rs.close();
+						rs = null;
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 				if (pst != null) { 
-	                try {
-	                    pst.close();
-	                    pst = null;
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-	            }
+					try {
+						pst.close();
+						pst = null;
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 				int verificationCode = ThreadLocalRandom.current().nextInt(0, 1000000);
-				pst = conn.prepareStatement("INSERT into users (firstname, lastname, username, password, email, verification_code, verified_state) VALUES (?, ?, ?, ?, ?, ?, ?)");
+				pst = conn.prepareStatement("INSERT into users (firstname, lastname, username, password, email, verification_code, verified_state, role) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
 				pst.setString(1, firstname);
 				pst.setString(2, lastname);
 				pst.setString(3, username);
@@ -101,17 +104,18 @@ public class UserDao {
 				pst.setString(5, email);
 				pst.setString(6, String.valueOf(verificationCode));
 				pst.setString(7, "0");
+				pst.setBoolean(8, false);
 				pst.executeUpdate();
 				Mailer mailer = new Mailer(email,String.valueOf(verificationCode));
 				mailer.send();
 				if (pst != null) { 
-	                try {
-	                    pst.close();
-	                    pst = null;
-	                } catch (SQLException e) {
-	                    e.printStackTrace();
-	                }
-	            }
+					try {
+						pst.close();
+						pst = null;
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
 				// for what purpose do we need userName
 				pst = conn.prepareStatement("SELECT id FROM users WHERE username=?");
 				pst.setString(1, username);
@@ -126,32 +130,32 @@ public class UserDao {
 				user.setEmail(email);
 				user.setVerificationCode(String.valueOf(verificationCode));
 				user.setVerificationState(0);
-				
+				user.setRole(false);
 			}
 		}catch (Exception e) {
-            System.out.println(e);
-        } finally {
-            if (conn != null) {
-            	Dao.closeConnection();
-            }
-            if (pst != null) {
-                try {
-                    pst.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+			System.out.println(e);
+		} finally {
+			if (conn != null) {
+				Dao.closeConnection();
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		return user;
 	}
-	
+
 	public static User getUser(String username , String password)
 	{
 		Connection conn = Dao.getConnection();
@@ -160,79 +164,80 @@ public class UserDao {
 		User user = new User();
 		// not sure if userId is needed
 		try {
-        	pst = conn.prepareStatement("SELECT * FROM users WHERE username='" + username + "' and password='" + password + "'");
-        	rs = pst.executeQuery();
-        	
-        	//Stores the results
-        	while(rs.next())
-        	{
-        		user.setUserId(rs.getString("id"));
-        		user.setUsername(rs.getString("username"));
-        		user.setPassword(rs.getString("password"));
-        		user.setFirstname(rs.getString("firstname"));
-        		user.setLastname(rs.getString("lastname"));
-        		user.setEmail(rs.getString("email"));
-        	}
-        	
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (conn != null) {
+			pst = conn.prepareStatement("SELECT * FROM users WHERE username='" + username + "' and password='" + password + "'");
+			rs = pst.executeQuery();
+
+			//Stores the results
+			while(rs.next())
+			{
+				user.setUserId(rs.getString("id"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setFirstname(rs.getString("firstname"));
+				user.setLastname(rs.getString("lastname"));
+				user.setEmail(rs.getString("email"));
+				user.setRole(Boolean.valueOf(rs.getString("role")));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
 				Dao.closeConnection();
 			}
-            if (pst != null) {
-                try {
-                    pst.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            if (rs != null) {
-                try {
-                    rs.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }		
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
 		return user;
 	}//End of getUser
-	
+
 	public static void editProfile(String userId, String username, String firstname, String lastname, String email, String password)
 	{
 		Connection conn = Dao.getConnection();
 		PreparedStatement pst = null;
-		
-		
+
+
 		try {
-        	pst = conn.prepareStatement("UPDATE users SET firstname='" + firstname + "', lastname='" + lastname
-        								+ "', username='" + username + "', email='" + email + "', password='" + password + 
-        								"' WHERE id='" + userId + "';");
-			
-     	
-        	pst.executeUpdate();
-        	
-        }catch (SQLTimeoutException SQLte){
-        	SQLte.printStackTrace();
-    	}catch (SQLException SQLe){
-    		SQLe.printStackTrace();
+			pst = conn.prepareStatement("UPDATE users SET firstname='" + firstname + "', lastname='" + lastname
+					+ "', username='" + username + "', email='" + email + "', password='" + password + 
+					"' WHERE id='" + userId + "';");
+
+
+			pst.executeUpdate();
+
+		}catch (SQLTimeoutException SQLte){
+			SQLte.printStackTrace();
+		}catch (SQLException SQLe){
+			SQLe.printStackTrace();
 		}catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (conn != null) {
-            	Dao.closeConnection();
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				Dao.closeConnection();
 			}
-            if (pst != null) {
-                try {
-                    pst.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-            
-        }	
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+
+		}	
 	}//End of editProfile
-	
+
 	public static Boolean verifyVerificationCode(String username, String password, String verificationCode) {
 		password = Encryption.decrypt(password); //NOT REQUIRED
 		User user = getUser(username, password);
@@ -250,30 +255,30 @@ public class UserDao {
 			}
 			return false;
 		}
-	 catch (Exception e) {
-         e.printStackTrace();
-     } finally {
-         if (conn != null) {
+		catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
 				Dao.closeConnection();
 			}
-         if (pst != null) {
-             try {
-                 pst.close();
-             } catch (SQLException e) {
-                 e.printStackTrace();
-             }
-         }
-         if (rs != null) {
-             try {
-                 rs.close();
-             } catch (SQLException e) {
-                 e.printStackTrace();
-             }
-         }
-     }
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		return false;
-}
-	
+	}
+
 	public static void deleteUser(String username, String password) {
 		password = Encryption.decrypt(password); //NOT REQUIRED
 		User user = getUser(username, password);
@@ -285,28 +290,119 @@ public class UserDao {
 			pst.setString(1, username);
 			pst.execute();
 		}
-	 catch (Exception e) {
-         e.printStackTrace();
-     } finally {
-         if (conn != null) {
+		catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
 				Dao.closeConnection();
 			}
-         if (pst != null) {
-             try {
-                 pst.close();
-             } catch (SQLException e) {
-                 e.printStackTrace();
-             }
-         }
-         if (rs != null) {
-             try {
-                 rs.close();
-             } catch (SQLException e) {
-                 e.printStackTrace();
-             }
-         }
-     }
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
-	
-	
+
+	public static List<User> getAllUsers(){
+
+		Connection conn = Dao.getConnection();
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+
+		List<User> users = new ArrayList<User>();
+
+		try {
+			pst = conn.prepareStatement("SELECT * FROM users");
+			rs = pst.executeQuery();
+
+			//Stores the results
+			while(rs.next())
+			{
+				User user = new User();
+				user.setUserId(rs.getString("id"));
+				user.setUsername(rs.getString("username"));
+				user.setPassword(rs.getString("password"));
+				user.setFirstname(rs.getString("firstname"));
+				user.setLastname(rs.getString("lastname"));
+				user.setEmail(rs.getString("email"));
+				user.setRole("1".equals(rs.getString("role")) ? Boolean.TRUE : Boolean.FALSE);
+				users.add(user);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				Dao.closeConnection();
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+
+		return users;
+	}// end method getAll Users
+
+	@SuppressWarnings("resource")
+	public static void deleteUser(int userId) {
+		
+		Connection conn = Dao.getConnection();
+		PreparedStatement pst = null;
+
+		try {
+			pst = conn.prepareStatement("SET SQL_SAFE_UPDATES = 0");
+			pst.executeQuery();
+			
+			pst = conn.prepareStatement("delete FROM users where id = '" + userId + "'");
+			pst.executeUpdate();
+			
+			pst = conn.prepareStatement("delete FROM auctions where user_id = '" + userId + "'");
+			pst.executeUpdate();
+			
+			pst = conn.prepareStatement("delete FROM bids where users_fk = '" + userId + "'");
+			pst.executeUpdate();
+			
+			pst = conn.prepareStatement("delete FROM currenthighestBidder where user_id_fk = '" + userId + "'");
+			pst.executeUpdate();
+						
+			pst = conn.prepareStatement("delete FROM ratings where user_id_fk = '" + userId + "'");
+			pst.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) {
+				Dao.closeConnection();
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}		
+	}
+
 }//End of UserDao
