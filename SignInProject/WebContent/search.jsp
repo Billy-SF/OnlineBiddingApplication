@@ -168,6 +168,7 @@
 								<th>Detail</th>
 								<th>Current Bid</th>
 							    <th>Date created</th>
+							    <th></th>
 								
 							</tr>
 						</thead>
@@ -208,7 +209,13 @@
 									<td><b>${productItem.description}</b></td>
 									<td><b>$${productItem.highestPrice}</b></td>
 									<td><b>${productItem.getAuction().getDateCreated()}</b></td>
-									
+									<td>
+										<form method="get" action="adminServlet">
+											<button type="submit" name="auctionId" value="${productItem.getAuction().getId()}">
+												Delete
+											</button>
+										</form>
+									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -268,4 +275,5 @@
 
 
 </body>
+
 </html>

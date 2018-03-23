@@ -43,6 +43,7 @@ public class SearchServlet extends HttpServlet{
         ArrayList<ProductItem> productItem  = SearchDao.searchKeyword(searchKeyword);
 		request.setAttribute("productItems", productItem);
 		request.setAttribute("keyword", searchKeyword);
+		request.getSession(false).setAttribute("keyword", searchKeyword);
 		Integer productCount = Integer.valueOf(productItem.size());
 		request.setAttribute("productTotal", productCount);
 		request.setAttribute("locale", languageLocale);

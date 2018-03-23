@@ -47,10 +47,16 @@
 		<servlet-name>bidPageDisplay</servlet-name>
 		<servlet-class>com.oa.servlets.BidPageDisplayServlet</servlet-class>
 	</servlet>
-		<servlet>
+	<servlet>
 		<servlet-name>displayAuction</servlet-name>
 		<servlet-class>com.oa.servlets.DisplayAuctionServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>admin</servlet-name>
+		<servlet-class>com.oa.servlets.AdminServlet</servlet-class>
+	</servlet>
+	
+	
 	<servlet-mapping>
 		<servlet-name>login</servlet-name>
 		<url-pattern>/loginServlet</url-pattern>
@@ -98,6 +104,10 @@
 		<servlet-mapping>
 		<servlet-name>displayAuction</servlet-name>
 		<url-pattern>/displayActionServlet</url-pattern>
+	</servlet-mapping>
+			<servlet-mapping>
+		<servlet-name>admin</servlet-name>
+		<url-pattern>/adminServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
