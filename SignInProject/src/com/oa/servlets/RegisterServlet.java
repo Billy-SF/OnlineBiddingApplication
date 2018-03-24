@@ -46,7 +46,7 @@ public class RegisterServlet extends HttpServlet{
 				session.setAttribute("verificationAttempt", "0");
 				session.setAttribute("message", null);
 				session.setAttribute("userId", user.getUserId());
-				
+				session.setAttribute("role", "0");
 			}
 			
 			response.sendRedirect("verifyEmail.jsp"); 

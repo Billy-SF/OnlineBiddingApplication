@@ -11,8 +11,16 @@ public class User {
 	private String verificationCode;
 	private int verificationState;
 	private Address address;
+	private Boolean role; // By default, every body who registers is not an admin
+						  // admin's credentials are manually inserted in dB  
 	
 	
+	public Boolean getRole() {
+		return role;
+	}
+	public void setRole(Boolean role) {
+		this.role = role;
+	}
 	public String getUserId() {
 		return userId;
 	}
