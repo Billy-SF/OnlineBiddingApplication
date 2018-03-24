@@ -17,14 +17,10 @@
 <head>
 	<meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet"
-		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<link rel="stylesheet" href="customStyle.css"> 
 </head>
@@ -133,7 +129,14 @@
 						<td><b>${user.username}</b></td>
 						<%-- <td><b>${user.password}</b></td> --%>
 						<td><b>${user.email}</b></td>
-						<td><b>${user.role}</b></td>
+						<c:choose>
+							<c:when test="${user.role == true}">
+								<td><b>Administrator</b></td>
+							</c:when>
+							<c:otherwise>
+								<td><b>Client</b></td>
+							</c:otherwise>
+						</c:choose>
 						<td>
 							<form  action="deleteAuctionServlet">
 								<a href="deleteUserServlet?userId=${user.userId}" class="glyphicon glyphicon-remove" type="submit"></a>
@@ -148,7 +151,7 @@
 		$(document).ready(function() {
 			$('#users').DataTable({
 				searching : false,
-				lengthMenu : [ [ 5, 10, 30, -1 ], [ 5, 10, 30, "All" ] ],
+				lengthMenu : [ [ 10, 15, 30, -1 ], [ 10, 15, 30, "All" ] ],
 				ordering : false,
 				bServerSide : false
 			});

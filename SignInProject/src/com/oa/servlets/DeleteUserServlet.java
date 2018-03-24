@@ -19,8 +19,11 @@ public class DeleteUserServlet extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response)  
 			throws ServletException, IOException {
 		
+			String username = (String) request.getSession(false).getAttribute("username");
+			String password = (String) request.getSession(false).getAttribute("password");
+			User user = UserDao.getUser(username, password);
 			String userId = request.getParameter("userId");
-			if (userId != null) {
+			if (userId != null && !userId.equals(user.getUserId())) {
 				UserDao.deleteUser(Integer.valueOf(userId));
 			}
 			ArrayList<User> users = (ArrayList<User>) UserDao.getAllUsers();
