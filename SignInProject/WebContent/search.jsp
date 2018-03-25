@@ -190,7 +190,9 @@
 									<th>Detail</th>
 									<th>Current Bid</th>
 									<th>Date created</th>
-									<th></th>
+									<c:if test="${role}">
+										<th></th>
+									</c:if>
 
 								</tr>
 							</thead>
@@ -235,6 +237,7 @@
 										<td><b>${productItem.description}</b></td>
 										<td><b>$${productItem.highestPrice}</b></td>
 										<td><b>${productItem.getAuction().getDateCreated()}</b></td>
+									<c:if test="${role}">
 										<td>
 											<form method="get" action="adminServlet">
 												<button type="submit" name="auctionId"
@@ -242,6 +245,7 @@
 													Delete</button>
 											</form>
 										</td>
+									</c:if>
 									</tr>
 								</c:forEach>
 							</tbody>
