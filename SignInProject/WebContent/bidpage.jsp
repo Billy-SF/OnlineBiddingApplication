@@ -26,6 +26,7 @@
 	<link rel="stylesheet"
 		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+   <script src="chat.js"></script>
 <link rel="stylesheet" href="customStyle.css"> 
 
 	</head>
@@ -277,6 +278,25 @@ $(document).ready(
 					</script>
 
 
+<div class="row" id="chatroom">
+	<div id="chatmessage" class="col-sm-4" style="border-style: double; height:100px; overflow-y: scroll;">
+	</div>
+	<div class="clearfix"></div>
+	<div class="col-sm-4">
+		<input type="text" id="last_message_id" name="last_message_id"><br>
+		<input type="text" id="user_id" name="user_id" value="${sessionScope.userid}"><br>
+		<input type="text" id="user_name" name="user_name" value="${sessionScope.username}"><br>
+		<input type="text" id="auction_id" name="auction_id" value="${productitem.getAuction().getId()}"><br>
+		<input type="text" id="color" name="color"><br>
+		<div class="input-group">
+		   	<input type="text" class="form-control" id="message" name="message">
+		   	<span class="input-group-btn">
+		        <button class="btn btn-default" type="button" id="send" name="send">Submit</button>
+		   	</span>
+		</div>
+	</div>
+	
+</div>
 					</div>
 
 
