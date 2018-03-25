@@ -71,16 +71,26 @@
  	</c:url>
  	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 </ul>
-    
-   <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
-            <!-- <span class="caret"></span> -->
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
-      </ul>      
+ 	 
+	<c:if test="${null != sessionScope.username}">
+					<!--     toggle button for  -->
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user" style="color: white"></span><font
+								color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
+								<!-- <span class="caret"></span> -->
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="edit.jsp"><span
+										class="glyphicon glyphicon-edit"></span> <fmt:message
+											key="edit" /></a></li>
+								<li><a href="Logout.jsp"><span
+										class="glyphicon glyphicon-log-out"></span> <fmt:message
+											key="logout" /></a></li>
+							</ul></li>
+					</ul>
+				</c:if>     
     </div>
 </nav> 
 
@@ -101,7 +111,7 @@
 				
 						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-			<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productitem.image}" alt="${productitem.itemName}" ></img>					
+			<img src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productitem.image}" alt="${productitem.itemName}" ></img>					
 					</div>
 
 						<div class="bidInfo">

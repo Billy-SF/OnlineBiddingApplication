@@ -111,21 +111,9 @@
  	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 
     </ul>
-    
-   <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
-            <!-- <span class="caret"></span> -->
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="#"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
-      </ul>      
+      
     </div>
 </nav> 
-
-
-
 
 <div class="container-fluid text-center">    
   <div class="row content">
