@@ -20,6 +20,9 @@ public class AdminDao {
 				pst.execute();
 				pst = conn.prepareStatement("delete from items where id = \'" + auctionId + "\';");
 				pst.execute();
+				pst = conn.prepareStatement("delete from currenthighestBidder where item_id_fk in (select items_fk from auctions where id = \'" + auctionId + "\');");
+				pst.execute();
+				pst = conn.prepareStatement("delete from bids where auctions_fk = \'" + auctionId + "\';");
 
 		} catch (Exception e) {
 			e.printStackTrace();
