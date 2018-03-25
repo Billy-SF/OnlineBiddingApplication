@@ -223,6 +223,10 @@ $(document).ready(
 </script>
 
 					</div>
+					
+					<div>
+						<a href="Geolocation.jsp">Geolocation</a>
+					</div>
 					<h3>Item Description</h3>
 					<p>${productitem.getDescription()}</p>
 
