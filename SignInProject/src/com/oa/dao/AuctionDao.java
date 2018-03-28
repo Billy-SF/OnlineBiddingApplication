@@ -5,6 +5,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.oa.helpers.Auction;
+import com.oa.helpers.ProductItem;
 
 public class AuctionDao {
 	
@@ -117,4 +124,194 @@ public class AuctionDao {
 		return seller;
 	}
 
+	public static List<Auction> getClosedAuctions() {
+
+		Connection conn = Dao.getConnection();
+		PreparedStatement pst = null;
+		ResultSet rs = null;
+		List<Auction> soldAuctions = new ArrayList<Auction>();
+		
+		conn = Dao.getConnection();
+		
+		try{
+			
+			pst = conn.prepareStatement("select * from auctions where bid_end_time < now();");
+			rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				Auction auction = new Auction();
+				auction.setBidstarttime(rs.getString("bid_start_time"));
+				auction.setBidendtime(rs.getString("bid_end_time"));
+				auction.setBidpricestart(rs.getString("bid_price_start"));
+				auction.setDateCreated(rs.getString("date_created"));
+				auction.setItemsfk(rs.getString("items_fk"));
+				auction.setUserid(rs.getString("user_id")); // auction creator
+				auction.setId(rs.getString("id")); // auction id
+				soldAuctions.add(auction);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		finally {
+			if (conn != null) {
+				Dao.closeConnection();
+
+			}
+			if (pst != null) {
+				try {
+					pst.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (rs != null) {
+				try {
+					rs.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}// end finally
+		return soldAuctions;
+	}// end method
+	
+public static Map<String, String> getHighestBiderForSoldAuctions(List<Auction> auctions){
+
+	Connection conn = Dao.getConnection();
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+	// Map <auctionId, username of the person that placed the highest bid for that auction>
+	Map <String, String> usernamesMap = new HashMap<String, String>();
+	
+	conn = Dao.getConnection();
+	
+	try{
+		for (Auction auction : auctions) {
+			pst = conn.prepareStatement("select username from users where id in (select users_fk from bids where auctions_fk = '" + auction.getId() + "')");
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				usernamesMap.put(auction.getId(), rs.getString("username"));
+			}
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} 
+	finally {
+		if (conn != null) {
+			Dao.closeConnection();
+
+		}
+		if (pst != null) {
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}// end finally
+	return usernamesMap;
+}// end method
+
+public static Map<String, String> getHighestBidPriceForSoldAucions(List<Auction> auctions){
+
+	Connection conn = Dao.getConnection();
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+
+	// Map <auctionId, highest bid price>
+	Map <String, String> highestBidMap = new HashMap<String, String>();
+	conn = Dao.getConnection();
+	
+	try{
+		for (Auction auction : auctions) {
+			pst = conn.prepareStatement("select * from currenthighestBidder where item_id_fk in (select items_fk from auctions where id = '" + auction.getId() + "')");
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				highestBidMap.put(auction.getId(), rs.getString("highest_bid_price"));
+			}
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} 
+	finally {
+		if (conn != null) {
+			Dao.closeConnection();
+
+		}
+		if (pst != null) {
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}// end finally
+	return highestBidMap;
+}// end method
+
+public static Map<String, ProductItem> getItemsForSoldAuctions(List<Auction> auctions){
+
+	Connection conn = Dao.getConnection();
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+
+	// Map <auctionId, highest bid price for the auction>
+	Map <String, ProductItem> itemMap = new HashMap<String, ProductItem>();
+	conn = Dao.getConnection();
+	
+	try{
+		for (Auction auction : auctions) {
+			pst = conn.prepareStatement("select * from items where id in (select items_fk from auctions where id = '" + auction.getId() + "');");
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				ProductItem item = new ProductItem();
+				item.setItemName(rs.getString("itemname"));
+				item.setImage(rs.getString("image"));
+				item.setProductId(rs.getString("id"));
+				item.setDesciption(rs.getString("description"));
+				itemMap.put(auction.getId(), item);
+			}
+		}
+	} catch (Exception e) {
+		e.printStackTrace();
+	} 
+	finally {
+		if (conn != null) {
+			Dao.closeConnection();
+
+		}
+		if (pst != null) {
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}// end finally
+	return itemMap;
+	
+}
+	
 }// end class

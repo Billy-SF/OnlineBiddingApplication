@@ -46,28 +46,28 @@
     <ul class="nav navbar-nav">
       <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
       <c:if test="${null != sessionScope.username}">
-      <li><a href='auction.jsp'><font size="4" color='white'><b><fmt:message key="auction"/></b></font></a></li>
+      <li><a href='auction.jsp'><font  size ="4" color='white'><b><fmt:message key="auction"/></b></font></a></li>
       </c:if>
        <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
        <c:if test="${role}">
        		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
        </c:if>
-       <c:if test="${role}">
-     	 	 <li><a href="closedBidsServlet"><font  size ="4" color="white"><b><fmt:message key="closedBids"/></b></font></a></li>
-       </c:if>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
-      <li>
-    	<c:url value="users.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
- 		<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> 
- 	  </li>
+    
+    
+    <li>
+    <c:url value="users.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+ 	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
+ 	
  	  <li>
- 		<c:url value="users.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 	<a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a>
- 	 </li>
+ 	<c:url value="users.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 </ul>
  	  
  	  
+    
+    
 <!--     toggle button for  -->
   	<c:if test="${null != sessionScope.username}">
 					<!--     toggle button for  -->
@@ -106,53 +106,49 @@
 	 <div class="col-sm-10 text-left"> 
 
 		<div>
-			<p><h3><b>Users List</b></h3></p>
+			<p><h3><b>Sold Items</b></h3></p>
+			<br/>
 		</div>
 		<div>&nbsp;</div>
 	  
 		<table id="users" class="stripe table-striped" style="width:100%">
 			<thead>
 				<tr>
-					<th>User Id</th>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Username</th>
-				    <th>Email Address</th>
-				    <th>Role</th>
-					<th></th>
+					<th>Seller</th>
+					<th>Item</th>
+					<th>Image</th>
+					<th>Created Date</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Start Price</th>
+					<th>Sold Price</th>
+					<th>Buyer</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${users}" var="user">
+			
+				<c:forEach items="${soldAuctions}" var="soldAuction">
 					<tr>
-						<td>${user.userId}</td>
-						<td>${user.firstname}</td>
-						<td>${user.lastname}</td>
-						<td>${user.username}</td>
-						<td>${user.email}</td>
-						<c:choose>
-							<c:when test="${user.role == true}">
-								<td>Administrator</td>
-							</c:when>
-							<c:otherwise>
-								<td>Client</td>
-							</c:otherwise>
-						</c:choose>
-						<td>
-							<form  action="deleteAuctionServlet">
-								<a href="deleteUserServlet?userId=${user.userId}" class="glyphicon glyphicon-remove" type="submit"></a>
-							</form>
-						</td>
+						<c:set var="auctionId" value="${soldAuction.id}"/>
+						<c:set var = "userId" value="${soldAuction.userid}" />
+						<td>${usernamesMap[userId]}</td>
+						<td>${soldItems[auctionId].itemName}</td>
+						<td><div class ="gallery"><img src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${soldItems[auctionId].image}'  width="200" height="150" alt="${soldItems[auctionId].image}"></div></td>
+						<td>${soldAuction.dateCreated}</td>
+						<td>${soldAuction.bidstarttime}</td>
+						<td>${soldAuction.bidendtime}</td>
+						<td>${soldAuction.bidpricestart}</td>
+						<td>${highestBidPriceMap[auctionId]}</td>
+						<td>${usernamesMap[auctionId]}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	<script>
-
 		$(document).ready(function() {
 			$('#users').DataTable({
 				searching : false,
-				lengthMenu : [ [ 10, 15, 30, -1 ], [ 10, 15, 30, "All" ] ],
+				lengthMenu : [ [ 5, 10, 15, -1 ], [ 5, 10, 15, "All" ] ],
 				ordering : true,
 				bServerSide : false
 			});
