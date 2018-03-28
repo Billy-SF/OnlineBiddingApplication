@@ -52,6 +52,9 @@
        <c:if test="${role}">
        		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
        </c:if>
+       <c:if test="${role}">
+     	 	 <li><a href="closedBidsServlet"><font  size ="4" color="white"><b><fmt:message key="closedBids"/></b></font></a></li>
+       </c:if>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
     
@@ -130,16 +133,15 @@
 				<c:forEach items="${soldAuctions}" var="soldAuction">
 					<tr>
 						<c:set var="auctionId" value="${soldAuction.id}"/>
-						<c:set var = "userId" value="${soldAuction.userid}" />
-						<td>${usernamesMap[userId]}</td>
+						<td>${sellersMapForSoldAuctions[auctionId]}</td>
 						<td>${soldItems[auctionId].itemName}</td>
-						<td><div class ="gallery"><img src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${soldItems[auctionId].image}'  width="200" height="150" alt="${soldItems[auctionId].image}"></div></td>
+						<td><img class ="gallery" src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${soldItems[auctionId].image}'  width="200" height="150" alt="${soldItems[auctionId].image}"></td>
 						<td>${soldAuction.dateCreated}</td>
 						<td>${soldAuction.bidstarttime}</td>
 						<td>${soldAuction.bidendtime}</td>
 						<td>${soldAuction.bidpricestart}</td>
-						<td>${highestBidPriceMap[auctionId]}</td>
-						<td>${usernamesMap[auctionId]}</td>
+						<td>${highestBidPriceMapForSoldAuctions[auctionId]}</td>
+						<td>${buyersMapForSoldAuctions[auctionId]}</td>
 					</tr>
 				</c:forEach>
 			</tbody>
