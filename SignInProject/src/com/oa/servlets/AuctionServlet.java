@@ -110,9 +110,6 @@ public class AuctionServlet extends HttpServlet{
 									String bidStartFormat = bidStart.replaceAll("T", " ").concat(":00");
 									String bidEndFormat = bidEnd.replaceAll("T", " ").concat(":00");
 
-									/*Date bidStartDate = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS").parse(bidstartFormat);
-								Date bidEndDate = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS").parse(bidEndFormat);*/
-
 									AuctionDao.createAction(itemName, description, imageFileName, bidStartFormat, bidEndFormat, initialPriceBd, username, password);
 
 								}catch (Exception e) {
@@ -121,8 +118,7 @@ public class AuctionServlet extends HttpServlet{
 								finally {
 									IOUtils.closeQuietly(inputStream);
 								}
-								RequestDispatcher rd=request.getRequestDispatcher("displayAuction.jsp");  
-								rd.forward(request,response);
+								response.sendRedirect("displayAuctionServlet");
 							}// if start date is before end date or start date is before now
 							else {
 								request.setAttribute("dateFormat", "wrong");
