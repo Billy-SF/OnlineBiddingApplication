@@ -290,8 +290,7 @@ $(document).ready(
             <div class="clearfix"></div>
             <div class="message-send left-padding-5 right-padding-5 bottom-padding-5">
             	<div hidden="hidden">
-            		<input type="text" id="last_message_id" name="last_message_id"><br>
-					<input type="text" id="user_id" name="user_id" value="${sessionScope.userid}"><br>
+            		<input type="text" id="last_message_id" name="last_message_id"><br>			
 					<input type="text" id="user_name" name="user_name" value="${sessionScope.username}"><br>
 					<input type="text" id="auction_id" name="auction_id" value="${productitem.getAuction().getId()}"><br>
 					<input type="text" id="color" name="color"><br>
