@@ -32,9 +32,9 @@ public class BidPageDisplayServlet extends HttpServlet {
 		String productitemid = request.getParameter("productitemid");
 
 		ProductItem productitem = SearchDao.getProductItemByID(productitemid);
-
+		System.out.println(productitem == null?"productitem is Null":"productitem is not Null");
 		Auction auction = productitem.getAuction();
-
+		System.out.println(auction == null?"auction is Null":"auction is not Null");
 		// ArrayList<Bid> bids = productitem.getBids();
 
 		try {

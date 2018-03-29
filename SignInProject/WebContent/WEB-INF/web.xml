@@ -4,6 +4,10 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 	<servlet>
+		<servlet-name>chat</servlet-name>
+		<servlet-class>com.oa.servlets.ChatServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>login</servlet-name>
 		<servlet-class>com.oa.servlets.LoginServlet</servlet-class>
 	</servlet>
@@ -52,7 +56,7 @@
 		<servlet-class>com.oa.servlets.DisplayAuctionServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>usersServlet</servlet-name>
+		<servlet-name>users</servlet-name>
 		<servlet-class>com.oa.servlets.UsersServlet</servlet-class>
 	</servlet>
 	<servlet>
@@ -63,8 +67,15 @@
 		<servlet-name>admin</servlet-name>
 		<servlet-class>com.oa.servlets.AdminServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>closedBids</servlet-name>
+		<servlet-class>com.oa.servlets.ClosedBidsServlet</servlet-class>
+	</servlet>
 	
-	
+	<servlet-mapping>
+		<servlet-name>chat</servlet-name>
+		<url-pattern>/chatServlet</url-pattern>
+	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>login</servlet-name>
 		<url-pattern>/loginServlet</url-pattern>
@@ -114,7 +125,7 @@
 		<url-pattern>/displayActionServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>usersServlet</servlet-name>
+		<servlet-name>users</servlet-name>
 		<url-pattern>/usersServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -124,6 +135,10 @@
 	<servlet-mapping>
 		<servlet-name>admin</servlet-name>
 		<url-pattern>/adminServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>closedBids</servlet-name>
+		<url-pattern>/closedBidsServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

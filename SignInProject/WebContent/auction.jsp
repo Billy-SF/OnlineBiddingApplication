@@ -30,7 +30,6 @@ $( document ).ready(function() {
 	$("#descriptionValidationMessage").hide();
 	$("#bidStartValidationMessage").hide();
 	$("#bidEndValidationMessage").hide();
-	//$("#datesValidationMessage").hide();
 	$("#initialPriceValidationMessage").hide();
 	$("#imageValidationMessage").hide();
 	
@@ -45,26 +44,6 @@ $( document ).ready(function() {
 	$("#image").click(function() {
 		$("#imageValidationMessage").slideUp();
 	});
-	
-	
-	
-/* 	$("body").click(function(e){
-	    var name = $(e.target)[0].nodeName;
-	    alert(name);
-	    var nameid = $(e.target)[0].id;
-	    alert(nameid);
-	    var classname = $(name+"#"+nameid).attr('class');
-	    var full = name+"#"+nameid;
-	    console.log(nameid);
-
-	    function b(x){
-	        alert(x);
-	    };
-
-	    b(full);
-	}); */
-	
-	
 });
 
 function hideErrorMessage(element){
@@ -106,32 +85,6 @@ function validateAuctionForm(){
 	}
 	return error;
 }
-
-/* function hideErrorMessage(elementId){
-	
-	//document.getElementById(elementId).style.background = "yellow";
-	
-	//document.getElementById(elementId).next().css( "background-color", "red" );
-	//$( "#itemName" ).next().slideUp();
-	
-	//alert(elementId.next());
-	
-        $(elementId).css("background-color", "#cccccc");
-
-	
-	
-	document.getElementById(elementId).next().style.background = "yellow";
-	
-	return function() { // the function to return
-				/* alert("showing "+ elementId);
-				document.getElementById(elementId).slideUp();
-				$(elementId).slideUp(); // use the variable from the parameter */
-			//};
-	
-	//$(paramId).slideUp();
-	
-//} */
-
 </script>
   
 <title>Create Auction</title>
@@ -159,6 +112,15 @@ function validateAuctionForm(){
       <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
      <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size ='4' color='white'><b>Auction</b></font></a></li>"%>
        <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
+       <c:if test="${role}">
+       		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
+       </c:if>
+       <c:if test="${role}">
+       		<li><a href="closedBidsServlet"><font  size ="4" color="white"><b><fmt:message key="closedBids"/></b></font></a></li>
+       </c:if>
+       <c:if test="${role}">
+      	 	 <li><a href="closedBidsServlet"><font  size ="4" color="white"><b><fmt:message key="closedBids"/></b></font></a></li>
+        </c:if>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
     
@@ -173,15 +135,27 @@ function validateAuctionForm(){
  	 
     </ul>
     
-   <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="Logout.jsp">
-          <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
-            <!-- <span class="caret"></span> -->
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
-      </ul>      
+    
+      	<c:if test="${null != sessionScope.username}">
+					<!--     toggle button for  -->
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user" style="color: white"></span><font
+								color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
+								<!-- <span class="caret"></span> -->
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="edit.jsp"><span
+										class="glyphicon glyphicon-edit"></span> <fmt:message
+											key="edit" /></a></li>
+								<li><a href="Logout.jsp"><span
+										class="glyphicon glyphicon-log-out"></span> <fmt:message
+											key="logout" /></a></li>
+							</ul></li>
+					</ul>
+				</c:if>
+       
     </div>
 </nav> 
 
