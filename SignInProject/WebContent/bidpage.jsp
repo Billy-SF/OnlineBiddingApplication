@@ -26,8 +26,9 @@
 	<link rel="stylesheet"
 		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-   <script src="chat.js"></script>
 <link rel="stylesheet" href="customStyle.css"> 
+<link rel="stylesheet" href="chat.css"> 
+	<script src="chat.js"></script>
 
 	</head>
 	<body style="background-color:#f4f0f0">
@@ -55,9 +56,6 @@
       <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
      <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size=4 color='white'><b>Auction</b></font></a></li>"%>
        <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
-       <c:if test="${role}">
-       		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
-       </c:if>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
     
@@ -75,26 +73,16 @@
  	</c:url>
  	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 </ul>
- 	 
-	<c:if test="${null != sessionScope.username}">
-					<!--     toggle button for  -->
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"> <span
-								class="glyphicon glyphicon-user" style="color: white"></span><font
-								color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
-								<!-- <span class="caret"></span> -->
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="edit.jsp"><span
-										class="glyphicon glyphicon-edit"></span> <fmt:message
-											key="edit" /></a></li>
-								<li><a href="Logout.jsp"><span
-										class="glyphicon glyphicon-log-out"></span> <fmt:message
-											key="logout" /></a></li>
-							</ul></li>
-					</ul>
-				</c:if>     
+    
+   <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
+            <!-- <span class="caret"></span> -->
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
+      </ul>      
     </div>
 </nav> 
 
@@ -115,7 +103,7 @@
 				
 						<h1>${productitem.getItemName()}</h1>
 						<div class="image">
-			<img src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productitem.image}" alt="${productitem.itemName}" ></img>					
+			<img src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productitem.image}" alt="${productitem.itemName}" ></img>					
 					</div>
 
 						<div class="bidInfo">
@@ -277,26 +265,57 @@ $(document).ready(
 								});
 					</script>
 
-
+<c:if test="${!(empty sessionScope.username)}">
 <div class="row" id="chatroom">
-	<div id="chatmessage" class="col-sm-4" style="border-style: double; height:100px; overflow-y: scroll;">
-	</div>
-	<div class="clearfix"></div>
-	<div class="col-sm-4">
-		<input type="text" id="last_message_id" name="last_message_id"><br>
-		<input type="text" id="user_id" name="user_id" value="${sessionScope.userid}"><br>
-		<input type="text" id="user_name" name="user_name" value="${sessionScope.username}"><br>
-		<input type="text" id="auction_id" name="auction_id" value="${productitem.getAuction().getId()}"><br>
-		<input type="text" id="color" name="color"><br>
-		<div class="input-group">
-		   	<input type="text" class="form-control" id="message" name="message">
-		   	<span class="input-group-btn">
-		        <button class="btn btn-default" type="button" id="send" name="send">Submit</button>
-		   	</span>
+	<div class="col-md-5">
+		<div class="chatroom-container">
+			<div class="chatmessage-container" id="chatmessage"></div>
+			<div class="clearfix"></div>
+           	<div class="input-group left-padding-5  bottom-padding-5">
+                <div class="input-group-btn">
+                    <button class="btn btn-default btn-sm" type="button" name="clear" id="clear">Clear</button>
+                </div>
+                <div class="text-right top-padding-12 right-padding-100">
+                    <label for="color">Color</label>&nbsp;
+                    <select id="color" name="color">
+                        <option value="black">Black</option>
+                        <option value="red">Red</option>
+                        <option value="green">Green</option>
+                        <option value="yellow">Yellow</option>
+                        <option value="blue">Blue</option>
+                        <option value="purple">Purple</option>
+                    </select>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="message-send left-padding-5 right-padding-5 bottom-padding-5">
+            	<div hidden="hidden">
+            		<input type="text" id="last_message_id" name="last_message_id"><br>
+					<input type="text" id="user_id" name="user_id" value="${sessionScope.userid}"><br>
+					<input type="text" id="user_name" name="user_name" value="${sessionScope.username}"><br>
+					<input type="text" id="auction_id" name="auction_id" value="${productitem.getAuction().getId()}"><br>
+					<input type="text" id="color" name="color"><br>
+            	</div>
+		  		<div class="input-group">
+				   	<input type="text" class="form-control" id="message" name="message">
+				   	<span class="input-group-btn">
+				        <button class="btn btn-default" type="button" id="send" name="send">Submit</button>
+				   	</span>
+				</div>
+            </div>
 		</div>
 	</div>
-	
+	<div class="clearfix"></div>
 </div>
+</c:if>
+
+
+
+
+
+
+
+
 					</div>
 
 
@@ -306,6 +325,7 @@ $(document).ready(
 			</div>
 
          </div>
+
 
 			<footer class="container-fluid text-center">
 
