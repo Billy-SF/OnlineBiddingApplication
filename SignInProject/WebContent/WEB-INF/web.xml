@@ -71,10 +71,6 @@
 		<servlet-name>closedBids</servlet-name>
 		<servlet-class>com.oa.servlets.ClosedBidsServlet</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>displayAuction</servlet-name>
-		<servlet-class>com.oa.servlets.DisplayAuctionServlet</servlet-class>
-	</servlet>
 	
 	<servlet-mapping>
 		<servlet-name>chat</servlet-name>
@@ -143,10 +139,6 @@
 	<servlet-mapping>
 		<servlet-name>closedBids</servlet-name>
 		<url-pattern>/closedBidsServlet</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>displayAuction</servlet-name>
-		<url-pattern>/displayAuctionServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
