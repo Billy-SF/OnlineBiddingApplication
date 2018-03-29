@@ -61,8 +61,7 @@ public class ChatServlet extends HttpServlet{
 			break;
 		case "write":
 			Chat chat = new Chat();
-			String userId = request.getParameter("user_id");
-			chat.setUserId(userId);
+
 
 			String auctionId = request.getParameter("auction_id");
 			chat.setAuctionId(auctionId);

@@ -98,7 +98,7 @@ public class ChatDao {
 
 		// highestPrice
 		try{
-			String userId = chat.getUserId();
+		
 			String userName = chat.getUserName();
 			String auctionId = chat.getAuctionId();
 			String message = chat.getMessage();
@@ -110,7 +110,7 @@ public class ChatDao {
 			chat.setDateCreated(dateCreated);
 
 			pst = conn.prepareStatement("INSERT INTO chat (user_id,user_name,auction_id,message,color,date_created) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-			pst.setString(1, userId);
+
 			pst.setString(2, userName);
 			pst.setString(3, auctionId);
 			pst.setString(4, message);
@@ -181,7 +181,7 @@ public class ChatDao {
 				Chat chat = new Chat();
 			
 				chat.setId(rs.getString("id"));
-				chat.setUserId(rs.getString("user_id"));
+			
 				chat.setUserName(rs.getString("user_name"));
 				chat.setAuctionId(rs.getString("auction_id"));
 				chat.setMessage(rs.getString("message"));

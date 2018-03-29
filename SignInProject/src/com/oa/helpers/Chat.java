@@ -13,7 +13,7 @@ public class Chat {
 	private String userName;
 	private String auctionId;
 	private String message;
-
+    private String color;
 	private String dateCreated;
 
 	public Chat() {
@@ -59,5 +59,14 @@ public class Chat {
 	}
 	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+
+	public String getColor() {
+		return color;
+	}
+	
+	public void setColor(String color) {
+		this.color = color;
+		
 	}
 }
