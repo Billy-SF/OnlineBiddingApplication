@@ -50,6 +50,9 @@
        <c:if test="${role}">
        		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
        </c:if>
+      <c:if test="${role}">
+     	 	 <li><a href="closedBidsServlet"><font  size ="4" color="white"><b><fmt:message key="closedBids"/></b></font></a></li>
+       </c:if>
       <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
       <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
     

@@ -26,9 +26,10 @@
 	<link rel="stylesheet"
 		href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+   <script src="chat.js"></script>
 <link rel="stylesheet" href="customStyle.css"> 
 <link rel="stylesheet" href="chat.css"> 
-	<script src="chat.js"></script>
+	
 
 	</head>
 	<body style="background-color:#f4f0f0">
