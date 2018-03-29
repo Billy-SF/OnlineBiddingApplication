@@ -48,7 +48,7 @@
       <c:if test="${null != sessionScope.username}">
       <li><a href='auction.jsp'><font  size ="4" color='white'><b><fmt:message key="auction"/></b></font></a></li>
       </c:if>
-       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
+       <li><a href="displayAuctionServlet"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
        <c:if test="${role}">
        		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
        </c:if>
@@ -108,9 +108,8 @@
 	 <!-- middle part of the page -->
 	 <div class="col-sm-10 text-left"> 
 
-		<div>
+		<div class="text-center">
 			<p><h3><b>Sold Items</b></h3></p>
-			<br/>
 		</div>
 		<div>&nbsp;</div>
 	  
@@ -123,7 +122,7 @@
 					<th>Created Date</th>
 					<th>Start Date</th>
 					<th>End Date</th>
-					<th>Start Price</th>
+					<th>Initial Price</th>
 					<th>Sold Price</th>
 					<th>Buyer</th>
 				</tr>

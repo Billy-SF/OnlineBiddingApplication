@@ -25,7 +25,6 @@
 	<link rel="stylesheet" href="customStyle.css"> 
 </head>
 <body>
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -48,7 +47,7 @@
       <c:if test="${null != sessionScope.username}">
       <li><a href='auction.jsp'><font size="4" color='white'><b><fmt:message key="auction"/></b></font></a></li>
       </c:if>
-       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
+       <li><a href="displayAuctionServlet"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
        <c:if test="${role}">
        		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
        </c:if>
@@ -64,10 +63,12 @@
  	  <li>
  		<c:url value="users.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
  	 	<a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a>
- 	 </li>
+ 	 	</li>
  	 </ul>
  	  
  	  
+    
+    
 <!--     toggle button for  -->
   	<c:if test="${null != sessionScope.username}">
 					<!--     toggle button for  -->
@@ -105,7 +106,7 @@
 	 <!-- middle part of the page -->
 	 <div class="col-sm-10 text-left"> 
 
-		<div>
+		<div class="text-center">
 			<p><h3><b>Users List</b></h3></p>
 		</div>
 		<div>&nbsp;</div>
@@ -179,7 +180,6 @@
    </ul>
 </footer>
 
-</fmt:bundle>
-
 </body>
+</fmt:bundle>
 </html>
