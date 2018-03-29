@@ -274,6 +274,7 @@ $(document).ready(
 								});
 					</script>
 
+<br/>
 <c:if test="${!(empty sessionScope.username)}">
 <div class="row" id="chatroom">
 	<div class="col-md-5">

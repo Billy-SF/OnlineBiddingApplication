@@ -109,13 +109,13 @@ public class ChatDao {
 			String dateCreated = df.format(date);
 			chat.setDateCreated(dateCreated);
 
-			pst = conn.prepareStatement("INSERT INTO chat (user_id,user_name,auction_id,message,color,date_created) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			pst = conn.prepareStatement("INSERT INTO chat (user_name,auction_id,message,color,date_created) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
-			pst.setString(2, userName);
-			pst.setString(3, auctionId);
-			pst.setString(4, message);
-			pst.setString(5, color);
-			pst.setTimestamp(6, date);
+			pst.setString(1, userName);
+			pst.setString(2, auctionId);
+			pst.setString(3, message);
+			pst.setString(4, color);
+			pst.setTimestamp(5, date);
 			pst.executeUpdate();
 
 			ResultSet rrss = pst.getGeneratedKeys();
