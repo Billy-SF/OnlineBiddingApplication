@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLTimeoutException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -98,24 +99,28 @@ public class ChatDao {
 
 		// highestPrice
 		try{
-		
+			//String userId = chat.getUserId();
 			String userName = chat.getUserName();
 			String auctionId = chat.getAuctionId();
 			String message = chat.getMessage();
 			String color = chat.getColor();
-			java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+			String dateCreated = chat.getDateCreated();
+			
+			//java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
 			
 			DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-			String dateCreated = df.format(date);
-			chat.setDateCreated(dateCreated);
+			Date date = df.parse(dateCreated);
+			Timestamp timestamp = new Timestamp(date.getTime());
+			//String dateCreated = df.format(date);
+			//chat.setDateCreated(dateCreated);
 
 			pst = conn.prepareStatement("INSERT INTO chat (user_name,auction_id,message,color,date_created) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-
+			//pst.setString(1, userId);
 			pst.setString(1, userName);
 			pst.setString(2, auctionId);
 			pst.setString(3, message);
 			pst.setString(4, color);
-			pst.setTimestamp(5, date);
+			pst.setTimestamp(5, timestamp);
 			pst.executeUpdate();
 
 			ResultSet rrss = pst.getGeneratedKeys();
@@ -181,7 +186,7 @@ public class ChatDao {
 				Chat chat = new Chat();
 			
 				chat.setId(rs.getString("id"));
-			
+				//chat.setUserId(rs.getString("user_id"));
 				chat.setUserName(rs.getString("user_name"));
 				chat.setAuctionId(rs.getString("auction_id"));
 				chat.setMessage(rs.getString("message"));

@@ -2,10 +2,21 @@ package com.oa.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ArrayList;
+
+
+
+
+
+
+
+
+
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -61,7 +72,8 @@ public class ChatServlet extends HttpServlet{
 			break;
 		case "write":
 			Chat chat = new Chat();
-
+			//String userId = request.getParameter("user_id");
+			//chat.setUserId(userId);
 
 			String auctionId = request.getParameter("auction_id");
 			chat.setAuctionId(auctionId);
@@ -74,12 +86,19 @@ public class ChatServlet extends HttpServlet{
 
 			String color = request.getParameter("color");
 			chat.setColor(color);
+
+			java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+			
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+			String dateCreated = df.format(date);
+			chat.setDateCreated(dateCreated);
 			
 			last_message_id = String.valueOf(ChatDao.savemessage(chat));
 			
 			json = new JSONObject();
 			try {
 				json.put("last_message_id", last_message_id);
+				json.put("message_date", dateCreated);
 				// return JSON for is_saved
 				out.print(json);
 		    } 
