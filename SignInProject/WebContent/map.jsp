@@ -105,14 +105,11 @@
         
         
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 7,
+            zoom: 15,
             center: pos
           });
         
-        var marker = new google.maps.Marker({
-            position: pos,
-            map: map
-          });
+   
         
           directionsDisplay.setMap(map);
           directionsDisplay.setPanel(document.getElementById('right-panel'));
