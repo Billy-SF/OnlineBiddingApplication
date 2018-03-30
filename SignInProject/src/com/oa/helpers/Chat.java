@@ -9,15 +9,15 @@ import java.util.Date;
 public class Chat {
 	
 	private String id;
-
+	//private String userId;
 	private String userName;
 	private String auctionId;
 	private String message;
-    private String color;
+	private String color;
 	private String dateCreated;
 
 	public Chat() {
-		//this.color = "000000";
+		this.color = "000000";
 		//DateFormat df = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
 		//Date today = Calendar.getInstance().getTime(); 
 		//this.dateCreated = df.format(today);
@@ -30,7 +30,15 @@ public class Chat {
 		this.id = id; 
 	}
 	
-
+	/*
+	public String getUserId() {
+		return this.userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	*/
+	
 	public String getUserName() {
 		return this.userName;
 	}
@@ -53,20 +61,17 @@ public class Chat {
 		this.message = message;
 	}
 	
+	public String getColor() {
+		return this.color;
+	}
+	public void setColor(String color) {
+		this.color = color;
+	}
 	
 	public String getDateCreated() {
 		return dateCreated;
 	}
 	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
-	}
-
-	public String getColor() {
-		return color;
-	}
-	
-	public void setColor(String color) {
-		this.color = color;
-		
 	}
 }

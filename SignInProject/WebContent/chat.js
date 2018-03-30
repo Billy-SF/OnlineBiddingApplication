@@ -128,6 +128,7 @@ $(document).ready(function(){
 					tmp_last_message_id = element["id"];
 					
 					var str_date = element["dateCreated"];
+					alert(str_date);
 					str_date = str_date.substr(0, 19);
 					str_date = str_date.replace("-", "/");
 					
