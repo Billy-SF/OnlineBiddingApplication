@@ -8,7 +8,7 @@
 
 </head>
 <body>
-	<button onclick="getLocation()">Get location</button>
+	<button class="btn btn-success" onclick="getLocation()">Nearest Pick-up Location?</button>
 	<p id="demo"></p>
 	<div id="map"></div>
 	

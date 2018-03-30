@@ -234,6 +234,7 @@ $(document).ready(
 </script>
 
 					</div>
+					<jsp:include page="Geolocation.jsp"/>
 					<h3>Item Description</h3>
 					<p>${productitem.getDescription()}</p>
 
