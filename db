@@ -153,7 +153,6 @@ create table ratings (
 
 CREATE TABLE `chat` (
   `id` int(10) NOT NULL,
-  `user_id` int(10) NOT NULL,
   `user_name` varchar(50) NOT NULL,
   `auction_id` int(10) NOT NULL,
   `message` text NOT NULL,
