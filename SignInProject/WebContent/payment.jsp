@@ -14,7 +14,7 @@
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="pk_test_5xAtehpMJFCsizMiODrIcjvt"
     data-amount="999"
-    data-name="I love Julia"
+    data-name="Sample"
     data-description="Widget"
     data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
     data-locale="auto"
