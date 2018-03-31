@@ -83,15 +83,25 @@
  	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 </ul>
     
-   <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="glyphicon glyphicon-log-out"></span><font color="white"><b> <fmt:message key="logout"/></b></font>
-            <!-- <span class="caret"></span> -->
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="edit.jsp"><span class="glyphicon glyphicon-edit"></span> <fmt:message key="edit"/></a></li>
-      </ul>      
+  <c:if test="${null != sessionScope.username}">
+					<!--     toggle button for  -->
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user" style="color: white"></span><font
+								color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
+								<!-- <span class="caret"></span> -->
+						</a>
+							<ul class="dropdown-menu">
+								<li><a href="edit.jsp"><span
+										class="glyphicon glyphicon-edit"></span> <fmt:message
+											key="edit" /></a></li>
+								<li><a href="Logout.jsp"><span
+										class="glyphicon glyphicon-log-out"></span> <fmt:message
+											key="logout" /></a></li>
+							</ul></li>
+					</ul>
+				</c:if>     
     </div>
 </nav> 
 
@@ -99,7 +109,7 @@
 		<div class="container-fluid text-center">
 
 			<div class="row content">
-				<div class="col-sm-2 sidenav">
+		        <div class="col-sm-2 sidenav">
      <p><a href="#"><img src="Real_Time_Bidding.png" height=100% width=100%></a></p>
       <p><a href="#"><img src="chicago.png" height=100% width=100%></a></p>
       <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
@@ -234,7 +244,7 @@ $(document).ready(
 </script>
 
 					</div>
-					<jsp:include page="Geolocation.jsp"/>
+				
 					<h3>Item Description</h3>
 					<p>${productitem.getDescription()}</p>
 
@@ -318,14 +328,6 @@ $(document).ready(
 	<div class="clearfix"></div>
 </div>
 </c:if>
-
-
-
-
-
-
-
-
 					</div>
 
 
