@@ -234,8 +234,9 @@ $(document).ready(
 </script>
 
 					</div>
-					<jsp:include page="Geolocation.jsp"/>
-					<h3>Item Description</h3>
+					<form action="map.jsp"><input type="submit" class="btn btn-success" value="Get directions to our nearest pick-up location!"></form>
+					
+					<p>Item Description</p>
 					<p>${productitem.getDescription()}</p>
 
 					<div class="container">
