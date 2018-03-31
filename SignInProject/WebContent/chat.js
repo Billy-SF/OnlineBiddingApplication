@@ -79,8 +79,8 @@ $(document).ready(function(){
 						'</span>' + '<br>';
 					$('#chatmessage').html(str_message);
 					//$('#chatmessage').scrollTop($('#chatmessage').prop("scrollHeight"));
-					$("#chatmessage").animate({ scrollDown: $('#chatmessage').prop("scrollHeight")}, 1000);
-					
+					$("#chatmessage").animate({ scrollTop: $('#chatmessage').prop("scrollHeight")}, 1000);
+				
 					$('#message').val("");
 				},
 				error:function(error){

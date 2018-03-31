@@ -1,5 +1,9 @@
 package com.oa.helpers;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Auction {
 	
 	private String id;
@@ -45,6 +49,32 @@ public class Auction {
 		public void setBidendtime(String bidendtime) {
 		this.bidendtime = bidendtime.replaceAll("\\.\\d+", "");
 	}
+		
+		public String getBiddingStatus() {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+		        try {
+		        	Date dateStart = sdf.parse(bidstarttime);
+					Date dateEnd = sdf.parse(bidendtime);
+					   Date dateCurrent = new Date();
+					   if (dateCurrent.compareTo(dateEnd) > 0) {
+				            return "2";
+				        } else if (dateCurrent.compareTo(dateStart) < 0) {
+				          return "0";
+				        } 
+				        else {
+				            return "1";
+				        }
+
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return "3";
+		     
+			
+			
+		}
 
 	public String getBidpricestart() {
 		return this.bidpricestart;

@@ -223,13 +223,13 @@
 
 										<td><b>${productItem.itemName}</b></td>
 										<c:if test="${not empty productItem.getAuction().getId()}">
-											<c:if test="${productItem.getAuction().getBidstate() =='0'}">
+											<c:if test="${productItem.getAuction().getBiddingStatus() =='2'}">
 												<td><b>Bidding Ended</b></td>
 											</c:if>
-											<c:if test="${productItem.getAuction().getBidstate() =='1'}">
+											<c:if test="${productItem.getAuction().getBiddingStatus() =='1'}">
 												<td><b>Bidding</b></td>
 											</c:if>
-											<c:if test="${productItem.getAuction().getBidstate() =='2'}">
+											<c:if test="${productItem.getAuction().getBiddingStatus() =='1'}">
 												<td><b>Bidding Not Started</b></td>
 											</c:if>
 										</c:if>
