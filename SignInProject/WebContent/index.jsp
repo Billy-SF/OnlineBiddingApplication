@@ -254,7 +254,7 @@
 			</ul>
 			<ul class="nav navbar-nav">
 				<li><a href="#"><font size="4" color="white"><b><fmt:message
-									key="feedback" /></b></font></a></li>
+									key="faq" /></b></font></a></li>
 				<li><a href="#"><font size="4" color="white"><b><fmt:message
 									key="privacyPolicy" /></b></font></a></li>
 			</ul>
