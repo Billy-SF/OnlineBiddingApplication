@@ -13,11 +13,11 @@ public class Dao {
 	public static Connection getConnection() {
 		
 		if(dao.isConnected) return dao.con;
-        String url = "jdbc:mysql://localhost:3306/";
+        String url = "jdbc:mysql://localhost:3307/";
         String dbName = "ottawauction";
         String driver = "com.mysql.jdbc.Driver";
         String userName = "root";
-        String password = "xxxx";
+        String password = "yA832733!";
         try {
             Class.forName(driver).newInstance();
             dao.con = DriverManager.getConnection(url + dbName + 
