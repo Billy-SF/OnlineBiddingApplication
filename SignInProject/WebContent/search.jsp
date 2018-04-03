@@ -62,10 +62,13 @@
 				<ul class="nav navbar-nav">
 					<li><a href="index.jsp"><font size="4" color="white"><b><fmt:message key="home" /></b></font></a></li>
 					<%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size=4 color='white'><b>Auction</b></font></a></li>"%>
-					<li><a href="displayAuction.jsp"><font size="4" color="white"><b><fmt:message key="bids" /></b></font></a></li>
+					<li><a href="displayAuctionServlet"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
 			        <c:if test="${role}">
 			       	 	 <li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
 			        </c:if>
+			        <c:if test="${role}">
+			       	 	 <li><a href="closedBidsServlet"><font  size ="4" color="white"><b><fmt:message key="closedBids"/></b></font></a></li>
+ 			        </c:if>
 					<li><a href="#"><font size="4" color="white"><b><fmt:message key="contactUs" /></b></font></a></li>
 					<li><a href="#"><font size="4" color="white"><b><fmt:message key="help" /></b></font></a></li>
 					<li><c:url value="searchServlet" var="englishURL">
@@ -208,7 +211,7 @@
 												</c:if>
 
 												<img
-													src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productItem.image}"
+													src="chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${productItem.image}"
 													alt="${productItem.itemName}" width="300" height="200"></img>
 
 												<c:if test="${not empty productItem.getAuction().getId()}">
@@ -220,13 +223,13 @@
 
 										<td><b>${productItem.itemName}</b></td>
 										<c:if test="${not empty productItem.getAuction().getId()}">
-											<c:if test="${productItem.getAuction().getBidstate() =='0'}">
+											<c:if test="${productItem.getAuction().getBiddingStatus() =='2'}">
 												<td><b>Bidding Ended</b></td>
 											</c:if>
-											<c:if test="${productItem.getAuction().getBidstate() =='1'}">
+											<c:if test="${productItem.getAuction().getBiddingStatus() =='1'}">
 												<td><b>Bidding</b></td>
 											</c:if>
-											<c:if test="${productItem.getAuction().getBidstate() =='2'}">
+											<c:if test="${productItem.getAuction().getBiddingStatus() =='1'}">
 												<td><b>Bidding Not Started</b></td>
 											</c:if>
 										</c:if>
