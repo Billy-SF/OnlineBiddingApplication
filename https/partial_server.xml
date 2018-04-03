@@ -1,0 +1,4 @@
+<Connector port="8443" protocol="HTTP/1.1" SSLEnabled="true"
+maxThreads="150" scheme="https" secure="true"
+keystoreFile="<<insert path to keystore.jks here>>" keystorePass="changeit"
+clientAuth="false" sslProtocol="TLS" />
