@@ -8,7 +8,8 @@
 
 </head>
 <body>
-	<button class="btn btn-success" onclick="getLocation()">Nearest Pick-up Location?</button>
+	<form><input type="button" onclick="getLocation()" class="btn btn-success" value="How far am i from the warehouses?"></form>
+	<!--<button class="btn-xs " onclick="getLocation()">Nearest Pick-up Location?</button>  -->
 	<p id="demo"></p>
 	<div id="map"></div>
 	
@@ -36,7 +37,7 @@ function showPosition(position) {
     var from = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     //var fromLocation = 'ComputerLocation';
     
-    var destination = new google.maps.LatLng(45.3192, -75.6692);
+    var destination = new google.maps.LatLng(45.3192, -75.6692); 
     var destination2 = new google.maps.LatLng(45.4242,-75.6918);
     //var destinationAt = "Warehouse";
     //x.innerHTML = "Before excuting the DistanceMatrixService";
