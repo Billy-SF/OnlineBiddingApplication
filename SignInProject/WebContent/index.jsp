@@ -60,7 +60,7 @@
 					<c:if test="${role}">
 						<li><a href="usersServlet"><font size="4" color="white"><b><fmt:message	key="users" /></b></font></a></li>
 					</c:if>
-					<li><a href="#"><font size="4" color="white"><b><fmt:message
+					<li><a href="contactUs.jsp"><font size="4" color="white"><b><fmt:message
 										key="contactUs" /></b></font></a></li>
 					<li><a href="#"><font size="4" color="white"><b><fmt:message
 										key="help" /></b></font></a></li>
@@ -253,9 +253,9 @@
 								OttawAuction</b></font></a></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li><a href="#"><font size="4" color="white"><b><fmt:message
+				<li><a href="faq.jsp"><font size="4" color="white"><b><fmt:message
 									key="faq" /></b></font></a></li>
-				<li><a href="#"><font size="4" color="white"><b><fmt:message
+				<li><a href="privacyPolicy.jsp"><font size="4" color="white"><b><fmt:message
 									key="privacyPolicy" /></b></font></a></li>
 			</ul>
 		</footer>
