@@ -60,23 +60,19 @@
 					<c:if test="${role}">
 						<li><a href="usersServlet"><font size="4" color="white"><b><fmt:message	key="users" /></b></font></a></li>
 					</c:if>
-
-					<li><a href="contactUs.jsp"><font size="4" color="white"><b><fmt:message
-										key="contactUs" /></b></font></a></li>
-					<li><a href="#"><font size="4" color="white"><b><fmt:message
-										key="help" /></b></font></a></li>
-
-
-					<li><c:url value="index.jsp" var="englishURL">
-							<c:param name="locale" value="en_US" />
-						</c:url> <a href="${englishURL}"><font size="4" color="white">
-								<b>English</b>
-						</font> </a></li>
-
-					<li><c:url value="index.jsp" var="chineseURL">
-							<c:param name="locale" value="zh_CN" />
-						</c:url> <a href="${chineseURL}"><font size="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
-
+			        <c:if test="${role}">
+			       	 	 <li><a href="closedBidsServlet"><font  size ="4" color="white"><b><fmt:message key="closedBids"/></b></font></a></li>
+ 			        </c:if>
+					<li><a href="#"><font size="4" color="white"><b><fmt:message key="contactUs" /></b></font></a></li>
+					<li><a href="#"><font size="4" color="white"><b><fmt:message key="help" /></b></font></a></li>
+					<li>
+						<c:url value="index.jsp" var="englishURL"><c:param name="locale" value="en_US" /></c:url> 
+						<a href="${englishURL}"><font size="4" color="white"><b>English</b></font> </a>
+					</li>
+					<li>
+						<c:url value="index.jsp" var="chineseURL"><c:param name="locale" value="zh_CN" /></c:url> 
+						<a href="${chineseURL}"><font size="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a>
+					</li>
 				</ul>
 
 				<c:if test="${null != sessionScope.username}">
@@ -255,9 +251,9 @@
 								OttawAuction</b></font></a></li>
 			</ul>
 			<ul class="nav navbar-nav">
-				<li><a href="faq.jsp"><font size="4" color="white"><b><fmt:message
-									key="faq" /></b></font></a></li>
-				<li><a href="privacyPolicy.jsp"><font size="4" color="white"><b><fmt:message
+				<li><a href="#"><font size="4" color="white"><b><fmt:message
+									key="feedback" /></b></font></a></li>
+				<li><a href="#"><font size="4" color="white"><b><fmt:message
 									key="privacyPolicy" /></b></font></a></li>
 			</ul>
 		</footer>
