@@ -60,11 +60,11 @@
     
     
     <li>
-    <c:url value="users.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
+    <c:url value="closedBids.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
  	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
  	
  	  <li>
- 	<c:url value="users.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
+ 	<c:url value="closedBids.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
  	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
  	 </ul>
  	  
