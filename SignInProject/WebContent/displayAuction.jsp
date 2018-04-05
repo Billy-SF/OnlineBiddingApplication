@@ -1,211 +1,217 @@
 <!DOCTYPE html>
 
 <html lang="en">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-  
- <c:set var="loc" value="en_US"/>
+<head>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
-<c:set var="loc" value="${param.locale}"/>
+	<c:set var="loc" value="${param.locale}" />
 </c:if>
 <fmt:setLocale value="${param.locale}" />
-<fmt:bundle basename="MessagesBundle">
 
-
-
-
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> --%>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.sql.Statement" %>
-<%@ page import="java.sql.Connection" %>
-<%@ page import="java.sql.DriverManager" %>
-<%@ page import="com.oa.dao.Dao" %>
-<%@ page import="com.oa.helpers.User" %>
-<%@ page import="java.sql.PreparedStatement" %>
-<%@ page import="java.sql.SQLException" %>
-
-
-
-
-<% 
-	Connection conn = Dao.getConnection();
-	PreparedStatement pst = null;
-	ResultSet rs = null;
-	User user = new User();
-	// not sure if userId is needed
-	try {
-		pst = conn.prepareStatement("SELECT * FROM items");
-		rs = pst.executeQuery();
-%>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-
-<head>
 <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="customStyle.css"> 
-  
+<title>Search</title>
+	<script src="assets/js/jquery-min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Viewport Meta Tag -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Auctions</title>
-</head>
-<body> 
-<div id="grad1">
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
-    </div>
-    
-    <form class="navbar-form navbar-left" action="searchServlet">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
- 
-    <ul class="nav navbar-nav">
-      <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
-     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size=4 color='white'><b>Auction</b></font></a></li>"%>
-       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
-       <c:if test="${role}">
-       		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
-       </c:if>
-      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
-      <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
-    
-    
-    <li>
-    <c:url value="displayAuction.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
- 	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
- 	
- 	  <li>
- 	<c:url value="displayAuction.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
- 	 </ul>
-    
- 	<c:if test="${null != sessionScope.username}">
-					<!--     toggle button for  -->
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"> <span
-								class="glyphicon glyphicon-user" style="color: white"></span><font
-								color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
-								<!-- <span class="caret"></span> -->
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="edit.jsp"><span
-										class="glyphicon glyphicon-edit"></span> <fmt:message
-											key="edit" /></a></li>
-								<li><a href="Logout.jsp"><span
-										class="glyphicon glyphicon-log-out"></span> <fmt:message
-											key="logout" /></a></li>
-							</ul></li>
-					</ul>
-				</c:if>    
-    </div>
-</nav> 
+<!-- Bootstrap -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/css/bootstrap.min.css">
+<!-- Main Style -->
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<!-- Slicknav Css -->
+<link rel="stylesheet" type="text/css" href="assets/css/slicknav.css">
+
+<!-- Responsive Style -->
+<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+<!--Fonts-->
+<link rel="stylesheet" media="screen"
+	href="assets/fonts/font-awesome/font-awesome.min.css">
+<link rel="stylesheet" media="screen"
+	href="assets/fonts/simple-line-icons.css">
+
+<!-- Extras -->
+<link rel="stylesheet" type="text/css"
+	href="assets/extras/owl/owl.carousel.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/extras/owl/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="assets/extras/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/extras/normalize.css">
 
 
+<!-- Color CSS Styles  -->
+<link rel="stylesheet" type="text/css"
+	href="assets/css/colors/green.css" media="screen" />
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+    </script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+    </script>
+    <![endif]-->
+<style>
+.center-div {
+	margin: 0 auto;
+	width: 100px;
+}
+</style>
+	</head>
+	<body>
+
+		<%@include file="header.jsp"%>
+
+  <!-- Service Block-1 Section -->
+    <section id="service-block-main" class="section">
+      <!-- Container Starts -->
+      <div class="container">
+        <h1 class="section-title wow fadeIn animated" data-wow-delay=".2s">
+        Current Auctions
+        </h1>
+        <br/>
+        <div class="row">  
+        <c:forEach items="${openAuctions}" var="openAuction">
+        	<c:set var="auctionId" value="${openAuction.id}" />
+          <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
+            <!-- Service-Block-1 Item Starts -->
+            <div class="service-item wow fadeInUpQuick animated" data-wow-delay=".3s">
+              <div class="client-item-wrapper">
+              <img src="assets/img/products/cake.jpg" style="min-height:200px; max-width:200px;max-height:200px;" alt="">
+            </div>
+              <h2>
+               ${ItemsForOpenAuctions[auctionId].itemName}
+              </h2>
+              <p>
+               Seller: ${sellersMapForOpenAuctions[auctionId]}
+              </p>
+                <p>
+               Description:
+              </p>
+                <p>
+                Start Date:
+              </p>
+                <p>
+                End Date:
+              </p>
+                <p>
+                Initial Price:
+              </p>
+                <p>
+                Current Bid:
+              </p>
+                <p>
+                Bidder:
+              </p>
+            </div>
+            <!-- Service-Block-1 Item Ends -->
+          </div>
+          </c:forEach>
+</div>
+</div>
+</section>
 
 
-
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="#"><img src="Real_Time_Bidding.png" height=100% width=100%></a></p>
-      <p><a href="#"><img src="chicago.png" height=100% width=100%></a></p>
-      <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
-    </div>
-
-
-<div class="col-sm-1"></div>
-
-<div class="col-sm-8">
-<div> &nbsp;</div>
-<div class= "panel panel-danger">
+			<!-- <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> Auctions</b> </div>
   <div class ="panel-body"> 
+ -->
+			<div class="text-center">
+				<p class="text-center">
+				<h3>
+					<b>Current Auctions</b>
+				</h3>
+				</p>
+			</div>
+			<div>&nbsp;</div>
+
+			<table id="displayAuctionTable" class="stripe table-striped"
+				style="width: 100%">
+				<thead>
+					<tr>
+						<th>Seller</th>
+						<th>Item</th>
+						<th>Image</th>
+						<th>Description</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Initial Price</th>
+						<th>Current Bid</th>
+						<th>Bidder</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<c:forEach items="${openAuctions}" var="openAuction">
+						<tr>
+							<c:set var="auctionId" value="${openAuction.id}" />
+							<td>${sellersMapForOpenAuctions[auctionId]}</td>
+							<td>${ItemsForOpenAuctions[auctionId].itemName}</td>
+							<td><a
+								href="bidPageDisplayServlet?productitemid=${ItemsForOpenAuctions[auctionId].productId}">
+									<img class="gallery"
+									src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${ItemsForOpenAuctions[auctionId].image}'
+									width="200" height="150"
+									alt="${ItemsForOpenAuctions[auctionId].image}">
+							</a></td>
+							<td>${ItemsForOpenAuctions[auctionId].description}</td>
+							<td>${openAuction.bidstarttime}</td>
+							<td>${openAuction.bidendtime}</td>
+							<td>${openAuction.bidpricestart}</td>
+							<td>${highestBidpriceForOpenAuctions[auctionId]}</td>
+							<td>${buyersMapForOpenAuctions[auctionId]}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<script>
+				$(document).ready(
+						function() {
+							$('#displayAuctionTable').DataTable(
+									{
+										searching : false,
+										lengthMenu : [ [ 5, 10, 15, -1 ],
+												[ 5, 10, 15, "All" ] ],
+										ordering : true,
+										bServerSide : false
+									});
+						});
+			</script>
 	
-	<table>
 
-<%		
-		//Stores the results
-		while(rs.next())
-		{
-%>
-			<tr>
-				<td style="width:10%">	
-				<a href="bidPageDisplayServlet?productitemid=<%=rs.getString("id")%>" onclick='<%request.getSession(false).setAttribute("auctionId", rs.getString("id"));%>'> <%=rs.getString("itemname")%></a></td><!-- <%=rs.getString("id")%> -->
-			</tr>
-			<tr>
-				<td style="width:10%"><%=rs.getString("description") %></td>
-				<td style="width:90%"><img  <%-- src="c:\\uploadImageOttawAction\\<%=rs.getString("image")%>" --%> height="200"  width="200"
-				 src='chrome-extension://icghneokgcoplpkbhligbcmaljochmel/<%=rs.getString("image")%>' alt="Auction Image"></td>
-			</tr>
-			<tr><td>&nbsp;</td></tr>
-<%
-		}
-%>
 
-	</table>
-</div>
-</div>	
- </div>	
-  </div>
-</div>
 
-<footer class="container-fluid text-center">
-  <div class="navbar-header">
-      <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#"><font size ="4" color="white"><b>© OttawAuction</b></font></a></li>
-   </ul>
-     <ul class="nav navbar-nav"> 
-      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="feedback"/></b></font></a></li>
-      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
-   </ul>
-</footer>
+		<%@include file="footer.jsp"%>
 
-	
-</div>	
+		<!-- JavaScript & jQuery Plugins -->
+	<script src="assets/js/popper.min.js"></script>
+	<script src="assets/js/bootstrap.min.js"></script>
+	<script src="assets/js/jquery.mixitup.js"></script>
+	<script src="assets/js/smoothscroll.js"></script>
+	<script src="assets/js/wow.js"></script>
+	<script src="assets/js/owl.carousel.js"></script>
+	<script src="assets/js/waypoints.min.js"></script>
+	<script src="assets/js/jquery.counterup.min.js"></script>
+	<script src="assets/js/jquery.slicknav.js"></script>
+	<script src="assets/js/jquery.appear.js"></script>
+	<script src="assets/js/form-validator.min.js"></script>
+	<script src="assets/js/contact-form-script.min.js"></script>
+	<script src="assets/js/main.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script
+		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+
 
 </body>
-
-
-<%
-		
-	} catch (Exception e) {
-	    e.printStackTrace();
-	} finally {
-	    if (conn != null) {
-			Dao.closeConnection();
-		}
-	    if (pst != null) {
-	        try {
-	            pst.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	    if (rs != null) {
-	        try {
-	            rs.close();
-	        } catch (SQLException e) {
-	            e.printStackTrace();
-	        }
-	    }
-	}		
-
-%>
-</fmt:bundle>
 </html>

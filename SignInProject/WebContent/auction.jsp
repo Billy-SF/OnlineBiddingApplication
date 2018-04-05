@@ -1,290 +1,333 @@
-<%-- <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%> --%>
-
 <!DOCTYPE html>
 <html lang="en">
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="loc" value="en_US"/>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
-  <c:set var="loc" value="${param.locale}"/>
+	<c:set var="loc" value="${param.locale}" />
 </c:if>
-<fmt:setLocale value="${param.locale}" />
+<fmt:setLocale value="${loc}" />
+
 <fmt:bundle basename="MessagesBundle">
+	<head>
+<meta charset="utf-8">
+<!-- Viewport Meta Tag -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-<head>
- <meta http-equiv="Content-Type" charset="UTF-8" content="text/html">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   <link rel="stylesheet" href="customStyle.css">
-  <script type="text/javascript">
-
-$( document ).ready(function() { 
-	//alert("Helllo!");
-	$("#itemNameValidationMessage").hide();
-	$("#descriptionValidationMessage").hide();
-	$("#bidStartValidationMessage").hide();
-	$("#bidEndValidationMessage").hide();
-	//$("#datesValidationMessage").hide();
-	$("#initialPriceValidationMessage").hide();
-	$("#imageValidationMessage").hide();
-	
-	// make sure the uploaded file is an image
- 	$("#image").change(function() {
-		var mimeType = this.files[0]['type'];
-		if(mimeType.split('/')[0] != 'image'){
-			$("#imageValidationMessage").slideDown();
-	    }
-	});
-
-	$("#image").click(function() {
-		$("#imageValidationMessage").slideUp();
-	});
-	
-	
-	
-/* 	$("body").click(function(e){
-	    var name = $(e.target)[0].nodeName;
-	    alert(name);
-	    var nameid = $(e.target)[0].id;
-	    alert(nameid);
-	    var classname = $(name+"#"+nameid).attr('class');
-	    var full = name+"#"+nameid;
-	    console.log(nameid);
-
-	    function b(x){
-	        alert(x);
-	    };
-
-	    b(full);
-	}); */
-	
-	
-});
-
-function hideErrorMessage(element){
-	//alert("hoho");
-	//alert(element);
-	//alert("hi"+$(element).nodeNme+"hi");	
-	documet.getElementById(element).style.background = "yellow";
-	
-}
-
-function validateAuctionForm(){
-	var error = true;
-	var itemName = document.forms["auction"]["itemName"].value;
-	var description = document.forms["auction"]["description"].value;
-	var bidStart = document.forms["auction"]["bidStart"].value;
-	var bidEnd = document.forms["auction"]["bidEnd"].value;
-	var initialPrice = document.forms["auction"]["initialPrice"].value;
-	  
-	if (itemName.length == 0) 
-	{
-		$("#itemNameValidationMessage").slideDown();
-		error = false;
-	}
-	if (description.length == 0) {
-		$("#descriptionValidationMessage").slideDown();
-		error = false;
-	}
-	if (bidStart.length == 0 ) {
-		$("#bidStartValidationMessage").slideDown();
-		error = false;
-	}
-	if (bidEnd.length == 0) {
-		$("#bidEndValidationMessage").slideDown();
-		error = false;
-	}
-  	if (initialPrice.length == 0 || isNaN(initialPrice)) {
-		$("#initialPriceValidationMessage").slideDown();
-		error = false;
-	}
-	return error;
-}
-
-/* function hideErrorMessage(elementId){
-	
-	//document.getElementById(elementId).style.background = "yellow";
-	
-	//document.getElementById(elementId).next().css( "background-color", "red" );
-	//$( "#itemName" ).next().slideUp();
-	
-	//alert(elementId.next());
-	
-        $(elementId).css("background-color", "#cccccc");
-
-	
-	
-	document.getElementById(elementId).next().style.background = "yellow";
-	
-	return function() { // the function to return
-				/* alert("showing "+ elementId);
-				document.getElementById(elementId).slideUp();
-				$(elementId).slideUp(); // use the variable from the parameter */
-			//};
-	
-	//$(paramId).slideUp();
-	
-//} */
-
-</script>
-  
 <title>Create Auction</title>
-</head>
-<body>
-	<div id="grad1">
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <c:url value="index.jsp" var="index"> <c:param name="locale" value="${loc}"/></c:url><a class="navbar-brand" href="${index}"><b><font size="6" color="white"> <fmt:message key="ottawAction"/></font></b> </a>
-    </div>
-    
-    <form class="navbar-form navbar-left" action="searchServlet">
-      <div class="input-group">
-        <input type="text" class="form-control" placeholder="<fmt:message key="search"/>" name="search">
-        <div class="input-group-btn">
-          <button class="btn btn-default" type="submit">
-            <i class="glyphicon glyphicon-search"></i>
-          </button>
-        </div>
-      </div>
-    </form>
- 
-    <ul class="nav navbar-nav">
-      <li><a href="index.jsp"><font size ="4" color="white"><b><fmt:message key="home"/></b></font></a></li>
-     <%=session.getAttribute("username") == null ? "" : "<li><a href='auction.jsp'><font size ='4' color='white'><b>Auction</b></font></a></li>"%>
-       <li><a href="displayAuction.jsp"><font  size ="4" color="white"><b><fmt:message key="bids"/></b></font></a></li>
-       <c:if test="${role}">
-       		<li><a href="usersServlet"><font  size ="4" color="white"><b><fmt:message key="users"/></b></font></a></li>
-       </c:if>
-      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="contactUs"/></b></font></a></li>
-      <li><a href="#"><font  size ="4" color="white"><b><fmt:message key="help"/></b></font></a></li>
-    
-    
-    <li>
-    <c:url value="auction.jsp" var="englishURL"><c:param name="locale" value="en_US"/></c:url>
- 	<a href="${englishURL}"><font size ="4" color="white"> <b>English</b></font> </a> </li>
- 	
- 	  <li>
- 	<c:url value="auction.jsp" var="chineseURL"><c:param name="locale" value="zh_CN"/></c:url>
- 	 <a href="${chineseURL}"><font size ="4" color="white"><b>&#x4E2D;&#x6587;</b></font></a></li>
- 	 
-    </ul>
-    
-    
-      	<c:if test="${null != sessionScope.username}">
-					<!--     toggle button for  -->
-					<ul class="nav navbar-nav navbar-right">
-						<li class="dropdown"><a class="dropdown-toggle"
-							data-toggle="dropdown" href="#"> <span
-								class="glyphicon glyphicon-user" style="color: white"></span><font
-								color="white"><b> <%=session.getAttribute("username") != null ? session.getAttribute("username") : ""%></b></font>
-								<!-- <span class="caret"></span> -->
-						</a>
-							<ul class="dropdown-menu">
-								<li><a href="edit.jsp"><span
-										class="glyphicon glyphicon-edit"></span> <fmt:message
-											key="edit" /></a></li>
-								<li><a href="Logout.jsp"><span
-										class="glyphicon glyphicon-log-out"></span> <fmt:message
-											key="logout" /></a></li>
-							</ul></li>
-					</ul>
-				</c:if>
-       
-    </div>
-</nav> 
+<script src="assets/js/jquery-min.js"></script>
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css"
+	href="assets/css/bootstrap.min.css">
+	
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+        	
+<!-- Main Style -->
+<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+<!-- Slicknav Css -->
+<link rel="stylesheet" type="text/css" href="assets/css/slicknav.css">
+
+<!-- Responsive Style -->
+<link rel="stylesheet" type="text/css" href="assets/css/responsive.css">
+<!--Fonts-->
+<link rel="stylesheet" media="screen"
+	href="assets/fonts/font-awesome/font-awesome.min.css">
+<link rel="stylesheet" media="screen"
+	href="assets/fonts/simple-line-icons.css">
+
+<!-- Extras -->
+<link rel="stylesheet" type="text/css"
+	href="assets/extras/owl/owl.carousel.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/extras/owl/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="assets/extras/animate.css">
+<link rel="stylesheet" type="text/css"
+	href="assets/extras/normalize.css">
+
+<link href="assets/css/login-register.css" rel="stylesheet" />
+
+<!-- Color CSS Styles  -->
+<link rel="stylesheet" type="text/css"
+	href="assets/css/colors/green.css" media="screen" />
+
+
+<script
+	src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js"></script>
+<link href="./css/prettify-1.0.css" rel="stylesheet">
+<link href="./css/base.css" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<link
+	href="//cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/e8bddc60e73c1ec2475f827be36e1957af72e2ea/build/css/bootstrap-datetimepicker.css"
+	rel="stylesheet">
+	
+	<script type="text/javascript">
+	$(function() {
+		$('#datetimepicker1').datetimepicker();
+	});
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		$('#datetimepicker2').datetimepicker();
+	});
+</script>
+	
+<script type="text/javascript">
+	$(document).ready(function() {
+		//alert("Helllo!");
+		$("#itemNameValidationMessage").hide();
+		$("#descriptionValidationMessage").hide();
+		$("#bidStartValidationMessage").hide();
+		$("#bidEndValidationMessage").hide();
+		$("#initialPriceValidationMessage").hide();
+		$("#imageValidationMessage").hide();
+
+		// make sure the uploaded file is an image
+		$("#image").change(function() {
+			var mimeType = this.files[0]['type'];
+			if (mimeType.split('/')[0] != 'image') {
+				$("#imageValidationMessage").slideDown();
+			}
+		});
+
+		$("#image").click(function() {
+			$("#imageValidationMessage").slideUp();
+		});
+	});
+
+	function hideErrorMessage(element) {
+		//alert("hoho");
+		//alert(element);
+		//alert("hi"+$(element).nodeNme+"hi");	
+		documet.getElementById(element).style.background = "yellow";
+
+	}
+
+	function disableBidStartDate() {
+		if (document.getElementById("bidStartNow").checked == true) {
+			document.getElementById("bidStart").disabled = true;
+		} else {
+			document.getElementById("bidStart").disabled = false;
+		}
+	}
+	
+	
+
+	$('.datepicker').datetimepicker({
+		format : 'DD-MM-YYYY HH:mm:ss'
+	});
+
+	function validateAuctionForm() {
+		var error = true;
+		var itemName = document.forms["auction"]["itemName"].value;
+		var description = document.forms["auction"]["description"].value;
+		var bidStart = document.forms["auction"]["bidStart"].value;
+		var bidStartNow = document.getElementById("bidStartNow").checked;
+		var bidEnd = document.forms["auction"]["bidEnd"].value;
+		var initialPrice = document.forms["auction"]["initialPrice"].value;
+
+		if (itemName.length == 0) {
+			$("#itemNameValidationMessage").slideDown();
+			error = false;
+		}
+		if (description.length == 0) {
+			$("#descriptionValidationMessage").slideDown();
+			error = false;
+		}
+		if (bidStart.length == 0 && bidStartNow == false) {
+			$("#bidStartValidationMessage").slideDown();
+			error = false;
+		}
+		if (bidEnd.length == 0) {
+			$("#bidEndValidationMessage").slideDown();
+			error = false;
+		}
+		if (initialPrice.length == 0 || isNaN(initialPrice)) {
+			$("#initialPriceValidationMessage").slideDown();
+			error = false;
+		}
+		return error;
+	}
+
+	$(function() {
+
+		// We can attach the `fileselect` event to all file inputs on the page
+		$(document).on(
+				'change',
+				':file',
+				function() {
+					var input = $(this), numFiles = input.get(0).files ? input
+							.get(0).files.length : 1, label = input.val()
+							.replace(/\\/g, '/').replace(/.*\//, '');
+					input.trigger('fileselect', [ numFiles, label ]);
+				});
+
+		// We can watch for our custom `fileselect` event like this
+		$(document)
+				.ready(
+						function() {
+							$(':file')
+									.on(
+											'fileselect',
+											function(event, numFiles, label) {
+
+												var input = $(this).parents(
+														'.input-group').find(
+														':text'), log = numFiles > 1 ? numFiles
+														+ ' files selected'
+														: label;
+
+												if (input.length) {
+													input.val(log);
+												} else {
+													if (log)
+														alert(log);
+												}
+
+											});
+						});
+
+	});
+</script>
+
+
+
+	</head>
+	<body>
+	
+	
+
+		<%@include file="header2.jsp"%>
+		<!-- Contact Section -->
+		<section class="contact-form-section section">
+			<div class="container">
+				<div class="row">
+					<div
+						class="col-md-12 mb-50 text-center contact-title-text wow fadeIn"
+						data-wow-delay="0.3s">
+						<h2>Create Auction</h2>
+					</div>
+					<div
+						class="col-md-7 col-md-offset-1 contact-form contact-info-section center-div">
+						<form enctype="multipart/form-data" name="auction"
+							id="auctionForm" onsubmit="return validateAuctionForm()"
+							action="auctionServlet" onsubmit="return validateForm()"
+							method="POST">
+
+							<div class="form-group">
+								<label for="itemName" class="sr-only">Item Name</label> <input
+									type="text" placeholder="Your item Name" name="itemName"
+									onfocus="hideErrorMessage(this.id);" required id="itemName"
+									class="form-control contact-control">
+								<div id="itemNameValidationMessage" Style="color: red">Item
+									Name is required</div>
+							</div>
+
+							<div class="form-group">
+								<label for="description" class="sr-only">Description</label>
+								<textarea name="description" rows="5" placeholder="Enter Description" form="auctionForm" required id="description" class="form-control"></textarea>
+								<div id="descriptionValidationMessage" Style="color: red">Description
+									is required</div>
+							</div>
+
+							<div class="input-group date" data-provide="datepicker" style="text-align: left;">
+								<label for="bidStart">Bidding Starts at :</label>
+								<div class='input-group date' id='datetimepicker1'>
+									<input type='text' class="form-control"
+										data-date-format="YYYY-MM-DD HH:mm:ss" id="bidStart"
+										name="bidStart" /> <span class="input-group-addon"> <span
+										class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+
+							
+							<div class="input-group date" data-provide="datepicker" style="text-align: left;">
+								<label for="bidStartNow">Start Bid Now</label> 
+								<input 
+									type="checkbox" onclick="disableBidStartDate()"
+									id="bidStartNow" name="bidStartNow" />
+								<div id="bidStartValidationMessage" Style="color: red">Bidding
+									Start Date and Time are required</div>
+							</div>
+
+							<div class="form-group" style="text-align: left;">
+								<label for="bidEnd">Bidding Ends at:</label>
+								<div class='input-group date' id='datetimepicker2'>
+									<input type='text' class="form-control"
+										data-date-format="YYYY-MM-DD HH:mm:ss" id="bidEnd"
+										name="bidEnd" /> <span class="input-group-addon"> <span
+										class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="pull-left" for="initialPrice">Initial
+									Price</label> <input type="text" class="form-control" id="initialPrice"
+									placeholder="Enter Initial Price" name="initialPrice" required>
+								<div id="initialPriceValidationMessage" Style="color: red">Initial
+									Price is required and has to be number</div>
+							</div>
+
+							<br />
+
+
+							<div class="input-group" id="fileUpload">
+								<label class="input-group-btn" for="image"> <span
+									class="btn btn-primary"> Upload Image<input type="file"
+										id="image" name="image" accept="image/*"
+										style="display: none;" multiple>
+								</span>
+								</label> <input type="text" class="form-control"
+									style="border-radius: 0px 5px 5px 0px" readonly>
+								<div id="imageValidationMessage" Style="color: red">The
+									file needs to be an image</div>
+							</div>
+							
+							<br />
+							<br />
+
+							<button type="submit" class="btn btn-primary"
+								id="submitAuctionbtn" name="submitAuctionbtn">
+								<fmt:message key="submit" />
+							</button>
+
+							<div class="clearfix"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Contact Section End -->
 
 
 
 
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-      <p><a href="#"><img src="Real_Time_Bidding.png" height=100% width=100%></a></p>
-      <p><a href="#"><img src="chicago.png" height=100% width=100%></a></p>
-      <p><a href="#"><img src="bids.png" height=100% width=100%></a></p>
-    </div>
-	
-	
-	
-	
-	
-	<div class="col-sm-3"></div>
-	
-<div  class="col-sm-3">
-<div> &nbsp;</div>
-<div class= "panel panel-danger">
- <div class= "panel-heading" >  <b> <fmt:message key="auctionForm"/></b> </div>
-  <div class ="panel-body"> 
-	<form action="auctionServlet" method="POST" enctype="multipart/form-data" name="auction" onsubmit="return validateAuctionForm()"> 
-		<div class="form-group">
-		    <label class ="pull-left" for="itemName">Item Name:</label>
-			<input type="text" class="form-control input-sm" id="itemName"  placeholder="Please Enter item name" name="itemName" onfocus="hideErrorMessage(this.id);" required>
-			<div id="itemNameValidationMessage" Style="color: red">Item Name is required</div>
-		</div>
-		
-		<div class="form-group">
-		    <label class ="pull-left" for="description">Description:</label>
-			<input type="text" class="form-control input-sm" id="description"  placeholder="Please Enter Description"  name="description" required>
-			<div id="descriptionValidationMessage" Style="color: red">Description is required</div>
-	    </div>
-	    
-	    <div class="form-group">		
-			<label class ="pull-left" for="bidStart">Bidding Starts at :</label>
-			<input type="datetime-local" class="form-control input-sm" id="bidStart" name="bidStart" required>
-			<div id="bidStartValidationMessage" Style="color: red">Bidding Start Date and Time are required</div>
-		</div>
-			
-		<div class="form-group">	
-			<label class ="pull-left" for="bidEnd">Bidding Ends at:</label>
-			<input type="datetime-local" class="form-control input-sm" id="bidEnd" name="bidEnd" required>
-			<div id="bidEndValidationMessage" Style="color: red">Bidding End Date and Time are required</div>
-			<c:if test = "${dateFormat == 'wrong'}">
-				<div id="datesValidationMessage" Style="color: red">Bidding Start Time should be before End Time and Bidding start time has to be after now</div>
-			</c:if>
-		</div>
-		
-		<div class="form-group">	
-			<label class ="pull-left" for="initialPrice">Initial Price</label>
-			<input type="text" class="form-control input-sm" id="initialPrice" placeholder="Please Enter Initial Price" name="initialPrice" required>
-			<div id="initialPriceValidationMessage" Style="color: red">Initial Price is required and has to be number</div>    
-		</div>	
-		
-		<div class="form-group">	
-			<label class ="pull-left" for="image">Image:</label>
-			<input type="file" class="form-control input-sm" id="image" placeholder="Please Upload image of the item" name="image" accept="image/*">
-			<div id="imageValidationMessage" Style="color: red">The file needs to be an image</div>    
-		</div>	
 
-			<button type="submit" class="btn btn-primary" id="submitAuctionbtn" name="submitAuctionbtn">Submit Auction</button>
+		<%@include file="footer.jsp"%>
 
-	</form>
-	</div>
-</div>	
- </div>	
-  </div>
-</div>
-</div> 
-<footer class="container-fluid text-center">
-  <div class="navbar-header">
-      <a href="#"><b><font size="6" color="white">OttawAuction</font></b></a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#"><font size ="4" color="white"><b>© OttawAuction</b></font></a></li>
-   </ul>
-     <ul class="nav navbar-nav"> 
-      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="feedback"/></b></font></a></li>
-      <li><a href="#"><font size ="4" color="white"><b><fmt:message key="privacyPolicy"/></b></font></a></li>
-   </ul>
-</footer>	
+
+		<!-- JavaScript & jQuery Plugins -->
 	
+		<script src="assets/js/popper.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/jquery.mixitup.js"></script>
+		<script src="assets/js/smoothscroll.js"></script>
+		<script src="assets/js/wow.js"></script>
+		<script src="assets/js/owl.carousel.js"></script>
+		<script src="assets/js/waypoints.min.js"></script>
+		<script src="assets/js/jquery.counterup.min.js"></script>
+		<script src="assets/js/jquery.slicknav.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/form-validator.min.js"></script>
+		<script src="assets/js/contact-form-script.min.js"></script>
+		<script src="assets/js/main.js"></script>
 	
-</body>
 </fmt:bundle>
+</body>
 </html>

@@ -30,6 +30,7 @@ public class SellerFeedbackDao {
 					pst.setString(2, description);
 					pst.setString(3, ("" + userId));
 					pst.executeUpdate();
+					
 				}
 
 		} catch (Exception e) {

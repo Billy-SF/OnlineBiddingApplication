@@ -3,6 +3,17 @@
 	xmlns="http://java.sun.com/xml/ns/javaee"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
+	
+		<servlet>
+		<servlet-name>checkpay</servlet-name>
+		<servlet-class>com.oa.servlets.CheckHighestBidServlet</servlet-class>
+	</servlet>
+	
+		<servlet>
+		<servlet-name>contact</servlet-name>
+		<servlet-class>com.oa.servlets.ContactServlet</servlet-class>
+	</servlet>
+	
 	<servlet>
 		<servlet-name>chat</servlet-name>
 		<servlet-class>com.oa.servlets.ChatServlet</servlet-class>
@@ -56,7 +67,7 @@
 		<servlet-class>com.oa.servlets.DisplayAuctionServlet</servlet-class>
 	</servlet>
 	<servlet>
-		<servlet-name>usersServlet</servlet-name>
+		<servlet-name>users</servlet-name>
 		<servlet-class>com.oa.servlets.UsersServlet</servlet-class>
 	</servlet>
 	<servlet>
@@ -67,6 +78,20 @@
 		<servlet-name>admin</servlet-name>
 		<servlet-class>com.oa.servlets.AdminServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>closedBids</servlet-name>
+		<servlet-class>com.oa.servlets.ClosedBidsServlet</servlet-class>
+	</servlet>
+	
+		<servlet-mapping>
+		<servlet-name>checkpay</servlet-name>
+		<url-pattern>/checkHighestBidServlet</url-pattern>
+	</servlet-mapping>
+	
+		<servlet-mapping>
+		<servlet-name>contact</servlet-name>
+		<url-pattern>/contactServlet</url-pattern>
+	</servlet-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>chat</servlet-name>
@@ -118,10 +143,10 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>displayAuction</servlet-name>
-		<url-pattern>/displayActionServlet</url-pattern>
+		<url-pattern>/displayAuctionServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>usersServlet</servlet-name>
+		<servlet-name>users</servlet-name>
 		<url-pattern>/usersServlet</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
@@ -131,6 +156,10 @@
 	<servlet-mapping>
 		<servlet-name>admin</servlet-name>
 		<url-pattern>/adminServlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>closedBids</servlet-name>
+		<url-pattern>/closedBidsServlet</url-pattern>
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

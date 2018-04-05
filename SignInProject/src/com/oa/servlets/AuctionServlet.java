@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.file.StandardCopyOption;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -35,6 +36,8 @@ public class AuctionServlet extends HttpServlet{
 
 		String username = (String)request.getSession(false).getAttribute("username"); 
 		String password = (String)request.getSession(false).getAttribute("password");
+		String bidStart;
+		String bidEnd;
 
 		if(username != null || password != null) { 
 
@@ -44,38 +47,51 @@ public class AuctionServlet extends HttpServlet{
 
 				String itemName= request.getParameter("itemName");
 				String description = request.getParameter("description");
-				String bidStart = request.getParameter("bidStart");
-				String bidEnd = request.getParameter("bidEnd") ;
+				System.out.println("Checkbox value is " + request.getParameter("bidStartNow"));
+				String bidStartNow = request.getParameter("bidStartNow");
+				bidStart = new String();
+				
+				if("on".equals(bidStartNow)) {
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					Date date = new Date();
+					bidStart = sdf.format(date);	
+					
+				}
+				else {
+			 bidStart = request.getParameter("bidStart");
+			 System.out.println("zzzzzzz"+bidStart);
+				}
+				bidEnd = request.getParameter("bidEnd") ;
 				String initialPrice = request.getParameter("initialPrice");
 				Part filePart = request.getPart("image");
 
 				if (itemName != null && description != null && bidStart != null && bidEnd != null && initialPrice != null) {
 					// date validation
-					String [] validSatrtBidArray = bidStart.split("T");
-					String [] startBidDate = validSatrtBidArray[0].split("-");
+					//String [] validSatrtBidArray = bidStart.split("T");
+					//String [] startBidDate = validSatrtBidArray[0].split("-");
 
 					// time validation
-					if(validSatrtBidArray.length > 1) {
-						String [] startBidTime = validSatrtBidArray[1].split(":");
+					//if(validSatrtBidArray.length > 1) {
+						//String [] startBidTime = validSatrtBidArray[1].split(":");
 
-						Calendar calS = Calendar.getInstance();
-						calS.set(Integer.valueOf(startBidDate[0]), Integer.valueOf(startBidDate[1]) - 1, Integer.valueOf(startBidDate[2]), Integer.valueOf(startBidTime[0]), Integer.valueOf(startBidTime[1]));
-						Date start = calS.getTime();
+						//Calendar calS = Calendar.getInstance();
+						//calS.set(Integer.valueOf(startBidDate[0]), Integer.valueOf(startBidDate[1]) - 1, Integer.valueOf(startBidDate[2]), Integer.valueOf(startBidTime[0]), Integer.valueOf(startBidTime[1]));
+						//Date start = calS.getTime();
 
-						String [] validEndBidArray = bidEnd.split("T");
-						String [] endBidDate = validEndBidArray[0].split("-");
-						if(validEndBidArray.length > 1){ 
-							String [] endBidTime = validEndBidArray[1].split(":");
+						//String [] validEndBidArray = bidEnd.split("T");
+						//String [] endBidDate = validEndBidArray[0].split("-");
+						//if(validEndBidArray.length > 1){ 
+							//String [] endBidTime = validEndBidArray[1].split(":");
 
-							Calendar calE = Calendar.getInstance();
-							calE.set(Integer.valueOf(endBidDate[0]), Integer.valueOf(endBidDate[1]) - 1, Integer.valueOf(endBidDate[2]), Integer.valueOf(endBidTime[0]), Integer.valueOf(endBidTime[1]));
-							Date end = calE.getTime();
+							//Calendar calE = Calendar.getInstance();
+							//calE.set(Integer.valueOf(endBidDate[0]), Integer.valueOf(endBidDate[1]) - 1, Integer.valueOf(endBidDate[2]), Integer.valueOf(endBidTime[0]), Integer.valueOf(endBidTime[1]));
+							//Date end = calE.getTime();
 
 
 							// if date is not valid, stay on page
-							if (end.compareTo(start) > 0 && end.compareTo(new Date()) > 0 && start.compareTo(new Date()) > 0) {
+							//if (end.compareTo(start) > 0 && end.compareTo(new Date()) > 0 && start.compareTo(new Date()) > 0) {
 								
-								request.setAttribute("dateFormat", "correct");
+								//request.setAttribute("dateFormat", "correct");
 
 								try {
 									if (filePart != null) {
@@ -107,13 +123,10 @@ public class AuctionServlet extends HttpServlet{
 
 									BigDecimal initialPriceBd = new BigDecimal(initialPrice);
 
-									String bidStartFormat = bidStart.replaceAll("T", " ").concat(":00");
-									String bidEndFormat = bidEnd.replaceAll("T", " ").concat(":00");
+									//String bidStartFormat = bidStart.replaceAll("T", " ").concat(":00");
+									//String bidEndFormat = bidEnd.replaceAll("T", " ").concat(":00");
 
-									/*Date bidStartDate = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS").parse(bidstartFormat);
-								Date bidEndDate = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS").parse(bidEndFormat);*/
-
-									AuctionDao.createAction(itemName, description, imageFileName, bidStartFormat, bidEndFormat, initialPriceBd, username, password);
+									AuctionDao.createAction(itemName, description, imageFileName, bidStart, bidEnd, initialPriceBd, username, password);
 
 								}catch (Exception e) {
 									e.printStackTrace();
@@ -121,8 +134,7 @@ public class AuctionServlet extends HttpServlet{
 								finally {
 									IOUtils.closeQuietly(inputStream);
 								}
-								RequestDispatcher rd=request.getRequestDispatcher("displayAuction.jsp");  
-								rd.forward(request,response);
+								response.sendRedirect("displayAuctionServlet");
 							}// if start date is before end date or start date is before now
 							else {
 								request.setAttribute("dateFormat", "wrong");
@@ -137,18 +149,18 @@ public class AuctionServlet extends HttpServlet{
 						redirectToPage(request, response, "auction.jsp");
 					}
 				}// if form is not completely filled
-				else {
-					redirectToPage(request, response, "auction.jsp");
-				}
-			}// if user == null
-			else {
-				redirectToPage(request, response, "registerForm.jsp");
-			}
-		}// if user is not on session
-		else {
-			redirectToPage(request, response, "index.jsp");
-		}
-	}
+				//else {
+					//redirectToPage(request, response, "auction.jsp");
+				//}
+			//}// if user == null
+			//else {
+				//redirectToPage(request, response, "registerForm.jsp");
+			//}
+		//}// if user is not on session
+		//else {
+			//redirectToPage(request, response, "index.jsp");
+		//}
+	//}
 
 	private void redirectToPage(HttpServletRequest request , HttpServletResponse response , String page) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher(page);  

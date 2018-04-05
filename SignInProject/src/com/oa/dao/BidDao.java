@@ -326,6 +326,74 @@ public String getUserId(String auctionId)
 	return "Failure in getUserID Method";
 }
 
+public static Bid getHigestBid(String productitemid) {
+	Connection conn = Dao.getConnection();
+	PreparedStatement pst = null;
+	ResultSet rs = null;
+
+	Bid bid= null;
+
+	//Todo: need to check auction table first
+	try{
+		pst = conn.prepareStatement("select b.* from bids b, auctions a where "
+				+ " b.auctions_fk = a.id and a.items_fk = ? order by bid_price desc limit 1");
+		pst.setString(1, productitemid);
+
+		rs = pst.executeQuery();
+		int size =0;
+		if (rs != null) 
+		{
+			rs.beforeFirst();
+			rs.last();
+			size = rs.getRow();
+		}
+
+
+		rs.beforeFirst();
+		int i = 0;
+	
+		while(rs.next()){
+
+			bid = new Bid();
+
+			bid.setId(rs.getString("id"));
+			bid.setBidprice(rs.getString("bid_price"));
+			bid.setAuctionid(rs.getString("auctions_fk"));
+			bid.setUserid(rs.getString("users_fk"));
+			bid.setDateCreated(rs.getString("date_created"));
+
+		}
+		pst.close();
+		rs.close();
+
+		//System.out.println("Size of Arraylist bids is " + bids.size() );
+
+	}catch (Exception e) {
+		e.printStackTrace();
+	} finally {
+		if (conn != null) {
+			Dao.closeConnection();
+		}
+		if (pst != null) {
+			try {
+				pst.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	
+	}	
+	return bid;
+}
+
 
 }//End of BidDao
 
