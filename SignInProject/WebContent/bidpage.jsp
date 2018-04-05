@@ -238,18 +238,18 @@ to {
 				<c:if test="${errorMessageBidDao ne null}">
 					<h3>${errorMessageBidDao}</h3>
 				</c:if>
-
-				<div id="paylink" name="paylink">
+				<c:if test="${null != sessionScope.username}">
+				<div id="paylink">
 					<form class="margin-left:90px;">
 						<script src="https://checkout.stripe.com/checkout.js"
 							class="stripe-button" data-key="pk_test_5xAtehpMJFCsizMiODrIcjvt"
 							data-amount="99" data-name="Sample" data-description="Widget"
 							data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
 							data-locale="auto" data-currency="cad">
-							
 						</script>
 					</form>
 				</div>
+				</c:if>
 				<br />
 
 				<form class="form-inline" action="bidServlet" method="post">
@@ -298,23 +298,22 @@ to {
 							"productitemid" : "${productitem.getProductId()}"
 						},
 						beforeSend : function(xhr) {
-							//resp.html("Please wait...");
-							//console.log("----Please wait...");
+				
 						},
 						success : function(data) {
 							if ((typeof data["paymessage"]) != "undefined") {
 								var paymessage = data["paymessage"];
 
 								if (paymessage == "1") {
-									$("#paylink").html(content2);
+									$("button[class$='stripe-button-el']").show();
 								}
 							} else {
-								$('#paylink').html("");
+								$("button[class$='stripe-button-el']").hide();
 							}
 
 						},
 						error : function(error) {
-							$('#paylink').html("");
+							$("button[class$='stripe-button-el']").hide();
 						},
 					});
 
@@ -381,30 +380,30 @@ to {
 														+ parseInt(seconds)
 														+ ' seconds');
 
+										//before start date
 										if ((date_now.getTime() - date_start
-												.getTime()) >= 0
-												&& (date_future.getTime() - date_now
-														.getTime()) < 0) {
-
-											$("#bidprice")
-													.attr("disabled", " ");
-											$("#bidsubmit").attr('disabled',
-													" ");
-
-										} else if ((date_now.getTime() - date_start
-												.getTime()) < 0
-												&& (date_future.getTime() - date_now
-														.getTime()) > 0) {
+												.getTime()) < 0) {
 											$("#bidprice").attr("disabled",
-													"disabled");
-											$("#bidsubmit").attr('disabled',
-													"disabled");
+											"disabled");
+									$("#bidsubmit").attr('disabled',
+											"disabled");
 
-											$("#tttt").text(
-													"Bidding not started!!");
+									$("#tttt").text(
+											"Bidding not started!!");
 
-										} else if (date_future.getTime()
-												- date_now.getTime() < 0) {
+										
+										//between bidding time
+										} else if ((date_now.getTime() - date_start
+												.getTime()) >= 0 && date_now.getTime() - date_future.getTime()
+												 < 0) {
+											$("#bidprice")
+											.attr("disabled", " ");
+									$("#bidsubmit").attr('disabled',
+											" ");
+											
+										//after end date
+										} else if (date_now.getTime() - date_future.getTime()
+												 >= 0) {
 											// auction end date expired
 											$("#bidprice").attr("disabled",
 													"disabled");
