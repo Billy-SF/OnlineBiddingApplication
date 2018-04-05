@@ -238,7 +238,7 @@ to {
 				<c:if test="${errorMessageBidDao ne null}">
 					<h3>${errorMessageBidDao}</h3>
 				</c:if>
-				<c:if test="${null != sessionScope.username}">
+
 				<div id="paylink">
 					<form class="margin-left:90px;">
 						<script src="https://checkout.stripe.com/checkout.js"
@@ -249,7 +249,6 @@ to {
 						</script>
 					</form>
 				</div>
-				</c:if>
 				<br />
 
 				<form class="form-inline" action="bidServlet" method="post">
@@ -332,6 +331,7 @@ to {
 				$(document)
 						.ready(
 								function() {
+									$("button[class$='stripe-button-el']").hide();
 									if ("${sessionScope.username}" != "") {
 										checkUserPay();
 
@@ -387,7 +387,7 @@ to {
 											"disabled");
 									$("#bidsubmit").attr('disabled',
 											"disabled");
-
+									$("button[class$='stripe-button-el']").hide();
 									$("#tttt").text(
 											"Bidding not started!!");
 
@@ -396,10 +396,8 @@ to {
 										} else if ((date_now.getTime() - date_start
 												.getTime()) >= 0 && date_now.getTime() - date_future.getTime()
 												 < 0) {
-											$("#bidprice")
-											.attr("disabled", " ");
-									$("#bidsubmit").attr('disabled',
-											" ");
+											$("#bidprice").removeAttr("disabled");
+									$("#bidsubmit").removeAttr('disabled');
 											
 										//after end date
 										} else if (date_now.getTime() - date_future.getTime()
