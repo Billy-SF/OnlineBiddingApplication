@@ -240,7 +240,7 @@ to {
 				</c:if>
 
 				<div id="paylink">
-					<form class="margin-left:90px;">
+					<form class="margin-left:90px;" action="/webProject/index.jsp">
 						<script src="https://checkout.stripe.com/checkout.js"
 							class="stripe-button" data-key="pk_test_5xAtehpMJFCsizMiODrIcjvt"
 							data-amount="99" data-name="Sample" data-description="Widget"

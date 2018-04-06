@@ -104,7 +104,13 @@
 						<c:set var="auctionId" value="${soldAuction.id}"/>
 						<td>${sellersMapForSoldAuctions[auctionId]}</td>
 						<td>${soldItems[auctionId].itemName}</td>
-						<td><img class ="gallery" src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${soldItems[auctionId].image}'  width="200" height="150" alt="${soldItems[auctionId].image}"></td>
+						<td>
+						<a href="bidPageDisplayServlet?productitemid=${soldItems[auctionId].productId}">
+						<img class ="gallery"
+						 src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${soldItems[auctionId].image}' 
+						  width="200" height="150" alt="${soldItems[auctionId].image}">
+						</a>
+						</td>
 						<td>${soldAuction.dateCreated}</td>
 						<td>${soldAuction.bidstarttime}</td>
 						<td>${soldAuction.bidendtime}</td>

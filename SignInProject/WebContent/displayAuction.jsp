@@ -72,55 +72,6 @@
 
 		<%@include file="header.jsp"%>
 
-  <!-- Service Block-1 Section -->
-    <section id="service-block-main" class="section">
-      <!-- Container Starts -->
-      <div class="container">
-        <h1 class="section-title wow fadeIn animated" data-wow-delay=".2s">
-        Current Auctions
-        </h1>
-        <br/>
-        <div class="row">  
-        <c:forEach items="${openAuctions}" var="openAuction">
-        	<c:set var="auctionId" value="${openAuction.id}" />
-          <div class="col-sm-6 col-md-6 col-lg-6 col-xs-12">
-            <!-- Service-Block-1 Item Starts -->
-            <div class="service-item wow fadeInUpQuick animated" data-wow-delay=".3s">
-              <div class="client-item-wrapper">
-              <img src="assets/img/products/cake.jpg" style="min-height:200px; max-width:200px;max-height:200px;" alt="">
-            </div>
-              <h2>
-               ${ItemsForOpenAuctions[auctionId].itemName}
-              </h2>
-              <p>
-               Seller: ${sellersMapForOpenAuctions[auctionId]}
-              </p>
-                <p>
-               Description:
-              </p>
-                <p>
-                Start Date:
-              </p>
-                <p>
-                End Date:
-              </p>
-                <p>
-                Initial Price:
-              </p>
-                <p>
-                Current Bid:
-              </p>
-                <p>
-                Bidder:
-              </p>
-            </div>
-            <!-- Service-Block-1 Item Ends -->
-          </div>
-          </c:forEach>
-</div>
-</div>
-</section>
-
 
 			<!-- <div class= "panel panel-danger">
  <div class= "panel-heading" >  <b> Auctions</b> </div>
