@@ -246,6 +246,7 @@ to {
 							data-amount="99" data-name="Sample" data-description="Widget"
 							data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
 							data-locale="auto" data-currency="cad">
+							
 						</script>
 					</form>
 				</div>
@@ -297,14 +298,15 @@ to {
 							"productitemid" : "${productitem.getProductId()}"
 						},
 						beforeSend : function(xhr) {
-				
+
 						},
 						success : function(data) {
 							if ((typeof data["paymessage"]) != "undefined") {
 								var paymessage = data["paymessage"];
 
 								if (paymessage == "1") {
-									$("button[class$='stripe-button-el']").show();
+									$("button[class$='stripe-button-el']")
+											.show();
 								}
 							} else {
 								$("button[class$='stripe-button-el']").hide();
@@ -331,11 +333,8 @@ to {
 				$(document)
 						.ready(
 								function() {
-									$("button[class$='stripe-button-el']").hide();
-									if ("${sessionScope.username}" != "") {
-										checkUserPay();
-
-									}
+									$("button[class$='stripe-button-el']")
+											.hide();
 
 									var timestamp = "${productitem.getAuction().getBidendtime()}";
 									var timestamp_start = "${productitem.getAuction().getBidstarttime()}";
@@ -384,24 +383,28 @@ to {
 										if ((date_now.getTime() - date_start
 												.getTime()) < 0) {
 											$("#bidprice").attr("disabled",
-											"disabled");
-									$("#bidsubmit").attr('disabled',
-											"disabled");
-									$("button[class$='stripe-button-el']").hide();
-									$("#tttt").text(
-											"Bidding not started!!");
+													"disabled");
+											$("#bidsubmit").attr('disabled',
+													"disabled");
+											$(
+													"button[class$='stripe-button-el']")
+													.hide();
+											$("#tttt").text(
+													"Bidding not started!!");
 
-										
-										//between bidding time
+											//between bidding time
 										} else if ((date_now.getTime() - date_start
-												.getTime()) >= 0 && date_now.getTime() - date_future.getTime()
-												 < 0) {
-											$("#bidprice").removeAttr("disabled");
-									$("#bidsubmit").removeAttr('disabled');
-											
-										//after end date
-										} else if (date_now.getTime() - date_future.getTime()
-												 >= 0) {
+												.getTime()) >= 0
+												&& date_now.getTime()
+														- date_future.getTime() < 0) {
+											$("#bidprice").removeAttr(
+													"disabled");
+											$("#bidsubmit").removeAttr(
+													'disabled');
+
+											//after end date
+										} else if (date_now.getTime()
+												- date_future.getTime() >= 0) {
 											// auction end date expired
 											$("#bidprice").attr("disabled",
 													"disabled");
@@ -411,6 +414,11 @@ to {
 											$("#tttt")
 													.text(
 															"0 seconds left, Bidding ended!");
+											
+											if ("${sessionScope.username}" != "") {
+												checkUserPay();
+
+											}
 											clearInterval(myVar);
 											$
 													.ajax({
@@ -431,6 +439,7 @@ to {
 															//console.log( errorThrown );
 														}
 													});
+
 											if ("${sessionScope.username}" != "") {
 												checkUserPay();
 											}
@@ -564,17 +573,14 @@ to {
 		// Get the image and insert it inside the modal - use its "alt" text as a caption
 		var img = document.getElementById('myImg');
 		var modalImg = document.getElementById("img01");
-		var captionText = document.getElementById("caption");
+	
 		img.onclick = function() {
 			modal.style.display = "block";
 			modalImg.src = this.src;
-			captionText.innerHTML = this.alt;
+		
 		}
 
-		// When the user clicks on <span> (x), close the modal
-		span.onclick = function() {
-			modal.style.display = "none";
-		}
+	
 	</script>
 
 
