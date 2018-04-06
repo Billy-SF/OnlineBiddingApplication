@@ -65,7 +65,7 @@
                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   <i class="fa fa-user icon-round icon-xs"></i>${sessionScope.username}</a>
     				<div class="dropdown-menu">
     				<c:url value="users.jsp" var="users">
-								<c:param name="locale" value="${users}" />
+								<c:param name="locale" value="${loc}" />
 							</c:url>
     				<c:url value="edit.jsp" var="edit">
 								<c:param name="locale" value="${loc}" />
