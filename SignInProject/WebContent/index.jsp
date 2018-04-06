@@ -121,7 +121,7 @@
               <img src="assets/img/products/cake.jpg" style="min-height:200px; max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                40+ Pages
+                Cake
               </h2>
               <p>
                 Pellentesque ipsum erat, facilisis ut venenatis eu, sodales vel dolor.
@@ -139,7 +139,7 @@
               <img src="assets/img/products/car.jpg" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                Refreshing Design
+                Car
               </h2>
               <p>
                 Pellentesque ipsum erat, facilisis ut venenatis eu, sodales vel dolor.
@@ -155,7 +155,7 @@
               <img src="assets/img/products/rolex.jpg" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                Bootstrap4 and HTML5
+                Watch
               </h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat Quidem!
@@ -171,7 +171,7 @@
               <img src="assets/img/products/snowman.jpg" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                Crafted Carefully
+                Snowman
               </h2>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat Quidem!

@@ -202,7 +202,7 @@ to {
 				<div class="image">
 			
 
-					<img id="myImg" alt="W3Schools.com" class="float-left" style="height:90%;width:90%;"
+					<img id="myImg" alt="W3Schools.com" class="float-left" style="height:93%;width:93%;"
 					src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productitem.image}"
 					alt="${productitem.itemName}"></img> 
 				</div>

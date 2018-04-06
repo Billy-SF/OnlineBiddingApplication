@@ -89,10 +89,10 @@
           	<form name="verifyForm" action="verifyEmailServlet" onsubmit="return validateForm()" method="POST"> 
 		<div class="form-group">
 			<p class="pull-left" style="color:red"id="codeValidation"></p>
-		    <label for="verificationCode"><fmt:message key="verficationCode"/></label>
-			<input type="text" class="form-control input-md" id="code" placeholder="<fmt:message key="EnterverficationCode"/>" name="code">
+		    <label for="verificationCode">Verify Code</label>
+			<input type="text" class="form-control input-md" id="code" placeholder="Enter Verification Code" name="code">
 		</div>
-			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><fmt:message key="submit"/></button>
+			<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
 </form>
     
           </div>

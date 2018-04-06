@@ -51,12 +51,14 @@
 								<c:if test="${null != sessionScope.username}">
 								<a class="dropdown-item" href="auction.jsp"><fmt:message
 										key="createAuction" /></a> </c:if> 
-										
+									
 							<a class="dropdown-item"
 									href="displayAuctionServlet"><fmt:message key="viewCurrentBids" /></a>
 								
+									<c:if test="${role}">
 								<a class="dropdown-item" href="closedBidsServlet"><fmt:message
 										key="viewEndedBids" /></a>
+											</c:if>
 							</div></li>
 					  <c:if test="${null != sessionScope.username}">
               
