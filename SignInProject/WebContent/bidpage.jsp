@@ -373,7 +373,7 @@ to {
 										//(date_now.getTime() - date_past.getTime())
 										// );
 										$("#tttt").text(
-												days + ' days, ' + minutes
+												days + ' days, ' + hours + ' hours, ' + minutes
 														+ ' minutes, '
 														+ parseInt(seconds)
 														+ ' seconds');
