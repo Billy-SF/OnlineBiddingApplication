@@ -115,8 +115,9 @@
 							</c:otherwise>
 						</c:choose>
 						<td>
-							<form  action="deleteAuctionServlet">
-								<a href="deleteUserServlet?userId=${user.userId}" class="glyphicon glyphicon-remove" type="submit"></a>
+						
+							<form action="deleteAuctionServlet">
+								<a href="deleteUserServlet?userId=${user.userId}"  class="btn btn-primary" type="submit">Delete</a>
 							</form>
 						</td>
 					</tr>
