@@ -180,8 +180,8 @@
 														href="bidPageDisplayServlet?productitemid=${productItem.productId}">
 												</c:if>
 												<img
-													src="chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${productItem.image}"
-													alt="${productItem.itemName}" width="300" height="200"></img>
+													src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productItem.getImage()}"
+													alt="${productItem.itemName}" width="200" height="200"></img>
 												<c:if test="${not empty productItem.getAuction().getId()}">
 													</a>
 												</c:if>

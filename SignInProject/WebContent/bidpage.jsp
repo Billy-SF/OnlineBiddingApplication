@@ -200,12 +200,11 @@ to {
 			<div class="col-lg-9 col-md-5 col-sm-5" style="margin-left: 70px;">
 				<h2>${productitem.getItemName()}</h2>
 				<div class="image">
-					<img id="myImg" src="assets/img/art/a1.jpg" alt="W3Schools.com"
-						class="float-left"">
+			
 
-					<%-- <img
-					src="chrome-extension://dhdebllgjlepmfjeignhkcmdklalodmd/${productitem.image}"
-					alt="${productitem.itemName}"></img> --%>
+					<img id="myImg" alt="W3Schools.com" class="float-left" style="height:90%;width:90%;"
+					src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productitem.image}"
+					alt="${productitem.itemName}"></img> 
 				</div>
 
 			</div>
@@ -496,16 +495,13 @@ to {
 	<hr>
 	<br />
 	<c:if test="${!(empty sessionScope.username)}">
-		<div class="row" id="chatroom">
-			<div class="col-md-5">
+		<div class="row align-items-center justify-content-center" id="chatroom">
+			<div class="col-md-5 col-lg-9 col-sm-5 ">
 				<div class="chatroom-container">
 					<div class="chatmessage-container" id="chatmessage"></div>
 					<div class="clearfix"></div>
-					<div class="input-group left-padding-5  bottom-padding-5">
-						<div class="input-group-btn">
-							<button class="btn btn-default btn-sm" type="button" name="clear"
-								id="clear">Clear</button>
-						</div>
+					<div class="input-group left-padding-5 bottom-padding-5">
+						
 						<div class="text-right top-padding-12 right-padding-100">
 							<label for="color">Color</label>&nbsp; <select id="color"
 								name="color">
@@ -530,9 +526,13 @@ to {
 								type="text" id="color" name="color"><br>
 						</div>
 						<div class="input-group">
+						<div class="input-group-btn">
+							<button class="btn btn-primary  btn-sm" type="button" name="clear"
+								id="clear">Clear</button>
+						</div>
 							<input type="text" class="form-control" id="message"
 								name="message"> <span class="input-group-btn">
-								<button class="btn btn-default" type="button" id="send"
+								<button class="btn btn-primary btn-sm" type="button" id="send"
 									name="send">Submit</button>
 							</span>
 						</div>

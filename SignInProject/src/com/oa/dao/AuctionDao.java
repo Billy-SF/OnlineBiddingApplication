@@ -189,6 +189,7 @@ public class AuctionDao {
 		try{
 			for (Auction auction : auctions) {
 				pst = conn.prepareStatement("select username from users where id in (select users_fk from bids where auctions_fk = '" + auction.getId() + "')");
+
 				rs = pst.executeQuery();
 				while(rs.next()) {
 					usernamesMap.put(auction.getId(), rs.getString("username"));

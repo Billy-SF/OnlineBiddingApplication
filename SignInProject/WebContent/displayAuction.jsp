@@ -111,7 +111,7 @@
 							<td><a
 								href="bidPageDisplayServlet?productitemid=${ItemsForOpenAuctions[auctionId].productId}">
 									<img class="gallery"
-									src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${ItemsForOpenAuctions[auctionId].image}'
+									src='chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${ItemsForOpenAuctions[auctionId].image}'
 									width="200" height="150"
 									alt="${ItemsForOpenAuctions[auctionId].image}">
 							</a></td>

@@ -78,6 +78,14 @@
 			<h3><b>Users List</b></h3>
 		<div>&nbsp;</div>
 	  
+		<!-- middle part of the page -->
+	 <div class="col-sm-10 text-left"> 
+
+		<div class="text-center">
+			<p><h3><b>Users List</b></h3></p>
+		</div>
+		<div>&nbsp;</div>
+	  
 		<table id="users" class="stripe table-striped" style="width:100%">
 			<thead>
 				<tr>
@@ -116,7 +124,6 @@
 			</tbody>
 		</table>
 	<script>
-
 		$(document).ready(function() {
 			$('#users').DataTable({
 				searching : false,
@@ -130,7 +137,7 @@
 	  
 	</div>
 	
-
+</div>
 
 
 

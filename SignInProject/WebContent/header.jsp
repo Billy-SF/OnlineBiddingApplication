@@ -64,16 +64,14 @@
 					     <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">   <i class="fa fa-user icon-round icon-xs"></i>${sessionScope.username}</a>
     				<div class="dropdown-menu">
-    				<c:url value="users.jsp" var="users">
-								<c:param name="locale" value="${loc}" />
-							</c:url>
+    			
     				<c:url value="edit.jsp" var="edit">
 								<c:param name="locale" value="${loc}" />
 							</c:url>
     				
-    					<c:if test="${role}">
-									 <a class="dropdown-item" href="${users}"><fmt:message key="edit" /></a>
-									</c:if>
+    				<c:if test="${role}">
+						<a class="dropdown-item" href="usersServlet"><fmt:message key="users" /></a>
+					</c:if>
     				
     				 <a class="dropdown-item" href="${edit}"><fmt:message key="edit" /></a>
                   <a class="dropdown-item" href="Logout.jsp"><fmt:message key="logout" /></a>
