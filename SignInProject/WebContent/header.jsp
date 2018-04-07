@@ -105,7 +105,7 @@
 								value="${fn:substring(pageContext.request.requestURI, 13,fn:length(pageContext.request.requestURI))}" />
 
 						
-								<c:if test="${localeURI == '/condition.jsp'}">
+								<c:if test="${localeURI == '/condition.jsp'} ">
 								<div class="dropdown-menu">
 									<c:url value="condition.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -183,6 +183,20 @@
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
 							</c:if> 
+							
+									<c:if test="${localeURI == '/users.jsp'}">
+								<div class="dropdown-menu">
+									<c:url value="usersServlet" var="englishURL">
+										<c:param name="locale" value="en_US" />
+									</c:url>
+									<a class="dropdown-item" href="${englishURL}">English</a>
+									<c:url value="usersServlet" var="chineseURL">
+										<c:param name="locale" value="zh_CN" />
+									</c:url>
+									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
+								</div>
+							</c:if>
+							
 							<c:if test="${localeURI == '/usersServlet'}">
 								<div class="dropdown-menu">
 									<c:url value="usersServlet" var="englishURL">
@@ -194,7 +208,10 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/auction.jsp'}">
+							</c:if>
+							
+							
+							 <c:if test="${localeURI == '/auction.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="auction.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -205,7 +222,9 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/closedBidsServlet'}">
+							</c:if>
+							
+							 <c:if test="${localeURI == '/closedBidsServlet'}">
 								<div class="dropdown-menu">
 									<c:url value="closedBidsServlet" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -216,9 +235,24 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/displayAuction.jsp'}">
+							</c:if>
+							
+							 <c:if test="${localeURI == '/closedBids.jsp'}">
 								<div class="dropdown-menu">
-									<c:url value="displayAuctionServlet" var="englishURL">
+									<c:url value="closedBidsServlet" var="englishURL">
+										<c:param name="locale" value="en_US" />
+									</c:url>
+									<a class="dropdown-item" href="${englishURL}">English</a>
+									<c:url value="closedBidsServlet" var="chineseURL">
+										<c:param name="locale" value="zh_CN" />
+									</c:url>
+									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
+								</div>
+							</c:if>
+							
+							 <c:if test="${localeURI == '/displayAuction.jsp'}">
+								<div class="dropdown-menu">
+									<c:url value="displayAuction.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
 									</c:url>
 									<a class="dropdown-item" href="${englishURL}">English</a>
@@ -227,7 +261,9 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/search.jsp'}">
+							</c:if>
+							
+							 <c:if test="${localeURI == '/search.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="searchServlet" var="englishURL">
 										<c:param name="search" value="${keyword}" />
@@ -240,7 +276,9 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/index.jsp'}">
+							</c:if> 
+							
+							<c:if test="${localeURI == '/index.jsp'}">
 								<div class="dropdown-menu">
 
 									<c:url value="index.jsp" var="englishURL">
@@ -254,10 +292,6 @@
 
 								</div>
 							</c:if></li>
-
-
-
-
 					</ul>
 
 					<form class="navbar-form navbar-left" action="searchServlet">
