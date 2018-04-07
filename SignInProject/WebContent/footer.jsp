@@ -36,7 +36,6 @@
               <li><a href="team.jsp"><fmt:message key="team" /></a></li>
                <li><a href="contact.jsp"><fmt:message key="contact" /></a></li>
               <li><a href="privacy.jsp"><fmt:message key="privacyPolicy" /></a></li>
-                <li><a href="contact.jsp"><fmt:message key="shipping" /></a></li>
                 <li><a href="faq.jsp"><fmt:message key="faq" /></a></li>
               <li><a href="condition.jsp"><fmt:message key="terms" /></a></li>
             </ul>
