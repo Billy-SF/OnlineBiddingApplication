@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
-	<c:set var="loc" value="${param.locale}" /> 
+	<c:set var="loc" value="${param.locale}" />
 </c:if>
 <fmt:setLocale value="${loc}" />
 
@@ -104,8 +104,31 @@
 									key="language" /></a> <c:set var="localeURI" scope="request"
 								value="${fn:substring(pageContext.request.requestURI, 13,fn:length(pageContext.request.requestURI))}" />
 
-						
-								<c:if test="${localeURI == '/condition.jsp'} ">
+							<c:if test="${localeURI == '/seller.jsp'}">
+								<div class="dropdown-menu">
+									<c:url value="matchSellerServlet" var="englishURL">
+										<c:param name="locale" value="en_US" />
+									</c:url>
+									<a class="dropdown-item" href="${englishURL}">English</a>
+									<c:url value="matchSellerServlet" var="chineseURL">
+										<c:param name="locale" value="zh_CN" />
+									</c:url>
+									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
+								</div>
+							</c:if> <c:if test="${localeURI == '/sellerFeedback.jsp'}">
+								<div class="dropdown-menu">
+									<c:url value="sellerFeedback.jsp" var="englishURL">
+										<c:param name="locale" value="en_US" />
+										<c:param name="seller" value="${param.seller}" />
+									</c:url>
+									<a class="dropdown-item" href="${englishURL}">English</a>
+									<c:url value="sellerFeedback.jsp" var="chineseURL">
+										<c:param name="locale" value="en_US" />
+										<c:param name="seller" value="${param.seller}" />
+									</c:url>
+									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
+								</div>
+							</c:if> <c:if test="${localeURI == '/condition.jsp'} ">
 								<div class="dropdown-menu">
 									<c:url value="condition.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -116,10 +139,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-							
-								<c:if test="${localeURI == '/faq.jsp'}">
+							</c:if> <c:if test="${localeURI == '/faq.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="faq.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -130,9 +150,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-								<c:if test="${localeURI == '/privacy.jsp'}">
+							</c:if> <c:if test="${localeURI == '/privacy.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="privacy.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -143,9 +161,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-								<c:if test="${localeURI == '/contact.jsp'}">
+							</c:if> <c:if test="${localeURI == '/contact.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="contact.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -156,9 +172,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-							<c:if test="${localeURI == '/team.jsp'}">
+							</c:if> <c:if test="${localeURI == '/team.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="team.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -169,9 +183,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-							<c:if test="${localeURI == '/edit.jsp'}">
+							</c:if> <c:if test="${localeURI == '/edit.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="edit.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -182,9 +194,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-									<c:if test="${localeURI == '/users.jsp'}">
+							</c:if> <c:if test="${localeURI == '/users.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="usersServlet" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -195,9 +205,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if>
-							
-							<c:if test="${localeURI == '/usersServlet'}">
+							</c:if> <c:if test="${localeURI == '/usersServlet'}">
 								<div class="dropdown-menu">
 									<c:url value="usersServlet" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -208,10 +216,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if>
-							
-							
-							 <c:if test="${localeURI == '/auction.jsp'}">
+							</c:if> <c:if test="${localeURI == '/auction.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="auction.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -222,9 +227,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if>
-							
-							 <c:if test="${localeURI == '/closedBidsServlet'}">
+							</c:if> <c:if test="${localeURI == '/closedBidsServlet'}">
 								<div class="dropdown-menu">
 									<c:url value="closedBidsServlet" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -235,9 +238,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if>
-							
-							 <c:if test="${localeURI == '/closedBids.jsp'}">
+							</c:if> <c:if test="${localeURI == '/closedBids.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="closedBidsServlet" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -248,9 +249,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if>
-							
-							 <c:if test="${localeURI == '/displayAuction.jsp'}">
+							</c:if> <c:if test="${localeURI == '/displayAuction.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="displayAuction.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -261,24 +260,22 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if>
-							
-							 <c:if test="${localeURI == '/bidpage.jsp'}"> 
+							</c:if> <c:if test="${localeURI == '/bidpage.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="bidPageDisplayServlet" var="englishURL">
-										<c:param name="productitemid" value="${productitem.getProductId()}" />
+										<c:param name="productitemid"
+											value="${productitem.getProductId()}" />
 										<c:param name="locale" value="en_US" />
 									</c:url>
 									<a class="dropdown-item" href="${englishURL}">English</a>
 									<c:url value="bidPageDisplayServlet" var="chineseURL">
-										<c:param name="productitemid" value="${productitem.getProductId()}" />
+										<c:param name="productitemid"
+											value="${productitem.getProductId()}" />
 										<c:param name="locale" value="zh_CN" />
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-							 <c:if test="${localeURI == '/search.jsp'}">
+							</c:if> <c:if test="${localeURI == '/search.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="searchServlet" var="englishURL">
 										<c:param name="search" value="${keyword}" />
@@ -291,9 +288,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> 
-							
-							<c:if test="${localeURI == '/index.jsp'}">
+							</c:if> <c:if test="${localeURI == '/index.jsp'}">
 								<div class="dropdown-menu">
 
 									<c:url value="index.jsp" var="englishURL">
