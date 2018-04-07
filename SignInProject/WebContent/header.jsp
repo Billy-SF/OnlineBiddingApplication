@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
-	<c:set var="loc" value="${param.locale}" />
+	<c:set var="loc" value="${param.locale}" /> 
 </c:if>
 <fmt:setLocale value="${loc}" />
 
@@ -262,6 +262,21 @@
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
 							</c:if>
+							
+							 <c:if test="${localeURI == '/bidpage.jsp'}"> 
+								<div class="dropdown-menu">
+									<c:url value="bidPageDisplayServlet" var="englishURL">
+										<c:param name="productitemid" value="${productitem.getProductId()}" />
+										<c:param name="locale" value="en_US" />
+									</c:url>
+									<a class="dropdown-item" href="${englishURL}">English</a>
+									<c:url value="bidPageDisplayServlet" var="chineseURL">
+										<c:param name="productitemid" value="${productitem.getProductId()}" />
+										<c:param name="locale" value="zh_CN" />
+									</c:url>
+									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
+								</div>
+							</c:if> 
 							
 							 <c:if test="${localeURI == '/search.jsp'}">
 								<div class="dropdown-menu">
