@@ -170,6 +170,7 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${productItems}" var="productItem">
+									<c:if test="${not empty productItem.getAuction().getId()}">
 									<tr>
 
 										<td><div class="gallery">
@@ -206,7 +207,7 @@
 										<c:if test="${empty productItem.getAuction().getId()}">
 											<td><b>No Bidding</b></td>
 										</c:if>
-
+										
 
 										<td><b>${productItem.description}</b></td>
 										<td><b>$${productItem.highestPrice}</b></td>
@@ -223,6 +224,7 @@
 											</td>
 										</c:if>
 									</tr>
+									</c:if>
 								</c:forEach>
 							</tbody>
 						</table>
