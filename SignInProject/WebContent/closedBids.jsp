@@ -74,14 +74,15 @@
 
 		<%@include file="header.jsp"%>
 
-		
-		
-		<div class="col-sm-10 text-left"> 
-
-		<div class="text-center">
-			<h3><b>Sold Items</b></h3>
-		</div>
-		<div>&nbsp;</div>
+	<section class="contact-form-section section">
+		<div class="container">
+			<div class="row">
+				<div
+					class="col-md-12 mb-50 text-center contact-title-text wow fadeIn"
+					data-wow-delay="0.3s">
+					<h2>Closed Auctions</h2>
+				</div>
+				<div>&nbsp;</div>
 	  
 		<table id="users" class="stripe table-striped" style="width:100%">
 			<thead>
@@ -107,7 +108,7 @@
 						<td>
 						<a href="bidPageDisplayServlet?productitemid=${soldItems[auctionId].productId}">
 						<img class ="gallery"
-						 src='chrome-extension://hipcckofpiilnhlbnobnhdmnpmicjidl/${soldItems[auctionId].image}' 
+						 src='chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${soldItems[auctionId].image}' 
 						  width="200" height="150" alt="${soldItems[auctionId].image}">
 						</a>
 						</td>
@@ -135,7 +136,7 @@
 	  
 	</div>
 	
-
+</div></section>
 		<%@include file="footer.jsp"%>
 
 
