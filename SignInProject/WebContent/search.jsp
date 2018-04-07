@@ -84,14 +84,14 @@
 </head>
 
 <body>
-
+<fmt:bundle basename="MessagesBundle">
 	<%@include file="header.jsp"%>
 	<!-- Contact Section -->
 	<section class="contact-form-section section">
 		<div class="container">
 			<div class="row">
 				  <div class="col-md-12 mb-50 text-center contact-title-text wow fadeIn" data-wow-delay="0.3s">
-            <h2>Search</h2>
+            <h2><fmt:message key="search" /></h2>
           </div>
 				<div
 					class="col-lg-11 contact-form contact-info-section ">
@@ -101,7 +101,7 @@
 						<h2 class="small-title mb-30">Search for: ${keyword}</h2>
 					</c:if>
 					<c:if test="${keyword.isEmpty()}">
-						<h2 class="small-title mb-30">Search for: all items</h2>
+						<h2 class="small-title mb-30"><fmt:message key="searchForAll" /></h2>
 					</c:if>
 
 					<c:if test="${productTotal <=0}">
@@ -113,34 +113,29 @@
 					<c:if test="${productTotal > 0}">
 					<form class="form-inline" action="sortServlet" method="get">
 							<input type="hidden" name="search" value="${keyword}" />
-							<label for="sortby">Sort by: </label> 
+							<label for="sortby"><fmt:message key="sortBy" /></label> 
 							&nbsp;
 							<select name="sortby" id="sortby" class="form-control">
 								<option value="name"
-									<c:if test="${sortMethod == 'name'}">selected</c:if>>Name</option>
+									<c:if test="${sortMethod == 'name'}">selected</c:if>><fmt:message key="name" /></option>
 								<option value="lowestprice"
-									<c:if test="${sortMethod == 'lowestprice'}">selected</c:if>>Lowest
-									Price</option>
+									<c:if test="${sortMethod == 'lowestprice'}">selected</c:if>><fmt:message key="lowestPrice" /></option>
 
 								<option value="highestprice"
 									<c:if test="${sortMethod == 'highestprice'}">selected</c:if>>
-									Highest Price</option>
+									<fmt:message key="highestPrice" /></option>
 
 								<option value="mostbids"
-									<c:if test="${sortMethod == 'mostbids'}">selected</c:if>>Most
-									Bids</option>
+									<c:if test="${sortMethod == 'mostbids'}">selected</c:if>><fmt:message key="mostBids" /></option>
 								<option value="leastbids"
-									<c:if test="${sortMethod == 'leastbids'}">selected</c:if>>Least
-									Bids</option>
+									<c:if test="${sortMethod == 'leastbids'}">selected</c:if>><fmt:message key="leastBids" /></option>
 								<option value="newestauction"
-									<c:if test="${sortMethod == 'newestauction'}">selected</c:if>>Newest
-									auction</option>
+									<c:if test="${sortMethod == 'newestauction'}">selected</c:if>><fmt:message key="newestAuction" /></option>
 								<option value="oldestauction"
-									<c:if test="${sortMethod == 'oldestauction'}">selected</c:if>>Oldest
-									auction</option>
+									<c:if test="${sortMethod == 'oldestauction'}">selected</c:if>><fmt:message key="oldestAuction" /></option>
 							</select>
 							&nbsp;
-							<input type="submit" class="form-control btn btn-sm" value="Sort"
+							<input type="submit" class="form-control btn btn-sm" value="<fmt:message key="sort" />"
 								style="background-color:#2296F3; border-radius:10px;">
 						</form>
 
@@ -149,19 +144,19 @@
 
 
 						<hr>
-						<p>${productTotal} item(s) for ${keyword}</p>
+						<p>${productTotal} <fmt:message key="item1" /> ${keyword}</p>
 						<hr>
 
 						<table id="example" class="table-striped" style="width: 100%">
 							<thead>
 								<tr>
 									<th></th>
-									<th>Item</th>
-									<th>Status</th>
-									<th>Detail</th>
-									<th>Current Bid</th>
-									<th>Bid Date Start</th>
-									<th>Bid Date End</th>
+									<th><fmt:message key="item" /></th>
+									<th><fmt:message key="status" /></th>
+									<th><fmt:message key="detail" /></th>
+									<th><fmt:message key="currentBid" /></th>
+									<th><fmt:message key="bidDateStart" /></th>
+									<th><fmt:message key="bidDateEnd" /></th>
 									<c:if test="${role}">
 										<th></th>
 									</c:if>
@@ -193,19 +188,19 @@
 										<c:if test="${not empty productItem.getAuction().getId()}">
 											<c:if
 												test="${productItem.getAuction().getBiddingStatus() =='2'}">
-												<td><b>Bidding Ended</b></td>
+												<td><b><fmt:message key="biddingEnded" /></b></td>
 											</c:if>
 											<c:if
 												test="${productItem.getAuction().getBiddingStatus() =='1'}">
-												<td><b>Bidding</b></td>
+												<td><b><fmt:message key="bidding" /></b></td>
 											</c:if>
 											<c:if
 												test="${productItem.getAuction().getBiddingStatus() =='0'}">
-												<td><b>Bidding Not Started</b></td>
+												<td><b><fmt:message key="biddingNotStarted" /></b></td>
 											</c:if>
 										</c:if>
 										<c:if test="${empty productItem.getAuction().getId()}">
-											<td><b>No Bidding</b></td>
+											<td><b><fmt:message key="noBidding" /></b></td>
 										</c:if>
 										
 
@@ -219,7 +214,7 @@
 													<button type="submit" name="auctionId" 
 													class="form-control btn btn-sm" style="background-color:#2296F3; border-radius:10px;"
 														value="${productItem.getAuction().getId()}">
-														Delete</button>
+														<fmt:message key="delete" /></button>
 												</form>
 											</td>
 										</c:if>
@@ -298,6 +293,6 @@
 		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
+</fmt:bundle>
 </body>
 </html>

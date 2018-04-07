@@ -16,7 +16,7 @@
 <!-- Viewport Meta Tag -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Create Auction</title>
+<title><fmt:message key="createAuction" /></title>
 <script src="assets/js/jquery-min.js"></script>
 <!-- Bootstrap -->
 <link rel="stylesheet" type="text/css"
@@ -209,7 +209,7 @@
 					<div
 						class="col-md-12 mb-50 text-center contact-title-text wow fadeIn"
 						data-wow-delay="0.3s">
-						<h2>Create Auction</h2>
+						<h2><fmt:message key="createAuction" /></h2>
 					</div>
 					<div
 						class="col-md-7 col-md-offset-1 contact-form contact-info-section center-div">
@@ -220,7 +220,7 @@
 
 							<div class="form-group">
 								<label for="itemName" class="sr-only">Item Name</label> <input
-									type="text" placeholder="Your item Name" name="itemName"
+									type="text" placeholder="<fmt:message key="yourItemName" />" name="itemName"
 									onfocus="hideErrorMessage(this.id);" required id="itemName"
 									class="form-control contact-control">
 								<div id="itemNameValidationMessage" Style="color: red">Item
@@ -229,13 +229,13 @@
 
 							<div class="form-group">
 								<label for="description" class="sr-only">Description</label>
-								<textarea name="description" rows="5" placeholder="Enter Description" form="auctionForm" required id="description" class="form-control"></textarea>
+								<textarea name="description" rows="5" placeholder="<fmt:message key="enterDescription" />" form="auctionForm" required id="description" class="form-control"></textarea>
 								<div id="descriptionValidationMessage" Style="color: red">Description
 									is required</div>
 							</div>
 
 							<div class="input-group date" data-provide="datepicker" style="text-align: left;">
-								<label for="bidStart">Bidding Starts at :</label>
+								<label for="bidStart"><fmt:message key="biddingStartAt" /> :</label>
 								<div class='input-group date' id='datetimepicker1'>
 									<input type='text' class="form-control"
 										data-date-format="YYYY-MM-DD HH:mm:ss" id="bidStart"
@@ -247,7 +247,7 @@
 
 							
 							<div class="input-group date" data-provide="datepicker" style="text-align: left;">
-								<label for="bidStartNow">Start Bid Now</label> 
+								<label for="bidStartNow"><fmt:message key="startBidNow" /></label> 
 								<input 
 									type="checkbox" onclick="disableBidStartDate()"
 									id="bidStartNow" name="bidStartNow" />
@@ -256,7 +256,7 @@
 							</div>
 
 							<div class="form-group" style="text-align: left;">
-								<label for="bidEnd">Bidding Ends at:</label>
+								<label for="bidEnd"><fmt:message key="biddingEndsAt" />:</label>
 								<div class='input-group date' id='datetimepicker2'>
 									<input type='text' class="form-control"
 										data-date-format="YYYY-MM-DD HH:mm:ss" id="bidEnd"
@@ -267,9 +267,8 @@
 							</div>
 
 							<div class="form-group">
-								<label class="pull-left" for="initialPrice">Initial
-									Price</label> <input type="text" class="form-control" id="initialPrice"
-									placeholder="Enter Initial Price" name="initialPrice" required>
+								<label class="pull-left" for="initialPrice"><fmt:message key="initialPrice" /></label> <input type="text" class="form-control" id="initialPrice"
+									placeholder="<fmt:message key="enterInitialPrice" />" name="initialPrice" required>
 								<div id="initialPriceValidationMessage" Style="color: red">Initial
 									Price is required and has to be number</div>
 							</div>
@@ -279,7 +278,7 @@
 
 							<div class="input-group" id="fileUpload">
 								<label class="input-group-btn" for="image"> <span
-									class="btn btn-primary"> Upload Image<input type="file"
+									class="btn btn-primary"><fmt:message key="uploadImage" /><input type="file"
 										id="image" name="image" accept="image/*"
 										style="display: none;" multiple>
 								</span>

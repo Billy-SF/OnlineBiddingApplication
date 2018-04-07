@@ -70,7 +70,7 @@
 </style>
 </head>
 <body>
-
+<fmt:bundle basename="MessagesBundle">
 	<%@include file="header.jsp"%>
 	<section class="contact-form-section section">
 		<div class="container">
@@ -78,7 +78,7 @@
 				<div
 					class="col-md-12 mb-50 text-center contact-title-text wow fadeIn"
 					data-wow-delay="0.3s">
-					<h2>Current Auctions</h2>
+					<h2><fmt:message key="currentAuctions" /></h2>
 				</div>
 				<div>&nbsp;</div>
 
@@ -86,15 +86,15 @@
 					style="width: 100%">
 					<thead>
 						<tr>
-							<th>Seller</th>
-							<th>Item</th>
-							<th>Image</th>
-							<th>Description</th>
-							<th>Start Date</th>
-							<th>End Date</th>
-							<th>Initial Price</th>
-							<th>Current Bid</th>
-							<th>Bidder</th>
+							<th><fmt:message key="seller" /></th>
+							<th><fmt:message key="item" /></th>
+							<th><fmt:message key="image" /></th>
+							<th><fmt:message key="description" /></th>
+							<th><fmt:message key="startDate" /></th>
+							<th><fmt:message key="endDate" /></th>
+							<th><fmt:message key="initialPrice" /></th>
+							<th><fmt:message key="currentBid" /></th>
+							<th><fmt:message key="bidder" /></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -160,6 +160,6 @@
 	<script
 		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
 
-
+</fmt:bundle>
 </body>
 </html>
