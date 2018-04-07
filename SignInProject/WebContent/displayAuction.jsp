@@ -15,8 +15,9 @@
 
 <meta charset="utf-8">
 <title>Search</title>
-	<script src="assets/js/jquery-min.js"></script>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="assets/js/jquery-min.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- Viewport Meta Tag -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -67,84 +68,80 @@
 	width: 100px;
 }
 </style>
-	</head>
-	<body>
+</head>
+<body>
 
-		<%@include file="header.jsp"%>
+	<%@include file="header.jsp"%>
+	<section class="contact-form-section section">
+		<div class="container">
+			<div class="row">
+				<div
+					class="col-md-12 mb-50 text-center contact-title-text wow fadeIn"
+					data-wow-delay="0.3s">
+					<h2>Current Auctions</h2>
+				</div>
+				<div>&nbsp;</div>
 
-
-			<!-- <div class= "panel panel-danger">
- <div class= "panel-heading" >  <b> Auctions</b> </div>
-  <div class ="panel-body"> 
- -->
-			<div class="text-center">
-				<p class="text-center">
-				<h3>
-					<b>Current Auctions</b>
-				</h3>
-				</p>
-			</div>
-			<div>&nbsp;</div>
-
-			<table id="displayAuctionTable" class="stripe table-striped"
-				style="width: 100%">
-				<thead>
-					<tr>
-						<th>Seller</th>
-						<th>Item</th>
-						<th>Image</th>
-						<th>Description</th>
-						<th>Start Date</th>
-						<th>End Date</th>
-						<th>Initial Price</th>
-						<th>Current Bid</th>
-						<th>Bidder</th>
-					</tr>
-				</thead>
-				<tbody>
-
-					<c:forEach items="${openAuctions}" var="openAuction">
+				<table id="displayAuctionTable" class="stripe table-striped"
+					style="width: 100%">
+					<thead>
 						<tr>
-							<c:set var="auctionId" value="${openAuction.id}" />
-							<td>${sellersMapForOpenAuctions[auctionId]}</td>
-							<td>${ItemsForOpenAuctions[auctionId].itemName}</td>
-							<td><a
-								href="bidPageDisplayServlet?productitemid=${ItemsForOpenAuctions[auctionId].productId}">
-									<img class="gallery"
-									src='chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${ItemsForOpenAuctions[auctionId].image}'
-									width="200" height="150"
-									alt="${ItemsForOpenAuctions[auctionId].image}">
-							</a></td>
-							<td>${ItemsForOpenAuctions[auctionId].description}</td>
-							<td>${openAuction.bidstarttime}</td>
-							<td>${openAuction.bidendtime}</td>
-							<td>${openAuction.bidpricestart}</td>
-							<td>${highestBidpriceForOpenAuctions[auctionId]}</td>
-							<td>${buyersMapForOpenAuctions[auctionId]}</td>
+							<th>Seller</th>
+							<th>Item</th>
+							<th>Image</th>
+							<th>Description</th>
+							<th>Start Date</th>
+							<th>End Date</th>
+							<th>Initial Price</th>
+							<th>Current Bid</th>
+							<th>Bidder</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<script>
-				$(document).ready(
-						function() {
-							$('#displayAuctionTable').DataTable(
-									{
-										searching : false,
-										lengthMenu : [ [ 5, 10, 15, -1 ],
-												[ 5, 10, 15, "All" ] ],
-										ordering : true,
-										bServerSide : false
-									});
-						});
-			</script>
-	
+					</thead>
+					<tbody>
 
+						<c:forEach items="${openAuctions}" var="openAuction">
+							<tr>
+								<c:set var="auctionId" value="${openAuction.id}" />
+								<td>${sellersMapForOpenAuctions[auctionId]}</td>
+								<td>${ItemsForOpenAuctions[auctionId].itemName}</td>
+								<td><a
+									href="bidPageDisplayServlet?productitemid=${ItemsForOpenAuctions[auctionId].productId}">
+										<img class="gallery"
+										src='chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${ItemsForOpenAuctions[auctionId].image}'
+										width="200" height="150"
+										alt="${ItemsForOpenAuctions[auctionId].image}">
+								</a></td>
+								<td>${ItemsForOpenAuctions[auctionId].description}</td>
+								<td>${openAuction.bidstarttime}</td>
+								<td>${openAuction.bidendtime}</td>
+								<td>${openAuction.bidpricestart}</td>
+								<td>${highestBidpriceForOpenAuctions[auctionId]}</td>
+								<td>${buyersMapForOpenAuctions[auctionId]}</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<script>
+					$(document).ready(
+							function() {
+								$('#displayAuctionTable').DataTable(
+										{
+											searching : false,
+											lengthMenu : [ [ 5, 10, 15, -1 ],
+													[ 5, 10, 15, "All" ] ],
+											ordering : true,
+											bServerSide : false
+										});
+							});
+				</script>
 
+			</div>
+		</div>
+	</section>
 
-		<%@include file="footer.jsp"%>
+	<%@include file="footer.jsp"%>
 
-		<!-- JavaScript & jQuery Plugins -->
+	<!-- JavaScript & jQuery Plugins -->
 	<script src="assets/js/popper.min.js"></script>
 	<script src="assets/js/bootstrap.min.js"></script>
 	<script src="assets/js/jquery.mixitup.js"></script>
