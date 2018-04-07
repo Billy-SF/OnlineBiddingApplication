@@ -178,7 +178,7 @@ to {
 
 </head>
 <body>
-
+<fmt:bundle basename="MessagesBundle">
 	<%@include file="header.jsp"%>
 
 	<br>
@@ -211,27 +211,27 @@ to {
 
 		</div>
 		<br> <br>
-		<h3>Item Description</h3>
+		<h3><fmt:message key="itemDescription" /></h3>
 		<p>${productitem.getDescription()}</p>
 		<div>
 			<div class="bidInfo">
 				<p>
-					<a href="matchSellerServlet">Seller Page</a>
+					<a href="matchSellerServlet"><fmt:message key="sellerPage" /></a>
 				</p>
 				<p>
-					Bid Date Start: <b>${productitem.getAuction().getBidstarttime()}</b>
+					<fmt:message key="bidDateStart" />: <b>${productitem.getAuction().getBidstarttime()}</b>
 				</p>
 				<p>
-					Time left: <span id="tttt"></span>
+					<fmt:message key="timeLeft" />: <span id="tttt"></span>
 				</p>
 				<c:if test="${productitem.getHighestPrice() == '0.00'}">
 					<p>
-						Initial Bid Price: <b>$${productitem.getAuction().getBidpricestart()}</b>
+						<fmt:message key="initialBidPrice" />: <b>$${productitem.getAuction().getBidpricestart()}</b>
 					</p>
 				</c:if>
 				<c:if test="${productitem.getHighestPrice() != '0.00'}">
 					<p>
-						Current Bid Price: <b>$${productitem.getHighestPrice()}</b>
+						<fmt:message key="currentBidPrice" />: <b>$${productitem.getHighestPrice()}</b>
 					</p>
 				</c:if>
 				<c:if test="${errorMessageBidDao ne null}">
@@ -266,18 +266,18 @@ to {
 							<input type="text" class="form-control contact-control"
 								style="border-radius: 10px 0px 0px 10px;"
 								pattern="[0-9]+(\.[0-9]{0,2})?%?" id="bidprice" name="bidPrice"
-								placeholder="bid here">
+								placeholder="<fmt:message key="bidHere" />">
 						</div>
 
 						<div class="form-group">
 							<input type="submit" style="border-radius: 0px 10px 10px 0px;"
 								class="btn btn-primary" name="bidsubmit" id="bidsubmit"
-								value="Bid" />
+								value="<fmt:message key="bid" />" />
 						</div>
 
 					</c:if>
 					<c:if test="${null == sessionScope.username}">
-						<b style="color: red;">Please Signin to Bid</b>
+						<b style="color: red;"><fmt:message key="pleaseSignIn" /></b>
 					</c:if>
 				</form>
 
@@ -458,16 +458,16 @@ to {
 	<div class="col-lg-11 contact-form contact-info-section "
 		style="margin-left: 60px;">
 		<div style="margin-left: 15px;">
-			<h3>Bid History</h3>
-			${productitem.getBids().size()} bid(s) found
+			<h3><fmt:message key="bidHistory" /></h3>
+			${productitem.getBids().size()} <fmt:message key="bidFound" />
 		</div>
 		<br />
 		<table id="bidhistory" class="table-striped" style="width: 100%">
 			<thead>
 				<tr>
-					<th>bid price</th>
-					<th>user</th>
-					<th>date</th>
+					<th><fmt:message key="bidPrice" /></th>
+					<th><fmt:message key="user" /></th>
+					<th><fmt:message key="date" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -503,14 +503,14 @@ to {
 					<div class="input-group left-padding-5 bottom-padding-5">
 						
 						<div class="text-right top-padding-12 right-padding-100">
-							<label for="color">Color</label>&nbsp; <select id="color"
+							<label for="color"><fmt:message key="color" /></label>&nbsp; <select id="color"
 								name="color">
-								<option value="black">Black</option>
-								<option value="red">Red</option>
-								<option value="green">Green</option>
-								<option value="yellow">Yellow</option>
-								<option value="blue">Blue</option>
-								<option value="purple">Purple</option>
+								<option value="black"><fmt:message key="black" /></option>
+								<option value="red"><fmt:message key="red" /></option>
+								<option value="green"><fmt:message key="green" /></option>
+								<option value="yellow"><fmt:message key="yellow" /></option>
+								<option value="blue"><fmt:message key="blue" /></option>
+								<option value="purple"><fmt:message key="purple" /></option>
 							</select>
 						</div>
 					</div>
@@ -528,12 +528,12 @@ to {
 						<div class="input-group">
 						<div class="input-group-btn">
 							<button class="btn btn-primary  btn-sm" type="button" name="clear"
-								id="clear">Clear</button>
+								id="clear"><fmt:message key="clear" /></button>
 						</div>
 							<input type="text" class="form-control" id="message"
 								name="message"> <span class="input-group-btn">
 								<button class="btn btn-primary btn-sm" type="button" id="send"
-									name="send">Submit</button>
+									name="send"><fmt:message key="submit" /></button>
 							</span>
 						</div>
 					</div>
@@ -606,7 +606,7 @@ to {
 		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	<script
 		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
+</fmt:bundle>
 
 </body>
 </html>
