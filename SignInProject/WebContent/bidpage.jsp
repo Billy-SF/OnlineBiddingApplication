@@ -226,6 +226,7 @@ to {
 				</p>
 				<c:if test="${productitem.getHighestPrice() == '0.00'}">
 					<p>
+					
 						Initial Bid Price: <b>$${productitem.getAuction().getBidpricestart()}</b>
 					</p>
 				</c:if>

@@ -27,6 +27,8 @@ public class Bid {
 		return this.bidprice;
 	}
 	public void setBidprice(String bidprice) {
+		
+		
 		this.bidprice = bidprice;
 	}
 	

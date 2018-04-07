@@ -71,6 +71,7 @@ public class BidPageDisplayServlet extends HttpServlet {
 			// System.out.print("you get the ParseException");
 		}
 
+		
 		request.setAttribute("itemId", productitemid);
 		request.setAttribute("productitem", productitem);
 		request.setAttribute("auction", auction);
