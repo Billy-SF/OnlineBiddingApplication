@@ -10,6 +10,7 @@ public class Auction {
 	private String bidstarttime;
 	private String bidstarttimeLocale;
 	private String bidendtime;
+	private String bidendtimeLocale;
 	private String bidpricestart;
 	private String bidpricestartLocale;
 	private String bidpricemax;
@@ -166,5 +167,13 @@ public class Auction {
 
 	public void setBidstarttimeLocale(String bidstarttimeLocale) {
 		this.bidstarttimeLocale = bidstarttimeLocale;
+	}
+
+	public String getBidendtimeLocale() {
+		return bidendtimeLocale;
+	}
+
+	public void setBidendtimeLocale(String bidendtimeLocale) {
+		this.bidendtimeLocale = bidendtimeLocale;
 	}
 }

@@ -71,8 +71,7 @@ public class BidPageDisplayServlet extends HttpServlet {
 
 			}
 
-			// Locale locale = new Locale(request.getParameter("locale"));
-			System.out.println(request.getParameter("locale"));
+		
 
 			if ("en_US".equals(request.getParameter("locale"))) {
 

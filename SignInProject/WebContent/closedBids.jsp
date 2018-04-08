@@ -114,8 +114,8 @@
 						</a>
 						</td>
 						<td>${soldAuction.dateCreated}</td>
-						<td>${soldAuction.bidstarttime}</td>
-						<td>${soldAuction.bidendtime}</td>
+						<td>${soldAuction.getBidstarttimeLocale()}</td>
+						<td>${soldAuction.getBidendtimeLocale()}</td>
 						<td>${soldAuction.bidpricestart}</td>
 						<td>${highestBidPriceMapForSoldAuctions[auctionId]}</td>
 						<td>${buyersMapForSoldAuctions[auctionId]}</td>

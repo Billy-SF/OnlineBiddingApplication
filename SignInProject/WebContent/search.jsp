@@ -206,9 +206,9 @@
 										
 
 										<td><b>${productItem.description}</b></td>
-										<td><b>$${productItem.highestPrice}</b></td>
-										<td><b>${productItem.getAuction().getBidstarttime()}</b></td>
-										<td><b>${productItem.getAuction().getBidendtime()}</b></td>
+										<td><b>${productItem.getHighestPriceLocale()}</b></td>
+										<td><b>${productItem.getAuction().getBidstarttimeLocale()}</b></td>
+										<td><b>${productItem.getAuction().getBidendtimeLocale()}</b></td>
 										<c:if test="${role}">
 											<td>
 												<form method="get" action="adminServlet">

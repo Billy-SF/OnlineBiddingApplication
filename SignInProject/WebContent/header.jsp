@@ -254,7 +254,7 @@
 								</div>
 							</c:if> <c:if test="${localeURI == '/displayAuction.jsp'}">
 								<div class="dropdown-menu">
-									<c:url value="displayAuction.jsp" var="englishURL">
+									<c:url value="displayAuctionServlet" var="englishURL">
 										<c:param name="locale" value="en_US" />
 									</c:url>
 									<a class="dropdown-item" href="${englishURL}">English</a>

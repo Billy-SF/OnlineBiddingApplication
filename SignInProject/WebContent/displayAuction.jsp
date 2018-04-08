@@ -113,8 +113,8 @@
 										alt="${ItemsForOpenAuctions[auctionId].image}">
 								</a></td>
 								<td>${ItemsForOpenAuctions[auctionId].description}</td>
-								<td>${openAuction.bidstarttime}</td>
-								<td>${openAuction.bidendtime}</td>
+								<td>${openAuction.getBidstarttimeLocale()}</td>
+								<td>${openAuction.getBidendtimeLocale()}</td>
 								<td>${openAuction.bidpricestart}</td>
 								<td>${highestBidpriceForOpenAuctions[auctionId]}</td>
 								<td>${buyersMapForOpenAuctions[auctionId]}</td>
