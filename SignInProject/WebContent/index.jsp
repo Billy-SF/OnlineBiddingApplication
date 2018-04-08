@@ -111,7 +111,7 @@
       <!-- Container Starts -->
       <div class="container">
         <h1 class="section-title wow fadeIn animated" data-wow-delay=".2s">
-        Current Bids
+        <fmt:message key="currentAuctions" />
         </h1>
         <div class="row">  
           <div class="col-sm-6 col-md-6 col-lg-3 col-xs-12">
@@ -190,7 +190,7 @@
       <!-- Container Starts -->
       <div class="container">
          <h1 class="section-title wow fadeIn animated">
-      		User Ratings
+      		<fmt:message key="userRatings" />
         </h1>
         <div class="row">
           <div class="col-sm-12">

@@ -1,4 +1,15 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="loc" value="en_US" />
+<c:if test="${!(empty param.locale)}">
+	<c:set var="loc" value="${param.locale}" />
+</c:if>
+<fmt:setLocale value="${param.locale}" />
+
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -113,7 +124,7 @@
 
   </head>
   <body>
-
+<fmt:bundle basename="MessagesBundle">
  <%@include file="header.jsp" %>
 
     <!-- Page Header -->
@@ -122,7 +133,7 @@
         <div class="row">
           <div class="page-header-area">
             <div class="page-header-content">
-              <h2>Direction to Our Warehouses</h2>
+              <h2><fmt:message key="directionToWareHouse" /></h2>
             </div>
           </div>
         </div>
@@ -131,19 +142,19 @@
     <!-- Page Header End -->
 
    <div id="floating-panel">
-     <strong>Travel Mode:</strong>
+     <strong><fmt:message key="travelMode" />:</strong>
      <select id="mode">
-      <option value="DRIVING">Driving</option>
-      <option value="WALKING">Walking</option>
-      <option value="BICYCLING">Bicycling</option>
-      <option value="TRANSIT">Transit</option>
+      <option value="DRIVING"><fmt:message key="driving" /></option>
+      <option value="WALKING"><fmt:message key="walking" /></option>
+      <option value="BICYCLING"><fmt:message key="bicycling" /></option>
+      <option value="TRANSIT"><fmt:message key="transit" /> </option>
     </select>
-      <strong>End:</strong>
+      <strong><fmt:message key="end" />:</strong>
       <select id="end">
-        <option value="" selected="true" disabled="disabled">Select WareHouse</option>
-        <option value="311 Bell st, Ottawa,Ontario, Canada">WareHouse 1</option>
-        <option value="424 June court, Ottawa, Ontario, Canada">WareHouse 2</option>
-        <option value="1343 Meadowlands Drive, Ottawa, Ontario, Canada">WareHouse 3</option>
+        <option value="" selected="true" disabled="disabled"><fmt:message key="selectWareHouse" /></option>
+        <option value="311 Bell st, Ottawa,Ontario, Canada"><fmt:message key="warehouse" /> 1</option>
+        <option value="424 June court, Ottawa, Ontario, Canada"><fmt:message key="warehouse" /> 2</option>
+        <option value="1343 Meadowlands Drive, Ottawa, Ontario, Canada"><fmt:message key="warehouse" /> 3</option>
       </select>
     </div>
     <div id="right-panel"></div>
@@ -210,29 +221,29 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-50 text-center contact-title-text wow fadeIn" data-wow-delay="0.3s">
-            <h2>Contact with us!</h2>
-            <p>Do you want to know more? We love to hear from you!</p>
+            <h2><fmt:message key="contactWithUs" />!</h2>
+            <p><fmt:message key="doYouWantToKnowMore" />? <fmt:message key="weLoveToHearFromYou" />!</p>
           </div>
           <div class="col-md-4 contact-info-section">
             <div class="contact-widget office-location">
-              <h2>Office Location</h2>
+              <h2><fmt:message key="officeLocation" /></h2>
               <address>
-                <i class="fa fa-map-marker icon-box icon-xs"></i>4211, 2367 Nash Street , Dearborn, Michigan<br>
-                <i class="fa fa-phone icon-box icon-xs"></i> 313-240-4015<br>
-                <a href="mailto:#"><i class="fa fa-envelope icon-box icon-xs"></i> yourmail@gmail.com</a>
+                <i class="fa fa-map-marker icon-box icon-xs"></i>4211, 2367 Nash Street , Ottawa, Ontario<br>
+                <i class="fa fa-phone icon-box icon-xs"></i> 613-240-4015<br>
+                <a href="mailto:chiJon@algonquinlive.com"><i class="fa fa-envelope icon-box icon-xs"></i> chiJon@algonquinlive.com</a>
               </address>
             </div>
             <div class="contact-widget office-location">
-              <h2>Contact Hours</h2>
+              <h2><fmt:message key="contactHours" /></h2>
               <address>
                 <p><i class="fa fa-clock-o icon-box icon-xs"></i> <span>Mon - Fri:</span> 9.00 AM - 6.00 PM</p>
               </address>
             </div>
             <div class="contact-widget social-contact">
-              <h2>Social Quick Links</h2>
-              <a href="#"><i class="fa fa-facebook icon-round icon-xs"></i></a>
-              <a href="#"><i class="fa fa-twitter icon-round icon-xs"></i></a>
-              <a href="#"><i class="fa fa-linkedin icon-round icon-xs"></i></a>
+              <h2><fmt:message key="socialQuickLinks" /></h2>
+              <a href="https://www.facebook.com/"><i class="fa fa-facebook icon-round icon-xs"></i></a>
+              <a href="https://www.twitter.com/"><i class="fa fa-twitter icon-round icon-xs"></i></a>
+              <a href="https://www.linkedin.com/"><i class="fa fa-linkedin icon-round icon-xs"></i></a>
               <a href="#"><i class="fa fa-google-plus icon-round icon-xs"></i></a>
               <a href="#"><i class="fa fa-github icon-round icon-xs"></i></a>
             </div>
@@ -241,29 +252,29 @@
             <form class="shake" role="form" method="post" action="contactServlet" id="contactForm" name="contact-form" data-toggle="validator">
               <div class="form-group">
                 <label for="name" class="sr-only">Name</label>
-                <input type="text" placeholder="Your Name" id="name" class="form-control contact-control" name="name" required data-error="Please enter your name">
+                <input type="text" placeholder="<fmt:message key="yourName" />" id="name" class="form-control contact-control" name="name" required data-error="Please enter your name">
                 <div class="help-block with-errors"></div>
               </div>
 
               <div class="form-group">
                 <label for="email2" class="sr-only">Email</label>
-                <input type="email" placeholder="Your Email" id="email2" class="form-control contact-control" name="email2" required data-error="Please enter your Email">
+                <input type="email" placeholder="<fmt:message key="yourEmail" />" id="email2" class="form-control contact-control" name="email2" required data-error="Please enter your Email">
                 <div class="help-block with-errors"></div>
               </div>
 
               <div class="form-group">
                 <label for="subject" class="sr-only">Subject</label>
-                <input type="text" placeholder="Your Subject" id="msg_subject" class="form-control contact-control" name="subject" required data-error="Please enter your message subject">
+                <input type="text" placeholder="<fmt:message key="yourSubject" />" id="msg_subject" class="form-control contact-control" name="subject" required data-error="Please enter your message subject">
                 <div class="help-block with-errors"></div>
               </div>
 
               <div class="form-group">
                 <label for="message" class="sr-only">Message</label>
-                <textarea placeholder="Your Message" rows="7" id="message" class="form-control" name="message" required data-error="Write your message"></textarea>
+                <textarea placeholder="<fmt:message key="yourMessage" />" rows="7" id="message" class="form-control" name="message" required data-error="Write your message"></textarea>
                 <div class="help-block with-errors"></div>
               </div>
 
-              <button class="btn btn-common btn-lg" type="submit" id="form-submit"><i class="fa fa-envelope"></i> Submit</button>
+              <button class="btn btn-common btn-lg" type="submit" id="form-submit"><i class="fa fa-envelope"></i> <fmt:message key="submit" /></button>
               <div id="msgSubmit" class="h3 text-center hidden"></div>
               <div class="clearfix"></div>
             </form>
@@ -296,6 +307,6 @@
     <script src="assets/js/form-validator.min.js"></script>
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/main.js"></script> 
-    
+    </fmt:bundle>
   </body>
 </html>

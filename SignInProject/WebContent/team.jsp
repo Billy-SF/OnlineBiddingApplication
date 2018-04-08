@@ -85,7 +85,7 @@
                 <img src="assets/img/team/team1.png" alt="">
                 <figcaption class="our-team">
                   <div class="details">
-                    <p class="content-white">Worked on the chatting and search functionality.</p>
+                    <p class="content-white">Worked on the chatting, search functionality, and everything else.</p>
                    <div class="orange-line"></div>
                    <div class="social"> 
                      <a class="facebook" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a> 
@@ -115,7 +115,7 @@
                  <img src="assets/img/team/team2.png" alt="">
                 <figcaption class="our-team">
                   <div class="details">
-                    <p class="content-white">Worked on internationalization and geolocation.</p>
+                    <p class="content-white">Worked on internationalization, timer, bidpage, and geolocation.</p>
                    <div class="orange-line"></div>
                    <div class="social"> 
                      <a class="facebook" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a> 
@@ -234,7 +234,7 @@
                 <img src="assets/img/team/team6.png" alt="">
                 <figcaption class="our-team">
                   <div class="details">
-                    <p class="content-white">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                    <p class="content-white">Worked on home page view.</p>
                    <div class="orange-line"></div>
                    <div class="social"> 
                      <a class="facebook" href="http://www.facebook.com"><i class="fa fa-facebook"></i></a> 

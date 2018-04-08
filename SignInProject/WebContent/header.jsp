@@ -128,7 +128,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/condition.jsp'} ">
+							</c:if> <c:if test="${localeURI == '/condition.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="condition.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
