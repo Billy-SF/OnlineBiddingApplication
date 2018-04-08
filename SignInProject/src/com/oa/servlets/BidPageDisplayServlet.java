@@ -75,12 +75,14 @@ public class BidPageDisplayServlet extends HttpServlet {
 			//Locale locale = new Locale(request.getParameter("locale"));
 			//System.out.println("Country is" + locale.getCountry());
 			
-			//DateFormat df = DateFormat.getTimeInstance(DateFormat.MEDIUM, locale);
-			//String formattedDate = df.format(date1);		
-			//auction.setBidstarttime(formattedDate);
-			System.out.println(request.getParameter("locale"));
+	
 			
 			if("en_US".equals(request.getParameter("locale"))) {
+				
+				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM,DateFormat.MEDIUM, Locale.CANADA);
+				String formattedDate = df.format(date1);		
+				auction.setBidstarttime(formattedDate);
+				
 				
 				String bidPriceStart = auction.getBidpricestart();
 				Double currencyAmount = new Double(Double.parseDouble(bidPriceStart));
@@ -91,10 +93,13 @@ public class BidPageDisplayServlet extends HttpServlet {
 			    
 				auction.setBidpricestart(formattedCurrency);
 				
-			    System.out.println("Canada" + formattedCurrency);
+			
 				
 			}
 			else {
+				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.CHINA);
+				String formattedDate = df.format(date1);		
+				auction.setBidstarttime(formattedDate);
 				
 				
 				String bidPriceStart = auction.getBidpricestart();
@@ -109,7 +114,7 @@ public class BidPageDisplayServlet extends HttpServlet {
 			    
 				auction.setBidpricestart(formattedCurrency + "¥");
 				
-			    System.out.println("China" + formattedCurrency);
+			  
 				
 				
 			}
