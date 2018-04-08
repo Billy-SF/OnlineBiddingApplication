@@ -224,19 +224,19 @@ to {
 					<a href="matchSellerServlet?locale=${loc}"><fmt:message key="sellerPage" /></a>
 				</p>
 				<p>
-					<fmt:message key="bidDateStart" />: <b>${productitem.getAuction().getBidstarttime()}</b>
+					<fmt:message key="bidDateStart" />: <b>${productitem.getAuction().getBidstarttimeLocale()}</b>
 				</p>
 				<p>
 					<fmt:message key="timeLeft" />: <span id="tttt"></span>
 				</p>
 				<c:if test="${productitem.getHighestPrice() == '0.00'}">
 					<p>
-						<fmt:message key="initialBidPrice" />: <b>${productitem.getAuction().getBidpricestart()}</b>
+						<fmt:message key="initialBidPrice" />: <b>${productitem.getAuction().getBidpricestartLocale()}</b>
 					</p>
 				</c:if>
 				<c:if test="${productitem.getHighestPrice() != '0.00'}">
 					<p>
-						<fmt:message key="currentBidPrice" />: <b>$${productitem.getHighestPrice()}</b>
+						<fmt:message key="currentBidPrice" />: <b>${productitem.getHighestPriceLocale()}</b>
 					</p>
 				</c:if>
 				<c:if test="${errorMessageBidDao ne null}">

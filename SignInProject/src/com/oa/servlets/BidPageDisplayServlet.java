@@ -70,65 +70,66 @@ public class BidPageDisplayServlet extends HttpServlet {
 				// then write to database
 
 			}
-			
-			
-			//Locale locale = new Locale(request.getParameter("locale"));
-			//System.out.println("Country is" + locale.getCountry());
-			
-	
-			
-			if("en_US".equals(request.getParameter("locale"))) {
-				
-				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM,DateFormat.MEDIUM, Locale.CANADA);
-				String formattedDate = df.format(date1);		
-				auction.setBidstarttime(formattedDate);
-				
-				
+
+			// Locale locale = new Locale(request.getParameter("locale"));
+			System.out.println(request.getParameter("locale"));
+
+			if ("en_US".equals(request.getParameter("locale"))) {
+
+				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.CANADA);
+				String formattedDate = df.format(date1);
+				auction.setBidstarttimeLocale(formattedDate);
+
 				String bidPriceStart = auction.getBidpricestart();
 				Double currencyAmount = new Double(Double.parseDouble(bidPriceStart));
-				
-			    NumberFormat currencyFormatter = 
-			        NumberFormat.getCurrencyInstance(Locale.CANADA);    
-			    String formattedCurrency = currencyFormatter.format(currencyAmount);
-			    
-				auction.setBidpricestart(formattedCurrency);
-				
-			
-				
-			}
-			else {
-				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.CHINA);
-				String formattedDate = df.format(date1);		
-				auction.setBidstarttime(formattedDate);
-				
-				
-				String bidPriceStart = auction.getBidpricestart();
-				Double currencyAmount = new Double(Double.parseDouble(bidPriceStart)*6.00);
-				
-			    NumberFormat currencyFormatter = 
-			        NumberFormat.getCurrencyInstance(Locale.CHINA);    
-			    String formattedCurrency = currencyFormatter.format(currencyAmount);
-			    if(formattedCurrency.length()>1) {
-			    	formattedCurrency =  formattedCurrency.substring(1);
-			    }
-			    
-				auction.setBidpricestart(formattedCurrency + "¥");
-				
-			  
-				
-				
-			}
-		
-		
 
-			
-			
+				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedCurrency = currencyFormatter.format(currencyAmount);
+
+				auction.setBidpricestartLocale(formattedCurrency);
+
+				String bidPriceMax = productitem.getHighestPrice();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+
+				productitem.setHighestPriceLocale(formattedMaxCurrency);
+
+			} else {
+				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.CHINA);
+				String formattedDate = df.format(date1);
+				auction.setBidstarttimeLocale(formattedDate);
+
+				String bidPriceStart = auction.getBidpricestart();
+				Double currencyAmount = new Double(Double.parseDouble(bidPriceStart) * 6.00);
+
+				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.CHINA);
+				String formattedCurrency = currencyFormatter.format(currencyAmount);
+				if (formattedCurrency.length() > 1) {
+					formattedCurrency = formattedCurrency.substring(1);
+				}
+
+				auction.setBidpricestartLocale(formattedCurrency + "¥");
+				
+				String bidPriceMax = productitem.getHighestPrice();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+				if (formattedMaxCurrency.length() > 1) {
+					formattedMaxCurrency = formattedMaxCurrency.substring(1);
+				}
+				productitem.setHighestPriceLocale(formattedMaxCurrency + "¥");
+
+
+			}
+
 		} catch (ParseException e) {
 			// e.printStackTrace();
 			// System.out.print("you get the ParseException");
 		}
 
-		
 		request.setAttribute("itemId", productitemid);
 		request.setAttribute("productitem", productitem);
 		request.setAttribute("auction", auction);
@@ -145,8 +146,5 @@ public class BidPageDisplayServlet extends HttpServlet {
 
 		out.close();
 	}
-
-
-
 
 }

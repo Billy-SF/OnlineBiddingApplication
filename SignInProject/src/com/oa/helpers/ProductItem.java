@@ -11,6 +11,7 @@ public class ProductItem {
 	//private String dateCreated;
 	private String image;
 	private String highestPrice;
+	private String highestPriceLocale;
 	private String lowestPrice;
 	private Bid currentbid;
 	private Auction auction;
@@ -99,6 +100,14 @@ public class ProductItem {
 	
 	public void setBids(ArrayList<Bid> bids) {
 		this.bids = bids;
+	}
+
+	public String getHighestPriceLocale() {
+		return highestPriceLocale;
+	}
+
+	public void setHighestPriceLocale(String highestPriceLocale) {
+		this.highestPriceLocale = highestPriceLocale;
 	}
 		
 }

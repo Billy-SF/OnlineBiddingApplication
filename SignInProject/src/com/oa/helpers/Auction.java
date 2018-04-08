@@ -8,8 +8,10 @@ public class Auction {
 	
 	private String id;
 	private String bidstarttime;
+	private String bidstarttimeLocale;
 	private String bidendtime;
 	private String bidpricestart;
+	private String bidpricestartLocale;
 	private String bidpricemax;
 	private String description;
 	private String itemsfk;
@@ -148,5 +150,21 @@ public class Auction {
 	}
 	public void setBidstate(String bidstate) {
 		this.bidstate = bidstate;
+	}
+
+	public String getBidpricestartLocale() {
+		return bidpricestartLocale;
+	}
+
+	public void setBidpricestartLocale(String bidpricestartLocale) {
+		this.bidpricestartLocale = bidpricestartLocale;
+	}
+
+	public String getBidstarttimeLocale() {
+		return bidstarttimeLocale;
+	}
+
+	public void setBidstarttimeLocale(String bidstarttimeLocale) {
+		this.bidstarttimeLocale = bidstarttimeLocale;
 	}
 }
