@@ -18,8 +18,10 @@
     <title>
       OttawAuction
     </title>
+      <script src="assets/js/jquery-min.js"></script>
     
     <!-- Bootstrap -->
+     <link rel="stylesheet" type="text/css" href="assets/css/header.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <!-- Main Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
@@ -348,7 +350,7 @@
    
 
     <!-- JavaScript & jQuery Plugins -->
-    <script src="assets/js/jquery-min.js"></script>
+  
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
     <script src="assets/js/jquery.mixitup.js"></script>
@@ -362,7 +364,7 @@
     <script src="assets/js/form-validator.min.js"></script>
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/main.js"></script>    
-	<script src="assets/js/jquery-1.10.2.js" type="text/javascript"></script>
+
 	</fmt:bundle>
   </body>
 </html>
