@@ -291,6 +291,19 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
+							</c:if> <c:if test="${localeURI == '/'}">
+								<div class="dropdown-menu">
+
+									<c:url value="index.jsp" var="englishURL">
+										<c:param name="locale" value="en_US" />
+									</c:url>
+									<a class="dropdown-item" href="${englishURL}">English</a>
+									<c:url value="index.jsp" var="chineseURL">
+										<c:param name="locale" value="zh_CN" />
+									</c:url>
+									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
+
+								</div>
 							</c:if> <c:if test="${localeURI == '/index.jsp'}">
 								<div class="dropdown-menu">
 

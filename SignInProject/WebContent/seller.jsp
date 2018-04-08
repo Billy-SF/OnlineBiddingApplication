@@ -77,7 +77,7 @@
 
 <p>${currentRating}</p>
 
-<a href="sellerFeedback.jsp?seller=${param.seller}">Rate This Seller</a>
+<a href="sellerFeedback.jsp?seller=${param.seller}&locale=${loc}">Rate This Seller</a>
           </div>
         </div>
       </div>

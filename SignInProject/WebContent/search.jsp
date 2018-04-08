@@ -174,7 +174,7 @@
 													<c:set var="auctionId" scope="session"
 														value="${productItem.getAuction().getId()}" />
 													<a
-														href="bidPageDisplayServlet?productitemid=${productItem.productId}">
+														href="bidPageDisplayServlet?productitemid=${productItem.productId}&locale=${loc}">
 												</c:if>
 												<img
 													src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productItem.getImage()}"

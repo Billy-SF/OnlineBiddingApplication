@@ -107,7 +107,7 @@
 						<td>${sellersMapForSoldAuctions[auctionId]}</td>
 						<td>${soldItems[auctionId].itemName}</td>
 						<td>
-						<a href="bidPageDisplayServlet?productitemid=${soldItems[auctionId].productId}">
+						<a href="bidPageDisplayServlet?productitemid=${soldItems[auctionId].productId}&locale=${loc}">
 						<img class ="gallery"
 						 src='chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${soldItems[auctionId].image}' 
 						  width="200" height="150" alt="${soldItems[auctionId].image}">

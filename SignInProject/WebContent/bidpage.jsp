@@ -221,7 +221,7 @@ to {
 		<div>
 			<div class="bidInfo">
 				<p>
-					<a href="matchSellerServlet"><fmt:message key="sellerPage" /></a>
+					<a href="matchSellerServlet?locale=${loc}"><fmt:message key="sellerPage" /></a>
 				</p>
 				<p>
 					<fmt:message key="bidDateStart" />: <b>${productitem.getAuction().getBidstarttime()}</b>
