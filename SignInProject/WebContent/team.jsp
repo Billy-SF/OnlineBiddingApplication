@@ -1,11 +1,21 @@
 <!DOCTYPE html>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="loc" value="en_US" />
+<c:if test="${!(empty param.locale)}">
+	<c:set var="loc" value="${param.locale}" />
+</c:if>
+<fmt:setLocale value="${param.locale}" />
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <!-- Viewport Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
-      Engage - Multi-Purose Bootstrap HTML5 Template
+      Team Page
     </title>
     <!-- Bootstrap -->
      <link rel="stylesheet" type="text/css" href="assets/css/header.css">
@@ -40,10 +50,11 @@
     <![endif]-->
   </head>
   <body>
-
+<fmt:bundle basename="MessagesBundle">
     <!-- Header area wrapper starts -->
    <%@include file ="header.jsp" %> 
     <!-- Header-wrap Section End -->
+  
     
     <!-- Page Header -->
     <div class="page-header-section">
@@ -51,7 +62,7 @@
         <div class="row">
           <div class="page-header-area">
             <div class="page-header-content">
-              <h2>Team</h2>
+              <h2><fmt:message key="team" /></h2>
             </div>
           </div>
         </div>
@@ -63,9 +74,9 @@
       <!-- Container Starts -->
       <div class="container">  
         <h1 class="section-title wow fadeInUpQuick">
-          Meet Our Team
+          <fmt:message key="meetOurTeam" />
         </h1>
-        <p class="section-subcontent">At vero eos et accusamus et iusto odio dignissimos ducimus qui <br> blanditiis praesentium</p>      
+             
         <!-- Row Starts -->
         <div class="row">          
           <div class="col-sm-6 col-md-3">
@@ -91,7 +102,7 @@
                 </h2>
                 <div class="orange-line"></div>
                 <p>
-                  Team Leader
+                  <fmt:message key="teamLeader" />
                 </p>
               </div>
             </div>
@@ -121,7 +132,7 @@
                 </h2>
                 <div class="orange-line"></div>
                 <p>
-                  Back-end developer
+                 <fmt:message key="backEndDev" />
                 </p>
               </div>
             </div><!-- Team Item Starts -->
@@ -152,7 +163,7 @@
                 </h2>
                 <div class="orange-line"></div>
                 <p>
-                  creative studio head
+                  <fmt:message key="backEndDev" />
                 </p>
               </div>
             </div><!-- Team Item Starts -->
@@ -180,7 +191,7 @@
                 </h2>
                 <div class="orange-line"></div>
                 <p>
-                  magento developer
+                 <fmt:message key="backEndDev" />
                 </p>
               </div>
             </div>
@@ -210,7 +221,7 @@
                 </h2>
                 <div class="orange-line"></div>
                 <p>
-                  magento developer
+                  <fmt:message key="backEndDev" />
                 </p>
               </div>
             </div>
@@ -240,7 +251,7 @@
                 </h2>
                 <div class="orange-line"></div>
                 <p>
-                  Logo / branding designer
+                  <fmt:message key="frontEndDev" />
                 </p>
               </div>
             </div><!-- Team Item Ends -->
@@ -257,43 +268,40 @@
 
     <section class="section">
       <div class="container wow fadeIn" data-wow-delay="0.3s">
-        <h1 class="section-title">Why Choose Us?</h1>
-        <p class="section-subcontent mb-30">At vero eos et accusamus et iusto odio dignissimos ducimus qui <br> blanditiis praesentium</p>
+        <h1 class="section-title"><fmt:message key="whyChooseUs" /></h1>
+        
         <div class="row">          
           <div class="col-md-6 about2-intro-image">
             <img src="assets/img/about/team.jpg" alt="">
           </div>
           <div class="col-md-6">
             <h3 class="small-title">
-              Our Specialty
+              <fmt:message key="ourSpecialty" />
             </h3>
-            <p>We are unique and had working! We work for better product.</p>
+            <p><fmt:message key="ourSpecialtyMessage" /></p>
             <div id="default-tab" class="mt-10">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item"><a class="nav-link active" href="#home" aria-controls="home" role="tab" data-toggle="tab">work</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Planning</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Idea</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Team</a></li>
+                  <li class="nav-item"><a class="nav-link active" href="#home" aria-controls="home" role="tab" data-toggle="tab"><fmt:message key="work" /></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#profile" aria-controls="profile" role="tab" data-toggle="tab"><fmt:message key="planning" /></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><fmt:message key="idea" /></a></li>
+                  <li class="nav-item"><a class="nav-link" href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><fmt:message key="team" /></a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="home">
-                    <p>Boy desirous families prepared gay reserved add ecstatic say. Replied joy age visitor nothing cottage. Mrs door paid led loud sure easy read. Hastily at perhaps as neither or ye fertile tedious visitor. Use fine bed none call busy dull when. Quiet ought match my right by table means. Principles up do in me favourable affronting. Twenty mother denied effect we to do on.</p>
-                    <p>Contented get distrusts certainty nay are frankness concealed ham. On unaffected resolution on considered of. No thought me husband or colonel forming effects. End sitting shewing who saw besides son musical adapted.</p>
+                    <p><fmt:message key="workMessage" /></p>
+                   
                   </div>
                   <div role="tabpanel" class="tab-pane" id="profile">
-                    <p>In as name to here them deny wise this. As rapid woody my he me which. Men but they fail shew just wish next put. Led all visitor musical calling nor her. Within coming figure sex things are. Pretended concluded did repulsive education smallness yet yet described. Had country man his pressed shewing. No gate dare rose he. Eyes year if miss he as upon.</p>
-                    <p>Or neglected agreeable of discovery concluded oh it sportsman. Week to time in john. Son elegance use weddings separate. Ask too matter formed county wicket oppose talent.</p>
+                    <p><fmt:message key="planningMessage" /></p>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="messages">
-                    <p>Repulsive questions contented him few extensive supported. Of remarkably thoroughly he appearance in. Supposing tolerably applauded or of be. Suffering unfeeling so objection agreeable allowance me of. Ask within entire season sex common far who family. As be valley warmth assure on. Park girl they rich hour new well way you. Face ye be me been room we sons fond.</p>
-                    <p>Yourself required no at thoughts delicate landlord it be. Branched dashwood do is whatever it. Farther be chapter at visited married in it pressed. By distrusts procuring be oh frankness existence believing instantly if. Doubtful on an juvenile as of servants insisted</p>
+                    <p><fmt:message key="ideaMessage" /></p>
                   </div>
                   <div role="tabpanel" class="tab-pane" id="settings">
-                    <p>As collected deficient objection by it discovery sincerity curiosity. Quiet decay who round three world whole has mrs man. Built the china there tried jokes which gay why. Assure in adieus wicket it is. But spoke round point and one joy. Offending her moonlight men sweetness see unwilling. Often of it tears whole oh balls share an.</p>
-                    <p>But why smiling man her imagine married. Chiefly can man her out believe manners cottage colonel unknown.</p>
+                    <p><fmt:message key="teamMessage" /></p>
                   </div>
                 </div>
               </div>
@@ -325,6 +333,6 @@
     <script src="assets/js/form-validator.min.js"></script>
     <script src="assets/js/contact-form-script.min.js"></script>
     <script src="assets/js/main.js"></script> 
- 
+ </fmt:bundle>
   </body>
 </html>

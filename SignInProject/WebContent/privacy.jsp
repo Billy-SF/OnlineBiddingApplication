@@ -1,4 +1,16 @@
 <!DOCTYPE html>
+
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="loc" value="en_US" />
+<c:if test="${!(empty param.locale)}">
+	<c:set var="loc" value="${param.locale}" />
+</c:if>
+<fmt:setLocale value="${param.locale}" />
+
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -45,6 +57,8 @@
     <![endif]-->
 </head>
 <body>
+
+<fmt:bundle basename="MessagesBundle">
 	<%@include file="header.jsp"%>
 
 	<!-- Page Header -->
@@ -120,7 +134,7 @@
 									way.</p>
 								<p>&nbsp;</p>
 								<h4>Using Cookies on the OttawAuction website</h4>
-								<p>"Cookies" are files stored on your computer’s hard drive
+								<p>"Cookies" are files stored on your computerâs hard drive
 									by your browser. These cookies help us identify our account
 									holders and optimize their shopping experience. They do not
 									include any data that will identify you personally. Most
@@ -140,7 +154,7 @@
 									From time to time, we may contact you about special offers and
 									new site features if you agreed to be included in our email
 									lists when you complete transaction with us. To cancel our free
-									emails, you can select the “Unsubscribe” link in any email we
+									emails, you can select the âUnsubscribeâ link in any email we
 									send you or by contacting us at (403) 287-8439.
 								</p>
 								<p>&nbsp;</p>
@@ -191,8 +205,8 @@
 									access your existing account or create a new one. Existing
 									account holders are prompted for their ID (your email address)
 									and password. This password is for your protection. If you
-									don’t have your password, there is a link that reads “Forgotten
-									your password?” Click on this for instructions on how to get
+									donât have your password, there is a link that reads âForgotten
+									your password?â Click on this for instructions on how to get
 									your password.</p>
 								<p>&nbsp;</p>
 								<h4>Changes to Privacy Policy</h4>
@@ -258,6 +272,6 @@
 	<script src="assets/js/form-validator.min.js"></script>
 	<script src="assets/js/contact-form-script.min.js"></script>
 	<script src="assets/js/main.js"></script>
-
+</fmt:bundle>
 </body>
 </html>
