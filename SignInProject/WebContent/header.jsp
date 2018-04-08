@@ -361,7 +361,8 @@
 								<div class="form loginBox">
 									<form class="modal-content animate" action="loginServlet"
 										method="post">
-
+										<input type="hidden" name="locale" value="${loc}">
+										
 										<input id="username" name="username" required
 											style="background-color: rgba(0, 0, 0, 0.09) !important;"
 											type="text" placeholder="<fmt:message key="username" />">
