@@ -6,6 +6,10 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.text.NumberFormat" %>
+<%@ page import="java.util.Locale" %>
+<%@ page import="java.util.Currency" %>
+
 
 <c:set var="loc" value="en_US" />
 <c:if test="${!(empty param.locale)}">
@@ -22,6 +26,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Bootstrap -->
+ <link rel="stylesheet" type="text/css" href="assets/css/header.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
 <link rel="stylesheet"
@@ -226,7 +231,7 @@ to {
 				</p>
 				<c:if test="${productitem.getHighestPrice() == '0.00'}">
 					<p>
-						<fmt:message key="initialBidPrice" />: <b>$${productitem.getAuction().getBidpricestart()}</b>
+						<fmt:message key="initialBidPrice" />: <b>${productitem.getAuction().getBidpricestart()}</b>
 					</p>
 				</c:if>
 				<c:if test="${productitem.getHighestPrice() != '0.00'}">
@@ -280,9 +285,7 @@ to {
 						<b style="color: red;"><fmt:message key="pleaseSignIn" /></b>
 					</c:if>
 				</form>
-
-
-			</div>
+		</div>
 
 			<script>
 				var checkUserPay = function() {

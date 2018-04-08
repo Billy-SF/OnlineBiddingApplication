@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Engage - Multi-Purose Bootstrap HTML5 Template</title>
 <!-- Bootstrap -->
+ <link rel="stylesheet" type="text/css" href="assets/css/header.css">
 	<script src="assets/js/jquery-min.js"></script>
 	
 <link rel="stylesheet" type="text/css"

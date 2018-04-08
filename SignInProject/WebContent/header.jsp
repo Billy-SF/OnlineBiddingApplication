@@ -16,25 +16,27 @@
 
 		<!-- Navbar Starts -->
 		<nav
-			class="navbar navbar-expand-md  fixed-top scrolling-navbar nav-bg">
-			<div class="container">
+			class="navbar navbar-expand-md  fixed-top scrolling-navbar  nav-bg navbar-dark">
+			
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<c:url value="index.jsp" var="home1">
 						<c:param name="locale" value="${loc}" />
 					</c:url>
 
-					<a class="navbar-brand" href="${home1}"> <img
+					
+				
+				</div>
+					<button id="hu" class="navbar-toggler bg-primary" type="button" data-toggle="collapse"
+						data-target="#main-menu" aria-controls="main-menu"
+						aria-expanded="false" aria-label="Toggle navigation" style="display:block !important">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				<div class="collapse navbar-collapse" id="main-menu">
+				<a class="navbar-brand" href="${home1}"> <img
 						src="assets/img/logo.png" style="width: 180px; height: 90%;"
 						alt="">
 					</a>
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#main-menu" aria-controls="main-menu"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
-				<div class="collapse navbar-collapse" id="main-menu">
 					<ul class="navbar-nav mr-auto w-100 justify-content-end">
 						<li class="nav-item dropdown"><c:url value="index.jsp"
 								var="home">
@@ -49,15 +51,16 @@
 									key="auction" /></a>
 							<div class="dropdown-menu">
 								<c:if test="${null != sessionScope.username}">
-									<a class="dropdown-item" href="auction.jsp"><fmt:message
-											key="createAuction" /></a>
+									<a class="dropdown-item" href="auction.jsp?locale=${loc}"><fmt:message
+											key="createAuction" />
+											</a>
 								</c:if>
 
-								<a class="dropdown-item" href="displayAuctionServlet"><fmt:message
+								<a class="dropdown-item" href="displayAuctionServlet?locale=${loc}"><fmt:message
 										key="viewCurrentBids" /></a>
 
 								<c:if test="${role}">
-									<a class="dropdown-item" href="closedBidsServlet"><fmt:message
+									<a class="dropdown-item" href="closedBidsServlet?locale=${loc}"><fmt:message
 											key="viewEndedBids" /></a>
 								</c:if>
 							</div></li>
@@ -75,12 +78,12 @@
 									</c:url>
 
 									<c:if test="${role}">
-										<a class="dropdown-item" href="usersServlet"><fmt:message
+										<a class="dropdown-item" href="usersServlet?locale=${loc}"><fmt:message
 												key="users" /></a>
 									</c:if>
 
 									<a class="dropdown-item" href="${edit}"><fmt:message
-											key="edit" /></a> <a class="dropdown-item" href="Logout.jsp"><fmt:message
+											key="edit" /></a> <a class="dropdown-item" href="Logout.jsp?locale=${loc}"><fmt:message
 											key="logout" /></a>
 								</div></li>
 						</c:if>
@@ -93,7 +96,7 @@
 								<div class="dropdown-menu">
 									<a class="dropdown-item" data-toggle="modal" href="#id01"><fmt:message
 											key="login" /></a> <a class="dropdown-item"
-										href="registrationForm.jsp"><fmt:message key="register" /></a>
+										href="registrationForm.jsp?locale=${loc}"><fmt:message key="register" /></a>
 								</div></li>
 						</c:if>
 
@@ -128,7 +131,7 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/condition.jsp'} ">
+							</c:if> <c:if test="${localeURI == '/condition.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="condition.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />
@@ -306,6 +309,7 @@
 
 					<form class="navbar-form navbar-left" action="searchServlet">
 						<div class="input-group" style="height: 35px;">
+						<input type="hidden" name="locale" value="${loc}">
 							<input type="text" class="form-control"
 								placeholder="<fmt:message key="search"/>"
 								style="border-radius: 10px 0px 0px 10px;" name="search">
@@ -321,7 +325,7 @@
 				</div>
 
 
-			</div>
+		
 		</nav>
 
 

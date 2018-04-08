@@ -8,6 +8,7 @@
       Contact
     </title>
     <!-- Bootstrap -->
+     <link rel="stylesheet" type="text/css" href="assets/css/header.css">
     <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
     <!-- Main Style -->
     <link rel="stylesheet" type="text/css" href="assets/css/main.css">
