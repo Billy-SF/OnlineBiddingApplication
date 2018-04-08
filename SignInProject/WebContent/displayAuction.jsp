@@ -115,7 +115,7 @@
 								<td>${ItemsForOpenAuctions[auctionId].description}</td>
 								<td>${openAuction.getBidstarttimeLocale()}</td>
 								<td>${openAuction.getBidendtimeLocale()}</td>
-								<td>${openAuction.bidpricestart}</td>
+								<td>${openAuction.getBidpricestartLocale()}</td>
 								<td>${highestBidpriceForOpenAuctions[auctionId]}</td>
 								<td>${buyersMapForOpenAuctions[auctionId]}</td>
 							</tr>

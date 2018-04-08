@@ -63,7 +63,13 @@ public class DisplayAuctionServlet extends HttpServlet{
 
 					}
 				}
-				
+				String bidPriceMax = auction.getBidpricestart();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+
+				auction.setBidpricestartLocale(formattedMaxCurrency);
 				
 			} else {
 
@@ -95,7 +101,15 @@ public class DisplayAuctionServlet extends HttpServlet{
 					}
 				}
 				
+				String bidPriceMax = auction.getBidpricestart();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
 
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+				if (formattedMaxCurrency.length() > 1) {
+					formattedMaxCurrency = formattedMaxCurrency.substring(1);
+				}
+				auction.setBidpricestartLocale(formattedMaxCurrency + "¥");
 
 			}
 

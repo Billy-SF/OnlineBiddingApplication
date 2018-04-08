@@ -2,6 +2,7 @@ package com.oa.servlets;
 
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,6 +63,14 @@ for(Auction auction: soldAuctions) {
 					}
 				}
 				
+				String bidPriceMax = auction.getBidpricestart();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+
+				auction.setBidpricestartLocale(formattedMaxCurrency);
+				
 				
 			} else {
 
@@ -92,7 +101,15 @@ for(Auction auction: soldAuctions) {
 
 					}
 				}
-				
+				String bidPriceMax = auction.getBidpricestart();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+				if (formattedMaxCurrency.length() > 1) {
+					formattedMaxCurrency = formattedMaxCurrency.substring(1);
+				}
+				auction.setBidpricestartLocale(formattedMaxCurrency + "Y");
 
 
 			}
