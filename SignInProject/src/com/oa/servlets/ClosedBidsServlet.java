@@ -117,7 +117,37 @@ for(Auction auction: soldAuctions) {
 		}
 		
 		Map<String, String> buyersMapForSoldAuctions = AuctionDao.getHighestBiderForAuctions(soldAuctions);
+
+		
 		Map<String, String> highestBidPriceMapForSoldAuctions = AuctionDao.getHighestBidPriceForAucions(soldAuctions);
+		for (Map.Entry<String, String> entry : highestBidPriceMapForSoldAuctions.entrySet())
+		{
+		    
+			
+			if ("en_US".equals(request.getParameter("locale"))) {
+				
+				String bidPriceMax = entry.getValue();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+
+				entry.setValue(formattedMaxCurrency);
+			}
+			else {
+				String bidPriceMax = entry.getValue();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+				if (formattedMaxCurrency.length() > 1) {
+					formattedMaxCurrency = formattedMaxCurrency.substring(1);
+				}
+				entry.setValue(formattedMaxCurrency + "Y");
+				
+			}
+			
+		}
 		Map<String, ProductItem> soldItems = AuctionDao.getItemsForAuctions(soldAuctions);
 		Map<String, String> sellersMapForSoldAuctions = AuctionDao.getSellersForAucions(soldAuctions);
 		

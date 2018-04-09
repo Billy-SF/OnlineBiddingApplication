@@ -75,7 +75,8 @@ public class BidServlet extends HttpServlet{
 		
 		//RequestDispatcher rp = request.getRequestDispatcher("bidpage.jsp");
 		//rp.forward(request, response);
-		response.sendRedirect("bidPageDisplayServlet?productitemid=" + itemId+ "&errorMessagebd=" + errorMessage);
+		response.sendRedirect("bidPageDisplayServlet?productitemid=" + itemId+ 
+				"&errorMessagebd=" + errorMessage + "&locale=" + request.getParameter("locale"));
 		out.close();
 	}	
 	

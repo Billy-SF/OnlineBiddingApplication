@@ -81,6 +81,21 @@ public class DisplayAuctionServlet extends HttpServlet{
 						DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM,
 								Locale.CHINA);
 						String formattedDate = df.format(startDate);
+					String[] datetime = formattedDate.split(" ");
+					String[] dates = datetime[0].split("-");
+					String[] time = datetime[1].split(":");
+					if((dates!=null && dates.length==3) && (time!=null && time.length==3)) {
+					dates[0]+= "年";
+					dates[1]+= "月";
+					dates[2]+= "日";
+					
+					time[0]+= "小時";
+					time[1]+= "分";
+					time[2]+= "秒";
+					
+					formattedDate = dates[0] + dates[1] + dates[2] + " " + 
+							time[0]+ time[1] + time[2];
+					}
 						auction.setBidstarttimeLocale(formattedDate);
 
 					} catch (ParseException e) {
@@ -94,6 +109,21 @@ public class DisplayAuctionServlet extends HttpServlet{
 						DateFormat df2 = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM,
 								Locale.CHINA);
 						String formattedDate2 = df2.format(endDate);
+						String[] datetime = formattedDate2.split(" ");
+						String[] dates = datetime[0].split("-");
+						String[] time = datetime[1].split(":");
+						if((dates!=null && dates.length==3) && (time!=null && time.length==3)) {
+							dates[0]+= "年";
+							dates[1]+= "月";
+							dates[2]+= "日";
+							
+							time[0]+= "小時";
+							time[1]+= "分";
+							time[2]+= "秒";
+							
+							formattedDate2 = dates[0] + dates[1] + dates[2] + " " + 
+									time[0]+ time[1] + time[2];
+							}
 						auction.setBidendtimeLocale(formattedDate2);
 
 					} catch (ParseException e) {
@@ -109,12 +139,40 @@ public class DisplayAuctionServlet extends HttpServlet{
 				if (formattedMaxCurrency.length() > 1) {
 					formattedMaxCurrency = formattedMaxCurrency.substring(1);
 				}
-				auction.setBidpricestartLocale(formattedMaxCurrency + "�");
+				auction.setBidpricestartLocale(formattedMaxCurrency + "¥");
 
 			}
 
 		}
 		Map<String, String> highestBidpriceForOpenAuctions = AuctionDao.getHighestBidPriceForAucions(openAuctions);
+		for (Map.Entry<String, String> entry : highestBidpriceForOpenAuctions.entrySet())
+		{
+		    
+			
+			if ("en_US".equals(request.getParameter("locale"))) {
+				
+				String bidPriceMax = entry.getValue();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+
+				entry.setValue(formattedMaxCurrency);
+			}
+			else {
+				String bidPriceMax = entry.getValue();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+				if (formattedMaxCurrency.length() > 1) {
+					formattedMaxCurrency = formattedMaxCurrency.substring(1);
+				}
+				entry.setValue(formattedMaxCurrency + "¥");
+				
+			}
+			
+		}
 		Map<String, ProductItem> ItemsForOpenAuctions = AuctionDao.getItemsForAuctions(openAuctions);
 		Map<String, String> buyersMapForOpenAuctions = AuctionDao.getHighestBiderForAuctions(openAuctions);
 		Map<String, String> sellersMapForOpenAuctions = AuctionDao.getSellersForAucions(openAuctions);

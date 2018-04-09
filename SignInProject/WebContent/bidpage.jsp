@@ -257,6 +257,7 @@ to {
 				<br />
 
 				<form class="form-inline" action="bidServlet" method="post">
+					<input type="hidden" value="${loc}" name="locale">
 					<c:if test="${sessionScope.auctionId != null}}">
 						<c:remove var="auctionId" />
 					</c:if>
@@ -275,6 +276,7 @@ to {
 						</div>
 
 						<div class="form-group">
+					
 							<input type="submit" style="border-radius: 0px 10px 10px 0px;"
 								class="btn btn-primary" name="bidsubmit" id="bidsubmit"
 								value="<fmt:message key="bid" />" />
