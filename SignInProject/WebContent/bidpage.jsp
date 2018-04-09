@@ -478,9 +478,9 @@ to {
 			<tbody>
 				<c:forEach items="${productitem.getBids()}" var="bid">
 					<tr>
-						<td>$${bid.getBidprice()}</td>
+						<td>${bid.getBidpriceLocale()}</td>
 						<td><b>${bid.getUser().getUsername()}</b></td>
-						<td><b>${bid.getDateCreated()}</b></td>
+						<td><b>${bid.getDateCreatedLocale()}</b></td>
 					</tr>
 				</c:forEach>
 			</tbody>

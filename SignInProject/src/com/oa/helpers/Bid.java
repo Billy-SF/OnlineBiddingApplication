@@ -10,6 +10,8 @@ public class Bid {
 	private String userid;
 		private User user;
 	private String dateCreated;
+	private String bidpriceLocale;
+	private String dateCreatedLocale;
 	
 	public Bid() {
 		
@@ -69,6 +71,21 @@ public class Bid {
 	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated.replaceAll("\\.\\d+", "");
 	}
-	
+
+	public String getBidpriceLocale() {
+		return bidpriceLocale;
+	}
+
+	public void setBidpriceLocale(String bidpriceLocale) {
+		this.bidpriceLocale = bidpriceLocale;
+	}
+
+	public String getDateCreatedLocale() {
+		return dateCreatedLocale;
+	}
+
+	public void setDateCreatedLocale(String dateCreatedLocale) {
+		this.dateCreatedLocale = dateCreatedLocale;
+	}
 	
 }

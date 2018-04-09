@@ -71,8 +71,6 @@ public class BidPageDisplayServlet extends HttpServlet {
 
 			}
 
-		
-
 			if ("en_US".equals(request.getParameter("locale"))) {
 
 				DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM, Locale.CANADA);
@@ -110,7 +108,7 @@ public class BidPageDisplayServlet extends HttpServlet {
 				}
 
 				auction.setBidpricestartLocale(formattedCurrency + "¥");
-				
+
 				String bidPriceMax = productitem.getHighestPrice();
 				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
 
@@ -121,7 +119,6 @@ public class BidPageDisplayServlet extends HttpServlet {
 				}
 				productitem.setHighestPriceLocale(formattedMaxCurrency + "¥");
 
-
 			}
 
 		} catch (ParseException e) {
@@ -131,6 +128,68 @@ public class BidPageDisplayServlet extends HttpServlet {
 
 		request.setAttribute("itemId", productitemid);
 		request.setAttribute("productitem", productitem);
+		
+		ArrayList<Bid> bids = productitem.getBids();
+		for (Bid bid : bids) {
+
+			if ("en_US".equals(request.getParameter("locale"))) {
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String startDateC = bid.getDateCreated();
+		
+				if (null != startDateC) {
+					try {
+						Date startDate = sdf.parse(startDateC);
+						DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM,
+								Locale.CANADA);
+						String formattedDate = df.format(startDate);
+						bid.setDateCreatedLocale(formattedDate);
+
+					} catch (ParseException e) {
+
+					}
+				}
+				
+				String bidPriceMax = bid.getBidprice();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+
+				bid.setBidpriceLocale(formattedMaxCurrency);
+				
+			} else {
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String startDateC = bid.getDateCreated();
+		
+				if (null != startDateC) {
+					try {
+						Date startDate = sdf.parse(startDateC);
+						DateFormat df = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.MEDIUM,
+								Locale.CHINA);
+						String formattedDate = df.format(startDate);
+						bid.setDateCreatedLocale(formattedDate);
+
+					} catch (ParseException e) {
+
+					}
+				}
+				
+				
+				String bidPriceMax = bid.getBidprice();
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+
+				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CHINA);
+				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+				if (formattedMaxCurrency.length() > 1) {
+					formattedMaxCurrency = formattedMaxCurrency.substring(1);
+				}
+				bid.setBidpriceLocale(formattedMaxCurrency + "¥");
+
+			}
+		}
+		productitem.setBids(bids);
 		request.setAttribute("auction", auction);
 
 		if (null == request.getParameter("errorMessagebd") || request.getParameter("errorMessagebd").trim().isEmpty()
