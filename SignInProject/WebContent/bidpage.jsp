@@ -301,6 +301,7 @@ to {
 					Accept : "application/json",
 					dataType : "json",
 					data : {
+						"locale": "${loc}",
 						"productitemid" : "${productitem.getProductId()}"
 					},
 					beforeSend : function(xhr) {
