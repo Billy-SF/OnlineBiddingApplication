@@ -177,7 +177,7 @@
 														href="bidPageDisplayServlet?productitemid=${productItem.productId}&locale=${loc}">
 												</c:if>
 												<img
-													src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productItem.getImage()}"
+													src="chrome-extension://fcmhodknfdbdmfadnmhngoekgkejephl/${productItem.getImage()}"
 													alt="${productItem.itemName}" width="200" height="200"></img>
 												<c:if test="${not empty productItem.getAuction().getId()}">
 													</a>

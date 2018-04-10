@@ -15,12 +15,12 @@
 
 <meta charset="utf-8">
 <title>Search</title>
-	<script src="assets/js/jquery-min.js"></script>
+<script src="assets/js/jquery-min.js"></script>
 <!-- Viewport Meta Tag -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- Bootstrap -->
- <link rel="stylesheet" type="text/css" href="assets/css/header.css">
+<link rel="stylesheet" type="text/css" href="assets/css/header.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.css">
 <link rel="stylesheet"
@@ -69,95 +69,99 @@
 </style>
 
 
-	</head>
-	<body>
-
+</head>
+<body>
+	<fmt:bundle basename="MessagesBundle">
 		<%@include file="header.jsp"%>
 
-	<section class="contact-form-section section">
-		<div class="container">
-			<div class="row">
-				<div
-					class="col-md-12 mb-50 text-center contact-title-text wow fadeIn"
-					data-wow-delay="0.3s">
-					<h2>Closed Auctions</h2>
+		<section class="contact-form-section section">
+			<div class="container">
+				<div class="row">
+					<div
+						class="col-md-12 mb-50 text-center contact-title-text wow fadeIn"
+						data-wow-delay="0.3s">
+						<h2><fmt:message key="closedAuctions" /></h2>
+					</div>
+					<div>&nbsp;</div>
+
+					<table id="users" class="stripe table-striped" style="width: 100%">
+						<thead>
+							<tr>
+								<th><fmt:message key="seller" /></th>
+								<th><fmt:message key="item" /></th>
+								<th><fmt:message key="image" /></th>
+								<th><fmt:message key="createdDate" /></th>
+								<th><fmt:message key="startDate" /></th>
+								<th><fmt:message key="endDate" /></th>
+								<th><fmt:message key="initialPrice" /></th>
+								<th><fmt:message key="soldPrice" /></th>
+								<th><fmt:message key="buyer" /></th>
+							</tr>
+						</thead>
+						<tbody>
+
+							<c:forEach items="${soldAuctions}" var="soldAuction">
+								<tr>
+									<c:set var="auctionId" value="${soldAuction.id}" />
+									<td>${sellersMapForSoldAuctions[auctionId]}</td>
+									<td>${soldItems[auctionId].itemName}</td>
+									<td><a
+										href="bidPageDisplayServlet?productitemid=${soldItems[auctionId].productId}&locale=${loc}">
+											<img class="gallery"
+											src='chrome-extension://fcmhodknfdbdmfadnmhngoekgkejephl/${soldItems[auctionId].image}'
+											width="200" height="150" alt="${soldItems[auctionId].image}">
+									</a></td>
+									<td>${soldAuction.dateCreated}</td>
+									<td>${soldAuction.getBidstarttimeLocale()}</td>
+									<td>${soldAuction.getBidendtimeLocale()}</td>
+									<td>${soldAuction.getBidpricestartLocale()}</td>
+									<td>${highestBidPriceMapForSoldAuctions[auctionId]}</td>
+									<td>${buyersMapForSoldAuctions[auctionId]}</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<script>
+						$(document).ready(
+								function() {
+									$('#users').DataTable(
+											{
+												searching : false,
+												lengthMenu : [
+														[ 5, 10, 15, -1 ],
+														[ 5, 10, 15, "All" ] ],
+												ordering : true,
+												bServerSide : false
+											});
+								});
+					</script>
+
+
 				</div>
-				<div>&nbsp;</div>
-	  
-		<table id="users" class="stripe table-striped" style="width:100%">
-			<thead>
-				<tr>
-					<th>Seller</th>
-					<th>Item</th>
-					<th>Image</th>
-					<th>Created Date</th>
-					<th>Start Date</th>
-					<th>End Date</th>
-					<th>Initial Price</th>
-					<th>Sold Price</th>
-					<th>Buyer</th>
-				</tr>
-			</thead>
-			<tbody>
-			
-				<c:forEach items="${soldAuctions}" var="soldAuction">
-					<tr>
-						<c:set var="auctionId" value="${soldAuction.id}"/>
-						<td>${sellersMapForSoldAuctions[auctionId]}</td>
-						<td>${soldItems[auctionId].itemName}</td>
-						<td>
-						<a href="bidPageDisplayServlet?productitemid=${soldItems[auctionId].productId}&locale=${loc}">
-						<img class ="gallery"
-						 src='chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${soldItems[auctionId].image}' 
-						  width="200" height="150" alt="${soldItems[auctionId].image}">
-						</a>
-						</td>
-						<td>${soldAuction.dateCreated}</td>
-						<td>${soldAuction.getBidstarttimeLocale()}</td>
-						<td>${soldAuction.getBidendtimeLocale()}</td>
-						<td>${soldAuction.getBidpricestartLocale()}</td>
-						<td>${highestBidPriceMapForSoldAuctions[auctionId]}</td>
-						<td>${buyersMapForSoldAuctions[auctionId]}</td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	<script>
-		$(document).ready(function() {
-			$('#users').DataTable({
-				searching : false,
-				lengthMenu : [ [ 5, 10, 15, -1 ], [ 5, 10, 15, "All" ] ],
-				ordering : true,
-				bServerSide : false
-			});
-		});
-	</script>
-	  
-	  
-	</div>
-	
-</div></section>
+
+			</div>
+		</section>
 		<%@include file="footer.jsp"%>
 
 
 		<!-- JavaScript & jQuery Plugins -->
-	<script src="assets/js/popper.min.js"></script>
-	<script src="assets/js/bootstrap.min.js"></script>
-	<script src="assets/js/jquery.mixitup.js"></script>
-	<script src="assets/js/smoothscroll.js"></script>
-	<script src="assets/js/wow.js"></script>
-	<script src="assets/js/owl.carousel.js"></script>
-	<script src="assets/js/waypoints.min.js"></script>
-	<script src="assets/js/jquery.counterup.min.js"></script>
-	<script src="assets/js/jquery.slicknav.js"></script>
-	<script src="assets/js/jquery.appear.js"></script>
-	<script src="assets/js/form-validator.min.js"></script>
-	<script src="assets/js/contact-form-script.min.js"></script>
-	<script src="assets/js/main.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-	<script
-		src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
-
+		<script src="assets/js/popper.min.js"></script>
+		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="assets/js/jquery.mixitup.js"></script>
+		<script src="assets/js/smoothscroll.js"></script>
+		<script src="assets/js/wow.js"></script>
+		<script src="assets/js/owl.carousel.js"></script>
+		<script src="assets/js/waypoints.min.js"></script>
+		<script src="assets/js/jquery.counterup.min.js"></script>
+		<script src="assets/js/jquery.slicknav.js"></script>
+		<script src="assets/js/jquery.appear.js"></script>
+		<script src="assets/js/form-validator.min.js"></script>
+		<script src="assets/js/contact-form-script.min.js"></script>
+		<script src="assets/js/main.js"></script>
+		<script
+			src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+		<script
+			src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js"></script>
+	</fmt:bundle>
 </body>
 </html>
