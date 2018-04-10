@@ -2,9 +2,11 @@ package com.oa.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ArrayList;
 
 
@@ -46,6 +48,30 @@ public class GetHighestBidPriceServlet extends HttpServlet{
 		
 	    Bid bid = BidDao.getHigestBid(productitemid);
 	    String highestprice =  bid.getBidprice();
+
+		if ("en_US".equals(request.getParameter("locale"))) {
+			
+		
+			Double currencyMaxAmount = new Double(Double.parseDouble(highestprice));
+
+			NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
+			String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+
+			highestprice = formattedMaxCurrency;
+		}
+		else {
+			String bidPriceMax = bid.getBidprice();
+			Double currencyMaxAmount = new Double(Double.parseDouble(highestprice) *  4.96);
+
+			NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CHINA);
+			String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
+			if (formattedMaxCurrency.length() > 1) {
+				formattedMaxCurrency = formattedMaxCurrency.substring(1);
+			}
+			highestprice = formattedMaxCurrency + "&#xA5;";
+			
+			
+		}
 	    
 	   
 	    json = new JSONObject();
