@@ -502,12 +502,12 @@ to {
 	<c:if test="${!(empty sessionScope.username)}">
 		<div class="row align-items-center justify-content-center" id="chatroom">
 			<div class="col-md-5 col-lg-9 col-sm-5 ">
-				<div class="chatroom-container">
-					<div class="chatmessage-container" id="chatmessage"></div>
-					<div class="clearfix"></div>
-					<div class="input-group left-padding-5 bottom-padding-5">
+				<div class="chatroom-container border border-primary" style="border-radius:20px;">
+					<div class="chatmessage-container"  id="chatmessage"></div>
+					<div class="clearfix  border border-primary"></div>
+					<div class="input-group left-padding-5 bottom-padding-5 border border-primary" >
 						
-						<div class="text-right top-padding-12 right-padding-100">
+						<div class="text-right top-padding-12 right-padding-100 ">
 							<label for="color"><fmt:message key="color" /></label>&nbsp; <select id="color"
 								name="color">
 								<option value="black"><fmt:message key="black" /></option>
@@ -521,7 +521,7 @@ to {
 					</div>
 					<div class="clearfix"></div>
 					<div
-						class="message-send left-padding-5 right-padding-5 bottom-padding-5">
+						class="message-send left-padding-5 right-padding-5 bottom-padding-5 border border-primary">
 						<div hidden="hidden">
 							<input type="text" id="last_message_id" name="last_message_id"><br>
 							<input type="text" id="user_name" name="user_name"
