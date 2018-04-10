@@ -566,7 +566,7 @@ to {
 					</div>
 					<div class="clearfix"></div>
 					<div
-						class="message-send left-padding-5 right-padding-5 bottom-padding-5 border border-primary">
+						class="message-send left-padding-5 right-padding-5 bottom-padding-5" >
 						<div hidden="hidden">
 							<input type="text" id="last_message_id" name="last_message_id"><br>
 							<input type="text" id="user_name" name="user_name"
