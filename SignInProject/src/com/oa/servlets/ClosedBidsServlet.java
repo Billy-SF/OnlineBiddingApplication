@@ -102,14 +102,14 @@ for(Auction auction: soldAuctions) {
 					}
 				}
 				String bidPriceMax = auction.getBidpricestart();
-				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 4.96);
 
 				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
 				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
 				if (formattedMaxCurrency.length() > 1) {
 					formattedMaxCurrency = formattedMaxCurrency.substring(1);
 				}
-				auction.setBidpricestartLocale(formattedMaxCurrency + "Y");
+				auction.setBidpricestartLocale(formattedMaxCurrency + "&#xA5;");
 
 
 			}
@@ -136,14 +136,14 @@ for(Auction auction: soldAuctions) {
 			}
 			else {
 				String bidPriceMax = entry.getValue();
-				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) *  4.96);
 
 				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
 				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
 				if (formattedMaxCurrency.length() > 1) {
 					formattedMaxCurrency = formattedMaxCurrency.substring(1);
 				}
-				entry.setValue(formattedMaxCurrency + "Y");
+				entry.setValue(formattedMaxCurrency + "&#xA5;");
 				
 			}
 			

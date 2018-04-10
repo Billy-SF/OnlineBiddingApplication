@@ -85,13 +85,13 @@ public class DisplayAuctionServlet extends HttpServlet{
 					String[] dates = datetime[0].split("-");
 					String[] time = datetime[1].split(":");
 					if((dates!=null && dates.length==3) && (time!=null && time.length==3)) {
-					dates[0]+= "年";
-					dates[1]+= "月";
-					dates[2]+= "日";
-					
-					time[0]+= "小時";
-					time[1]+= "分";
-					time[2]+= "秒";
+						dates[0]+= "&#x5E74;";
+						dates[1]+= "&#x6708;";
+						dates[2]+= "&#x65E5;";
+						
+						time[0]+= "&#x5C0F;&#x65F6;";
+						time[1]+= "&#x5206;";
+						time[2]+= "&#x79D2;";
 					
 					formattedDate = dates[0] + dates[1] + dates[2] + " " + 
 							time[0]+ time[1] + time[2];
@@ -113,13 +113,13 @@ public class DisplayAuctionServlet extends HttpServlet{
 						String[] dates = datetime[0].split("-");
 						String[] time = datetime[1].split(":");
 						if((dates!=null && dates.length==3) && (time!=null && time.length==3)) {
-							dates[0]+= "年";
-							dates[1]+= "月";
-							dates[2]+= "日";
+							dates[0]+= "&#x5E74;";
+							dates[1]+= "&#x6708;";
+							dates[2]+= "&#x65E5;";
 							
-							time[0]+= "小時";
-							time[1]+= "分";
-							time[2]+= "秒";
+							time[0]+= "&#x5C0F;&#x65F6;";
+							time[1]+= "&#x5206;";
+							time[2]+= "&#x79D2;";
 							
 							formattedDate2 = dates[0] + dates[1] + dates[2] + " " + 
 									time[0]+ time[1] + time[2];
@@ -132,14 +132,14 @@ public class DisplayAuctionServlet extends HttpServlet{
 				}
 				
 				String bidPriceMax = auction.getBidpricestart();
-				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) *  4.96);
 
 				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
 				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
 				if (formattedMaxCurrency.length() > 1) {
 					formattedMaxCurrency = formattedMaxCurrency.substring(1);
 				}
-				auction.setBidpricestartLocale(formattedMaxCurrency + "¥");
+				auction.setBidpricestartLocale(formattedMaxCurrency + "&#xA5;");
 
 			}
 
@@ -161,14 +161,14 @@ public class DisplayAuctionServlet extends HttpServlet{
 			}
 			else {
 				String bidPriceMax = entry.getValue();
-				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) *  4.96);
 
 				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
 				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
 				if (formattedMaxCurrency.length() > 1) {
 					formattedMaxCurrency = formattedMaxCurrency.substring(1);
 				}
-				entry.setValue(formattedMaxCurrency + "¥");
+				entry.setValue(formattedMaxCurrency + "&#xA5;");
 				
 			}
 			

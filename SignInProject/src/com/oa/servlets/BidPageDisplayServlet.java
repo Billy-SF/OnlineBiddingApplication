@@ -99,7 +99,7 @@ public class BidPageDisplayServlet extends HttpServlet {
 				auction.setBidstarttimeLocale(formattedDate);
 
 				String bidPriceStart = auction.getBidpricestart();
-				Double currencyAmount = new Double(Double.parseDouble(bidPriceStart) * 6.00);
+				Double currencyAmount = new Double(Double.parseDouble(bidPriceStart) *  4.96);
 
 				NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.CHINA);
 				String formattedCurrency = currencyFormatter.format(currencyAmount);
@@ -107,17 +107,17 @@ public class BidPageDisplayServlet extends HttpServlet {
 					formattedCurrency = formattedCurrency.substring(1);
 				}
 
-				auction.setBidpricestartLocale(formattedCurrency + "¥");
+				auction.setBidpricestartLocale(formattedCurrency + "&#xA5;");
 
 				String bidPriceMax = productitem.getHighestPrice();
-				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) * 6.00);
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) *  4.96);
 
 				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CANADA);
 				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
 				if (formattedMaxCurrency.length() > 1) {
 					formattedMaxCurrency = formattedMaxCurrency.substring(1);
 				}
-				productitem.setHighestPriceLocale(formattedMaxCurrency + "¥");
+				productitem.setHighestPriceLocale(formattedMaxCurrency + "&#xA5;");
 
 			}
 
@@ -178,14 +178,14 @@ public class BidPageDisplayServlet extends HttpServlet {
 				
 				
 				String bidPriceMax = bid.getBidprice();
-				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax));
+				Double currencyMaxAmount = new Double(Double.parseDouble(bidPriceMax) *  4.96);
 
 				NumberFormat currencyMaxFormatter = NumberFormat.getCurrencyInstance(Locale.CHINA);
 				String formattedMaxCurrency = currencyMaxFormatter.format(currencyMaxAmount);
 				if (formattedMaxCurrency.length() > 1) {
 					formattedMaxCurrency = formattedMaxCurrency.substring(1);
 				}
-				bid.setBidpriceLocale(formattedMaxCurrency + "¥");
+				bid.setBidpriceLocale(formattedMaxCurrency + "&#xA5;");
 
 			}
 		}

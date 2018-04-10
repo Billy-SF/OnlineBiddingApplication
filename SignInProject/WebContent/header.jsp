@@ -118,7 +118,20 @@
 									</c:url>
 									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
 								</div>
-							</c:if> <c:if test="${localeURI == '/sellerFeedback.jsp'}">
+							</c:if> 
+								<c:if test="${localeURI == '/registrationForm.jsp'}">
+								<div class="dropdown-menu">
+									<c:url value="registrationForm.jsp" var="englishURL">
+										<c:param name="locale" value="en_US" />
+									</c:url>
+									<a class="dropdown-item" href="${englishURL}">English</a>
+									<c:url value="registrationForm.jsp" var="chineseURL">
+										<c:param name="locale" value="zh_CN" />
+									</c:url>
+									<a class="dropdown-item" href="${chineseURL}">&#x4E2D;&#x6587;</a>
+								</div>
+							</c:if>
+							<c:if test="${localeURI == '/sellerFeedback.jsp'}">
 								<div class="dropdown-menu">
 									<c:url value="sellerFeedback.jsp" var="englishURL">
 										<c:param name="locale" value="en_US" />

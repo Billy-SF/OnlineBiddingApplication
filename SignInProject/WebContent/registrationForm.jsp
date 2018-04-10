@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<c:set var="loc" value="en_US" />
+<c:if test="${!(empty param.locale)}">
+	<c:set var="loc" value="${param.locale}" />
+</c:if>
+<fmt:setLocale value="${param.locale}" />
   <head>
     <meta charset="utf-8">
 
@@ -107,13 +117,8 @@
 				return true;
 			}
 </script>
-
-
-
-
   </head>
   <body>
-
     <fmt:bundle basename="MessagesBundle">
  <%@include file="header.jsp" %>
  
@@ -122,35 +127,35 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 mb-50 text-center contact-title-text wow fadeIn" data-wow-delay="0.3s">
-            <h2>Register</h2>
+            <h2><fmt:message key="registration" /></h2>
           </div>
           <div  class="col-md-7 col-md-offset-1 contact-form contact-info-section center-div">
            <form name="registrationForm" action="registerServlet" onsubmit="return validateForm()" method="POST"> 
               <div class="form-group">
               	<p class="pull-left" style="color:red" id="firstNameValidation"></p>
-                <label for="firstName" class="sr-only">First Name</label>
-                <input type="text" placeholder="Your First Name" name="firstName" id="firstName" class="form-control contact-control"  required data-error="Please enter your first name">
+                <label for="firstName" class="sr-only"><fmt:message key="RegisterFirstname" /></label>
+                <input type="text" placeholder="<fmt:message key="RegisterFirstname" />" name="firstName" id="firstName" class="form-control contact-control"  required data-error="Please enter your first name">
                 <div class="help-block with-errors"></div>
               </div>
 
               <div class="form-group">
               <p class="pull-left" style="color:red" id="lastNameValidation"></p>
-                <label for="lastName" class="sr-only">Last Name</label>
-                <input type="text" placeholder="Your Last Name" id="lastName" class="form-control contact-control" name="lastName" required data-error="Please enter your Last Name">
+                <label for="lastName" class="sr-only"><fmt:message key="RegisterLastname" /></label>
+                <input type="text" placeholder="<fmt:message key="RegisterLastname" />" id="lastName" class="form-control contact-control" name="lastName" required data-error="Please enter your Last Name">
                 <div class="help-block with-errors"></div>
               </div>
 
               <div class="form-group">
                 <p class="pull-left" style="color:red" id="userNameValidation"></p>	
-                <label for="userName" class="sr-only">Username</label>
-                <input type="text" placeholder="Your Username" id="userName" class="form-control contact-control" name="userName" required data-error="Please enter your Username">
+                <label for="userName" class="sr-only"><fmt:message key="RegisterUsername" /></label>
+                <input type="text" placeholder="<fmt:message key="RegisterUsername" />" id="userName" class="form-control contact-control" name="userName" required data-error="Please enter your Username">
                 <div class="help-block with-errors"></div>
               </div>
 
               <div class="form-group">
               	 <p class="pull-left" style="color:red" id="passwordValidation"></p>	
-                <label for="password" class="sr-only">Password</label>
-                <input type="password" placeholder="Your Password" id="password" class="form-control contact-control" name="password" required data-error="Please enter your password">
+                <label for="password" class="sr-only"><fmt:message key="Registerpassword" /></label>
+                <input type="password" placeholder="<fmt:message key="Registerpassword" />" id="password" class="form-control contact-control" name="password" required data-error="Please enter your password">
                 <div class="help-block with-errors"></div>
               </div>
 
@@ -159,13 +164,13 @@
 		  	<h3>${message}</h3>
 		</c:if>
                 <p class="pull-left" style="color:red" id="emailValidation"></p>	
-                <label for="email" class="sr-only">Email Address</label>
-                <input type="email" placeholder="Your Email" id="msg_subject" id="email" class="form-control contact-control" name="email" required data-error="Please enter your Email">
+                <label for="email" class="sr-only"><fmt:message key="RegisterEmail" /></label>
+                <input type="email" placeholder="<fmt:message key="RegisterEmail" />" id="msg_subject" id="email" class="form-control contact-control" name="email" required data-error="Please enter your Email">
                 <div class="help-block with-errors"></div>
               </div>
               
 	
-            		<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn">Submit</button>
+            		<button type="submit" class="btn btn-primary" id="submitbtn" name="submitbtn"><fmt:message key="submit" /></button>
               <div id="msgSubmit" class="h3 text-center hidden"></div>
               <div class="clearfix"></div>
             </form>
