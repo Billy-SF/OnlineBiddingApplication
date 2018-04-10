@@ -120,13 +120,13 @@
             <!-- Service-Block-1 Item Starts -->
             <div class="service-item wow fadeInUpQuick animated" data-wow-delay=".3s">
               <div class="client-item-wrapper">
-              <img src="assets/img/products/cake.jpg" style="min-height:200px; max-width:200px;max-height:200px;" alt="">
+              <img src="assets/img/products/frame.PNG" style="min-height:200px; max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                Cake
+                CMJ Mining Frame
               </h2>
               <p>
-                Pellentesque ipsum erat, facilisis ut venenatis eu, sodales vel dolor.
+                6 GPU mining Frame.  Mining bitcoin rig.
               </p>
             </div>
             <!-- Service-Block-1 Item Ends -->
@@ -138,13 +138,13 @@
             <!-- Service-Block-1 Item Starts -->
             <div class="service-item wow fadeInUpQuick animated" data-wow-delay=".3s">
                <div class="client-item-wrapper">
-              <img src="assets/img/products/car.jpg" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
+              <img src="assets/img/products/brain.jpg" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                Car
+                LiZ Brain Hat
               </h2>
               <p>
-                Pellentesque ipsum erat, facilisis ut venenatis eu, sodales vel dolor.
+                one of a kind brain, open brain
               </p>
             </div>
             <!-- Service-Block-1 Item Ends -->
@@ -157,10 +157,10 @@
               <img src="assets/img/products/rolex.jpg" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                Watch
+                Rolex Watch
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat Quidem!
+                no need introduction.  Its a freaking Rolex.
               </p>
             </div>
             <!-- Service-Block-1 Item Ends -->
@@ -170,13 +170,13 @@
             <!-- Service-Block-1 Item Starts -->
             <div class="service-item  wow fadeInUpQuick animated" data-wow-delay=".3s">
               <div class="client-item-wrapper">
-              <img src="assets/img/products/snowman.jpg" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
+              <img src="assets/img/products/mouse1.PNG" style="min-height:200px;max-width:200px;max-height:200px;" alt="">
             </div>
               <h2>
-                Snowman
+                BlueTooth mouse
               </h2>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat Quidem!
+                this is the best mouse in the universe
               </p>
             </div>
           </div><!-- Service-Block-1 Item Ends -->
