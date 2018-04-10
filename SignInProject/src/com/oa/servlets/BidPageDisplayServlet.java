@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Currency;
 
 import javax.servlet.RequestDispatcher;
@@ -130,6 +131,7 @@ public class BidPageDisplayServlet extends HttpServlet {
 		request.setAttribute("productitem", productitem);
 		
 		ArrayList<Bid> bids = productitem.getBids();
+		Collections.reverse(bids);
 		for (Bid bid : bids) {
 
 			if ("en_US".equals(request.getParameter("locale"))) {
