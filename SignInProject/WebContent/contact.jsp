@@ -153,6 +153,7 @@
       <strong><fmt:message key="end" />:</strong>
       <select id="end">
         <option value="" selected="true" disabled="disabled"><fmt:message key="selectWareHouse" /></option>
+        <option value="333 Laurier, Ottawa, Ontario, Canada"><fmt:message key="office" /></option>
         <option value="311 Bell st, Ottawa,Ontario, Canada"><fmt:message key="warehouse" /> 1</option>
         <option value="424 June court, Ottawa, Ontario, Canada"><fmt:message key="warehouse" /> 2</option>
         <option value="1343 Meadowlands Drive, Ottawa, Ontario, Canada"><fmt:message key="warehouse" /> 3</option>
@@ -229,7 +230,7 @@
             <div class="contact-widget office-location">
               <h2><fmt:message key="officeLocation" /></h2>
               <address>
-                <i class="fa fa-map-marker icon-box icon-xs"></i>4211, 2367 Nash Street , Ottawa, Ontario<br>
+                <i class="fa fa-map-marker icon-box icon-xs"></i>333 Laurier Street , Ottawa, Ontario<br>
                 <i class="fa fa-phone icon-box icon-xs"></i> 613-240-4015<br>
                 <a href="mailto:chiJon@algonquinlive.com"><i class="fa fa-envelope icon-box icon-xs"></i> chiJon@algonquinlive.com</a>
               </address>
