@@ -218,7 +218,7 @@
 							id="auctionForm" onsubmit="return validateAuctionForm()"
 							action="auctionServlet" onsubmit="return validateForm()"
 							method="POST">
-
+							<input type="hidden" name="locale" value="${loc}">
 							<div class="form-group">
 								<label for="itemName" class="sr-only">Item Name</label> <input
 									type="text" placeholder="<fmt:message key="yourItemName" />" name="itemName"

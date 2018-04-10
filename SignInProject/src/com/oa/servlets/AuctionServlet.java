@@ -134,19 +134,19 @@ public class AuctionServlet extends HttpServlet{
 								finally {
 									IOUtils.closeQuietly(inputStream);
 								}
-								response.sendRedirect("displayAuctionServlet");
+								response.sendRedirect("displayAuctionServlet?locale=" + request.getParameter("locale"));
 							}// if start date is before end date or start date is before now
 							else {
 								request.setAttribute("dateFormat", "wrong");
-								redirectToPage(request, response, "auction.jsp");
+								redirectToPage(request, response, "auction.jsp?locale=" + request.getParameter("locale"));
 							}
 						} // if validEndBidArray < 1
 						else {
-							redirectToPage(request, response, "auction.jsp");
+							redirectToPage(request, response, "auction.jsp?locale=" + request.getParameter("locale"));
 						}
 					}// if validSatrtBidArray < 1
 					else {
-						redirectToPage(request, response, "auction.jsp");
+						redirectToPage(request, response, "auction.jsp?locale=" + request.getParameter("locale"));
 					}
 				}// if form is not completely filled
 				//else {
