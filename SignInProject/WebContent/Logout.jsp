@@ -23,7 +23,7 @@
 	<%
 		if(session != null){
 			session.invalidate();
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index.jsp?locale=" + request.getParameter("locale"));
 		}
 	%>
 	
