@@ -208,7 +208,7 @@ to {
 			
 
 					<img id="myImg" alt="W3Schools.com" class="float-left" style="height:93%;width:93%;"
-					src="chrome-extension://fcmhodknfdbdmfadnmhngoekgkejephl/${productitem.image}"
+					src="chrome-extension://icghneokgcoplpkbhligbcmaljochmel/${productitem.image}"
 					alt="${productitem.itemName}"></img> 
 				</div>
 
@@ -236,7 +236,7 @@ to {
 				</c:if>
 				<c:if test="${productitem.getHighestPrice() != '0.00'}">
 					<p>
-						<fmt:message key="currentBidPrice" />: <b>${productitem.getHighestPriceLocale()}</b>
+						<fmt:message key="currentBidPrice" />: <b><span id="highestpricespan">${productitem.getHighestPriceLocale()}</span></b>
 					</p>
 				</c:if>
 				<c:if test="${errorMessageBidDao ne null}">
@@ -290,6 +290,36 @@ to {
 		</div>
 
 			<script>
+			var abc = function(){
+				
+				
+				$.ajax({
+					url : "getHighestBidPriceServlet",
+					async : true,
+					cache : false,
+					type : "get",
+					Accept : "application/json",
+					dataType : "json",
+					data : {
+						"productitemid" : "${productitem.getProductId()}"
+					},
+					beforeSend : function(xhr) {
+
+					},
+					success : function(data) {
+						if ((typeof data["highestprice"]) != "undefined") {
+							var highestprice = data["highestprice"];
+							$("#highestpricespan").html(highestprice);
+						
+						} 
+					},
+					error : function(error) {
+						
+					},
+				});
+
+				
+			};
 				var checkUserPay = function() {
 					$.ajax({
 						url : "checkHighestBidServlet",
@@ -305,6 +335,7 @@ to {
 
 						},
 						success : function(data) {
+							
 							if ((typeof data["paymessage"]) != "undefined") {
 								var paymessage = data["paymessage"];
 
@@ -334,6 +365,7 @@ to {
 					return new Date(parts[0], parts[1] - 1, parts[2], parts[3],
 							parts[4], parts[5]);
 				};
+				
 				$(document)
 						.ready(
 								function() {
@@ -377,6 +409,7 @@ to {
 										// $("#tttt").text(days + ' days, ' + minutes + ' minutes, ' + seconds + ' seconds' + "\n" +
 										//(date_now.getTime() - date_past.getTime())
 										// );
+										abc();
 										$("#tttt").text(
 												days + ' days, ' + hours + ' hours, ' + minutes
 														+ ' minutes, '
@@ -421,6 +454,8 @@ to {
 											
 											if ("${sessionScope.username}" != "") {
 												checkUserPay();
+												//abc();
+												
 
 											}
 											clearInterval(myVar);
@@ -443,9 +478,18 @@ to {
 															//console.log( errorThrown );
 														}
 													});
+											
+											
+											
+										
+											
+											
+											
+											
 
 											if ("${sessionScope.username}" != "") {
 												checkUserPay();
+											//	abc();
 											}
 
 										}

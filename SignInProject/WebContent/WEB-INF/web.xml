@@ -5,6 +5,11 @@
 	version="2.5">
 	
 	<servlet>
+		<servlet-name>gethighestbidprice</servlet-name>
+		<servlet-class>com.oa.servlets.GetHighestBidPriceServlet</servlet-class>
+	</servlet>
+	
+	<servlet>
 		<servlet-name>checkpay</servlet-name>
 		<servlet-class>com.oa.servlets.CheckHighestBidServlet</servlet-class>
 	</servlet>
@@ -82,6 +87,12 @@
 		<servlet-name>closedBids</servlet-name>
 		<servlet-class>com.oa.servlets.ClosedBidsServlet</servlet-class>
 	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>gethighestbidprice</servlet-name>
+		<url-pattern>/getHighestBidPriceServlet</url-pattern>
+	</servlet-mapping>
+	
 	
 		<servlet-mapping>
 		<servlet-name>checkpay</servlet-name>
@@ -165,5 +176,6 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 
+	
 
 </web-app>
